@@ -1,6 +1,5 @@
-package at.htldornbirn.projects.nawi.sinusfunction;
+package at.htldornbirn.projects.nawi.Team6;
 
-import at.htldornbirn.projects.nawi.NaWiGame;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;

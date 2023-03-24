@@ -1,7 +1,7 @@
 package at.htldornbirn.projects.nawi;
 
 import at.htldornbirn.projects.nawi.navigation.Navigation;
-import at.htldornbirn.projects.nawi.sinusfunction.SinusFunction;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -15,7 +15,7 @@ public class NaWiGame extends StateBasedGame {
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         addState(new Navigation());
-        addState(new SinusFunction());
+
     }
 
     public static void main(String[] args) throws SlickException {

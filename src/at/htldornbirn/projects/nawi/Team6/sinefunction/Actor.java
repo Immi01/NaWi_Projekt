@@ -1,4 +1,4 @@
-package at.rangel.games.sinefunction;
+package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

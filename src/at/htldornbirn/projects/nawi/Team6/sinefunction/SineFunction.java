@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -43,6 +44,7 @@ public class SineFunction extends BasicGameState {
             double angleOfComponent = positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
             sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + containerHeight / 2);
         }
+
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
@@ -57,10 +59,22 @@ public class SineFunction extends BasicGameState {
         for (SineComponent component : this.sineComponents) {
             component.render(graphics);
         }
+        graphics.setColor(Color.yellow);
+        graphics.drawString("Go to explanation", 600, 600);
         graphics.setColor(Color.white);
     }
 
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
+
+        if ((posX > 550 && posX < 650) && (posY > 250 && posY < 350)) {
+            int in = 0;
+            if (Mouse.isButtonDown(0)) {
+                stateBasedGame.enterState(1);
+            }
+        }
+
         for (SineComponent sineComponent : sineComponents) {
             double angleOfComponent = sineComponent.positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
             sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + gameContainer.getHeight() / 2 - sineComponent.displacementY);

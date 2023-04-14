@@ -5,6 +5,7 @@ import org.newdawn.slick.*;
 public class InclinedPlane extends BasicGame {
 
     private Triangle triangle;
+    private Slider slider;
 
 
     public InclinedPlane(String title) {
@@ -14,6 +15,7 @@ public class InclinedPlane extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         this.triangle = new Triangle(20);
+        this.slider = new Slider(200, 200);
     }
 
     @Override

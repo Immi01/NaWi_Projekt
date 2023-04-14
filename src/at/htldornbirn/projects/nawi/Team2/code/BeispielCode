@@ -1,0 +1,48 @@
+import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Vector2f;
+
+public class VerschiebbarerKreis extends BasicGame {
+
+    private Circle kreis;
+    private Vector2f offset;
+
+    public VerschiebbarerKreis() {
+        super("Verschiebbarer Kreis");
+    }
+
+    @Override
+    public void init(GameContainer gc) throws SlickException {
+        kreis = new Circle(100, 100, 50);
+        offset = new Vector2f();
+    }
+
+    @Override
+    public void update(GameContainer gc, int delta) throws SlickException {
+        // Überprüfen, ob die linke Maustaste gedrückt wird
+        if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            // Position des Mauszeigers abrufen
+            int mouseX = gc.getInput().getMouseX();
+            int mouseY = gc.getInput().getMouseY();
+
+            // Wenn der Mauszeiger innerhalb des Kreises liegt,
+            // dann die Position des Kreises aktualisieren
+            if (kreis.contains(mouseX, mouseY)) {
+                kreis.setCenterX(mouseX - offset.x);
+                kreis.setCenterY(mouseY - offset.y);
+            }
+        }
+    }
+
+    @Override
+    public void render(GameContainer gc, Graphics g) throws SlickException {
+        g.setColor(Color.blue);
+        g.fill(kreis);
+    }
+
+    public static void main(String[] args) throws SlickException {
+        AppGameContainer app = new AppGameContainer(new VerschiebbarerKreis());
+        app.setDisplayMode(640, 480, false);
+        app.start();
+    }
+}

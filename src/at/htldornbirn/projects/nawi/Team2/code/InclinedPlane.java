@@ -21,7 +21,6 @@ public class InclinedPlane extends BasicGame{
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
 
-        offset = new Vector2f();;
         slider.addListener(setAngle);
     }
 

@@ -20,7 +20,7 @@ public class InclinedPlane extends BasicGame{
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
 
-        input = gameContainer.getInput();
+        /*input = gameContainer.getInput();*/
         slider.addListener(setAngle);
     }
 
@@ -33,6 +33,7 @@ public class InclinedPlane extends BasicGame{
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         triangle.render(gameContainer,graphics);
         slider.render(gameContainer,graphics);
+        graphics.setBackground(new Color(255, 255, 255));
     }
 
     public static void main(String[] args) {

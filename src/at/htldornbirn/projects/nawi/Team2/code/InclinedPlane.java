@@ -1,12 +1,13 @@
 package at.htldornbirn.projects.nawi.Team2.code;
 
+import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.*;
 
 public class InclinedPlane extends BasicGame{
 
     private Triangle triangle;
     private Slider slider;
-    private Input input;
+
 
     private SetAngle setAngle = new SetAngle();
 
@@ -20,7 +21,7 @@ public class InclinedPlane extends BasicGame{
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
 
-        input = gameContainer.getInput();
+        offset = new Vector2f();;
         slider.addListener(setAngle);
     }
 

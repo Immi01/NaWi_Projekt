@@ -1,17 +1,25 @@
 package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Explanation extends BasicGameState {
+    private List<Actor> actors;
+    private Button button;
 
     public int getID() {
         return 1;
     }
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
+        this.actors = new ArrayList<>();
+        this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100);
+        this.actors.add(this.button);
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
@@ -28,11 +36,23 @@ public class Explanation extends BasicGameState {
                         "It is a fundamental component of trigonometry, which is the study of relationships between angles and sides of triangles.\n" +
                         "The sine function is used to describe many types of periodic phenomena, such as oscillations, vibrations, and waves.\n" +
                         "It is also used in the study of sound waves, light waves, and electromagnetic waves. In addition, it is commonly used in signal processing, image processing, and computer graphics.", 90, 125);
+        graphics.setColor(Color.yellow);
+        graphics.drawString("Go to sandbox", 687, 787);
+        graphics.setColor(Color.white);
+        for (Actor actor : this.actors) {
+            actor.render(graphics);
+        }
     }
 
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_2)) {
-            stateBasedGame.enterState(2);
+        Input input = gameContainer.getInput();
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
+
+        if ((posX > this.button.getX() && posX < this.button.getX() + this.button.getWidth()) && (posY > 50 && posY < 150)) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                stateBasedGame.enterState(2);
+            }
         }
     }
 }

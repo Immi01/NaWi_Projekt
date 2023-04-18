@@ -13,8 +13,8 @@ public class SetupSineFunction extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        this.addState(new SineFunction());
         this.addState(new Explanation());
+        this.addState(new SineFunction());
     }
 
     public static void main(String[] args) throws SlickException {

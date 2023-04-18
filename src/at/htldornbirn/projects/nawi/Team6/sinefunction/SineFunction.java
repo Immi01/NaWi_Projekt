@@ -2,6 +2,8 @@ package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -11,6 +13,7 @@ import java.util.List;
 public class SineFunction extends BasicGameState {
     private List<Actor> actors;
     private List<SineComponent> sineComponents;
+    private Button button;
     private boolean amplitudeIsChanging = false;
     private boolean yAxeIsChanging = true;
     private boolean xAxeIsChanging = true;
@@ -22,16 +25,18 @@ public class SineFunction extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
         this.sineComponents = new ArrayList<>();
+        this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100);
+        this.actors.add(this.button);
+
         double containerHeight = gameContainer.getHeight();
         double containerWidth = gameContainer.getWidth();
 
         Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 2);
         this.actors.add(xAxes);
-
         Axes yAxes = new Axes((float) 0, 0, 2, (float) containerHeight);
         this.actors.add(yAxes);
 
-        int amountOfComponents = 5000;
+        int amountOfComponents = 3000;
         for (int i = 1; i <= amountOfComponents; i++) {
             SineComponent sineComponent = new SineComponent();
             this.actors.add(sineComponent);
@@ -44,7 +49,6 @@ public class SineFunction extends BasicGameState {
             double angleOfComponent = positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
             sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + containerHeight / 2);
         }
-
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
@@ -60,17 +64,17 @@ public class SineFunction extends BasicGameState {
             component.render(graphics);
         }
         graphics.setColor(Color.yellow);
-        graphics.drawString("Go to explanation", 600, 600);
+        graphics.drawString("Go to explanation", 587 + 100, 587 + 200);
         graphics.setColor(Color.white);
     }
 
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+        Input input = gameContainer.getInput();
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 
-        if ((posX > 550 && posX < 650) && (posY > 250 && posY < 350)) {
-            int in = 0;
-            if (Mouse.isButtonDown(0)) {
+        if ((posX > this.button.getX() && posX < this.button.getX() + this.button.getWidth()) && (posY > 50 && posY < 150)) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 stateBasedGame.enterState(1);
             }
         }
@@ -79,9 +83,7 @@ public class SineFunction extends BasicGameState {
             double angleOfComponent = sineComponent.positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
             sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + gameContainer.getHeight() / 2 - sineComponent.displacementY);
         }
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_1)) {
-            stateBasedGame.enterState(1);
-        }
+
         if (gameContainer.getInput().isKeyPressed(Input.KEY_A)) {
             amplitudeIsChanging = true;
             yAxeIsChanging = false;

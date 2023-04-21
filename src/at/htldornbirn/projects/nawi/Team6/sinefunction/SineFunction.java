@@ -14,9 +14,9 @@ public class SineFunction extends BasicGameState {
     private List<Actor> actors;
     private List<SineComponent> sineComponents;
     private Button button;
-    private boolean amplitudeIsChanging = false;
-    private boolean yAxeIsChanging = true;
-    private boolean xAxeIsChanging = true;
+    private ValueButton valueButton1;
+    private ValueButton valueButton2;
+    private ValueButton valueButton3;
 
     public int getID() {
         return 2;
@@ -27,6 +27,13 @@ public class SineFunction extends BasicGameState {
         this.sineComponents = new ArrayList<>();
         this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100);
         this.actors.add(this.button);
+
+        this.valueButton1 = new ValueButton(500, 130, 50);
+        this.actors.add(this.valueButton1);
+        this.valueButton2 = new ValueButton(800, 130, 50);
+        this.actors.add(this.valueButton2);
+        this.valueButton3 = new ValueButton(1100, 130, 50);
+        this.actors.add(this.valueButton3);
 
         double containerHeight = gameContainer.getHeight();
         double containerWidth = gameContainer.getWidth();
@@ -52,7 +59,9 @@ public class SineFunction extends BasicGameState {
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        graphics.setColor(Color.yellow);
         graphics.drawString("Sine Function", 100, 100);
+        graphics.setColor(Color.white);
         graphics.drawString("Displacement x Axes: " + this.sineComponents.get(0).displacementX, 400, 100);
         graphics.drawString("Displacement y Axes: " + this.sineComponents.get(0).displacementY, 700, 100);
         graphics.drawString("Displacement amplitude: " + this.sineComponents.get(0).amplitude / 100, 1000, 100);
@@ -79,64 +88,59 @@ public class SineFunction extends BasicGameState {
             }
         }
 
-        for (SineComponent sineComponent : sineComponents) {
-            double angleOfComponent = sineComponent.positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
-            sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + gameContainer.getHeight() / 2 - sineComponent.displacementY);
-        }
-
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_A)) {
-            amplitudeIsChanging = true;
-            yAxeIsChanging = false;
-        }
-
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_X)) {
-            xAxeIsChanging = true;
-        }
-
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_Y)) {
-            yAxeIsChanging = true;
-            amplitudeIsChanging = false;
-        }
-
-        if (gameContainer.getInput().isKeyDown(Input.KEY_LEFT)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (xAxeIsChanging) {
+        if ((posX > this.valueButton1.getxSubtractionButton() && posX < this.valueButton1.getxSubtractionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton1.getY() && posY > gameContainer.getHeight() - (this.valueButton1.getY() + 30))) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                for (SineComponent sineComponent : sineComponents) {
                     sineComponent.x -= 1;
                     sineComponent.displacementX -= 1;
-
                 }
             }
         }
 
-        if (gameContainer.getInput().isKeyDown(Input.KEY_RIGHT)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (xAxeIsChanging) {
+        if ((posX > this.valueButton1.getxAdditionButton() && posX < this.valueButton1.getxAdditionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton1.getY() && posY > gameContainer.getHeight() - (this.valueButton1.getY() + 30))) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                for (SineComponent sineComponent : sineComponents) {
                     sineComponent.x += 1;
                     sineComponent.displacementX += 1;
                 }
             }
         }
 
-        if (gameContainer.getInput().isKeyDown(Input.KEY_UP)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (yAxeIsChanging) {
+        if ((posX > this.valueButton2.getxSubtractionButton() && posX < this.valueButton2.getxSubtractionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton2.getY() && posY > gameContainer.getHeight() - (this.valueButton2.getY() + 30))) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                for (SineComponent sineComponent : sineComponents) {
+                    sineComponent.displacementY -= 1;
+                }
+            }
+        }
+
+        if ((posX > this.valueButton2.getxAdditionButton() && posX < this.valueButton2.getxAdditionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton2.getY() && posY > gameContainer.getHeight() - (this.valueButton2.getY() + 30))) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                for (SineComponent sineComponent : sineComponents) {
                     sineComponent.displacementY += 1;
                 }
-                if (amplitudeIsChanging) {
+            }
+        }
+
+        if ((posX > this.valueButton3.getxSubtractionButton() && posX < this.valueButton3.getxSubtractionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton3.getY() && posY > gameContainer.getHeight() - (this.valueButton3.getY() + 30))) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                for (SineComponent sineComponent : sineComponents) {
+                    sineComponent.amplitude -= 1;
+                }
+            }
+        }
+
+        if ((posX > this.valueButton3.getxAdditionButton() && posX < this.valueButton3.getxAdditionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton3.getY() && posY > gameContainer.getHeight() - (this.valueButton3.getY() + 30))) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                for (SineComponent sineComponent : sineComponents) {
                     sineComponent.amplitude += 1;
                 }
             }
         }
 
-        if (gameContainer.getInput().isKeyDown(Input.KEY_DOWN)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (yAxeIsChanging) {
-                    sineComponent.displacementY -= 1;
-                }
-                if (amplitudeIsChanging) {
-                    sineComponent.amplitude -= 1;
-                }
-            }
+        for (SineComponent sineComponent : sineComponents) {
+            double angleOfComponent = sineComponent.positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
+            sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + gameContainer.getHeight() / 2 - sineComponent.displacementY);
         }
 
         for (Actor actor : this.actors) {

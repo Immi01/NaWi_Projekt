@@ -7,6 +7,7 @@ public class InclinedPlane extends BasicGame{
 
     private Triangle triangle;
     private Slider slider;
+    private Color backgroundColor;
 
 
     private SetAngle setAngle = new SetAngle();
@@ -22,19 +23,23 @@ public class InclinedPlane extends BasicGame{
         this.slider = new Slider(200, 200);
 
         slider.addListener(setAngle);
+
+        backgroundColor = Color.white;
     }
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
-        float sliderValue = slider.update(gameContainer);
-        sliderValue = sliderValue/10;
-        triangle.setAngle(sliderValue);
+        slider.update(gameContainer);
+
+        triangle.setAngle(setAngle.getSliderValue());
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         triangle.render(gameContainer,graphics);
         slider.render(gameContainer,graphics);
+
+        graphics.setBackground(backgroundColor);
     }
 
     public static void main(String[] args) {

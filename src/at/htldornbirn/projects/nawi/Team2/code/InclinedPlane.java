@@ -1,6 +1,7 @@
 package at.htldornbirn.projects.nawi.Team2.code;
 
-import org.lwjgl.util.vector.Vector2f;
+import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
+import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
 
 public class InclinedPlane extends BasicGame{
@@ -24,7 +25,7 @@ public class InclinedPlane extends BasicGame{
 
         slider.addListener(setAngle);
 
-        backgroundColor = Color.white;
+        backgroundColor = Color.blue;
     }
 
     @Override

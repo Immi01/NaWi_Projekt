@@ -24,22 +24,19 @@ public class Slider {
     }
 
 
-    public float update(GameContainer gameContainer) throws SlickException {
-        if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
-            for (EventListener eventListener: this.eventListeners) {
-                eventListener.onChange();
-            }
-        }
-
+    public void update(GameContainer gameContainer) throws SlickException {
         Input input = gameContainer.getInput();
         int mouseY = input.getMouseY();
+        int mouseX = input.getMouseX();
+
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            if (mouseY>200 && mouseY<500){
-                y = mouseY;
-                sliderPosition = y - 200;
+            if (mouseY>200 && mouseY<500 && mouseX >200 && mouseX < 240){
+                this.y = mouseY;
+                for (EventListener eventlistener: eventListeners) {
+                    eventlistener.onChange(mouseY);
+                }
             }
         }
-        return sliderPosition;
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {

@@ -1,18 +1,12 @@
 package at.htldornbirn.projects.nawi.Team2.code;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.*;
 
-import org.newdawn.slick.state.*;
 
 public class InclinedPlane2 extends BasicGame{
-    private Color backgroundColor = Color.white;
     private Triangle triangle;
     private Slider slider;
+    private Color backgroundColor;
+
 
 
     private SetAngle setAngle = new SetAngle();
@@ -26,6 +20,9 @@ public class InclinedPlane2 extends BasicGame{
     public void init(GameContainer gameContainer) throws SlickException {
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
+
+        backgroundColor = Color.blue;
+
 
 
         slider.addListener(setAngle);
@@ -42,18 +39,16 @@ public class InclinedPlane2 extends BasicGame{
         triangle.render(gameContainer,graphics);
         slider.render(gameContainer,graphics);
         graphics.setBackground(backgroundColor);
-        graphics.setColor(backgroundColor);
-        graphics.fillRect(0, 0, gameContainer.getWidth(), gameContainer.getHeight());
-
 
     }
+
 
     public static void main(String[] args) {
         try {
             AppGameContainer container = new AppGameContainer(new InclinedPlane("InclinedPlane"));
             container.setDisplayMode(1500,800,false);
+
             container.start();
-            container.setShowFPS(false);
         } catch (SlickException e) {
             e.printStackTrace();
         }

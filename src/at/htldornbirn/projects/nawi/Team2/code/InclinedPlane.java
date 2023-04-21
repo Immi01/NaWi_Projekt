@@ -26,7 +26,9 @@ public class InclinedPlane extends BasicGame{
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
-        slider.update(gameContainer);
+        float sliderValue = slider.update(gameContainer);
+        sliderValue = sliderValue/10;
+        triangle.setAngle(sliderValue);
     }
 
     @Override

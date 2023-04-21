@@ -34,4 +34,12 @@ public class Triangle {
         System.out.println(angle);
         System.out.println(this.angle);
     }
+
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+        angle(angle);
+    }
+
+
 }

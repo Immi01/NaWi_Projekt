@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Slider {
     private float x, y;
+    float sliderPosition;
     private List<EventListener> eventListeners;
 
 
@@ -23,13 +24,24 @@ public class Slider {
     }
 
 
-    public void update(GameContainer gameContainer) throws SlickException {
+    public float update(GameContainer gameContainer) throws SlickException {
         if (gameContainer.getInput().isKeyDown(Input.KEY_SPACE)) {
             for (EventListener eventListener: this.eventListeners) {
                 eventListener.onChange();
             }
         }
+
+        Input input = gameContainer.getInput();
+        int mouseY = input.getMouseY();
+        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            if (mouseY>200 && mouseY<500){
+                y = mouseY;
+                sliderPosition = y - 200;
+            }
+        }
+        return sliderPosition;
     }
+
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.drawOval(this.x, this.y, 40, 40);
     }

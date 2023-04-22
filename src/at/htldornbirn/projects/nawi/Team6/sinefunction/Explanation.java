@@ -18,7 +18,7 @@ public class Explanation extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100);
+        this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox");
         this.actors.add(this.button);
     }
 
@@ -37,7 +37,6 @@ public class Explanation extends BasicGameState {
                         "The sine function is used to describe many types of periodic phenomena, such as oscillations, vibrations, and waves.\n" +
                         "It is also used in the study of sound waves, light waves, and electromagnetic waves. In addition, it is commonly used in signal processing, image processing, and computer graphics.", 90, 125);
         graphics.setColor(Color.yellow);
-        graphics.drawString("Go to sandbox", 687, 787);
         graphics.setColor(Color.white);
         for (Actor actor : this.actors) {
             actor.render(graphics);

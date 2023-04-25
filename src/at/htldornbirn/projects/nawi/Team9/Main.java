@@ -1,47 +1,61 @@
 package at.htldornbirn.projects.nawi.Team9;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.gui.GUIContext;
-import org.newdawn.slick.util.ResourceLoader;
 
-import java.awt.FontFormatException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.regex.Pattern;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends BasicGame {
+
+    private List<Actor> actors;
+    private InputFieldRN inputFieldRN;
+
     public Main(String title) {
         super(title);
     }
-    private InputField inputField;
-
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        try {
-            InputStream inputStream = ResourceLoader.getResourceAsStream("src/at/htldornbirn/projects/nawi/Team9/fonts/Anuphan/Anuphan-VariableFont_wght.ttf");
-            java.awt.Font awtFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, inputStream);
-            awtFont = awtFont.deriveFont(24f); // set font size
-            TrueTypeFont font = new TrueTypeFont(awtFont, false);
-            inputField = new InputField(font, 100, 100, 200, 30, 5, Pattern.compile("\\d+"));
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
+        inputFieldRN = new InputFieldRN(100, 100, 100, 20, 10);
+        actors = new ArrayList<Actor>();
+    }
+
+    @Override
+    public void keyPressed(int key, char c) {
+        inputFieldRN.keyPressed(key, c);
+    }
+
+    @Override
+    public void mousePressed(int button, int x, int y) {
+        boolean clickedOnInputField = inputFieldRN.isMouseOver(x, y);
+        if (clickedOnInputField) {
+            inputFieldRN.setSelected(true);
+        } else {
+            inputFieldRN.setSelected(false);
         }
     }
 
     @Override
-    public void update(GameContainer gc, int delta) throws SlickException {
+    public void mouseClicked(int button, int x, int y, int clickCount) {
+        boolean clickedOnInputField = inputFieldRN.isMouseOver(x, y);
+        if (clickedOnInputField) {
+            inputFieldRN.setSelected(true);
+        } else {
+            inputFieldRN.setSelected(false);
+        }
     }
-
-
 
     @Override
-    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        graphics.drawString("Enter an integer (max length 5):", 100, 70);
-        inputField.render((GUIContext) gameContainer.getInput(), graphics);
+    public void render(GameContainer container, Graphics graphics) throws SlickException {
+        inputFieldRN.draw(graphics);
+        graphics.drawString("Value: " + inputFieldRN.getValue(), inputFieldRN.getX(), inputFieldRN.getY() + 40);
     }
+
+    @Override
+    public void update(GameContainer container, int delta) throws SlickException {
+        inputFieldRN.update(delta);
+    }
+
     public static void main(String[] argv) {
         try {
             AppGameContainer container = new AppGameContainer(new Main("Analyzing"));
@@ -51,7 +65,4 @@ public class Main extends BasicGame {
             e.printStackTrace();
         }
     }
-
 }
-
-

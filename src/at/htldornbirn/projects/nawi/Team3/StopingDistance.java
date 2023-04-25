@@ -32,11 +32,18 @@ public class StopingDistance extends BasicGameState {
         speedField.setAcceptingInput(true);
         reactionTimeField.setAcceptingInput(true);
         decelerationField.setAcceptingInput(true);
+
+
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
-
+        g.drawString("Geschwindigkeit (Km/h)", 20, 100);
+        g.drawString("Reaktionszeit s)", 20, 150);
+        g.drawString("Verzögerung (m/s^2)", 20, 200);
+        speedField.render(gameContainer, g);
+        reactionTimeField.render(gameContainer, g);
+        decelerationField.render(gameContainer, g);
     }
 
     @Override

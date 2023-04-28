@@ -9,6 +9,7 @@ public class Main extends BasicGame {
 
     private List<Actor> actors;
     private InputFieldRN inputFieldRN;
+    private Color backgroundColor;
 
     public Main(String title) {
         super(title);
@@ -18,6 +19,7 @@ public class Main extends BasicGame {
     public void init(GameContainer gc) throws SlickException {
         inputFieldRN = new InputFieldRN(100, 100, 100, 20, 10);
         actors = new ArrayList<Actor>();
+        backgroundColor = Color.white;
     }
 
     @Override
@@ -49,11 +51,14 @@ public class Main extends BasicGame {
     public void render(GameContainer container, Graphics graphics) throws SlickException {
         inputFieldRN.draw(graphics);
         graphics.drawString("Value: " + inputFieldRN.getValue(), inputFieldRN.getX(), inputFieldRN.getY() + 40);
+        graphics.setBackground(Color.white);
     }
+
 
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
         inputFieldRN.update(delta);
+        backgroundColor = Color.white;
     }
 
     public static void main(String[] argv) {

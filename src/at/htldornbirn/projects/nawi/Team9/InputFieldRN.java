@@ -6,8 +6,8 @@ import org.newdawn.slick.Input;
 
 public class InputFieldRN {
     private String value = "";
-    private String placeholder = "Enter kg value";
-    private int maxLength;
+    private String placeholder = "KG value";
+    private int maxLength = 4;
     private int x;
     private int y;
     private int width;
@@ -27,25 +27,31 @@ public class InputFieldRN {
     public void draw(Graphics graphics) {
         graphics.setColor(Color.black);
         graphics.drawRect(x, y, width, height);
+
         if (selected) {
-            graphics.drawLine(x + cursorPos, y + 2, x + cursorPos, y + height - 2);
-        }
-        if (value.isEmpty()) {
-            graphics.setColor(Color.gray);
-            graphics.drawString(placeholder, x + 5, y + 5);
-        } else {
             graphics.setColor(Color.black);
             graphics.drawString(value, x + 5, y + 5);
+            if (cursorBlinkTimer < 250) {
+                graphics.drawLine(x + 5 + cursorPos * 10, y + 2, x + 5 + cursorPos * 10, y + height - 2);
+            }
+        } else {
+            if (value.isEmpty()) {
+                graphics.setColor(Color.gray);
+                graphics.drawString(placeholder, x + 5, y + 5);
+            } else {
+                graphics.setColor(Color.black);
+                graphics.drawString(value, x + 5, y + 5);
+            }
         }
     }
 
     public void update(int delta) {
         cursorBlinkTimer += delta;
-        if (cursorBlinkTimer >= 500) {
-            cursorBlinkTimer = 0;
+        if (cursorBlinkTimer >= 1000) {
+            cursorBlinkTimer -= 1000;
         }
-        System.out.println(value);
     }
+
 
     public boolean isMouseOver(int mouseX, int mouseY) {
         return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
@@ -58,34 +64,38 @@ public class InputFieldRN {
 
     public void keyPressed(int key, char c) {
         if (selected) {
-            if (key == Input.KEY_BACK && value.length() > 0) {
-// Backspace
-                value = value.substring(0, value.length() - 1);
+            if (key == Input.KEY_BACK && value.length() > 0 && cursorPos > 0) {
+                // Backspace
+                value = value.substring(0, cursorPos - 1) + value.substring(cursorPos);
                 cursorPos--;
             } else if (key == Input.KEY_DELETE && cursorPos < value.length()) {
-// Delete
+                // Delete
                 value = value.substring(0, cursorPos) + value.substring(cursorPos + 1);
             } else if (key == Input.KEY_LEFT && cursorPos > 0) {
-// Move cursor left
+                // Move cursor left
                 cursorPos--;
             } else if (key == Input.KEY_RIGHT && cursorPos < value.length()) {
-// Move cursor right
+                // Move cursor right
                 cursorPos++;
             } else if (key == Input.KEY_END) {
-// Move cursor to end
+                // Move cursor to end
                 cursorPos = value.length();
             } else if (key == Input.KEY_HOME) {
-// Move cursor to beginning
+                // Move cursor to beginning
                 cursorPos = 0;
-            } else if (Character.isLetterOrDigit(c) || Character.isWhitespace(c) || Character.getType(c) == Character.CONNECTOR_PUNCTUATION) {
-// Add character to input field
-                if (value.length() < maxLength) {
-                    value = value.substring(0, cursorPos) + c + value.substring(cursorPos);
-                    cursorPos++;
+            } else if (Character.isDigit(c) && value.length() < maxLength && cursorPos < maxLength) {
+                // Add digit to input field if length < maxLength
+                value = value.substring(0, cursorPos) + c + value.substring(cursorPos);
+                cursorPos++;
+
+                if (cursorPos > maxLength) {
+                    cursorPos = maxLength;
                 }
             }
         }
     }
+
+
 
     public String getValue() {
         return value;

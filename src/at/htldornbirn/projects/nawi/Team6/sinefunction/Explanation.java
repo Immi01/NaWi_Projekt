@@ -11,6 +11,7 @@ import java.util.List;
 public class Explanation extends BasicGameState {
     private List<Actor> actors;
     private Button button;
+    private SineFunction sineFunction1;
 
     public int getID() {
         return 1;
@@ -18,7 +19,12 @@ public class Explanation extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox");
+        this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox", Color.yellow);
+        this.sineFunction1 = new SineFunction(5000, gameContainer.getWidth(), gameContainer.getHeight() - 150, Color.magenta);
+        for (SineComponent sineComponent : sineFunction1.getSineComponents()) {
+            sineComponent.setAmplitude(50);
+            sineComponent.setAmountOfDurations(20);
+        }
         this.actors.add(this.button);
     }
 
@@ -41,6 +47,10 @@ public class Explanation extends BasicGameState {
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }
+
+        for (SineComponent component : this.sineFunction1.getSineComponents()) {
+            component.render(graphics);
+        }
     }
 
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
@@ -52,6 +62,12 @@ public class Explanation extends BasicGameState {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 stateBasedGame.enterState(2);
             }
+        }
+
+        for (SineComponent sineComponent : sineFunction1.getSineComponents()) {
+            sineComponent.setDisplacementX(sineComponent.getDisplacementX() - Math.PI / 64);
+            double angleOfComponent = sineComponent.getPositionRelative() * 2 * Math.PI * sineComponent.getAmountOfDurations() + sineComponent.getDisplacementX();
+            sineComponent.setY((float) (-sineComponent.getAmplitude() * Math.sin(angleOfComponent) + gameContainer.getHeight() * 2 / 3 - sineComponent.getDisplacementY()));
         }
     }
 }

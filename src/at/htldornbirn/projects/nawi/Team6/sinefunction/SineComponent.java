@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -8,33 +9,29 @@ public class SineComponent implements Actor {
     private double amplitude, amplitudeFactor;
     private double displacementX, displacementY;
     private double positionRelative, amountOfDurations;
-    public SineComponent() {
+    private Color color;
 
+    public SineComponent(Color color) {
         this.x = x;
         this.y = y;
         this.componentRadius = 2;
         this.positionRelative = positionRelative;
         this.amplitudeFactor = 100;
-        this.amplitude = 1 * amplitudeFactor;
-        this.amountOfDurations = 10;
+        this.amplitude = amplitudeFactor;
+        this.amountOfDurations = 5;
         this.displacementX = displacementX;
         this.displacementY = displacementY;
+        this.color = color;
     }
 
     @Override
     public void render(Graphics graphics) {
+        graphics.setColor(this.color);
         graphics.drawOval(this.x, this.y, this.componentRadius, this.componentRadius);
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
-        if (this.x > gameContainer.getWidth()) {
-            this.x = 0;
-        }
-
-        if (this.x < 0) {
-            this.x = gameContainer.getWidth();
-        }
     }
 
     public float getX() {
@@ -67,6 +64,10 @@ public class SineComponent implements Actor {
 
     public double getAmountOfDurations() {
         return amountOfDurations;
+    }
+
+    public void setAmountOfDurations(double amountOfDurations) {
+        this.amountOfDurations = amountOfDurations;
     }
 
     public void setX(float x) {

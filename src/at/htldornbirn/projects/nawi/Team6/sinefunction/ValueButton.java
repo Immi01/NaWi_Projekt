@@ -53,6 +53,5 @@ public class ValueButton implements Actor {
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
-
     }
 }

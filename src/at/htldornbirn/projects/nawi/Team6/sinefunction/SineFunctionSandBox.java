@@ -7,8 +7,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SineFunctionSandBox extends BasicGameState {
     private List<Actor> actors;
@@ -26,27 +29,27 @@ public class SineFunctionSandBox extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.stateButton1 = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to explanation");
+        this.stateButton1 = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to explanation", Color.yellow);
+        this.stateButton2 = new Button(975, gameContainer.getHeight() - 150, 175, 100, "Interference", Color.cyan);
         this.actors.add(this.stateButton1);
-        this.stateButton2 = new Button(975, gameContainer.getHeight() - 150, 175, 100, "Interference");
         this.actors.add(this.stateButton2);
 
         this.valueButton1 = new ValueButton(500, 130, 50);
+        this.valueButton2 = new ValueButton(850, 130, 50);
+        this.valueButton3 = new ValueButton(1200, 130, 50);
         this.actors.add(this.valueButton1);
-        this.valueButton2 = new ValueButton(800, 130, 50);
         this.actors.add(this.valueButton2);
-        this.valueButton3 = new ValueButton(1100, 130, 50);
         this.actors.add(this.valueButton3);
 
         double containerHeight = gameContainer.getHeight();
         double containerWidth = gameContainer.getWidth();
 
-        this.sineFunction1 = new SineFunction(5000, containerWidth, containerHeight);
-        this.sineFunction2 = new SineFunction(2500, containerWidth, containerHeight);
+        this.sineFunction1 = new SineFunction(5000, containerWidth, containerHeight / 2, Color.orange);
+        this.sineFunction2 = new SineFunction(5000, containerWidth, containerHeight / 2, Color.green);
 
-        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1);
+        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1, "x", (float) containerWidth * 0.99f, (float) containerHeight / 2 + 5);
+        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight, "sin(x)", 5, 30);
         this.actors.add(xAxes);
-        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight);
         this.actors.add(yAxes);
     }
 
@@ -54,17 +57,25 @@ public class SineFunctionSandBox extends BasicGameState {
         graphics.setColor(Color.yellow);
         graphics.drawString("Sine Function", 100, 100);
         graphics.setColor(Color.white);
-        graphics.drawString("Displacement x Axes: " + this.sineFunction1.getSineComponents().get(0).getDisplacementX(), 400, 100);
-        graphics.drawString("Displacement y Axes: " + this.sineFunction1.getSineComponents().get(0).getDisplacementY(), 700, 100);
-        graphics.drawString("Displacement amplitude: " + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100, 1000, 100);
+
+        Locale locale = new Locale("en", "UK");
+        String pattern = "###.#####";
+        DecimalFormat decimalFormat = (DecimalFormat)
+                NumberFormat.getNumberInstance(locale);
+        decimalFormat.applyPattern(pattern);
+
+        double currentDisplacementX = this.sineFunction1.getSineComponents().get(0).getDisplacementX() / Math.PI;
+        String currentDisplacementXFormatted = decimalFormat.format(currentDisplacementX);
+
+        graphics.drawString("Displacement x Axes: " + currentDisplacementXFormatted + " pi RAD", 400, 100);
+        graphics.drawString("Displacement y Axes: " + this.sineFunction1.getSineComponents().get(0).getDisplacementY() / 100, 750, 100);
+        graphics.drawString("Displacement amplitude: " + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100, 1100, 100);
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }
-        graphics.setColor(Color.red);
         for (SineComponent component : this.sineFunction1.getSineComponents()) {
             component.render(graphics);
         }
-        graphics.setColor(Color.green);
         for (SineComponent component : this.sineFunction2.getSineComponents()) {
             component.render(graphics);
         }
@@ -75,6 +86,7 @@ public class SineFunctionSandBox extends BasicGameState {
         Input input = gameContainer.getInput();
         int posX = Mouse.getX();
         int posY = Mouse.getY();
+
         for (SineComponent sineComponent : this.sineFunction1.getSineComponents()) {
             sineComponent.update(gameContainer, i);
         }
@@ -94,25 +106,23 @@ public class SineFunctionSandBox extends BasicGameState {
             }
         }
 
-        if ((posX > this.valueButton1.getxSubtractionButton() && posX < this.valueButton1.getxSubtractionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton1.getY() && posY > gameContainer.getHeight() - (this.valueButton1.getY() + this.valueButton1.getxAdditionButton()))) {
+        if ((posX > this.valueButton1.getxSubtractionButton() && posX < this.valueButton1.getxSubtractionButton() + this.valueButton1.getButtonCircleRadius()) && (posY < gameContainer.getHeight() - this.valueButton1.getY() && posY > gameContainer.getHeight() - this.valueButton1.getButtonCircleRadius() - this.valueButton1.getY())) {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 for (SineComponent sineComponent : this.sineFunction1.getSineComponents()) {
-                    sineComponent.setDisplacementX(sineComponent.getDisplacementX() - 1);
-                    sineComponent.setX(sineComponent.getX() - 1);
+                    sineComponent.setDisplacementX(sineComponent.getDisplacementX() - Math.PI / 64);
                 }
             }
         }
 
-        if ((posX > this.valueButton1.getxAdditionButton() && posX < this.valueButton1.getxAdditionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton1.getY() && posY > gameContainer.getHeight() - (this.valueButton1.getY() + this.valueButton1.getxAdditionButton()))) {
+        if ((posX > this.valueButton1.getxAdditionButton() && posX < this.valueButton1.getxAdditionButton() + this.valueButton1.getButtonCircleRadius()) && (posY < gameContainer.getHeight() - this.valueButton1.getY() && posY > gameContainer.getHeight() - this.valueButton1.getButtonCircleRadius() - this.valueButton1.getY())) {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 for (SineComponent sineComponent : this.sineFunction1.getSineComponents()) {
-                    sineComponent.setDisplacementX(sineComponent.getDisplacementX() + 1);
-                    sineComponent.setX(sineComponent.getX() + 1);
+                    sineComponent.setDisplacementX(sineComponent.getDisplacementX() + Math.PI / 64);
                 }
             }
         }
 
-        if ((posX > this.valueButton2.getxSubtractionButton() && posX < this.valueButton2.getxSubtractionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton2.getY() && posY > gameContainer.getHeight() - (this.valueButton2.getY() + this.valueButton2.getxAdditionButton()))) {
+        if ((posX > this.valueButton2.getxSubtractionButton() && posX < this.valueButton2.getxSubtractionButton() + this.valueButton2.getButtonCircleRadius()) && (posY < gameContainer.getHeight() - this.valueButton2.getY() && posY > gameContainer.getHeight() - this.valueButton2.getButtonCircleRadius() - this.valueButton2.getY())) {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 for (SineComponent sineComponent : this.sineFunction1.getSineComponents()) {
                     sineComponent.setDisplacementY(sineComponent.getDisplacementY() - 1);
@@ -120,7 +130,7 @@ public class SineFunctionSandBox extends BasicGameState {
             }
         }
 
-        if ((posX > this.valueButton2.getxAdditionButton() && posX < this.valueButton2.getxAdditionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton2.getY() && posY > gameContainer.getHeight() - (this.valueButton2.getY() + this.valueButton2.getxAdditionButton()))) {
+        if ((posX > this.valueButton2.getxAdditionButton() && posX < this.valueButton2.getxAdditionButton() + this.valueButton2.getButtonCircleRadius()) && (posY < gameContainer.getHeight() - this.valueButton2.getY() && posY > gameContainer.getHeight() - this.valueButton2.getButtonCircleRadius() - this.valueButton2.getY())) {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 for (SineComponent sineComponent : this.sineFunction1.getSineComponents()) {
                     sineComponent.setDisplacementY(sineComponent.getDisplacementY() + 1);
@@ -128,7 +138,7 @@ public class SineFunctionSandBox extends BasicGameState {
             }
         }
 
-        if ((posX > this.valueButton3.getxSubtractionButton() && posX < this.valueButton3.getxSubtractionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton3.getY() && posY > gameContainer.getHeight() - (this.valueButton3.getY() + this.valueButton3.getxAdditionButton()))) {
+        if ((posX > this.valueButton3.getxSubtractionButton() && posX < this.valueButton3.getxSubtractionButton() + this.valueButton3.getButtonCircleRadius()) && (posY < gameContainer.getHeight() - this.valueButton3.getY() && posY > gameContainer.getHeight() - this.valueButton3.getButtonCircleRadius() - this.valueButton3.getY())) {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 for (SineComponent sineComponent : this.sineFunction1.getSineComponents()) {
                     if (sineComponent.getAmplitude() > 0) {
@@ -138,7 +148,7 @@ public class SineFunctionSandBox extends BasicGameState {
             }
         }
 
-        if ((posX > this.valueButton3.getxAdditionButton() && posX < this.valueButton3.getxAdditionButton() + 30) && (posY < gameContainer.getHeight() - this.valueButton3.getY() && posY > gameContainer.getHeight() - (this.valueButton3.getY() + this.valueButton3.getxAdditionButton()))) {
+        if ((posX > this.valueButton3.getxAdditionButton() && posX < this.valueButton3.getxAdditionButton() + this.valueButton3.getButtonCircleRadius()) && (posY < gameContainer.getHeight() - this.valueButton3.getY() && posY > gameContainer.getHeight() - this.valueButton3.getButtonCircleRadius() - this.valueButton3.getY())) {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 for (SineComponent sineComponent : this.sineFunction1.getSineComponents()) {
                     if (sineComponent.getAmplitude() <= 2.5 * sineComponent.getAmplitudeFactor()) {
@@ -151,8 +161,9 @@ public class SineFunctionSandBox extends BasicGameState {
         for (Actor actor : this.actors) {
             actor.update(gameContainer, i);
         }
+
         for (SineComponent sineComponent : sineFunction1.getSineComponents()) {
-            double angleOfComponent = sineComponent.getPositionRelative() * 360 * Math.PI / (180) * sineComponent.getAmountOfDurations();
+            double angleOfComponent = sineComponent.getPositionRelative() * 2 * Math.PI * sineComponent.getAmountOfDurations() + sineComponent.getDisplacementX();
             sineComponent.setY((float) (-sineComponent.getAmplitude() * Math.sin(angleOfComponent) + gameContainer.getHeight() / 2 - sineComponent.getDisplacementY()));
         }
     }

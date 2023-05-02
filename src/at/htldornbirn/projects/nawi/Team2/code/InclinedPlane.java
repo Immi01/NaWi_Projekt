@@ -1,10 +1,6 @@
 package at.htldornbirn.projects.nawi.Team2.code;
-<<<<<<< HEAD
-=======
-
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
->>>>>>> ac1da72a1137faa764f18c9e7637801de5330690
 import org.newdawn.slick.*;
 
 public class InclinedPlane extends BasicGame{
@@ -46,13 +42,5 @@ public class InclinedPlane extends BasicGame{
         graphics.setBackground(backgroundColor);
     }
 
-    public static void main(String[] args) {
-        try {
-            AppGameContainer container = new AppGameContainer(new InclinedPlane("InclinedPlane"));
-            container.setDisplayMode(1500,800,false);
-            container.start();
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

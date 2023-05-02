@@ -1,4 +1,6 @@
 package at.htldornbirn.projects.nawi.Team2.code;
+import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
+import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;

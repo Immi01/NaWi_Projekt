@@ -1,5 +1,6 @@
-package at.htldornbirn.projects.nawi.Team2.code;
+package at.htldornbirn.projects.nawi.Team2.code.slider;
 
+import at.htldornbirn.projects.nawi.Team2.code.slider.EventListener;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;

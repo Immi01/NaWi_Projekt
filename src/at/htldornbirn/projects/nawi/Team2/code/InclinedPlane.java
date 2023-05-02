@@ -1,6 +1,4 @@
 package at.htldornbirn.projects.nawi.Team2.code;
-
-import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.*;
 
 public class InclinedPlane extends BasicGame{

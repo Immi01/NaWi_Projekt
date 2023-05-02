@@ -2,58 +2,76 @@ package at.htldornbirn.projects.nawi.Team2.code;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class InclinedPlane2 extends BasicGame{
+public class InclinedPlane2 extends  BasicGameState{
+    private List<Actor> actors;
     private Triangle triangle;
     private Slider slider;
-    private Color backgroundColor;
-
-
-
     private SetAngle setAngle = new SetAngle();
 
 
-    public InclinedPlane2(String title) {
-        super(title);
+
+    @Override
+    public int getID() {
+        return 0;
     }
 
     @Override
-    public void init(GameContainer gameContainer) throws SlickException {
+    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        this.actors = new ArrayList<>();
+
+        for (int i = 0; i <1; i++) {
+            Sky sky = new Sky();
+            this.actors.add(sky);
+        }
+        for (int i = 0; i <1; i++) {
+            Background background = new Background();
+            this.actors.add(background);
+        }
+        for (int i = 0; i <1; i++) {
+            Sun sun = new Sun();
+            this.actors.add(sun);
+        }
+
+        for (int i = 0; i <1; i++) {
+            Cloud cloud = new Cloud(5,5,5);
+            this.actors.add(cloud);
+        }
+
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
-
-        backgroundColor = Color.blue;
-
-
-
         slider.addListener(setAngle);
     }
 
-    @Override
-    public void update(GameContainer gameContainer, int i) throws SlickException {
-        slider.update(gameContainer);
-    }
+
 
     @Override
-    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        graphics.clear();
+    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        for (Actor actors:this.actors){
+            actors.render(graphics);
+        }
         triangle.render(gameContainer,graphics);
         slider.render(gameContainer,graphics);
-        graphics.setBackground(backgroundColor);
 
     }
 
-
-    public static void main(String[] args) {
-        try {
-            AppGameContainer container = new AppGameContainer(new InclinedPlane("InclinedPlane"));
-            container.setDisplayMode(1500,800,false);
-
-            container.start();
-        } catch (SlickException e) {
-            e.printStackTrace();
+    @Override
+    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        for (Actor actors:this.actors){
+            actors.update(delta);
         }
+
+        slider.update(gameContainer);
+
     }
+
+
 }
+
 

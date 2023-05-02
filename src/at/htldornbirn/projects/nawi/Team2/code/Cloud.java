@@ -24,8 +24,7 @@ public class Cloud implements Actor{
 
     @Override
     public void render(Graphics graphics) {
-        cloudColor = new Color(255,255,255);
-        graphics.setColor(cloudColor);
+
 
     }
 
@@ -36,7 +35,7 @@ public class Cloud implements Actor{
             this.x = 1500;
 
         }
-        cloudColor = new Color(255,255,255);
+
 
 
 

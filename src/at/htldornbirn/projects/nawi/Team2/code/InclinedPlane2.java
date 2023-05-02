@@ -40,7 +40,7 @@ public class InclinedPlane2 extends  BasicGameState{
         }
 
         for (int i = 0; i <1; i++) {
-            Cloud cloud = new Cloud(5,5,5);
+            Cloud cloud = new Cloud();
             this.actors.add(cloud);
         }
 

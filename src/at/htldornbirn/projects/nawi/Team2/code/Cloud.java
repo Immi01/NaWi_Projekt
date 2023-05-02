@@ -11,7 +11,7 @@ public class Cloud implements Actor{
     private float speed;
     private Color cloudColor;
 
-    public Cloud(float x, float y, float speed){
+    public Cloud(){
         this.x = x;
         this.y = y;
         this.speed = 5;
@@ -26,7 +26,7 @@ public class Cloud implements Actor{
     public void render(Graphics graphics) {
         cloudColor = new Color(255,255,255);
         graphics.setColor(cloudColor);
-        System.out.println("drawing");
+
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Cloud implements Actor{
         this.x -= (float)delta/this.speed;
         if(this.x <0){
             this.x = 1500;
-            System.out.println("moving");
+
         }
         cloudColor = new Color(255,255,255);
 

@@ -1,48 +1,46 @@
+package at.htldornbirn.projects.nawi.Team2.code;
+import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
+import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Vector2f;
 
-public class VerschiebbarerKreis extends BasicGame {
+public class InclinedPlane extends BasicGame{
 
-    private Circle kreis;
-    private Vector2f offset;
+    private Triangle triangle;
+    private Slider slider;
+    private Color backgroundColor;
 
-    public VerschiebbarerKreis() {
-        super("Verschiebbarer Kreis");
+
+    private SetAngle setAngle = new SetAngle();
+
+
+    public InclinedPlane(String title) {
+        super(title);
     }
 
     @Override
-    public void init(GameContainer gc) throws SlickException {
-        kreis = new Circle(100, 100, 50);
-        offset = new Vector2f();
+    public void init(GameContainer gameContainer) throws SlickException {
+        this.triangle = new Triangle(20);
+        this.slider = new Slider(200, 200);
+
+        slider.addListener(setAngle);
+
+        backgroundColor = Color.blue;
     }
 
     @Override
-    public void update(GameContainer gc, int delta) throws SlickException {
-        // Überprüfen, ob die linke Maustaste gedrückt wird
-        if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            // Position des Mauszeigers abrufen
-            int mouseX = gc.getInput().getMouseX();
-            int mouseY = gc.getInput().getMouseY();
+    public void update(GameContainer gameContainer, int i) throws SlickException {
+        slider.update(gameContainer);
 
-            // Wenn der Mauszeiger innerhalb des Kreises liegt,
-            // dann die Position des Kreises aktualisieren
-            if (kreis.contains(mouseX, mouseY)) {
-                kreis.setCenterX(mouseX - offset.x);
-                kreis.setCenterY(mouseY - offset.y);
-            }
-        }
+        triangle.setAngle(setAngle.getSliderValue());
     }
 
     @Override
-    public void render(GameContainer gc, Graphics g) throws SlickException {
-        g.setColor(Color.blue);
-        g.fill(kreis);
+    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        triangle.render(gameContainer,graphics);
+        slider.render(gameContainer,graphics);
+
+        graphics.setBackground(backgroundColor);
     }
 
-    public static void main(String[] args) throws SlickException {
-        AppGameContainer app = new AppGameContainer(new VerschiebbarerKreis());
-        app.setDisplayMode(640, 480, false);
-        app.start();
-    }
+
 }

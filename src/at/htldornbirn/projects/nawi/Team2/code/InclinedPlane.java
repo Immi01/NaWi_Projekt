@@ -2,8 +2,10 @@ package at.htldornbirn.projects.nawi.Team2.code;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 
-public class InclinedPlane extends BasicGame{
+public class InclinedPlane extends BasicGameState {
 
     private Triangle triangle;
     private Slider slider;
@@ -13,12 +15,13 @@ public class InclinedPlane extends BasicGame{
     private SetAngle setAngle = new SetAngle();
 
 
-    public InclinedPlane(String title) {
-        super(title);
+    @Override
+    public int getID() {
+        return 0;
     }
 
     @Override
-    public void init(GameContainer gameContainer) throws SlickException {
+    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
 
@@ -28,19 +31,17 @@ public class InclinedPlane extends BasicGame{
     }
 
     @Override
-    public void update(GameContainer gameContainer, int i) throws SlickException {
-        slider.update(gameContainer);
-
-        triangle.setAngle(setAngle.getSliderValue());
-    }
-
-    @Override
-    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         triangle.render(gameContainer,graphics);
         slider.render(gameContainer,graphics);
 
         graphics.setBackground(backgroundColor);
     }
 
+    @Override
+    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+        slider.update(gameContainer);
 
+        triangle.setAngle(setAngle.getSliderValue());
+    }
 }

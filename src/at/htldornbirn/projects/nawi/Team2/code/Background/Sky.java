@@ -1,4 +1,4 @@
-package at.htldornbirn.projects.nawi.Team2.code;
+package at.htldornbirn.projects.nawi.Team2.code.Background;
 import org.newdawn.slick.*;
 
 public class Sky implements Actor {

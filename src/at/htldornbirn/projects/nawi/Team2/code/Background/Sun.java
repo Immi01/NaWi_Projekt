@@ -1,23 +1,22 @@
-package at.htldornbirn.projects.nawi.Team2.code;
+package at.htldornbirn.projects.nawi.Team2.code.Background;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-public class Background implements Actor{
+public class Sun implements Actor {
     private float x;
     private float y;
     private float speed;
-    private Color backgroundColor;
+    private Color cirColor;
 
 
-    public Background() {
+    public Sun(){
         this.x = x;
         this.y = y;
         this.speed = speed;
     }
-
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
@@ -26,16 +25,15 @@ public class Background implements Actor{
 
     @Override
     public void render(Graphics graphics) {
-        backgroundColor = new Color(124,252,0);
-        graphics.setColor(backgroundColor);
-        graphics.drawRect(0,200,1500,600);
-        graphics.fillRect(0,200,1500,600);
+        cirColor = new Color(255,255,0);
+        graphics.setColor(cirColor);
+        graphics.drawOval(1350,-150,300,300);
+        graphics.fillOval(1350,-150,300,300);
 
     }
 
     @Override
     public void update(int delta) {
-        backgroundColor = new Color(124, 252, 0);
-
+        cirColor = new Color(255,255,0);
     }
 }

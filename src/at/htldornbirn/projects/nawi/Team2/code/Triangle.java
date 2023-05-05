@@ -11,7 +11,7 @@ public class Triangle {
     private float lineY2;
 
     public Triangle(double angle) {
-        System.out.println(angle);
+        //System.out.println(angle);
         angle(angle);
     }
 
@@ -26,12 +26,16 @@ public class Triangle {
     }
 
     public void angle(double angle){
+        if (angle==0){
+            angle = 10;
+        }
+
         this.angle = Math.tan(Math.toRadians(angle));
         this.hu = this.angle * 900;
         double yValue = 600-this.hu;
-       this.lineY2 = (float) yValue;
-        System.out.println(lineY2);
-        System.out.println(angle);
+        this.lineY2 = (float) yValue;
+
+
     }
 
 

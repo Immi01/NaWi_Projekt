@@ -5,7 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 public class InputFieldRN {
-    private String value = "";
+    private String value = "1";
     private String placeholder = "KG value";
     private int maxLength = 4;
     private int x;
@@ -15,6 +15,7 @@ public class InputFieldRN {
     private boolean selected = false;
     private int cursorPos = 0;
     private int cursorBlinkTimer = 0;
+    private Calculations calculations;
 
     public InputFieldRN(int x, int y, int width, int height, int maxLength) {
         this.x = x;
@@ -96,7 +97,6 @@ public class InputFieldRN {
     }
 
 
-
     public String getValue() {
         return value;
     }
@@ -115,5 +115,9 @@ public class InputFieldRN {
 
     public int getHeight() {
         return height;
+    }
+
+    public String getText() {
+        return value;
     }
 }

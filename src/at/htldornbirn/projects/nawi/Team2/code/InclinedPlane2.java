@@ -47,6 +47,11 @@ public class InclinedPlane2 extends  BasicGameState{
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
         slider.addListener(setAngle);
+
+
+
+
+
     }
 
 
@@ -66,6 +71,8 @@ public class InclinedPlane2 extends  BasicGameState{
         for (Actor actors:this.actors){
             actors.update(delta);
         }
+
+
 
         slider.update(gameContainer);
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Explanation extends BasicGameState {
     private List<Actor> actors;
-    private Button button;
+    private Button stateButton1;
     private SineFunction sineFunction1;
 
     public int getID() {
@@ -19,29 +19,35 @@ public class Explanation extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.button = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox", Color.yellow);
-        this.sineFunction1 = new SineFunction(5000, gameContainer.getWidth(), gameContainer.getHeight() - 150, Color.magenta);
+
+        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1.setX((float) gameContainer.getWidth() / 2 - this.stateButton1.getWidth() / 2);
+        this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.actors.add(this.stateButton1);
+
+        this.sineFunction1 = new SineFunction(2500, gameContainer.getWidth(), gameContainer.getHeight() - 150, Color.magenta);
         for (SineComponent sineComponent : sineFunction1.getSineComponents()) {
             sineComponent.setAmplitude(50);
             sineComponent.setAmountOfDurations(20);
         }
-        this.actors.add(this.button);
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.setColor(Color.red);
-        graphics.drawString("The sine function\n", 50, 50);
+        graphics.drawString("The sine function\n", (float) gameContainer.getWidth() / 20, (float) gameContainer.getHeight() / 20);
         graphics.setColor(Color.white);
         graphics.drawString(
-                "The sine function, denoted as sin(x), is a mathematical function that relates the angles of a right-angled triangle to the ratios of the length of its sides.\n" +
-                        "Specifically, it is defined as the ratio of the length of the side opposite to an angle in a right-angled triangle to the length of the hypotenuse (the longest side) of the same triangle.\n" +
+                "The sine function, denoted as sin(x), is a mathematical function that relates the angles of a right-angled triangle to the ratios\n" +
+                        "of the length of its sides. Specifically, it is defined as the ratio of the length of the side opposite to an angle in a\n" +
+                        "right-angled triangle to the length of the hypotenuse (the longest side) of the same triangle.\n" + "\n" +
                         "In mathematical terms, sin(x) = opposite/hypotenuse.\n" + "\n" +
                         "The sine function is periodic, meaning that it repeats itself after a certain interval of values.\n" +
                         "In fact, sin(x) has a period of 2π radians or 360 degrees, which means that its values repeat after every 2π radians or 360 degrees.\n" + "\n" +
                         "The sine function is widely used in mathematics, physics, engineering, and other fields that deal with wave phenomena.\n" +
-                        "It is a fundamental component of trigonometry, which is the study of relationships between angles and sides of triangles.\n" +
+                        "It is a fundamental component of trigonometry, which is the study of relationships between angles and sides of triangles.\n" + "\n" +
                         "The sine function is used to describe many types of periodic phenomena, such as oscillations, vibrations, and waves.\n" +
-                        "It is also used in the study of sound waves, light waves, and electromagnetic waves. In addition, it is commonly used in signal processing, image processing, and computer graphics.", 90, 125);
+                        "It is also used in the study of sound waves, light waves, and electromagnetic waves. In addition, it is commonly used in\n" +
+                        "signal processing, image processing, and computer graphics.", 90, 125);
         graphics.setColor(Color.yellow);
         graphics.setColor(Color.white);
         for (Actor actor : this.actors) {
@@ -58,7 +64,7 @@ public class Explanation extends BasicGameState {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 
-        if ((posX > this.button.getX() && posX < this.button.getX() + this.button.getWidth()) && (posY > 50 && posY < 150)) {
+        if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > 50 && posY < 150)) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 stateBasedGame.enterState(2);
             }

@@ -29,14 +29,19 @@ public class SineFunctionSandBox extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.stateButton1 = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to explanation", Color.yellow);
-        this.stateButton2 = new Button(975, gameContainer.getHeight() - 150, 175, 100, "Interference", Color.cyan);
+        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 175, 100, "Go to explanation", Color.yellow);
+        this.stateButton1.setX((float) gameContainer.getWidth() / 3 - this.stateButton1.getWidth() / 2);
+        this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.stateButton2 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 175, 100, "Interference", Color.cyan);
+        this.stateButton2.setX((float) gameContainer.getWidth() * 2 / 3 - this.stateButton1.getWidth() / 2);
+        this.stateButton2.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(this.stateButton1);
         this.actors.add(this.stateButton2);
 
-        this.valueButton1 = new ValueButton(500, 130, 50);
-        this.valueButton2 = new ValueButton(850, 130, 50);
-        this.valueButton3 = new ValueButton(1200, 130, 50);
+        float heightValueButtons = (float) (gameContainer.getHeight() / 7);
+        this.valueButton1 = new ValueButton((float) (gameContainer.getWidth() / 3), heightValueButtons, 50);
+        this.valueButton2 = new ValueButton((float) (gameContainer.getWidth() * 6 / 10), heightValueButtons, 50);
+        this.valueButton3 = new ValueButton((float) (gameContainer.getWidth() * 8 / 10), heightValueButtons, 50);
         this.actors.add(this.valueButton1);
         this.actors.add(this.valueButton2);
         this.actors.add(this.valueButton3);
@@ -67,9 +72,18 @@ public class SineFunctionSandBox extends BasicGameState {
         double currentDisplacementX = this.sineFunction1.getSineComponents().get(0).getDisplacementX() / Math.PI;
         String currentDisplacementXFormatted = decimalFormat.format(currentDisplacementX);
 
-        graphics.drawString("Displacement x Axes: " + currentDisplacementXFormatted + " pi RAD", 400, 100);
-        graphics.drawString("Displacement y Axes: " + this.sineFunction1.getSineComponents().get(0).getDisplacementY() / 100, 750, 100);
-        graphics.drawString("Displacement amplitude: " + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100, 1100, 100);
+        String stringDisplacementX = "Displacement x Axes: ";
+        float widthXLabel = graphics.getFont().getWidth(stringDisplacementX);
+        String stringDisplacementY = "Displacement y Axes: ";
+        float widthYLabel = graphics.getFont().getWidth(stringDisplacementX);
+        String stringAmplitude = "Amplitude: ";
+        float widthAmplitudeLabel = graphics.getFont().getWidth(stringDisplacementX);
+
+        float heightValueButtonLabels = (float) (gameContainer.getHeight() / 10);
+
+        graphics.drawString(stringDisplacementX + currentDisplacementXFormatted + " pi RAD", (float) (gameContainer.getWidth() / 3 - widthXLabel/2), heightValueButtonLabels);
+        graphics.drawString(stringDisplacementY + this.sineFunction1.getSineComponents().get(0).getDisplacementY() / 100, (float) (gameContainer.getWidth() * 6 / 10 - widthYLabel/2), heightValueButtonLabels);
+        graphics.drawString(stringAmplitude + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100, (float) (gameContainer.getWidth() * 8.25 / 10 - widthAmplitudeLabel/2), heightValueButtonLabels);
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }

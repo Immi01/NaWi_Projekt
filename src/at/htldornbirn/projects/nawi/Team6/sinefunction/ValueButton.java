@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
 public class ValueButton implements Actor {
     private float x, y, width, xSubtractionButton, xAdditionButton, buttonCircleRadius;
 
-    public ValueButton(int x, int y, int width) {
+    public ValueButton(float x, float y, float width) {
         this.x = x;
         this.y = y;
         this.buttonCircleRadius = 30;
@@ -20,8 +20,16 @@ public class ValueButton implements Actor {
         return x;
     }
 
+    public void setX(float x) {
+        this.x = x;
+    }
+
     public float getY() {
         return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 
     public float getWidth() {
@@ -42,11 +50,13 @@ public class ValueButton implements Actor {
 
     @Override
     public void render(Graphics graphics) {
+        float minusWidth = graphics.getFont().getWidth("-");
+        float plusWidth = graphics.getFont().getWidth("+");
         graphics.setColor(Color.red);
-        graphics.drawString("-", this.x - this.width / 2 + 10, this.y + 5);
+        graphics.drawString("-", xSubtractionButton + this.buttonCircleRadius / 2 - minusWidth / 2, this.y + 5);
         graphics.drawOval(xSubtractionButton, this.y, this.buttonCircleRadius, this.buttonCircleRadius);
         graphics.setColor(Color.green);
-        graphics.drawString("+", this.x + this.width / 2 + 10, this.y + 5);
+        graphics.drawString("+", xAdditionButton + this.buttonCircleRadius / 2 - plusWidth / 2, this.y + 5);
         graphics.drawOval(xAdditionButton, this.y, this.buttonCircleRadius, this.buttonCircleRadius);
         graphics.setColor(Color.white);
     }

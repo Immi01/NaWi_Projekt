@@ -28,7 +28,9 @@ public class Interference extends BasicGameState {
 
         this.actors = new ArrayList<>();
         this.sineFunctions = new ArrayList<>();
-        this.stateButton1 = new Button(675, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1.setX((float) gameContainer.getWidth() / 2 - this.stateButton1.getWidth() / 2);
+        this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(stateButton1);
 
         int amountOfComponents = 2000;
@@ -47,12 +49,15 @@ public class Interference extends BasicGameState {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        float labelsHeight = (float) gameContainer.getHeight() * 1 / 10;
+        int amountOfLabels = 3;
+        float labelWidthDistance = (float) gameContainer.getHeight() / amountOfLabels;
         graphics.setColor(Color.blue);
-        graphics.drawString("--- Incident Wave", 400, 100);
+        graphics.drawString("--- Incident Wave", labelWidthDistance, labelsHeight);
         graphics.setColor(Color.green);
-        graphics.drawString("--- Reflecting Wave", 750, 100);
+        graphics.drawString("--- Reflecting Wave", labelWidthDistance * 2, labelsHeight);
         graphics.setColor(Color.red);
-        graphics.drawString("--- Resulting Wave", 1100, 100);
+        graphics.drawString("--- Resulting Wave", labelWidthDistance * 3, labelsHeight);
 
         for (Actor actor : this.actors) {
             actor.render(graphics);

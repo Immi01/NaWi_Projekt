@@ -8,9 +8,8 @@ import org.newdawn.slick.state.StateBasedGame;
 public class InclinedPlane extends BasicGameState {
 
     private Triangle triangle;
+    private Rectangle rectangle;
     private Slider slider;
-    private Color backgroundColor;
-
 
     private SetAngle setAngle = new SetAngle();
 
@@ -24,18 +23,22 @@ public class InclinedPlane extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.triangle = new Triangle(20);
         this.slider = new Slider(200, 200);
+        this.rectangle = new Rectangle();
 
         slider.addListener(setAngle);
-
-        backgroundColor = Color.blue;
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         triangle.render(gameContainer,graphics);
+
+        graphics.setColor(Color.black);
+        rectangle.render(gameContainer,graphics);
+        graphics.setColor(Color.white);
+
         slider.render(gameContainer,graphics);
 
-        graphics.setBackground(backgroundColor);
+        graphics.setBackground(Color.blue);
     }
 
     @Override

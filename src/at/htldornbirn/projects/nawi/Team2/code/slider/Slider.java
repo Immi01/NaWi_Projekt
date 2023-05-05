@@ -32,7 +32,7 @@ public class Slider {
 
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             if (mouseY>200 && mouseY<500 && mouseX >200 && mouseX < 240){
-                this.y = mouseY;
+                this.y = mouseY-20;
                 for (EventListener eventlistener: eventListeners) {
                     eventlistener.onChange(mouseY);
                 }
@@ -41,6 +41,6 @@ public class Slider {
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        graphics.drawOval(this.x, this.y, 40, 40);
+        graphics.fillOval(this.x, this.y, 40, 40);
     }
 }

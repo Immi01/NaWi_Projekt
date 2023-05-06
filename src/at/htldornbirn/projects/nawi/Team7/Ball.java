@@ -4,28 +4,35 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 public class Ball implements ProjectActor{
-    private float x,y;
-    private float speed;
-    private float realisticSpeed;
+    private float t,y,x;
+    private float speedY;
     private float Gforce;
     private float radius;
+    private float speedX;
 
-    public Ball(float x, float y, float speed, float gForce, float radius) {
+
+    public Ball(float x, float y, float speedY, float gForce, float radius, float speedX) {
         this.x = x;
         this.y = y;
-        this.speed = speed;
+        this.speedY = speedY;
         this.Gforce = gForce;
         this.radius = radius;
+        this.speedX = speedX;
     }
+
 
     @Override
     public void render(Graphics graphics) {
         graphics.drawOval(this.x, this.y, this.radius, this.radius);
     }
 
+
     @Override
     public void update(GameContainer gc, int delta) {
-
-        this.x = this.y + delta*this.speed - ((this.Gforce*(delta * delta))/2);
+        this.t += delta / 1000f;
+        this.x += this.speedX * t;
+        //if (this.x >= 400){
+            this.y +=  (this.speedY) * this.t + (this.Gforce*((float)Math.pow(this.t,2)))/2;
+        //}
     }
 }

@@ -6,6 +6,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Team9Game extends BasicGameState {
 
@@ -13,6 +14,7 @@ public class Team9Game extends BasicGameState {
     private InputFieldRN inputFieldRN;
     private Color backgroundColor;
     private Calculations calculations;
+    private ItemList itemList;
 
 
     @Override
@@ -24,6 +26,8 @@ public class Team9Game extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         inputFieldRN = new InputFieldRN(100, 100, 100, 20, 10);
         calculations = new Calculations(this);
+        itemList = new ItemList(this);
+
         actors = new ArrayList<Actor>();
         backgroundColor = Color.white;
 
@@ -32,13 +36,14 @@ public class Team9Game extends BasicGameState {
         RectangleGround rightGround = new RectangleGround(850, 400, 750, 400);
         this.actors.add(leftGround);
         this.actors.add(rightGround);
+        this.actors.add(calculations);
+        this.actors.add(itemList);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         inputFieldRN.draw(graphics);
-        graphics.drawString("KG: " + inputFieldRN.getText(), inputFieldRN.getX(), inputFieldRN.getY() + 40);
-        graphics.setBackground(Color.white);
+
 
         // Draw a green rectangle
 
@@ -50,9 +55,9 @@ public class Team9Game extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         inputFieldRN.update(delta);
+        calculations.update(delta);
+        itemList.update(delta);
         backgroundColor = Color.white;
-        calculations.setKgValueString(inputFieldRN.getValue());
-        System.out.println(calculations.getPs());
     }
 
     @Override

@@ -1,89 +1,64 @@
 package at.htldornbirn.projects.nawi.Team9;
 
-public class Calculations {
+import org.newdawn.slick.Graphics;
+
+import java.util.Objects;
+
+public class Calculations implements Actor {
     private double watt;
     private double ps = 0.0;
-    private String psString = "";
     private double gravitation = 9.81;
     private double height = 1.0;
+    private double kg;
+    private double work;
+    private double time = 1.0;
     private Team9Game team9Game;
-    private double kgValueDouble;
-    private String kgValueString;
 
 
     public Calculations(Team9Game game) {
         this.team9Game = game;
-        if (kgValueString != null) {
-            kgValueDouble = Double.parseDouble(kgValueString);
-            watt = kgValueDouble * gravitation * height;
-            ps = watt / 735.5;
-            psString = Double.toString(ps);
+
+    }
+
+    @Override
+    public void render(Graphics graphics) {
+
+    }
+
+    @Override
+    public void update(int delta) {
+        if (team9Game.getInputFieldRN().getValue() == null || Objects.equals(team9Game.getInputFieldRN().getValue(), "")) {
+            work = 0;
+            watt = 0;
+            ps = 0;
+        } else {
+            work = Math.round((gravitation * height * Double.parseDouble(team9Game.getInputFieldRN().getValue()))*100.0)/100.0;
+            watt = work / time;
+            ps = Math.round((watt/735.5)*100.0)/100.0;
         }
     }
 
-
     public double getWatt() {
         return watt;
-    }
-
-    public void setWatt(double watt) {
-        this.watt = watt;
     }
 
     public double getPs() {
         return ps;
     }
 
-    public void setPs(double ps) {
-        this.ps = ps;
+    public double getWork() {
+        return work;
     }
 
-    public String getPsString() {
-        return psString;
-    }
-
-    public void setPsString(String psString) {
-        this.psString = psString;
+    public double getTime() {
+        return time;
     }
 
     public double getGravitation() {
         return gravitation;
     }
 
-    public void setGravitation(double gravitation) {
-        this.gravitation = gravitation;
-    }
-
     public double getHeight() {
         return height;
     }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public Team9Game getTeam9Game() {
-        return team9Game;
-    }
-
-    public void setTeam9Game(Team9Game team9Game) {
-        this.team9Game = team9Game;
-    }
-
-    public double getKgValueDouble() {
-        return kgValueDouble;
-    }
-
-    public void setKgValueDouble(double kgValueDouble) {
-        this.kgValueDouble = kgValueDouble;
-    }
-
-    public String getKgValueString() {
-        return kgValueString;
-    }
-
-    public void setKgValueString(String kgValueString) {
-        this.kgValueString = kgValueString;
-    }
 }
-

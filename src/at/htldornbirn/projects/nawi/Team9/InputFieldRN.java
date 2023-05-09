@@ -5,7 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 public class InputFieldRN {
-    private String value = "1";
+    private String value = "";
     private String placeholder = "KG value";
     private int maxLength = 4;
     private int x;

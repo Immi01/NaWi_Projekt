@@ -3,6 +3,8 @@ package at.htldornbirn.projects.nawi.Team2.code;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import java.awt.event.KeyEvent;
+
 public class InputField {
     private String text;
     private int x,y;
@@ -24,10 +26,16 @@ public class InputField {
 
 
     public void append(String text){
-        this.text += text;
+       this.text += text;
     }
+
     public void back(){
-        //this.text = input.substring(0, input.length() - 1);;
+        StringBuilder sb = new StringBuilder(this.text);
+        if (sb.length()>=1){
+            sb.deleteCharAt(sb.length() - 1);
+            this.text = sb.toString();
+        }
+
     }
 
 

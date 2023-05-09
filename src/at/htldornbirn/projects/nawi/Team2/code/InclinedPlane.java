@@ -12,6 +12,7 @@ import org.w3c.dom.Text;
 
 import java.awt.*;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 
 public class InclinedPlane extends BasicGameState {
 
@@ -66,9 +67,12 @@ public class InclinedPlane extends BasicGameState {
     }
 
     public void keyPressed(int key, char c) {
-        this.inputField.append(Character.toString(c));
         if (key == Input.KEY_BACK){
-            this.inputField.back();
+               this.inputField.back();
+        }else{
+            if (Character.isDigit(c)) {
+                this.inputField.append(Character.toString(c));
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Slider {
     private float x, y;
-    float sliderPosition;
     private List<EventListener> eventListeners;
 
 

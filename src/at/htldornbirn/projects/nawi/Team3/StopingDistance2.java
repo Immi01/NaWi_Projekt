@@ -21,6 +21,8 @@ public class StopingDistance2 extends BasicGameState {
     private Font font;
     private Image carImage;
     private Image streetImage;
+    private float xCarImage;
+    private float CarSpeed;
 
     public StopingDistance2() throws SlickException {
 
@@ -37,7 +39,8 @@ public class StopingDistance2 extends BasicGameState {
         font = new TrueTypeFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 11), true);
         this.carImage = new Image("assets/Car.png");
         this.streetImage = new Image("assets/Street.png");
-
+        this.xCarImage = -150;
+        this.CarSpeed = 5.0f;
 
     }
 
@@ -56,7 +59,7 @@ public class StopingDistance2 extends BasicGameState {
 
 // Bilder ausgegeben
         streetImage.draw(0,0);
-        carImage.draw(0,300);
+        carImage.draw(this.xCarImage,300);
 
 
     }
@@ -78,6 +81,11 @@ public class StopingDistance2 extends BasicGameState {
         }
         if (input.isKeyDown(Input.KEY_LEFT)) {
             speed -= 50 * delta / 1000.0f;
+        }
+
+        this.xCarImage += (float)delta/this.CarSpeed;
+        if(this.xCarImage > 800){
+            this.xCarImage= -400;
         }
 
 //Benutzereingabe überprüfen

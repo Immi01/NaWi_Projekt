@@ -26,6 +26,9 @@ public class InputField {
     public void append(String text){
         this.text += text;
     }
+    public void back(){
+        //this.text = input.substring(0, input.length() - 1);;
+    }
 
 
     public String getText() {

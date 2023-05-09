@@ -67,5 +67,8 @@ public class InclinedPlane extends BasicGameState {
 
     public void keyPressed(int key, char c) {
         this.inputField.append(Character.toString(c));
+        if (key == Input.KEY_BACK){
+            this.inputField.back();
+        }
     }
 }

@@ -1,19 +1,17 @@
 package at.htldornbirn.projects.nawi.Team2.code;
 import at.htldornbirn.projects.nawi.Team2.code.Background.*;
-import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
-import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import java.util.Random;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InclinedPlane2 extends  BasicGameState{
     private List<Actor> actors;
-    private Triangle triangle;
-    private Slider slider;
-    private SetAngle setAngle = new SetAngle();
+
 
 
 
@@ -25,6 +23,7 @@ public class InclinedPlane2 extends  BasicGameState{
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
+        Random random = new Random();
 
         for (int i = 0; i <1; i++) {
             Sky sky = new Sky();
@@ -43,15 +42,11 @@ public class InclinedPlane2 extends  BasicGameState{
             Cloud cloud = new Cloud();
             this.actors.add(cloud);
         }
+        for (int i = 0; i <100; i++) {
+            Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(50));
+            this.actors.add(snowflake);
 
-        this.triangle = new Triangle(20);
-        this.slider = new Slider(200, 200);
-        slider.addListener(setAngle);
-
-
-
-
-
+        }
     }
 
 
@@ -61,8 +56,7 @@ public class InclinedPlane2 extends  BasicGameState{
         for (Actor actors:this.actors){
             actors.render(graphics);
         }
-        triangle.render(gameContainer,graphics);
-        slider.render(gameContainer,graphics);
+
 
     }
 
@@ -74,7 +68,7 @@ public class InclinedPlane2 extends  BasicGameState{
 
 
 
-        slider.update(gameContainer);
+
 
     }
 

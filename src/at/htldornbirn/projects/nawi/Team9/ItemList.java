@@ -18,13 +18,13 @@ public class ItemList implements Actor{
     @Override
     public void render(Graphics graphics) {
         graphics.setColor(Color.gray); // setting color of list
-        if (team9Game.getInputFieldRN() == null || Objects.equals(team9Game.getInputFieldRN() , "")) {
+        if (team9Game.getInputFieldRN().getText() == null || Objects.equals(team9Game.getInputFieldRN().getText() , "")) {
             graphics.drawString("Weight: " + "0" + " kg", InfoFieldX, InfoFieldY + 40);
         } else {
             graphics.drawString("Weight: " + team9Game.getInputFieldRN() + " kg", InfoFieldX, InfoFieldY + 40);
         }
         graphics.drawString("Work: " + calculations.getWork() + " joules", InfoFieldX, InfoFieldY + 60);
-        graphics.drawString("Heigt: " + calculations.getHeight() + " m", InfoFieldX, InfoFieldY + 80);
+        graphics.drawString("Height: " + calculations.getHeight() + " m", InfoFieldX, InfoFieldY + 80);
         graphics.drawString("Gravitation: " + calculations.getGravitation() + " m/s²", InfoFieldX, InfoFieldY + 100);
         graphics.drawString("Time: " + calculations.getTime() + " seconds", InfoFieldX, InfoFieldY + 120);
         graphics.drawString("Power: " + calculations.getWatt() + " watt", InfoFieldX, InfoFieldY + 140);

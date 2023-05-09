@@ -34,6 +34,8 @@ public class Team9Game extends BasicGameState {
         //Ground
         RectangleGround leftGround = new RectangleGround(0, 400, 750, 400);
         RectangleGround rightGround = new RectangleGround(850, 400, 750, 400);
+
+        //Adding all actors necessary
         this.actors.add(leftGround);
         this.actors.add(rightGround);
         this.actors.add(calculations);

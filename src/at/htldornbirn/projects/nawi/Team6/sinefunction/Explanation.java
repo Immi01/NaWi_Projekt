@@ -34,7 +34,7 @@ public class Explanation extends BasicGameState {
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.setColor(Color.red);
-        graphics.drawString("The sine function\n", (float) gameContainer.getWidth() / 20, (float) gameContainer.getHeight() / 20);
+        graphics.drawString("The sine function\n", (float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15);
         graphics.setColor(Color.white);
         graphics.drawString(
                 "The sine function, denoted as sin(x), is a mathematical function that relates the angles of a right-angled triangle to the ratios\n" +

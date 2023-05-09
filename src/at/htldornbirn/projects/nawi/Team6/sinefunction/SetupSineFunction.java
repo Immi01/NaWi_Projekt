@@ -20,7 +20,7 @@ public class SetupSineFunction extends StateBasedGame {
 
     public static void main(String[] args) throws SlickException {
         AppGameContainer app = new AppGameContainer(new SetupSineFunction("Sine Function"));
-        app.setDisplayMode(1440, 1080, false);
+        app.setDisplayMode(1280, 960, false);
         app.setAlwaysRender(true);
         app.start();
     }

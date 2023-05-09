@@ -29,12 +29,12 @@ public class SineFunctionSandBox extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 175, 100, "Go to explanation", Color.yellow);
+        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 175, 100, "Go to explanation", Color.red);
         this.stateButton1.setX((float) gameContainer.getWidth() / 3 - this.stateButton1.getWidth() / 2);
         this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.stateButton2 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 175, 100, "Interference", Color.cyan);
-        this.stateButton2.setX((float) gameContainer.getWidth() * 2 / 3 - this.stateButton1.getWidth() / 2);
-        this.stateButton2.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.stateButton2.setX((float) gameContainer.getWidth() * 0.66f - this.stateButton2.getWidth() / 2);
+        this.stateButton2.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton2.getHeight() / 2);
         this.actors.add(this.stateButton1);
         this.actors.add(this.stateButton2);
 
@@ -52,15 +52,15 @@ public class SineFunctionSandBox extends BasicGameState {
         this.sineFunction1 = new SineFunction(5000, containerWidth, containerHeight / 2, Color.orange);
         this.sineFunction2 = new SineFunction(5000, containerWidth, containerHeight / 2, Color.green);
 
-        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1, "x", (float) containerWidth * 0.99f, (float) containerHeight / 2 + 5);
-        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight, "sin(x)", 5, 30);
+        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1, "x", (float) containerWidth * 0.97f, (float) containerHeight / 2 + 5);
+        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight * 0.97f, "sin(x)", 5, 30);
         this.actors.add(xAxes);
         this.actors.add(yAxes);
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.setColor(Color.yellow);
-        graphics.drawString("Sine Function", 100, 100);
+        graphics.drawString("Sandbox", (float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15);
         graphics.setColor(Color.white);
 
         Locale locale = new Locale("en", "UK");
@@ -81,9 +81,9 @@ public class SineFunctionSandBox extends BasicGameState {
 
         float heightValueButtonLabels = (float) (gameContainer.getHeight() / 10);
 
-        graphics.drawString(stringDisplacementX + currentDisplacementXFormatted + " pi RAD", (float) (gameContainer.getWidth() / 3 - widthXLabel/2), heightValueButtonLabels);
-        graphics.drawString(stringDisplacementY + this.sineFunction1.getSineComponents().get(0).getDisplacementY() / 100, (float) (gameContainer.getWidth() * 6 / 10 - widthYLabel/2), heightValueButtonLabels);
-        graphics.drawString(stringAmplitude + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100, (float) (gameContainer.getWidth() * 8.25 / 10 - widthAmplitudeLabel/2), heightValueButtonLabels);
+        graphics.drawString(stringDisplacementX + currentDisplacementXFormatted + " pi RAD", (float) (gameContainer.getWidth() / 3 - widthXLabel / 2), heightValueButtonLabels);
+        graphics.drawString(stringDisplacementY + this.sineFunction1.getSineComponents().get(0).getDisplacementY() / 100, (float) (gameContainer.getWidth() * 6 / 10 - widthYLabel / 2), heightValueButtonLabels);
+        graphics.drawString(stringAmplitude + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100, (float) (gameContainer.getWidth() * 8.25 / 10 - widthAmplitudeLabel / 2), heightValueButtonLabels);
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }

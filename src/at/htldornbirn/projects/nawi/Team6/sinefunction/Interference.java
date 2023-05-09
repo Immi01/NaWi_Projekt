@@ -41,17 +41,19 @@ public class Interference extends BasicGameState {
         this.sineFunctions.add(sineFunction2);
         this.sineFunctions.add(sineFunction3);
 
-        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1, "x", (float) containerWidth * 0.99f, (float) containerHeight / 2 + 5);
-        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight, "sin(x)", 5, 30);
+        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1, "x", (float) containerWidth * 0.97f, (float) containerHeight / 2 + 5);
+        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight * 0.97f, "sin(x)", 5, 30);
         this.actors.add(xAxes);
         this.actors.add(yAxes);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        graphics.setColor(Color.cyan);
+        graphics.drawString("Interference", (float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15);
         float labelsHeight = (float) gameContainer.getHeight() * 1 / 10;
         int amountOfLabels = 3;
-        float labelWidthDistance = (float) gameContainer.getHeight() / amountOfLabels;
+        float labelWidthDistance = (float) gameContainer.getHeight() / (amountOfLabels);
         graphics.setColor(Color.blue);
         graphics.drawString("--- Incident Wave", labelWidthDistance, labelsHeight);
         graphics.setColor(Color.green);

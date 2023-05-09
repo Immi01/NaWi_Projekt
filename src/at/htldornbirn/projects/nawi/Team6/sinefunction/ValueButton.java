@@ -10,7 +10,7 @@ public class ValueButton implements Actor {
     public ValueButton(float x, float y, float width) {
         this.x = x;
         this.y = y;
-        this.buttonCircleRadius = 30;
+        this.buttonCircleRadius = 35;
         this.width = width;
         this.xSubtractionButton = this.x - this.width / 2;
         this.xAdditionButton = this.x + this.width / 2;
@@ -53,10 +53,10 @@ public class ValueButton implements Actor {
         float minusWidth = graphics.getFont().getWidth("-");
         float plusWidth = graphics.getFont().getWidth("+");
         graphics.setColor(Color.red);
-        graphics.drawString("-", xSubtractionButton + this.buttonCircleRadius / 2 - minusWidth / 2, this.y + 5);
+        graphics.drawString("-", xSubtractionButton + this.buttonCircleRadius / 2 - minusWidth / 2, this.y + buttonCircleRadius / 2 - minusWidth);
         graphics.drawOval(xSubtractionButton, this.y, this.buttonCircleRadius, this.buttonCircleRadius);
         graphics.setColor(Color.green);
-        graphics.drawString("+", xAdditionButton + this.buttonCircleRadius / 2 - plusWidth / 2, this.y + 5);
+        graphics.drawString("+", xAdditionButton + this.buttonCircleRadius / 2 - plusWidth / 2, this.y + buttonCircleRadius / 2 - plusWidth);
         graphics.drawOval(xAdditionButton, this.y, this.buttonCircleRadius, this.buttonCircleRadius);
         graphics.setColor(Color.white);
     }

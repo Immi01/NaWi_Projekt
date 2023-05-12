@@ -23,7 +23,7 @@ public class Team7 extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         ball = new Ball(0,80, 0.0f,(float) 5, 10, 0.5f);
-        table = new Table(450, 200, 0, 15);
+        table = new Table(150, 200, 150, 30);
 
     }
 

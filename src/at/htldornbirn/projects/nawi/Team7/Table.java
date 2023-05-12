@@ -23,10 +23,6 @@ public class Table implements ProjectActor {
 
     @Override
     public void render(Graphics graphics) {
-
-
-
-
         graphics.drawRect(this.x, this.y, this.width, this.high);
         graphics.drawRect((this.x - this.minWidth), this.y, this.width, this.high);
         graphics.drawRect(0 + this.originOffSet, this.y - this.width, this.x + this.minlength - this.originOffSet ,  this.width);
@@ -35,5 +31,9 @@ public class Table implements ProjectActor {
     @Override
     public void update(GameContainer gc, int delta) {
 
+    }
+
+    public float getHigh() {
+        return high;
     }
 }

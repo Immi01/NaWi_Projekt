@@ -10,13 +10,10 @@ public class Triangle {
     private double hu;
     private float lineY2;
 
-    public Triangle(double angle) {
-        //System.out.println(angle);
-        angle(angle);
+    public Triangle() {
     }
 
     public void update(GameContainer gameContainer, int i) throws SlickException {
-
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {

@@ -22,6 +22,7 @@ public class SineFunctionSandBox extends BasicGameState {
     private ValueButton valueButton3;
     private SineFunction sineFunction1;
     private SineFunction sineFunction2;
+    private AngelCodeFont font;
 
     public int getID() {
         return 2;
@@ -29,19 +30,19 @@ public class SineFunctionSandBox extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 175, 100, "Go to explanation", Color.red);
-        this.stateButton1.setX((float) gameContainer.getWidth() / 3 - this.stateButton1.getWidth() / 2);
+        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 250, 100, "Go to explanation", Color.red);
+        this.stateButton1.setX((float) gameContainer.getWidth() * 0.33f - this.stateButton1.getWidth() / 2);
         this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
-        this.stateButton2 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 175, 100, "Interference", Color.cyan);
-        this.stateButton2.setX((float) gameContainer.getWidth() * 0.66f - this.stateButton2.getWidth() / 2);
+        this.stateButton2 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 250, 100, "Interference", Color.cyan);
+        this.stateButton2.setX((float) gameContainer.getWidth() * 2 / 3 - this.stateButton2.getWidth() / 2);
         this.stateButton2.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton2.getHeight() / 2);
         this.actors.add(this.stateButton1);
         this.actors.add(this.stateButton2);
 
         float heightValueButtons = (float) (gameContainer.getHeight() / 7);
-        this.valueButton1 = new ValueButton((float) (gameContainer.getWidth() / 3), heightValueButtons, 50);
-        this.valueButton2 = new ValueButton((float) (gameContainer.getWidth() * 6 / 10), heightValueButtons, 50);
-        this.valueButton3 = new ValueButton((float) (gameContainer.getWidth() * 8 / 10), heightValueButtons, 50);
+        this.valueButton1 = new ValueButton((float) (gameContainer.getWidth() / 3), heightValueButtons, 75);
+        this.valueButton2 = new ValueButton((float) (gameContainer.getWidth() * 6 / 10), heightValueButtons, 75);
+        this.valueButton3 = new ValueButton((float) (gameContainer.getWidth() * 8 / 10), heightValueButtons, 75);
         this.actors.add(this.valueButton1);
         this.actors.add(this.valueButton2);
         this.actors.add(this.valueButton3);
@@ -56,11 +57,12 @@ public class SineFunctionSandBox extends BasicGameState {
         Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight * 0.97f, "sin(x)", 5, 30);
         this.actors.add(xAxes);
         this.actors.add(yAxes);
+
+        font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.setColor(Color.yellow);
-        graphics.drawString("Sandbox", (float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15);
+        font.drawString((float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15, "Sandbox", Color.yellow);
         graphics.setColor(Color.white);
 
         Locale locale = new Locale("en", "UK");
@@ -79,11 +81,14 @@ public class SineFunctionSandBox extends BasicGameState {
         String stringAmplitude = "Amplitude: ";
         float widthAmplitudeLabel = graphics.getFont().getWidth(stringDisplacementX);
 
-        float heightValueButtonLabels = (float) (gameContainer.getHeight() / 10);
+        float fontFactor = 0.7f;
+        float heightValueButtonLabels = (float) (gameContainer.getHeight() / 10) / fontFactor;
 
-        graphics.drawString(stringDisplacementX + currentDisplacementXFormatted + " pi RAD", (float) (gameContainer.getWidth() / 3 - widthXLabel / 2), heightValueButtonLabels);
-        graphics.drawString(stringDisplacementY + this.sineFunction1.getSineComponents().get(0).getDisplacementY() / 100, (float) (gameContainer.getWidth() * 6 / 10 - widthYLabel / 2), heightValueButtonLabels);
-        graphics.drawString(stringAmplitude + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100, (float) (gameContainer.getWidth() * 8.25 / 10 - widthAmplitudeLabel / 2), heightValueButtonLabels);
+        graphics.scale(fontFactor, fontFactor);
+        font.drawString((float) (gameContainer.getWidth() / 3 - widthXLabel / 2) / fontFactor, heightValueButtonLabels, stringDisplacementX + currentDisplacementXFormatted + " pi RAD");
+        font.drawString((float) (gameContainer.getWidth() * 6 / 10 - widthYLabel / 2) / fontFactor, heightValueButtonLabels, stringDisplacementY + this.sineFunction1.getSineComponents().get(0).getDisplacementY() / 100);
+        font.drawString((float) (gameContainer.getWidth() * 8.25 / 10 - widthAmplitudeLabel / 2) / fontFactor, heightValueButtonLabels, stringAmplitude + this.sineFunction1.getSineComponents().get(0).getAmplitude() / 100);
+        graphics.scale(1 / fontFactor, 1 / fontFactor);
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }

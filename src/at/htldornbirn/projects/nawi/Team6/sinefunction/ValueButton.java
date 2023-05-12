@@ -1,19 +1,19 @@
 package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.*;
 
 public class ValueButton implements Actor {
     private float x, y, width, xSubtractionButton, xAdditionButton, buttonCircleRadius;
+    private AngelCodeFont font;
 
-    public ValueButton(float x, float y, float width) {
+    public ValueButton(float x, float y, float width) throws SlickException {
         this.x = x;
         this.y = y;
         this.buttonCircleRadius = 35;
         this.width = width;
         this.xSubtractionButton = this.x - this.width / 2;
         this.xAdditionButton = this.x + this.width / 2;
+        this.font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
     }
 
     public float getX() {
@@ -50,13 +50,15 @@ public class ValueButton implements Actor {
 
     @Override
     public void render(Graphics graphics) {
-        float minusWidth = graphics.getFont().getWidth("-");
-        float plusWidth = graphics.getFont().getWidth("+");
+        float minusWidth = font.getWidth("-");
+        float minusHeight = font.getHeight("-");
+        float plusWidth = font.getWidth("+");
+        float plusHeight = font.getHeight("+");
         graphics.setColor(Color.red);
-        graphics.drawString("-", xSubtractionButton + this.buttonCircleRadius / 2 - minusWidth / 2, this.y + buttonCircleRadius / 2 - minusWidth);
+        font.drawString(xSubtractionButton + this.buttonCircleRadius / 2 - minusWidth / 2, this.y - minusHeight + buttonCircleRadius / 2, "-", Color.red);
         graphics.drawOval(xSubtractionButton, this.y, this.buttonCircleRadius, this.buttonCircleRadius);
         graphics.setColor(Color.green);
-        graphics.drawString("+", xAdditionButton + this.buttonCircleRadius / 2 - plusWidth / 2, this.y + buttonCircleRadius / 2 - plusWidth);
+        font.drawString(xAdditionButton + this.buttonCircleRadius / 2 - plusWidth / 2, this.y - plusHeight * 3 / 4 + buttonCircleRadius / 2, "+", Color.green);
         graphics.drawOval(xAdditionButton, this.y, this.buttonCircleRadius, this.buttonCircleRadius);
         graphics.setColor(Color.white);
     }

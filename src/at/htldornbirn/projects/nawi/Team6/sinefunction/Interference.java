@@ -15,6 +15,7 @@ public class Interference extends BasicGameState {
     private SineFunction sineFunction1;
     private SineFunction sineFunction2;
     private SineFunction sineFunction3;
+    private AngelCodeFont font;
 
     @Override
     public int getID() {
@@ -25,10 +26,11 @@ public class Interference extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         double containerHeight = gameContainer.getHeight();
         double containerWidth = gameContainer.getWidth();
+        font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
 
         this.actors = new ArrayList<>();
         this.sineFunctions = new ArrayList<>();
-        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 175, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 250, 100, "Go to sandbox", Color.yellow);
         this.stateButton1.setX((float) gameContainer.getWidth() / 2 - this.stateButton1.getWidth() / 2);
         this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(stateButton1);
@@ -49,18 +51,16 @@ public class Interference extends BasicGameState {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.setColor(Color.cyan);
-        graphics.drawString("Interference", (float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15);
-        float labelsHeight = (float) gameContainer.getHeight() * 1 / 10;
+        font.drawString((float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15, "Interference", Color.cyan);
         int amountOfLabels = 3;
-        float labelWidthDistance = (float) gameContainer.getHeight() / (amountOfLabels);
-        graphics.setColor(Color.blue);
-        graphics.drawString("--- Incident Wave", labelWidthDistance, labelsHeight);
-        graphics.setColor(Color.green);
-        graphics.drawString("--- Reflecting Wave", labelWidthDistance * 2, labelsHeight);
-        graphics.setColor(Color.red);
-        graphics.drawString("--- Resulting Wave", labelWidthDistance * 3, labelsHeight);
-
+        float fontFactor = 0.8f;
+        float labelsHeight = (float) gameContainer.getHeight() * 1 / 10 / fontFactor;
+        float labelWidthDistance = (float) gameContainer.getHeight() / (amountOfLabels) / fontFactor;
+        graphics.scale(fontFactor, fontFactor);
+        font.drawString(labelWidthDistance, labelsHeight, "--- Incident Wave", Color.blue);
+        font.drawString(labelWidthDistance * 2, labelsHeight, "--- Reflecting Wave", Color.green);
+        font.drawString(labelWidthDistance * 3, labelsHeight, "--- Resulting Wave", Color.red);
+        graphics.scale(1 / fontFactor, 1 / fontFactor);
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }

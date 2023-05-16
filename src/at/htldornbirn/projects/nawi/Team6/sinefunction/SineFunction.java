@@ -1,144 +1,68 @@
 package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
-import org.lwjgl.input.Mouse;
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SineFunction extends BasicGameState {
-    private List<Actor> actors;
+public class SineFunction implements Actor {
+
+    private int amountOfComponents;
+    private double width, height;
+    private Color color;
     private List<SineComponent> sineComponents;
-    private boolean amplitudeIsChanging = false;
-    private boolean yAxeIsChanging = true;
-    private boolean xAxeIsChanging = true;
 
-    public int getID() {
-        return 2;
-    }
-
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.actors = new ArrayList<>();
+    public SineFunction(int amountOfComponents, double width, double height, Color color) {
+        this.amountOfComponents = amountOfComponents;
+        this.width = width;
+        this.height = height;
         this.sineComponents = new ArrayList<>();
-        double containerHeight = gameContainer.getHeight();
-        double containerWidth = gameContainer.getWidth();
+        this.color = color;
 
-        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 2);
-        this.actors.add(xAxes);
-
-        Axes yAxes = new Axes((float) 0, 0, 2, (float) containerHeight);
-        this.actors.add(yAxes);
-
-        int amountOfComponents = 5000;
         for (int i = 1; i <= amountOfComponents; i++) {
-            SineComponent sineComponent = new SineComponent();
-            this.actors.add(sineComponent);
+            SineComponent sineComponent = new SineComponent(this.color);
             this.sineComponents.add(sineComponent);
 
             double positionRelative = (double) i / amountOfComponents;
-            sineComponent.positionRelative = positionRelative;
-            sineComponent.x = (float) (positionRelative * containerWidth);
+            sineComponent.setPositionRelative(positionRelative);
+            sineComponent.setX((float) (positionRelative * width));
 
-            double angleOfComponent = positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
-            sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + containerHeight / 2);
+            double angleOfComponent = positionRelative * 360 * Math.PI / (180) * sineComponent.getAmountOfDurations();
+            sineComponent.setY((float) (-sineComponent.getAmplitude() * Math.sin(angleOfComponent) + height));
         }
-
     }
 
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.drawString("Sine Function", 100, 100);
-        graphics.drawString("Displacement x Axes: " + this.sineComponents.get(0).displacementX, 400, 100);
-        graphics.drawString("Displacement y Axes: " + this.sineComponents.get(0).displacementY, 700, 100);
-        graphics.drawString("Displacement amplitude: " + this.sineComponents.get(0).amplitude / 100, 1000, 100);
-        for (Actor actor : this.actors) {
-            actor.render(graphics);
-        }
-        graphics.setColor(Color.red);
-        for (SineComponent component : this.sineComponents) {
-            component.render(graphics);
-        }
-        graphics.setColor(Color.yellow);
-        graphics.drawString("Go to explanation", 600, 600);
-        graphics.setColor(Color.white);
+    @Override
+    public void render(Graphics graphics) {
     }
 
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        int posX = Mouse.getX();
-        int posY = Mouse.getY();
+    @Override
+    public void update(GameContainer gameContainer, int delta) {
+    }
 
-        if ((posX > 550 && posX < 650) && (posY > 250 && posY < 350)) {
-            int in = 0;
-            if (Mouse.isButtonDown(0)) {
-                stateBasedGame.enterState(1);
-            }
-        }
+    public int getAmountOfComponents() {
+        return amountOfComponents;
+    }
 
-        for (SineComponent sineComponent : sineComponents) {
-            double angleOfComponent = sineComponent.positionRelative * 360 * Math.PI / (180) * sineComponent.amountOfDurations;
-            sineComponent.y = (float) (-sineComponent.amplitude * Math.sin(angleOfComponent) + gameContainer.getHeight() / 2 - sineComponent.displacementY);
-        }
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_1)) {
-            stateBasedGame.enterState(1);
-        }
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_A)) {
-            amplitudeIsChanging = true;
-            yAxeIsChanging = false;
-        }
+    public double getWidth() {
+        return width;
+    }
 
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_X)) {
-            xAxeIsChanging = true;
-        }
+    public double getHeight() {
+        return height;
+    }
 
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_Y)) {
-            yAxeIsChanging = true;
-            amplitudeIsChanging = false;
-        }
+    public Color getColor() {
+        return color;
+    }
 
-        if (gameContainer.getInput().isKeyDown(Input.KEY_LEFT)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (xAxeIsChanging) {
-                    sineComponent.x -= 1;
-                    sineComponent.displacementX -= 1;
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
-                }
-            }
-        }
-
-        if (gameContainer.getInput().isKeyDown(Input.KEY_RIGHT)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (xAxeIsChanging) {
-                    sineComponent.x += 1;
-                    sineComponent.displacementX += 1;
-                }
-            }
-        }
-
-        if (gameContainer.getInput().isKeyDown(Input.KEY_UP)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (yAxeIsChanging) {
-                    sineComponent.displacementY += 1;
-                }
-                if (amplitudeIsChanging) {
-                    sineComponent.amplitude += 1;
-                }
-            }
-        }
-
-        if (gameContainer.getInput().isKeyDown(Input.KEY_DOWN)) {
-            for (SineComponent sineComponent : sineComponents) {
-                if (yAxeIsChanging) {
-                    sineComponent.displacementY -= 1;
-                }
-                if (amplitudeIsChanging) {
-                    sineComponent.amplitude -= 1;
-                }
-            }
-        }
-
-        for (Actor actor : this.actors) {
-            actor.update(gameContainer, i);
-        }
+    public List<SineComponent> getSineComponents() {
+        return sineComponents;
     }
 }

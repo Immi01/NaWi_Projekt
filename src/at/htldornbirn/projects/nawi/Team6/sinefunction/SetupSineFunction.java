@@ -13,13 +13,14 @@ public class SetupSineFunction extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        this.addState(new SineFunction());
         this.addState(new Explanation());
+        this.addState(new SineFunctionSandBox());
+        this.addState(new Interference());
     }
 
     public static void main(String[] args) throws SlickException {
         AppGameContainer app = new AppGameContainer(new SetupSineFunction("Sine Function"));
-        app.setDisplayMode(1600, 900, false);
+        app.setDisplayMode(1280, 960, false);
         app.setAlwaysRender(true);
         app.start();
     }

@@ -27,7 +27,7 @@ public class InputField {
 
 
     public void render(Graphics graphics) throws SlickException{
-        this.backgroundInputField.render(graphics);
+        this.backgroundInputField.render(graphics,hasFocus);
         graphics.drawString(text,x,y);
     }
 

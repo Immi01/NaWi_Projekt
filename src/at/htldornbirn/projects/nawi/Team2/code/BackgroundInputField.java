@@ -1,6 +1,7 @@
 package at.htldornbirn.projects.nawi.Team2.code;
 
 import at.htldornbirn.projects.nawi.Team2.code.Background.Background;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -17,8 +18,12 @@ public class BackgroundInputField {
     }
 
 
-    public void render(Graphics graphics) throws SlickException {
+    public void render(Graphics graphics,boolean hasFocus) throws SlickException {
+        if (hasFocus){
+            graphics.setColor(Color.black);
+        }
         graphics.drawRect(x,y,width,height);
+        graphics.setColor(Color.white);
     }
 
     public void update(GameContainer gameContainer) {

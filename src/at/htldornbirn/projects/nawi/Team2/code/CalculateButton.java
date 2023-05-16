@@ -10,23 +10,24 @@ public class CalculateButton {
 
     private Calculations calculations;
     private float angle;
-    private String weight;
+    private String weight, distance;
 
 
-    public CalculateButton(float angle, String text) {
+    public CalculateButton(float angle, String weightText, String distanceText) {
         this.angle = angle;
-        this.weight = text;
+        this.weight = weightText;
+        this.distance = distanceText;
 
-        this.calculations = new Calculations(this.angle, this.weight);
+        this.calculations = new Calculations(this.angle, this.weight, this.distance);
     }
 
-    public void update(GameContainer gameContainer, float angle, String weight) throws SlickException {
+    public void update(GameContainer gameContainer, float angle, String weight, String distance) throws SlickException {
         Input input = gameContainer.getInput();
         int mouseY = input.getMouseY();
         int mouseX = input.getMouseX();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             if (mouseY>700 && mouseY<730 && mouseX >100 && mouseX < 250){
-                calculations.update(gameContainer, angle, weight);
+                calculations.update(gameContainer, angle, weight, distance);
             }
         }
     }

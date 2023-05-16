@@ -17,6 +17,8 @@ public class InclinedPlane extends BasicGameState {
 
     private SetAngle setAngle = new SetAngle();
 
+    private Image backgroundImage;
+
 
     @Override
     public int getID() {
@@ -26,20 +28,27 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
 
+        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/pictures/background.png");
+
         this.triangle = new Triangle();
 
         this.slider = new Slider(200, 200,40,300);
         this.inputFieldWeight = new InputField("", 100, 100,false);
         this.inputFieldDistance = new InputField("", 300, 100,false);
 
-        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText());
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText());
 
         slider.addListener(setAngle);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        graphics.drawImage(backgroundImage, 0, 0);
+        graphics.setLineWidth(3.0f);
+
         triangle.render(gameContainer,graphics);
+
+        graphics.setLineWidth(1.0f);
 
         slider.render(gameContainer,graphics);
         inputFieldWeight.render(graphics);
@@ -53,11 +62,9 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         slider.update(gameContainer);
-        calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText());
+        calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
-        inputFieldWeight.update(gameContainer);
-
 
     }
 

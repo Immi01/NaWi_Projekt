@@ -6,6 +6,10 @@ public class SetAngle implements EventListener {
 
     private float sliderValue;
 
+    public SetAngle() {
+        this.sliderValue = 10;
+    }
+
     @Override
     public void onChange(float mouseY) {
         //Berechnet Winkel für die Schiefe Ebene

@@ -28,10 +28,9 @@ public class InclinedPlane extends BasicGameState {
         this.triangle = new Triangle();
 
         this.slider = new Slider(200, 200,40,300);
-
         this.inputField = new InputField("", 100, 100);
 
-        this.calculateButton = new CalculateButton();
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(),inputField.getText());
 
         slider.addListener(setAngle);
     }
@@ -41,21 +40,20 @@ public class InclinedPlane extends BasicGameState {
         triangle.render(gameContainer,graphics);
 
         slider.render(gameContainer,graphics);
-
         inputField.render(graphics);
+
         calculateButton.render(gameContainer, graphics);
 
         graphics.setBackground(Color.blue);
-
-
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         slider.update(gameContainer);
-        calculateButton.update(gameContainer);
+        calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputField.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
+        inputField.update(gameContainer);
     }
 
     public void keyPressed(int key, char c) {

@@ -1,5 +1,7 @@
 package at.htldornbirn.projects.nawi.Team2.code;
 
+import org.newdawn.slick.Game;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
@@ -22,26 +24,20 @@ public class InputField {
     public void render(Graphics graphics) throws SlickException{
         graphics.drawString(text,x,y);
 
+        /*
         if (cursorVisible) {
             // Zeichnen des blinkenden Cursors
             graphics.drawLine(100,100,120,20);
-        }
-    }
-
-    public void update(int delta) throws SlickException {
-        if (System.currentTimeMillis() - lastTimeCursorChanged > 500) {
-            cursorVisible = !cursorVisible;
-            lastTimeCursorChanged = System.currentTimeMillis();
-        }
+        }*/
     }
 
 
 
-    public void update() {
-        if (System.currentTimeMillis() - lastTimeCursorChanged > 500) {
+    public void update(GameContainer gameContainer) {
+        /*if (System.currentTimeMillis() - lastTimeCursorChanged > 500) {
             cursorVisible = !cursorVisible;
             lastTimeCursorChanged = System.currentTimeMillis();
-        }
+        }*/
     }
 
 
@@ -55,15 +51,10 @@ public class InputField {
             sb.deleteCharAt(sb.length() - 1);
             this.text = sb.toString();
         }
-
     }
 
 
     public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+        return this.text;
     }
 }

@@ -16,6 +16,7 @@ public class LocationButton implements ProjectActor{
     @Override
     public void render(Graphics graphics) {
         graphics.drawRect(this.x, this.y, this.width, this.height);
+        graphics.drawString("Hallo", 10,20);
     }
 
     @Override

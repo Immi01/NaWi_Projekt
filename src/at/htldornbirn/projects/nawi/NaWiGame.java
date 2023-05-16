@@ -1,7 +1,7 @@
 package at.htldornbirn.projects.nawi;
 
 import at.htldornbirn.projects.nawi.navigation.Navigation;
-import at.htldornbirn.projects.nawi.sinusfunction.SinusFunction;
+import at.htldornbirn.projects.nawi.Team6.SinusFunction;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;

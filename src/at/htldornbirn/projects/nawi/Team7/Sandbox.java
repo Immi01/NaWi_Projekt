@@ -55,8 +55,10 @@ public class Sandbox extends BasicGameState {
 
         this.bY = this.rectangle.getY();
 
+        String[] locationsName = {"MERCURY", "VENUS", "EARTH", "MARS", "JUPITER", "SATURN", "URANUS", "NEPTUNE"};
+
         for (int i = 0; i < this.CountOfLocations; i++) {
-            locationButton = new LocationButton(this.distanceBetweenRandAndButton, this.bY, this.bHeight, this.bWidth);
+            locationButton = new LocationButton(this.distanceBetweenRandAndButton, this.bY, this.bHeight, this.bWidth, locationsName[i]);
             locationButtons.add(locationButton);
             this.bY += 100;
         }

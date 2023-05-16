@@ -17,6 +17,12 @@ public class Sandbox extends BasicGameState {
     private int distanceBetweenRechtangles;
     private CustomBalls customBall;
     private List<CustomBalls> customBalls;
+    private Table table;
+    private int CountOfLocations;
+    private LocationButton locationButton;
+    private List<LocationButton> locationButtons;
+    private float distanceBetweenRandAndButton;
+    private float bY, bHeight, bWidth;
 
     @Override
     public int getID() {
@@ -26,20 +32,36 @@ public class Sandbox extends BasicGameState {
     public Sandbox() {
         this.rectangles = new ArrayList<>();
         this.customBalls = new ArrayList<>();
+        this.locationButtons = new ArrayList<>();
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.countOfBallSelection = 4;
+        this.CountOfLocations = 8;
+        this.bWidth = 200;
+        this.bHeight = 50;
+        this.distanceBetweenRechtangles = 100;
+        this.distanceBetweenRandAndButton = 1440 - this.bWidth - this.distanceBetweenRechtangles;
+
         for (int i = 0; i < this.countOfBallSelection; i++) {
-            this.distanceBetweenRechtangles += 150;
             rectangle = new Rectangle(this.distanceBetweenRechtangles);
-            this.rectangle.setY(200);
+            this.rectangle.setY(150);
             rectangles.add(rectangle);
+            this.distanceBetweenRechtangles += 250;
             customBall = new CustomBalls(rectangles.get(i).getX(), rectangles.get(i).getY(), rectangles.get(i).getZ(), rectangles.get(i).getZ());
             customBalls.add(customBall);
         }
 
+        this.bY = this.rectangle.getY();
+
+        for (int i = 0; i < this.CountOfLocations; i++) {
+            locationButton = new LocationButton(this.distanceBetweenRandAndButton, this.bY, this.bHeight, this.bWidth);
+            locationButtons.add(locationButton);
+            this.bY += 100;
+        }
+
+        table = new Table(150, 200, 150, 30);
 
     }
 
@@ -53,7 +75,13 @@ public class Sandbox extends BasicGameState {
             customBall.render(graphics);
         }
 
+        for (LocationButton locationButton: this.locationButtons){
+            locationButton.render(graphics);
+        }
+
         graphics.drawString("Menue", 720, 40);
+
+        table.render(graphics);
     }
 
     @Override

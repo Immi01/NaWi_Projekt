@@ -1,17 +1,17 @@
 package at.htldornbirn.projects.nawi.navigation;
 
 import at.htldornbirn.projects.nawi.Constants;
-<<<<<<<HEAD
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
-=======
+
 import net.java.games.input.Component;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
->>>>>>>feature/Team2
+
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -31,16 +31,18 @@ public class Navigation extends BasicGameState {
     Input input;
     float team1X;
     float team1Y;
+    int team1A;
 
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         input = gameContainer.getInput();
         this.actors = new ArrayList<>();
-        Team1 team1 = new Team1(100, 100);
+        Team1 team1 = new Team1(100, 100,60);
         actors.add(team1);
         team1X = actors.get(0).getX();
         team1Y = actors.get(0).getY();
+        team1A = actors.get(0).getSize();
 
     }
 
@@ -64,7 +66,7 @@ public class Navigation extends BasicGameState {
         mouseY = (Mouse.getY() - 600) * -1;
 
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            if ((mouseX >= team1X && mouseX < team1X + 60) && (mouseY >= team1Y && mouseY < team1Y + 60)) {
+            if ((mouseX >= team1X && mouseX < team1X + team1A) && (mouseY >= team1Y && mouseY < team1Y + team1A)) {
                 stateBasedGame.enterState(Constants.SINUS_FUNKTION_GAME);
             }
 

@@ -8,5 +8,6 @@ public interface Actor {
     public void update(int delta);
     public float getY();
     public float getX();
+    public int getSize();
 
 }

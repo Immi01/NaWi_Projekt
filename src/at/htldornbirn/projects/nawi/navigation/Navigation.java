@@ -1,23 +1,12 @@
 package at.htldornbirn.projects.nawi.navigation;
-
 import at.htldornbirn.projects.nawi.Constants;
-<<<<<<< HEAD
-=======
 import at.htldornbirn.projects.nawi.tools.slider.Slider;
 import at.htldornbirn.projects.nawi.tools.slider.SliderListener;
->>>>>>> feature/Team2
-import org.lwjgl.input.Mouse;
-import org.newdawn.slick.*;
-import net.java.games.input.Component;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/Team2
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -37,10 +26,7 @@ public class Navigation extends BasicGameState implements SliderListener {
     Input input;
     float team1X;
     float team1Y;
-<<<<<<< HEAD
 
-=======
->>>>>>> feature/Team2
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
@@ -62,10 +48,9 @@ public class Navigation extends BasicGameState implements SliderListener {
         for (Actor actor : actors) {
             actor.render(graphics);
         }
-<<<<<<< HEAD
-=======
+
         this.slider.render(gameContainer,graphics);
->>>>>>> feature/Team2
+
 
 
     }

@@ -45,8 +45,8 @@ public class InclinedPlane2 extends  BasicGameState{
         for (int i = 0; i <100; i++) {
             Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(50));
             this.actors.add(snowflake);
-
         }
+
     }
 
 

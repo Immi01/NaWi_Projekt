@@ -1,31 +1,38 @@
 package at.htldornbirn.projects.nawi.navigation;
-
 import at.htldornbirn.projects.nawi.Constants;
+<<<<<<< HEAD
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 
 import net.java.games.input.Component;
+=======
+import at.htldornbirn.projects.nawi.tools.slider.Slider;
+import at.htldornbirn.projects.nawi.tools.slider.SliderListener;
+>>>>>>> d01608dd4e4a31f0a9d6188d7b91dfacde8e8ff8
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d01608dd4e4a31f0a9d6188d7b91dfacde8e8ff8
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Navigation extends BasicGameState {
+public class Navigation extends BasicGameState implements SliderListener {
     @Override
     public int getID() {
         return Constants.NAVIGATION;
     }
 
-
     private List<Actor> actors;
+    private Slider slider;
     float mouseX;
     float mouseY;
     Input input;
@@ -42,7 +49,13 @@ public class Navigation extends BasicGameState {
         actors.add(team1);
         team1X = actors.get(0).getX();
         team1Y = actors.get(0).getY();
+<<<<<<< HEAD
         team1A = actors.get(0).getSize();
+=======
+        this.slider = new Slider(300,300,0,100);
+        this.slider.addListener(this);
+
+>>>>>>> d01608dd4e4a31f0a9d6188d7b91dfacde8e8ff8
 
     }
 
@@ -53,6 +66,9 @@ public class Navigation extends BasicGameState {
             actor.render(graphics);
         }
 
+        this.slider.render(gameContainer,graphics);
+
+
 
     }
 
@@ -62,6 +78,7 @@ public class Navigation extends BasicGameState {
         for (Actor actor : actors) {
             actor.update(delta);
         }
+        this.slider.update(gameContainer);
         mouseX = Mouse.getX();
         mouseY = (Mouse.getY() - 600) * -1;
 
@@ -78,4 +95,10 @@ public class Navigation extends BasicGameState {
             }
         }
     }
+
+    @Override
+    public void onChange(float mouseY) {
+        System.out.println(mouseY);
+    }
 }
+

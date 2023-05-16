@@ -4,12 +4,8 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.font.effects.ColorEffect;
-import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
-import java.awt.*;
 
 public class StopingDistance2 extends BasicGameState {
 
@@ -23,6 +19,8 @@ public class StopingDistance2 extends BasicGameState {
     private Image streetImage;
     private float xCarImage;
     private float CarSpeed;
+    private int counter;
+    private float brakingSpeed;
 
     public StopingDistance2() throws SlickException {
 
@@ -31,7 +29,8 @@ public class StopingDistance2 extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
 
-        input = gameContainer.getInput();
+        this.input = gameContainer.getInput();
+        this.brakingSpeed = 0;
         speed = 0;
         reactionTime = 1f;
         deceleration = 9.81f * 0.8f;
@@ -39,8 +38,8 @@ public class StopingDistance2 extends BasicGameState {
         font = new TrueTypeFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 11), true);
         this.carImage = new Image("assets/Car.png");
         this.streetImage = new Image("assets/Street.png");
-        this.xCarImage = -150;
-        this.CarSpeed = 5.0f;
+        this.xCarImage = -100;
+        this.CarSpeed = this.speed;
 
     }
 
@@ -59,7 +58,7 @@ public class StopingDistance2 extends BasicGameState {
 
 // Bilder ausgegeben
         streetImage.draw(0,0);
-        carImage.draw(this.xCarImage,300);
+        carImage.draw(this.xCarImage,320);
 
 
     }
@@ -82,22 +81,33 @@ public class StopingDistance2 extends BasicGameState {
         if (input.isKeyDown(Input.KEY_LEFT)) {
             speed -= 50 * delta / 1000.0f;
         }
+        if (input.isKeyDown(Input.KEY_SPACE)) {
+            this.xCarImage += this.speed/90/(float)delta;
+            this.speed -= 1;
+            if (this.speed < 0) {
+                this.speed = 0;
+            } }
 
-        this.xCarImage += (float)delta/this.CarSpeed;
+        this.xCarImage += this.speed/100/(float)delta;
         if(this.xCarImage > 800){
             this.xCarImage= -400;
         }
 
+
+
+
+
 //Benutzereingabe überprüfen
         if (this.speed < 0) {
             this.speed = 0;
+        }  if (this.speed > 150) {
+            this.speed = 150;
         }
 
 // Berechnung des Anhaltewegs
         float dt = delta / 1000.0f; // Zeit in Sekunden
         float reactionDistance = speed / 3.6f * reactionTime; // Reaktionsweg in Metern
         float brakingSpeed = speed / 3.6f - deceleration * reactionTime; // Geschwindigkeit beim Bremsen in m/s
-        brakingSpeed = Math.max(brakingSpeed, 0); // Geschwindigkeit kann nicht kleiner als 0 sein
         brakingDistance = brakingSpeed * brakingSpeed / (2 * deceleration); // Bremsweg in Metern
         brakingDistance += reactionDistance; // Anhalteweg in Metern
     }
@@ -106,4 +116,6 @@ public class StopingDistance2 extends BasicGameState {
     public int getID() {
         return 0;
     }
+
+
 }

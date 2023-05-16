@@ -1,5 +1,4 @@
 package at.htldornbirn.projects.nawi.Team2.code;
-import at.htldornbirn.projects.nawi.Team2.code.slider.BackgroundSlider;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
@@ -12,7 +11,8 @@ public class InclinedPlane extends BasicGameState {
 
     private Triangle triangle;
     private Slider slider;
-    private InputField inputField;
+    private InputField inputFieldWeight;
+    private InputField inputFieldDistance;
     private CalculateButton calculateButton;
 
     private SetAngle setAngle = new SetAngle();
@@ -25,12 +25,14 @@ public class InclinedPlane extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+
         this.triangle = new Triangle();
 
         this.slider = new Slider(200, 200,40,300);
-        this.inputField = new InputField("", 100, 100);
+        this.inputFieldWeight = new InputField("", 100, 100,false);
+        this.inputFieldDistance = new InputField("", 300, 100,false);
 
-        this.calculateButton = new CalculateButton(setAngle.getSliderValue(),inputField.getText());
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText());
 
         slider.addListener(setAngle);
     }
@@ -40,7 +42,8 @@ public class InclinedPlane extends BasicGameState {
         triangle.render(gameContainer,graphics);
 
         slider.render(gameContainer,graphics);
-        inputField.render(graphics);
+        inputFieldWeight.render(graphics);
+        inputFieldDistance.render(graphics);
 
         calculateButton.render(gameContainer, graphics);
 
@@ -50,19 +53,41 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         slider.update(gameContainer);
-        calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputField.getText());
+        calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
-        inputField.update(gameContainer);
+        inputFieldWeight.update(gameContainer);
+
+
     }
 
     public void keyPressed(int key, char c) {
         if (key == Input.KEY_BACK){
-               this.inputField.back();
+               this.inputFieldWeight.back();
+               this.inputFieldDistance.back();
         }else{
             if (Character.isDigit(c)) {
-                this.inputField.append(Character.toString(c));
+                this.inputFieldWeight.append(Character.toString(c));
+                this.inputFieldDistance.append(Character.toString(c));
             }
+        }
+    }
+
+    public void mousePressed(int button, int x, int y) {
+
+        if (x >= this.inputFieldWeight.getX() && x <= this.inputFieldWeight.getX() + this.inputFieldWeight.getRectWidth()
+                && y >= this.inputFieldWeight.getY() && y <= this.inputFieldWeight.getY() + this.inputFieldWeight.getRectHeight()) {
+            this.inputFieldWeight.setHasFocus(true);
+        } else {
+            this.inputFieldWeight.setHasFocus(false);
+        }
+
+
+        if (x >= this.inputFieldDistance.getX() && x <= this.inputFieldDistance.getX() + this.inputFieldDistance.getRectWidth()
+                && y >= this.inputFieldDistance.getY() && y <= this.inputFieldDistance.getY() + this.inputFieldDistance.getRectHeight()) {
+            this.inputFieldDistance.setHasFocus(true);
+        } else {
+            this.inputFieldDistance.setHasFocus(false);
         }
     }
 }

@@ -1,17 +1,14 @@
 package at.htldornbirn.projects.nawi.navigation;
 
 import at.htldornbirn.projects.nawi.Constants;
-<<<<<<<HEAD
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
-=======
 import net.java.games.input.Component;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
->>>>>>>feature/Team2
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -23,7 +20,6 @@ public class Navigation extends BasicGameState {
     public int getID() {
         return Constants.NAVIGATION;
     }
-
 
     private List<Actor> actors;
     float mouseX;

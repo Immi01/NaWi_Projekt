@@ -10,14 +10,18 @@ import java.util.List;
 public class LocationButton implements ProjectActor{
     private float x,y,height,width;
     private String name;
+    private float Gforce;
+    private int LocationID;
 
 
-    public LocationButton(float x, float y, float height, float width, String name) {
+    public LocationButton(float x, float y, float height, float width, String name, float Gforce, int LocationID) {
         this.x = x;
         this.y = y;
         this.height = height;
         this.width = width;
         this.name = name;
+        this.Gforce = Gforce;
+        this.LocationID = LocationID;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class LocationButton implements ProjectActor{
 
     @Override
     public void update(GameContainer gc, int delta) {
-
+        
     }
 
     public float getX() {
@@ -47,5 +51,9 @@ public class LocationButton implements ProjectActor{
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public int getLocationID() {
+        return LocationID;
     }
 }

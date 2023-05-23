@@ -6,13 +6,17 @@ import org.newdawn.slick.Graphics;
 public class CustomBalls implements ProjectActor{
     private float x,y,height, width;
     private float distanceBetweenBallAndRectangle;
+    private float weight;
+    private float radius;
 
-    public CustomBalls(float x, float y, float height, float width) {
+    public CustomBalls(float x, float y, float height, float width, float weight, float radius) {
         this.x = x;
         this.y = y;
         this.height = height;
         this.width = width;
         this.distanceBetweenBallAndRectangle = 20;
+        this.weight = weight;
+        this.radius = radius;
     }
 
     @Override

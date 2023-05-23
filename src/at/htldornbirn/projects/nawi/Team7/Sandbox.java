@@ -1,9 +1,6 @@
 package at.htldornbirn.projects.nawi.Team7;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -23,6 +20,10 @@ public class Sandbox extends BasicGameState {
     private List<LocationButton> locationButtons;
     private float distanceBetweenRandAndButton;
     private float bY, bHeight, bWidth;
+    private Ball ball;
+    private float WeightForCustomBall;
+    private float RadiusForCustomBall;
+
 
     @Override
     public int getID() {
@@ -44,12 +45,23 @@ public class Sandbox extends BasicGameState {
         this.distanceBetweenRechtangles = 100;
         this.distanceBetweenRandAndButton = 1440 - this.bWidth - this.distanceBetweenRechtangles;
 
+
+        float[] GforcesForBallsOnLocatiosn = {3.7f, 8.87f, 9.81f, 3.71f,  24.79f, 10.44f, 8.87f, 11.15f};
+        float[] RadiusForBalls = {20f, 30f, 40f, this.RadiusForCustomBall};
+        float[] WeightForBalls = {0.4f, 0.3f, 0.5f, this.WeightForCustomBall};
+        int[] LocationID = new int[8];
+
+
+        for (int i = 0; i < this.customBalls.size(); i++) {
+
+        }
+
         for (int i = 0; i < this.countOfBallSelection; i++) {
             rectangle = new Rectangle(this.distanceBetweenRechtangles);
             this.rectangle.setY(150);
             rectangles.add(rectangle);
             this.distanceBetweenRechtangles += 250;
-            customBall = new CustomBalls(rectangles.get(i).getX(), rectangles.get(i).getY(), rectangles.get(i).getZ(), rectangles.get(i).getZ());
+            customBall = new CustomBalls(rectangles.get(i).getX(), rectangles.get(i).getY(), rectangles.get(i).getZ(), rectangles.get(i).getZ(), WeightForBalls[i], RadiusForBalls[i]);
             customBalls.add(customBall);
         }
 
@@ -58,13 +70,15 @@ public class Sandbox extends BasicGameState {
         String[] locationsName = {"MERCURY", "VENUS", "EARTH", "MARS", "JUPITER", "SATURN", "URANUS", "NEPTUNE"};
 
         for (int i = 0; i < this.CountOfLocations; i++) {
-            locationButton = new LocationButton(this.distanceBetweenRandAndButton, this.bY, this.bHeight, this.bWidth, locationsName[i]);
+            LocationID[i] = i;
+            locationButton = new LocationButton(this.distanceBetweenRandAndButton, this.bY, this.bHeight, this.bWidth, locationsName[i], GforcesForBallsOnLocatiosn[i], LocationID[i]);
             locationButtons.add(locationButton);
             this.bY += 100;
         }
 
         table = new Table(150, 200, 150, 30);
 
+        //ball = new Ball(0, this.table.getHigh(), 0.0f, GforcesForBallsOnLocatiosn[]);
     }
 
     @Override
@@ -84,6 +98,7 @@ public class Sandbox extends BasicGameState {
         graphics.drawString("Menue", 720, 40);
 
         table.render(graphics);
+
     }
 
     @Override

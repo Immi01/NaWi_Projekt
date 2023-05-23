@@ -31,8 +31,8 @@ public class Ball implements ProjectActor{
     public void update(GameContainer gc, int delta) {
         this.t += delta / 1000f;
         this.x += this.speedX * t;
-        //if (this.x >= 400){
+        if (this.x >= 400){
             this.y +=  (this.speedY) * this.t + (this.Gforce*((float)Math.pow(this.t,2)))/2;
-        //}
+        }
     }
 }

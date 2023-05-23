@@ -5,8 +5,11 @@ import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.awt.*;
 
 public class InclinedPlane extends BasicGameState {
 
@@ -33,7 +36,7 @@ public class InclinedPlane extends BasicGameState {
 
         this.triangle = new Triangle();
 
-        this.slider = new Slider(200, 200,40,300);
+        this.slider = new Slider(100, 200,40,300, setAngle.getSliderValue());
         this.inputFieldWeight = new InputField("", 100, 100,false);
         this.inputFieldDistance = new InputField("", 300, 100,false);
 
@@ -45,10 +48,9 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.drawImage(backgroundImage, 0, 0);
+
         graphics.setLineWidth(5.0f);
-
         triangle.render(gameContainer,graphics);
-
         graphics.setLineWidth(1.0f);
 
         slider.render(gameContainer,graphics);
@@ -62,7 +64,7 @@ public class InclinedPlane extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        slider.update(gameContainer);
+        slider.update(gameContainer, setAngle.getSliderValue());
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());

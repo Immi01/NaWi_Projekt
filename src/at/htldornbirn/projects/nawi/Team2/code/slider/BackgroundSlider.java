@@ -7,19 +7,22 @@ import org.newdawn.slick.SlickException;
 
 public class BackgroundSlider {
     private float x,y,width,value;
+    private float sliderValue;
 
-    public BackgroundSlider(float x, float y, float width, float value) {
+    public BackgroundSlider(float x, float y, float width, float value, float sliderValue) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.value = value;
+        this.sliderValue = sliderValue;
     }
 
-    public void update(GameContainer gameContainer, int i) throws SlickException {
-
+    public void update(GameContainer gameContainer, float sliderValue) throws SlickException {
+        this.sliderValue = sliderValue;
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.fillRect(this.x,this.y,this.width,this.value+this.width);
+        graphics.drawString(String.valueOf(sliderValue),this.x+this.width+20,this.y+20);
     }
 }

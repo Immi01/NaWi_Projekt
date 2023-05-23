@@ -12,18 +12,20 @@ public class Slider {
     private float value;
     private BackgroundSlider backgroundSlider;
     private List<EventListener> eventListeners;
+    private float sliderValue;
 
 
 
-    public Slider(float startPositionX, float startPositionY, float width, float value) {
+    public Slider(float startPositionX, float startPositionY, float width, float value, float sliderValue) {
         this.startPositionX = startPositionX;
         this.actualPositionY = startPositionY-width/2;
         this.startPositionY = startPositionY;
         this.width = width;
         this.value = value;
+        this.sliderValue = sliderValue;
 
         this.eventListeners = new ArrayList<>();
-        this.backgroundSlider = new BackgroundSlider(this.startPositionX,this.actualPositionY,this.width,this.value);
+        this.backgroundSlider = new BackgroundSlider(this.startPositionX,this.actualPositionY,this.width,this.value, this.sliderValue);
     }
 
 
@@ -32,17 +34,18 @@ public class Slider {
     }
 
 
-    public void update(GameContainer gameContainer) throws SlickException {
+    public void update(GameContainer gameContainer, float sliderValue) throws SlickException {
         Input input = gameContainer.getInput();
         int mouseY = input.getMouseY();
         int mouseX = input.getMouseX();
+        backgroundSlider.update(gameContainer, sliderValue);
 
 
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            if (mouseY>this.startPositionY && mouseY<this.value+this.startPositionX && mouseX >this.startPositionX && mouseX < startPositionX+width){
+            if (mouseY>=this.startPositionY && mouseY<=this.value+this.startPositionY && mouseX >=this.startPositionX && mouseX <= startPositionX+width){
                 this.actualPositionY = mouseY-width/2;
                 for (EventListener eventlistener: eventListeners) {
-                    eventlistener.onChange(mouseY);
+                    eventlistener.onChange(mouseY, startPositionY);
                 }
             }
         }

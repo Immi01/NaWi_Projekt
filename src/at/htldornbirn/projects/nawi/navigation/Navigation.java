@@ -1,12 +1,18 @@
 package at.htldornbirn.projects.nawi.navigation;
+
 import at.htldornbirn.projects.nawi.Constants;
+
+import org.lwjgl.input.Mouse;
+
 import at.htldornbirn.projects.nawi.tools.slider.Slider;
 import at.htldornbirn.projects.nawi.tools.slider.SliderListener;
-import org.lwjgl.input.Mouse;
+
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -24,17 +30,19 @@ public class Navigation extends BasicGameState implements SliderListener {
     float mouseX;
     float mouseY;
     Input input;
-    float team1X;
-    float team1Y;
+
 
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         input = gameContainer.getInput();
         this.actors = new ArrayList<>();
-        Team1 team1 = new Team1(100, 100);
+        Team1 team1 = new Team1(100, 100, 60);
         actors.add(team1);
-        this.slider = new Slider(300,300,0,100);
+
+
+
+        this.slider = new Slider(300, 300, 0, 100);
         this.slider.addListener(this);
 
 
@@ -47,8 +55,7 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.render(graphics);
         }
 
-        this.slider.render(gameContainer,graphics);
-
+        this.slider.render(gameContainer, graphics);
 
 
     }
@@ -61,9 +68,7 @@ public class Navigation extends BasicGameState implements SliderListener {
         }
         this.slider.update(gameContainer);
 
-        if(MousePressed(0)) {
-            stateBasedGame.enterState(Constants.SINUS_FUNKTION_GAME);
-        }
+
 
     }
 
@@ -72,8 +77,7 @@ public class Navigation extends BasicGameState implements SliderListener {
         System.out.println(mouseY);
     }
 
-    public boolean MousePressed(int id)
-    {
+    public boolean MousePressed(int id) {
         mouseX = Mouse.getX();
         mouseY = (Mouse.getY() - 600) * -1;
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -83,5 +87,6 @@ public class Navigation extends BasicGameState implements SliderListener {
         }
         return false;
     }
+
 }
 

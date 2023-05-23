@@ -34,8 +34,6 @@ public class Navigation extends BasicGameState implements SliderListener {
         this.actors = new ArrayList<>();
         Team1 team1 = new Team1(100, 100);
         actors.add(team1);
-        team1X = actors.get(0).getX();
-        team1Y = actors.get(0).getY();
         this.slider = new Slider(300,300,0,100);
         this.slider.addListener(this);
 
@@ -62,26 +60,28 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.update(delta);
         }
         this.slider.update(gameContainer);
-        mouseX = Mouse.getX();
-        mouseY = (Mouse.getY() - 600) * -1;
 
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            if ((mouseX >= team1X && mouseX < team1X + 60) && (mouseY >= team1Y && mouseY < team1Y + 60)) {
-                stateBasedGame.enterState(Constants.SINUS_FUNKTION_GAME);
-            }
-
-
-            if (gameContainer.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                System.out.println("OUT");
-                stateBasedGame.enterState(Constants.SINUS_FUNKTION_GAME);
-
-            }
+        if(MousePressed(0)) {
+            stateBasedGame.enterState(Constants.SINUS_FUNKTION_GAME);
         }
+
     }
 
     @Override
     public void onChange(float mouseY) {
         System.out.println(mouseY);
+    }
+
+    public boolean MousePressed(int id)
+    {
+        mouseX = Mouse.getX();
+        mouseY = (Mouse.getY() - 600) * -1;
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            if ((mouseX >= actors.get(id).getX() && mouseX < actors.get(id).getX() + 60) && (mouseY >= actors.get(id).getY() && mouseY < actors.get(id).getY() + 60)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

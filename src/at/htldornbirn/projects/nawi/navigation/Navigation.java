@@ -40,8 +40,6 @@ public class Navigation extends BasicGameState implements SliderListener {
         Team1 team1 = new Team1(100, 100, 60);
         actors.add(team1);
 
-
-
         this.slider = new Slider(300, 300, 0, 100);
         this.slider.addListener(this);
 
@@ -67,8 +65,6 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.update(delta);
         }
         this.slider.update(gameContainer);
-
-
 
     }
 

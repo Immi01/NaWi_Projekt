@@ -1,6 +1,5 @@
-package at.htldornbirn.projects.nawi.Team2.code;
+package at.htldornbirn.projects.nawi.Team2.code.inputField;
 
-import at.htldornbirn.projects.nawi.Team2.code.Background.Background;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

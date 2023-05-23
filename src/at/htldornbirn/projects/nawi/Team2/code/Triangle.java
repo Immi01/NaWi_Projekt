@@ -31,8 +31,6 @@ public class Triangle {
         this.hu = this.angle * 900;
         double yValue = 600-this.hu;
         this.lineY2 = (float) yValue;
-
-
     }
 
 

@@ -1,9 +1,6 @@
-package at.htldornbirn.projects.nawi.Team2.code;
+package at.htldornbirn.projects.nawi.Team2.code.inputField;
 
-import org.lwjgl.util.Rectangle;
 import org.newdawn.slick.*;
-
-import java.awt.event.KeyEvent;
 
 public class InputField {
     private String text;

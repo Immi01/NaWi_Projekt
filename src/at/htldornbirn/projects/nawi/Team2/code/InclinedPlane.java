@@ -1,4 +1,5 @@
 package at.htldornbirn.projects.nawi.Team2.code;
+import at.htldornbirn.projects.nawi.Team2.code.inputField.InputField;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import org.newdawn.slick.*;
@@ -36,7 +37,7 @@ public class InclinedPlane extends BasicGameState {
         this.inputFieldWeight = new InputField("", 100, 100,false);
         this.inputFieldDistance = new InputField("", 300, 100,false);
 
-        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText());
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 700, 150, 30);
 
         slider.addListener(setAngle);
     }
@@ -44,7 +45,7 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.drawImage(backgroundImage, 0, 0);
-        graphics.setLineWidth(3.0f);
+        graphics.setLineWidth(5.0f);
 
         triangle.render(gameContainer,graphics);
 

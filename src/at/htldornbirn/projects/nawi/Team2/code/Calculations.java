@@ -1,9 +1,6 @@
 package at.htldornbirn.projects.nawi.Team2.code;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 public class Calculations {
 
@@ -11,14 +8,12 @@ public class Calculations {
     private float angle;
     private String weight, distance;
 
+    private float fg, fn, fHang, fSchneeAufRodel, a, v;
+
     public Calculations(float angle, String weight, String distance) {
         this.angle = angle;
         this.weight = weight;
         this.distance = distance;
-        x = 10;
-        y = 10;
-        width = 10;
-        height = 10;
     }
 
     public void update(GameContainer gameContainer, float angle, String weight, String distance) throws SlickException {
@@ -30,14 +25,18 @@ public class Calculations {
         System.out.println("Distanz: " + distance + "m");
         System.out.println();
 
-        width = 1000;
-        height = 1000;
-
         calculate();
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        graphics.fillRect(x,y,width,height);
+        graphics.setColor(Color.black);
+        graphics.drawString("FG: " + String.valueOf(fg), 350,700);
+        graphics.drawString("FN: " + String.valueOf(fn), 350,730);
+        graphics.drawString("FHang: " + String.valueOf(fHang), 600,700);
+        graphics.drawString("FSchneeAufRodel: " + String.valueOf(fSchneeAufRodel), 600,730);
+        graphics.drawString("Beschleunigung: " + String.valueOf(a), 950,700);
+        graphics.drawString("Geschwindigkeit nach: "+ this.distance + "m beträgt: " + String.valueOf(v), 950,730);
+        graphics.setColor(Color.white);
     }
 
 
@@ -59,28 +58,28 @@ public class Calculations {
         }
 
 
-        float FG = inputWeight * 10;
-        System.out.println("FG: " + FG + "N");
+        this.fg = inputWeight * 10;
+        System.out.println("FG: " + fg + "N");
 
-        double FNDouble = Math.cos(Math.toRadians(this.angle))*FG;
-        float FN = (float)FNDouble;
-        System.out.println("FN: " + FN + "N");
+        double fNDouble = Math.cos(Math.toRadians(this.angle))*this.fg;
+        this.fn = (float)fNDouble;
+        System.out.println("FN: " + this.fn + "N");
 
-        double FHangDouble = Math.sin(Math.toRadians(this.angle))*FG;
-        float FHang = (float)FHangDouble;
-        System.out.println("FHang: " + FHang + "N");
+        double fHangDouble = Math.sin(Math.toRadians(this.angle))*this.fg;
+        this.fHang = (float)fHangDouble;
+        System.out.println("FHang: " + this.fHang + "N");
 
-        float FSchneeAufRodel = FN;
-        System.out.println("FSchneeAufRodel: " + FSchneeAufRodel + "N");
+        this.fSchneeAufRodel = this.fn;
+        System.out.println("FSchneeAufRodel: " + this.fSchneeAufRodel + "N");
 
         System.out.println();
 
-        float a = FHang/inputWeight;
-        System.out.println("Beschleunigung a: " + a + "m/s2");
+        this.a = this.fHang/inputWeight;
+        System.out.println("Beschleunigung a: " + this.a + "m/s2");
 
-        double vDouble = Math.sqrt(2*a*inputDistance);
-        float v = (float)vDouble;
-        System.out.println("Geschwindigkeit nach " + inputDistance + "m betraegt: " + v + "m/s");
+        double vDouble = Math.sqrt(2*this.a*inputDistance);
+        this.v = (float)vDouble;
+        System.out.println("Geschwindigkeit nach " + inputDistance + "m betraegt: " + this.v + "m/s");
 
         System.out.println("------------------");
     }

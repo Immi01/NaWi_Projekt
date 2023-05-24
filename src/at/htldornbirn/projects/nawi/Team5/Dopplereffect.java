@@ -41,14 +41,15 @@ public class Dopplereffect extends BasicGameState {
         this.waves = new ArrayList<>();
         this.paused = false;
 
-        this.ambulance = new Image("res/Rettung.png");
-        this.background = new Image("res/City2.png");
+        this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
+        this.background = new Image("at/htldornbirn/projects/nawi/Team5/res/City2.png");
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
+
 
         for (Wave wave : waves) {
             if (wave.getSize() > 0) {

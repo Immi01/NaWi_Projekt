@@ -1,6 +1,4 @@
 package at.htldornbirn.projects.nawi.Team5;
-
-import at.htldornbirn.projects.nawi.Team6.SinusFunction;
 import at.htldornbirn.projects.nawi.Team6.SinusTest;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -18,8 +16,9 @@ public class DopplerTest extends StateBasedGame {
     }
 
     public static void main(String[] args) throws SlickException {
-        AppGameContainer container = new AppGameContainer(new SinusTest("NaWi Portal"));
-        container.setDisplayMode(800,600,false);
+        AppGameContainer container = new AppGameContainer(new DopplerTest("NaWi Portal"));
+        container.setDisplayMode(1000,750,false);
+        container.setTargetFrameRate(60);
         container.start();
     }
 }

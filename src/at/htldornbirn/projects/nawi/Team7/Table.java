@@ -16,7 +16,7 @@ public class Table implements ProjectActor {
         this.x = x;
         this.width = width;
         this.minWidth = minWidth + this.width;
-        this.y = 599-this.high;
+        this.y = 899-this.high;
         this.minlength = 100;
         this.originOffSet = -10;
     }
@@ -35,5 +35,9 @@ public class Table implements ProjectActor {
 
     public float getHigh() {
         return high;
+    }
+
+    public float getWidth() {
+        return width;
     }
 }

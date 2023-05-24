@@ -34,7 +34,7 @@ public class LocationButton implements ProjectActor{
 
     @Override
     public void update(GameContainer gc, int delta) {
-        
+
     }
 
     public float getX() {
@@ -55,5 +55,17 @@ public class LocationButton implements ProjectActor{
 
     public int getLocationID() {
         return LocationID;
+    }
+
+    public float getGforce() {
+        return Gforce;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public float getWidth() {
+        return width;
     }
 }

@@ -60,4 +60,12 @@ public class CustomBalls implements ProjectActor{
     public void setWidth(float width) {
         this.width = width;
     }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public float getRadius() {
+        return radius;
+    }
 }

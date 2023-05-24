@@ -23,6 +23,9 @@ public class Sandbox extends BasicGameState {
     private Ball ball;
     private float WeightForCustomBall;
     private float RadiusForCustomBall;
+    private float BallGforce;
+    private float BallRadius;
+    private float BallWeight;
 
 
     @Override
@@ -76,9 +79,9 @@ public class Sandbox extends BasicGameState {
             this.bY += 100;
         }
 
-        table = new Table(150, 200, 150, 30);
+        table = new Table(200, 200, 150, 30);
+        ball = new Ball(0, 0, 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
 
-        //ball = new Ball(0, this.table.getHigh(), 0.0f, GforcesForBallsOnLocatiosn[]);
     }
 
     @Override
@@ -98,12 +101,39 @@ public class Sandbox extends BasicGameState {
         graphics.drawString("Menue", 720, 40);
 
         table.render(graphics);
+        ball.render(graphics);
 
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+        for (LocationButton locationButton: this.locationButtons){
+            Input input = gameContainer.getInput();
+            int mouseY = input.getMouseY();
+            int mouseX = input.getMouseX();
+            if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                if (mouseY>locationButton.getY() && mouseY<locationButton.getY()+locationButton.getHeight() && mouseX >locationButton.getX() && mouseX < locationButton.getX()+locationButton.getWidth()){
+                    this.BallGforce = locationButton.getGforce();
+                    System.out.println(this.BallGforce);
+                }
+            }
+        }
 
+        for (CustomBalls customBall: this.customBalls){
+            Input input = gameContainer.getInput();
+            int mouseY = input.getMouseY();
+            int mouseX = input.getMouseX();
+            if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                if (mouseY>customBall.getY() && mouseY<customBall.getY()+customBall.getHeight() && mouseX >customBall.getX() && mouseX < customBall.getX()+customBall.getWidth()){
+                    this.BallRadius = customBall.getRadius();
+                    this.BallWeight = customBall.getWeight();
+                    //System.out.println(this.BallRadius + ";" + this.BallWeight);
+                    System.out.println(this.ball.getRadius() + ";" + this.ball.getWeight());
+                }
+            }
+        }
+        ball = new Ball(0, 899-this.table.getHigh()-this.table.getWidth()-this.ball.getRadius(), 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
+        }
     }
 
-}
+

@@ -8,11 +8,7 @@ import at.htldornbirn.projects.nawi.tools.slider.Slider;
 import at.htldornbirn.projects.nawi.tools.slider.SliderListener;
 
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -30,20 +26,20 @@ public class Navigation extends BasicGameState implements SliderListener {
     float mouseX;
     float mouseY;
     Input input;
-
+    private Image image;
 
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         input = gameContainer.getInput();
         this.actors = new ArrayList<>();
-        Team1 team1 = new Team1(100, 100, 60);
-        actors.add(team1);
+        Team team = new Team(100, 100, 60);
+        actors.add(team);
 
         this.slider = new Slider(300, 300, 0, 100);
         this.slider.addListener(this);
 
-
+        image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
     }
 
     @Override
@@ -55,6 +51,7 @@ public class Navigation extends BasicGameState implements SliderListener {
 
         this.slider.render(gameContainer, graphics);
 
+        image.draw(0,0);
 
     }
 

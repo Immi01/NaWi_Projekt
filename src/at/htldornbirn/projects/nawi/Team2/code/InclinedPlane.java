@@ -1,4 +1,5 @@
 package at.htldornbirn.projects.nawi.Team2.code;
+import at.htldornbirn.projects.nawi.Constants;
 import at.htldornbirn.projects.nawi.Team2.code.inputField.InputField;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
@@ -29,7 +30,7 @@ public class InclinedPlane extends BasicGameState {
 
     @Override
     public int getID() {
-        return 0;
+        return Constants.TEAM2;
     }
 
     @Override
@@ -43,7 +44,7 @@ public class InclinedPlane extends BasicGameState {
         this.inputFieldWeight = new InputField("", 100, 100,false, "Gewicht: ");
         this.inputFieldDistance = new InputField("", 300, 100,false, "Strecke: ");
 
-        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 700, 150, 30);
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30);
 
         Font awtFont = new Font("Arial", Font.BOLD, 32);
         font = new TrueTypeFont(awtFont, true);

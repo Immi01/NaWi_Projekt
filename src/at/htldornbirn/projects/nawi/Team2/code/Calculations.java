@@ -31,12 +31,12 @@ public class Calculations {
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.setColor(Color.black);
-        graphics.drawString("FG: " + String.valueOf(fg), 350,700);
-        graphics.drawString("FN: " + String.valueOf(fn), 350,730);
-        graphics.drawString("FHang: " + String.valueOf(fHang), 600,700);
-        graphics.drawString("FSchneeAufRodel: " + String.valueOf(fSchneeAufRodel), 600,730);
-        graphics.drawString("Beschleunigung: " + String.valueOf(a), 950,700);
-        graphics.drawString("Geschwindigkeit nach "+ this.distance + "m beträgt: " + String.valueOf(v), 950,730);
+        graphics.drawString("FG: " + String.valueOf(fg) + " N", 350,700);
+        graphics.drawString("FN: " + String.valueOf(fn) + " N", 350,730);
+        graphics.drawString("FHang: " + String.valueOf(fHang) + " N", 600,700);
+        graphics.drawString("FSchneeAufRodel: " + String.valueOf(fSchneeAufRodel) + " N", 600,730);
+        graphics.drawString("Beschleunigung: " + String.valueOf(a) + " m/s^2", 950,700);
+        graphics.drawString("Geschwindigkeit nach "+ this.distance + "m beträgt: " + String.valueOf(v) + " m/s", 950,730);
         graphics.setColor(Color.white);
     }
 

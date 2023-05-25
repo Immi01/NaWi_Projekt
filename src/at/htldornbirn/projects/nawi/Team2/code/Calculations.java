@@ -13,7 +13,8 @@ public class Calculations {
     public Calculations(float angle, String weight, String distance) {
         this.angle = angle;
         this.weight = weight;
-        this.distance = distance;
+        System.out.println(distance);
+        this.distance = "0";
     }
 
     public void update(GameContainer gameContainer, float angle, String weight, String distance) throws SlickException {
@@ -35,7 +36,7 @@ public class Calculations {
         graphics.drawString("FHang: " + String.valueOf(fHang), 600,700);
         graphics.drawString("FSchneeAufRodel: " + String.valueOf(fSchneeAufRodel), 600,730);
         graphics.drawString("Beschleunigung: " + String.valueOf(a), 950,700);
-        graphics.drawString("Geschwindigkeit nach: "+ this.distance + "m beträgt: " + String.valueOf(v), 950,730);
+        graphics.drawString("Geschwindigkeit nach "+ this.distance + "m beträgt: " + String.valueOf(v), 950,730);
         graphics.setColor(Color.white);
     }
 
@@ -51,7 +52,7 @@ public class Calculations {
             inputWeight = Float.valueOf(this.weight);
         }
 
-        if (this.distance == ""){
+        if (this.distance == "" || this.distance == null){
             inputDistance = 0;
         }else{
             inputDistance = Float.valueOf(this.distance);

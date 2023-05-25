@@ -10,16 +10,19 @@ public class InputField {
     private int rectHeight,rectWidth;
     private boolean hasFocus;
 
+    private String function;
 
-    public InputField(String text, int x, int y, boolean hasFocus) {
+
+    public InputField(String text, int x, int y, boolean hasFocus, String function) {
         this.hasFocus = hasFocus;
+        this.function = function;
 
         this.text = text;
         this.x = x;
         this.y = y;
         this.rectHeight = 20;
         this.rectWidth = 100;
-        this.backgroundInputField = new BackgroundInputField(this.x,this.y,this.rectWidth,this.rectHeight);
+        this.backgroundInputField = new BackgroundInputField(this.x,this.y,this.rectWidth,this.rectHeight, this.function);
     }
 
 
@@ -46,6 +49,9 @@ public class InputField {
         if (sb.length()>=1 && hasFocus == true){
             sb.deleteCharAt(sb.length() - 1);
             this.text = sb.toString();
+        }
+        if (sb.length()==0){
+            this.text = "";
         }
     }
 

@@ -10,6 +10,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.awt.*;
+import java.awt.Font;
 
 public class InclinedPlane extends BasicGameState {
 
@@ -22,6 +23,8 @@ public class InclinedPlane extends BasicGameState {
     private SetAngle setAngle = new SetAngle();
 
     private Image backgroundImage;
+
+    private TrueTypeFont font;
 
 
     @Override
@@ -37,10 +40,13 @@ public class InclinedPlane extends BasicGameState {
         this.triangle = new Triangle();
 
         this.slider = new Slider(100, 200,40,300, setAngle.getSliderValue());
-        this.inputFieldWeight = new InputField("", 100, 100,false);
-        this.inputFieldDistance = new InputField("", 300, 100,false);
+        this.inputFieldWeight = new InputField("", 100, 100,false, "Gewicht: ");
+        this.inputFieldDistance = new InputField("", 300, 100,false, "Strecke: ");
 
         this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 700, 150, 30);
+
+        Font awtFont = new Font("Arial", Font.BOLD, 32);
+        font = new TrueTypeFont(awtFont, true);
 
         slider.addListener(setAngle);
     }
@@ -48,6 +54,8 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.drawImage(backgroundImage, 0, 0);
+
+        graphics.setColor(Color.white);
 
         graphics.setLineWidth(5.0f);
         triangle.render(gameContainer,graphics);
@@ -60,6 +68,10 @@ public class InclinedPlane extends BasicGameState {
         calculateButton.render(gameContainer, graphics);
 
         graphics.setBackground(Color.blue);
+
+        graphics.setColor(Color.black);
+        graphics.setFont(font);
+        graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-font.getWidth("Schiefe Ebene")/2, 20);
     }
 
     @Override

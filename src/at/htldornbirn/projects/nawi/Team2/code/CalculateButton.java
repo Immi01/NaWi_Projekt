@@ -40,6 +40,7 @@ public class CalculateButton {
         graphics.setColor(Color.black);
         graphics.fillRect(this.positionX,this.positionY,this.width,this.height);
         graphics.setColor(Color.white);
+        graphics.drawString("Calcualate",(this.positionX+width)/2,this.positionY+height/5);
         calculations.render(gameContainer,graphics);
     }
 }

@@ -8,12 +8,14 @@ import org.newdawn.slick.SlickException;
 public class BackgroundInputField {
 
     private int x,y,width,height;
+    private String function;
 
-    public BackgroundInputField(int x, int y, int width, int height) {
+    public BackgroundInputField(int x, int y, int width, int height, String function) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.function = function;
     }
 
 
@@ -23,6 +25,7 @@ public class BackgroundInputField {
         }
         graphics.drawRect(x,y,width,height);
         graphics.setColor(Color.white);
+        graphics.drawString(function,x,y-20);
     }
 
     public void update(GameContainer gameContainer) {

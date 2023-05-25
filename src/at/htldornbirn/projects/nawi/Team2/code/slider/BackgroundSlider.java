@@ -18,11 +18,17 @@ public class BackgroundSlider {
     }
 
     public void update(GameContainer gameContainer, float sliderValue) throws SlickException {
-        this.sliderValue = sliderValue;
+        this.sliderValue = Math.round(10.0f * sliderValue) / 10.0f;
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.fillRect(this.x,this.y,this.width,this.value+this.width);
-        graphics.drawString(String.valueOf(sliderValue),this.x+this.width+20,this.y+20);
+        graphics.drawString("Winkel:", this.x+this.width+20,this.y+15);
+        graphics.drawString(String.valueOf(sliderValue),this.x+this.width+20,this.y+35);
+    }
+
+    private double round(float value, int decimalPoints) {
+        double d = Math.pow(10, decimalPoints);
+        return Math.round(value * d) / d;
     }
 }

@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
@@ -17,6 +18,7 @@ public class Explanation extends BasicGameState {
     public int getID() {
         return 1;
     }
+
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");

@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Slider {
     private float x, y;
+    private float minValue, maxValue;
     private List<SliderListener> eventListeners;
 
 
@@ -17,6 +18,8 @@ public class Slider {
     public Slider(float x, float y, int minValue, int maxValue) {
         this.x = x;
         this.y = y;
+        this.minValue =minValue+y;
+        this.maxValue =maxValue+y;
         this.eventListeners = new ArrayList<>();
     }
 
@@ -32,11 +35,22 @@ public class Slider {
         int mouseX = input.getMouseX();
 
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            if (mouseY>y && mouseY<y+300 && mouseX >x && mouseX < x+40){
-                this.y = mouseY-20;
-                for (SliderListener eventlistener: eventListeners) {
-                    eventlistener.onChange(mouseY);
+            if (mouseY>this.y && mouseY<this.y+300 && mouseX >this.x && mouseX < this.x+40){
+                if(this.y >= this.minValue && this.y <= this.maxValue) {
+                    this.y = mouseY - 20;
+                    for (SliderListener eventlistener : eventListeners) {
+                        eventlistener.onChange(mouseY);
+                    }
                 }
+                if(this.y > this.maxValue)
+                {
+                    this.y = this.maxValue;
+                }
+                if(this.y < this.minValue)
+                {
+                    this.y = this.minValue;
+                }
+
             }
         }
     }

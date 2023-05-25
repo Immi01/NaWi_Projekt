@@ -16,7 +16,7 @@ public class Explanation extends BasicGameState {
     private AngelCodeFont font;
 
     public int getID() {
-        return 1;
+        return Constants.TEAM6;
     }
 
 

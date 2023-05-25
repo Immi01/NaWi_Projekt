@@ -26,20 +26,35 @@ public class Navigation extends BasicGameState implements SliderListener {
     float mouseX;
     float mouseY;
     Input input;
-    private Image image;
+    //private Image image;
 
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         input = gameContainer.getInput();
         this.actors = new ArrayList<>();
-        Team team = new Team(100, 100, 60);
-        actors.add(team);
+        Team team1 = new Team(75, 100, 60);
+        Team team2 = new Team(225, 100, 60);
+        Team team3 = new Team(375, 100, 60);
+        Team team4 = new Team(525, 100, 60);
+        Team team5 = new Team(675, 100, 60);
+        Team team6 = new Team(150, 300, 60);
+        Team team7 = new Team(300, 300, 60);
+        Team team8 = new Team(450, 300, 60);
+        Team team9 = new Team(600, 300, 60);
+        actors.add(team1);
+        actors.add(team2);
+        actors.add(team3);
+        actors.add(team4);
+        actors.add(team5);
+        actors.add(team6);
+        actors.add(team7);
+        actors.add(team8);
+        actors.add(team9);
 
-        this.slider = new Slider(300, 300, 0, 100);
-        this.slider.addListener(this);
 
-        image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
+
+        //image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
     }
 
     @Override
@@ -49,9 +64,9 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.render(graphics);
         }
 
-        this.slider.render(gameContainer, graphics);
 
-        image.draw(0,0);
+
+        //image.draw(0,0);
 
     }
 
@@ -61,7 +76,7 @@ public class Navigation extends BasicGameState implements SliderListener {
         for (Actor actor : actors) {
             actor.update(delta);
         }
-        this.slider.update(gameContainer);
+
 
     }
 

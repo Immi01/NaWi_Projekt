@@ -17,6 +17,7 @@ public class InclinedPlane2 extends  BasicGameState{
     private float speed;
     private float getX;
     private float getY;
+    private boolean isMoving;
 
 
 
@@ -31,11 +32,13 @@ public class InclinedPlane2 extends  BasicGameState{
         this.actors = new ArrayList<>();
         Random random = new Random();
 
-        rectangle = new Rectangle(500, 600, 150, 50);
+        getX = 100;
+        getY = 700;
+        isMoving = true;
+
+        rectangle = new Rectangle(getX, getY, 150, 50);
         angle = 135.0f;
         speed = 5.0f;
-        this.getX = getX;
-        this.getY = getY;
 
 
         for (int i = 0; i <1; i++) {
@@ -59,9 +62,6 @@ public class InclinedPlane2 extends  BasicGameState{
             Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(50));
             this.actors.add(snowflake);
         }
-
-
-
     }
 
 
@@ -74,33 +74,22 @@ public class InclinedPlane2 extends  BasicGameState{
             graphics.setColor(Color.white);
             graphics.pushTransform();
             graphics.rotate(rectangle.getCenterX(), rectangle.getCenterY(), angle);
-            graphics.fillRect(500, 600, 150, 50);
+            graphics.fillRect(getX, getY, 150, 50);
             graphics.popTransform();
         }
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        for (Actor actors:this.actors){
+        for (Actor actors : this.actors) {
             actors.update(delta);
         }
-        this.getX += (float)delta/this.speed;
-        this.getY += (float)delta/this.speed;
-        if (getX > 800 && getY > 600){
-            speed = 0;
+        if (getY > 200){
+            getX -= (float)delta/this.speed;
+        }else{
+            this.speed = 0;
         }
-        else{
-            this.getX += (float)delta/this.speed;
-            this.getY += (float)delta/this.speed;
-        }
-
-
-
-
-
     }
-
-
 }
 
 

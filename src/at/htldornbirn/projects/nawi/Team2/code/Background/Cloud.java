@@ -35,9 +35,5 @@ public class Cloud implements Actor {
             this.x = 1500;
 
         }
-
-
-
-
     }
 }

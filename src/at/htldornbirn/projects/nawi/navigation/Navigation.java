@@ -12,8 +12,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Navigation extends BasicGameState implements SliderListener {
     @Override
@@ -25,14 +24,18 @@ public class Navigation extends BasicGameState implements SliderListener {
     private Slider slider;
     float mouseX;
     float mouseY;
+    float ObjX;
+    float ObjY;
     Input input;
     //private Image image;
+    private Dictionary<Integer, Integer> map;
 
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         input = gameContainer.getInput();
         this.actors = new ArrayList<>();
+        map = new Hashtable<Integer, Integer>();
         Team team1 = new Team(75, 100, 60);
         Team team2 = new Team(225, 100, 60);
         Team team3 = new Team(375, 100, 60);
@@ -51,7 +54,15 @@ public class Navigation extends BasicGameState implements SliderListener {
         actors.add(team7);
         actors.add(team8);
         actors.add(team9);
-
+        map.put(0, Constants.TEAM1);
+        map.put(1, Constants.TEAM2);
+        map.put(2, Constants.TEAM3);
+        map.put(3, Constants.TEAM4);
+        map.put(4, Constants.TEAM5);
+        map.put(5, Constants.TEAM6);
+        map.put(6, Constants.TEAM7);
+        map.put(7, Constants.TEAM8);
+        map.put(8, Constants.TEAM9);
 
 
         //image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
@@ -64,8 +75,6 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.render(graphics);
         }
 
-
-
         //image.draw(0,0);
 
     }
@@ -76,6 +85,9 @@ public class Navigation extends BasicGameState implements SliderListener {
         for (Actor actor : actors) {
             actor.update(delta);
         }
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            ChangeState();
+        }
 
 
     }
@@ -85,16 +97,20 @@ public class Navigation extends BasicGameState implements SliderListener {
         System.out.println(mouseY);
     }
 
-    public boolean MousePressed(int id) {
+    public void ChangeState() {
         mouseX = Mouse.getX();
         mouseY = (Mouse.getY() - 600) * -1;
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            if ((mouseX >= actors.get(id).getX() && mouseX < actors.get(id).getX() + 60) && (mouseY >= actors.get(id).getY() && mouseY < actors.get(id).getY() + 60)) {
-                return true;
+        for (int i = 0; i < actors.size(); i++) {
+            ObjX = actors.get(i).getX();
+            ObjY = actors.get(i).getY();
+            if ((mouseX >= ObjX && mouseX < ObjX + 60) && (mouseY >= ObjY && mouseY < ObjY + 60)) {
+                System.out.println(map.get(i));
             }
-        }
-        return false;
-    }
 
+        }
+    }
 }
+
+
+
 

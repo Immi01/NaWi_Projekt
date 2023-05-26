@@ -12,11 +12,12 @@ import java.util.List;
 
 public class Substanzensimulator extends BasicGameState {
     private int x, y; // Position des Quadrats
-    private int radius = 25; // Radius des Kreises
+    private int radius = 100; // Radius des Kreises
     private boolean dragging; // Zustand des Quadrats
     private Circle circle; // Kreisobjekt
     private List<Actors> actors;
-    private Substanzen Sub;
+    private List<Substanzen> substanzen;
+    private Subject subject;
 
     public Substanzensimulator(String  name) {
     }
@@ -28,26 +29,38 @@ public class Substanzensimulator extends BasicGameState {
         y = 100;
         dragging = false;
         circle = new Circle(x, y, radius);
-        actors.add(new Substanzen(20,20,30,false));
-        Substanzen Sub = new Substanzen(20,20,30,false);
+        substanzen = new ArrayList<>();
+        for (int i = 0; i < 5;i++){
+            substanzen.add(new Substanzen(70+(150*i), 500, 50, 50, false));
+        }
+        subject = new Subject(400, 300, radius);
 
     }
 
 
     public void update(GameContainer container, StateBasedGame stateBasedGame, int delta) throws SlickException {
         Input input = container.getInput();
-        if (Sub.isDragging()){
-            Sub.setX(input.getMouseX());
-            Sub.setY(input.getMouseY());
+        for (Substanzen substanzen : substanzen) {
+            if (substanzen.isDragging()) {
+                substanzen.setX(input.getMouseX());
+                substanzen.setY(input.getMouseY());
+            }
+            if (subject.intersects(substanzen)) {
+                // Aktion bei Kollision
+                System.out.println("Quadrat und Kreis überlappen!");
+            }
         }
+
 
     }
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
-       Sub.render(graphics);
+        for (Substanzen substanzen : substanzen) {
+            substanzen.render(graphics);
+        }
+        subject.render(graphics);
 
-        graphics.drawOval(circle.getCenterX() - radius, circle.getCenterY() - radius, radius * 2, radius * 2);
     }
 
 
@@ -57,16 +70,19 @@ public class Substanzensimulator extends BasicGameState {
     }
 
     public void mousePressed(int button, int x, int y) {
-        for (int i = 0;i<actors.size();i++){
-            if (x >= Sub.getX() && x <= Sub.getX() + 50 && y >= Sub.getY() && y <= Sub.getY() + 50) {
-                dragging = true;
+        for (Substanzen substanzen : substanzen) {
+            if (x >= substanzen.getX() && x <= substanzen.getX() + substanzen.getWidth() &&
+                    y >= substanzen.getY() && y <= substanzen.getY() + substanzen.getHeight()) {
+                substanzen.setDragging(true);
             }
         }
     }
 
     @Override
     public void mouseReleased(int button, int x, int y) {
-        dragging = false;
+        for (Substanzen substanzen : substanzen) {
+            substanzen.setDragging(false);
+        }
     }
 
 

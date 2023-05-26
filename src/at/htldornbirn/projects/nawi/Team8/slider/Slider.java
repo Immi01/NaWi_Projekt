@@ -1,4 +1,4 @@
-package at.htldornbirn.projects.nawi.tools.slider;
+package at.htldornbirn.projects.nawi.Team8.slider;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

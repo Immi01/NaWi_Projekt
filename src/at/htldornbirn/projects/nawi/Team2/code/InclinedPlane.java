@@ -115,7 +115,9 @@ public class InclinedPlane extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-
+        if (sled.isAtBottom()){
+            calculateButton.setPushed(false);
+        }
         this.angleSled = setAngle.getSliderValue()*-1;
         sled.update(gameContainer, this.angleSled, delta, this.speedSled, calculateButton.isPushed());
 

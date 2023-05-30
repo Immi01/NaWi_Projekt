@@ -50,4 +50,8 @@ public class CalculateButton {
     public boolean isPushed() {
         return isPushed;
     }
+
+    public void setPushed(boolean pushed) {
+        isPushed = pushed;
+    }
 }

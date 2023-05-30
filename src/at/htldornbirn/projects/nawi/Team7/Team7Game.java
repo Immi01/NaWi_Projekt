@@ -15,12 +15,13 @@ public class Team7Game extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        addState(new Team7());
+        //addState(new Team7());
+        this.addState(new Sandbox());
     }
 
     public static void main(String[] args) throws SlickException {
         AppGameContainer container = new AppGameContainer(new Team7Game("NaWi Portal"));
-        container.setDisplayMode(800,600,false);
+        container.setDisplayMode(1440,1080,false);
         container.start();
     }
 }

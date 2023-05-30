@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team3;
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
@@ -114,7 +115,7 @@ public class StopingDistance2 extends BasicGameState {
 
     @Override
     public int getID() {
-        return 0;
+        return  Constants.TEAM3;
     }
 
 

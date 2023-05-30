@@ -31,8 +31,17 @@ public class Team9Game extends BasicGameState {
         backgroundColor = Color.white;
 
         //Ground
+<<<<<<< HEAD
         GroundSkyNew groundimagel = new GroundSkyNew();
         actors.add(groundimagel);
+=======
+        RectangleGround leftGround = new RectangleGround(0, 400, 750, 400);
+        RectangleGround rightGround = new RectangleGround(850, 400, 750, 400);
+
+        //Adding all actors necessary
+        this.actors.add(leftGround);
+        this.actors.add(rightGround);
+>>>>>>> 3805de3eb5de5fb32148102a32e5c8df641eb197
         this.actors.add(calculations);
         this.actors.add(itemList);
     }

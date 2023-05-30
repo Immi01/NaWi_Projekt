@@ -18,13 +18,13 @@ public class GroundSkyNew implements Actor {
 
 
     public GroundSkyNew() throws SlickException {
-        Image temp = new Image("C:\\Users\\Santiago\\IdeaProjects\\Games\\testdata\\Bilder\\pxfuel.jpg");
+        Image temp = new Image("src/at/htldornbirn/projects/nawi/Team9/images/pxfuel.jpg");
         this.minecraftgroundl = temp.getScaledCopy(600, 400);
-        Image temp2 = new Image("C:\\Users\\Santiago\\IdeaProjects\\Games\\testdata\\Bilder\\pxfuel.jpg");
+        Image temp2 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/pxfuel.jpg");
         this.minecraftgroundr = temp2.getScaledCopy(750, 400);
-        Image temp4 = new Image("C:\\Users\\Santiago\\IdeaProjects\\Games\\testdata\\Bilder\\ground.jpg");
+        Image temp4 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/ground.jpg");
         this.minecraftgroundu = temp4.getScaledCopy(500,100);
-        Image temp3 = new Image("C:\\Users\\Santiago\\IdeaProjects\\Games\\testdata\\Bilder\\ls.jpg");
+        Image temp3 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/ls.jpg");
         this.sky = temp3.getScaledCopy(1600, 800);
         //Gewicht
 

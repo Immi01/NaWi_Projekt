@@ -107,9 +107,10 @@ public class Navigation extends BasicGameState implements SliderListener {
             ObjY = actors.get(i).getY();
             if ((mouseX >= ObjX && mouseX < ObjX + 60) && (mouseY >= ObjY && mouseY < ObjY + 60)) {
                 System.out.println(map.get(i));
+                return;
             }
-
         }
+        System.out.println("no OBJ clicked");
     }
 }
 

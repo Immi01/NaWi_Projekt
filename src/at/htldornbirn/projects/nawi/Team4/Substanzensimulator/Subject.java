@@ -50,4 +50,7 @@ public class Subject implements Actors {
         float deltaY = circleY - Math.max(rectY, Math.min(circleY, rectY + rectHeight));
         return (deltaX * deltaX + deltaY * deltaY) < (radius * radius);
     }
+    public void consume(){
+
+    }
 }

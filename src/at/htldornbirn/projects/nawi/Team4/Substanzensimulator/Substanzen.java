@@ -7,13 +7,24 @@ public class Substanzen implements Actors{
     private float x, y;
     private int width, height;
     private boolean dragging;
+    private String id;
 
-    public Substanzen(float x, float y, int width, int height, boolean dragging) {
+    public Substanzen(float x, float y, int width, int height, boolean dragging, String id) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.id = id;
 
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public float getX() {

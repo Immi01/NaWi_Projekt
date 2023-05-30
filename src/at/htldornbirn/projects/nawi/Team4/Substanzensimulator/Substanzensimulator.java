@@ -31,7 +31,8 @@ public class Substanzensimulator extends BasicGameState {
         circle = new Circle(x, y, radius);
         substanzen = new ArrayList<>();
         for (int i = 0; i < 5;i++){
-            substanzen.add(new Substanzen(70+(150*i), 500, 50, 50, false));
+            String s = String.valueOf(i);
+            substanzen.add(new Substanzen(70+(150*i), 500, 50, 50, false,s));
         }
         subject = new Subject(400, 300, radius);
 
@@ -47,7 +48,7 @@ public class Substanzensimulator extends BasicGameState {
             }
             if (subject.intersects(substanzen)) {
                 // Aktion bei Kollision
-                System.out.println("Quadrat und Kreis überlappen!");
+                System.out.println("Quadrat "+substanzen.getId()+" und Kreis überlappen!" );
             }
         }
 

@@ -34,7 +34,7 @@ public class Dopplereffect extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.x = -100;
         this.y = 550;
-        this.speed = 2; // 5 ist Maximum weil gleich schnell wie Schall Geschwindigkeit
+        this.speed = 3; // 5 ist Maximum weil gleich schnell wie Schall Geschwindigkeit
         this.savedSpeed = this.speed;
         this.waveSize = 0;
         this.lastWaveTime = 0;
@@ -43,17 +43,19 @@ public class Dopplereffect extends BasicGameState {
 
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
         this.background = new Image("at/htldornbirn/projects/nawi/Team5/res/City2.png");
+        this.person = new Image("/src/at/htldornbirn/projects/nawi/Team5/res/Person.png");
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
+        g.drawImage(person, 800,700);
 
 
         for (Wave wave : waves) {
             if (wave.getSize() > 0) {
-                g.setColor(new Color(255, 255, 255, 255));
+                g.setColor(new Color(0, 255, 255, 255));
                 g.drawOval(wave.getX() - wave.getSize() / 2, wave.getY() - wave.getSize() / 2, wave.getSize(), wave.getSize());
             }
         }

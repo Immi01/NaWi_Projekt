@@ -54,4 +54,8 @@ public class CalculateButton {
     public void setPushed(boolean pushed) {
         isPushed = pushed;
     }
+
+    public Calculations getCalculations() {
+        return calculations;
+    }
 }

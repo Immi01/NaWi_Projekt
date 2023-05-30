@@ -36,12 +36,12 @@ public class Sled {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.pushTransform();
         graphics.rotate(rectangle.getX(), rectangle.getY(), angleSled);
-        graphics.fillRect(xPosition, yPosition, 150, 50);
+        graphics.fillRect(xPosition, yPosition-3, 150, 50);
         graphics.popTransform();
     }
 
 
-    public void update(GameContainer gameContainer, float angle, float delta, float speedSled, boolean isPushed) throws SlickException {
+    public void update(GameContainer gameContainer, float angle, float delta, float speedSled, boolean isPushed,float a) throws SlickException {
         this.angleSled = angle;
         this.speedSled = speedSled;
         if (isPushed){
@@ -52,17 +52,24 @@ public class Sled {
                 }
             }
             if (xPosition>=300 && isOnTop == false){
-                this.xPosition -= delta/this.speedSled;
+                if (a==0){
+                    a = 1;
+                }
+                this.xPosition -= delta/this.speedSled*a;
+
                 if (xPosition<=300){
                     isOnTop = true;
-                this.isAtBottom = true;
+                    this.isAtBottom = true;
                 }
             }
-
         }
     }
 
     public boolean isAtBottom() {
         return isAtBottom;
+    }
+
+    public void setAtBottom(boolean atBottom) {
+        isAtBottom = atBottom;
     }
 }

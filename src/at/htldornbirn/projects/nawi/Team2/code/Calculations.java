@@ -2,6 +2,8 @@ package at.htldornbirn.projects.nawi.Team2.code;
 
 import org.newdawn.slick.*;
 
+import javax.naming.NameNotFoundException;
+
 public class Calculations {
 
     private float x,y,width,height;
@@ -77,11 +79,21 @@ public class Calculations {
 
         this.a = this.fHang/inputWeight;
         System.out.println("Beschleunigung a: " + this.a + "m/s2");
+        if(inputWeight == 0){
+            this.a = 0;
+        }
 
         double vDouble = Math.sqrt(2*this.a*inputDistance);
         this.v = (float)vDouble;
         System.out.println("Geschwindigkeit nach " + inputDistance + "m betraegt: " + this.v + "m/s");
+        if(inputDistance == 0){
+            this.v = 0;
+        }
 
         System.out.println("------------------");
+    }
+
+    public float getA() {
+        return a;
     }
 }

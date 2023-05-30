@@ -117,9 +117,10 @@ public class InclinedPlane extends BasicGameState {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         if (sled.isAtBottom()){
             calculateButton.setPushed(false);
+            sled.setAtBottom(false);
         }
         this.angleSled = setAngle.getSliderValue()*-1;
-        sled.update(gameContainer, this.angleSled, delta, this.speedSled, calculateButton.isPushed());
+        sled.update(gameContainer, this.angleSled, delta, this.speedSled, calculateButton.isPushed(),calculateButton.getCalculations().getA());
 
         for (Actor actors : this.actors) {
             actors.update(delta);
@@ -153,7 +154,7 @@ public class InclinedPlane extends BasicGameState {
     public void mousePressed(int button, int x, int y) {
 
         if (x >= this.inputFieldWeight.getX() && x <= this.inputFieldWeight.getX() + this.inputFieldWeight.getRectWidth()
-                && y >= this.inputFieldWeight.getY() && y <= this.inputFieldWeight.getY() + this.inputFieldWeight.getRectHeight()) {
+                && y >= this.inputFieldWeight.getY() && y <= this.inputFieldWeight.getY() + this.inputFieldWeight.getRectHeight()&& calculateButtonPushed != true) {
             this.inputFieldWeight.setHasFocus(true);
         } else {
             this.inputFieldWeight.setHasFocus(false);
@@ -161,7 +162,7 @@ public class InclinedPlane extends BasicGameState {
 
 
         if (x >= this.inputFieldDistance.getX() && x <= this.inputFieldDistance.getX() + this.inputFieldDistance.getRectWidth()
-                && y >= this.inputFieldDistance.getY() && y <= this.inputFieldDistance.getY() + this.inputFieldDistance.getRectHeight()) {
+                && y >= this.inputFieldDistance.getY() && y <= this.inputFieldDistance.getY() + this.inputFieldDistance.getRectHeight() && calculateButtonPushed != true) {
             this.inputFieldDistance.setHasFocus(true);
         } else {
             this.inputFieldDistance.setHasFocus(false);

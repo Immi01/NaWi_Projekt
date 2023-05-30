@@ -56,10 +56,6 @@ public class InclinedPlane2 extends  BasicGameState{
         speed = 5.0f;
 
 
-        for (int i = 0; i <1; i++) {
-            Cloud cloud = new Cloud();
-            this.actors.add(cloud);
-        }
         for (int i = 0; i <100; i++) {
             Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(50));
             this.actors.add(snowflake);

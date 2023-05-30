@@ -97,7 +97,7 @@ public class InclinedPlane2 extends  BasicGameState{
             graphics.popTransform();
         }
 
-        //graphics.drawImage(backgroundImage, 0, 0);
+
 
         graphics.setColor(Color.white);
 

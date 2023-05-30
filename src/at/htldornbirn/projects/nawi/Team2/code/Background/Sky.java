@@ -22,8 +22,7 @@ public class Sky implements Actor {
     public void render(Graphics graphics) {
         recColor = new Color(32,178,170);
         graphics.setColor(recColor);
-        graphics.drawRect(0,0,1500,200);
-        graphics.fillRect(0,0,1500,200);
+        graphics.fillRect(0,0,1500,100);
 
 
     }

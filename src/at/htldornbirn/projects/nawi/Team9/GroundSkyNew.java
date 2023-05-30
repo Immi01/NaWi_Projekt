@@ -24,6 +24,7 @@ public class GroundSkyNew implements Actor {
         this.minecraftgroundr = temp2.getScaledCopy(750, 400);
         Image temp3 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/background.jpg");
         this.sky = temp3.getScaledCopy(1600, 800);
+
         //Gewicht
 
     }

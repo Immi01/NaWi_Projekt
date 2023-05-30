@@ -108,8 +108,8 @@ public class StopingDistance2 extends BasicGameState {
         float dt = delta / 1000.0f; // Zeit in Sekunden
         float reactionDistance = speed / 3.6f * reactionTime; // Reaktionsweg in Metern
         float brakingSpeed = speed / 3.6f - deceleration * reactionTime; // Geschwindigkeit beim Bremsen in m/s
-        brakingDistance = brakingSpeed * brakingSpeed / (2 * deceleration); // Bremsweg in Metern
-        brakingDistance += reactionDistance; // Anhalteweg in Metern
+        float brakingDistance = (brakingSpeed * brakingSpeed) / (2 * deceleration); // Bremsweg in Metern
+        brakingDistance += reactionDistance; // Anhalteweg in Meter
     }
 
     @Override

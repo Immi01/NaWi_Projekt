@@ -51,6 +51,6 @@ public class Subject implements Actors {
         return (deltaX * deltaX + deltaY * deltaY) < (radius * radius);
     }
     public void consume(){
-
+        
     }
 }

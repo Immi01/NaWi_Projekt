@@ -2,6 +2,7 @@ package at.htldornbirn.projects.nawi.Team4.Substanzensimulator;
 
 
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.state.BasicGameState;
@@ -67,7 +68,7 @@ public class Substanzensimulator extends BasicGameState {
 
     @Override
     public int getID() {
-        return 0;
+        return Constants.Team4;
     }
 
     public void mousePressed(int button, int x, int y) {

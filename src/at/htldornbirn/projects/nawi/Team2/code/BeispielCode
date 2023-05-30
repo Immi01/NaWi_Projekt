@@ -1,0 +1,92 @@
+package at.htldornbirn.projects.nawi.Team9;
+import org.newdawn.slick.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Main extends BasicGame {
+    public Main(String title) {
+        super(title);
+    }
+
+    private List<Actor> actors;
+    private InputFieldRN inputFieldRN;
+
+    @Override
+    public void init(GameContainer gc) throws SlickException {
+        this.inputFieldRN = new InputFieldRN("", 100, 100);
+        this.actors = new ArrayList<>();
+        this.actors.add(inputFieldRN);
+    }
+
+    @Override
+    public void update(GameContainer gc, int delta) throws SlickException {
+    }
+
+    @Override
+    public void keyPressed(int key, char c) {
+        this.inputFieldRN.append(Character.toString(c));
+    }
+
+    @Override
+    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        for (Actor actor : this.actors) {
+            actor.render(graphics);
+        }
+    }
+
+    public static void main(String[] argv) {
+        try {
+            AppGameContainer container = new AppGameContainer(new Main("Analyzing"));
+            container.setDisplayMode(1600, 800, false);
+            container.start();
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+
+
+
+
+
+
+InputFieldRN:
+
+package at.htldornbirn.projects.nawi.Team9;
+
+import org.newdawn.slick.Graphics;
+
+public class InputFieldRN implements Actor{
+    private String text;
+    private int x,y;
+
+    public InputFieldRN(String text, int x, int y) {
+        this.text = text;
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public void render(Graphics graphics) {
+        graphics.drawString(text,x,y);
+    }
+
+    public void append(String text){
+        this.text += text;
+    }
+
+    @Override
+    public void update(int delta) {
+
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+}

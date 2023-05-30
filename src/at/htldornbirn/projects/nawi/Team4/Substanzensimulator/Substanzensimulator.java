@@ -68,7 +68,7 @@ public class Substanzensimulator extends BasicGameState {
 
     @Override
     public int getID() {
-        return Constants.Team4;
+        return Constants.TEAM4;
     }
 
     public void mousePressed(int button, int x, int y) {

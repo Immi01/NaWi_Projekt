@@ -13,6 +13,7 @@ public class Sled {
     private Rectangle rectangle;
     private float speedSled;
     private float widthSled, heightSled;
+    private boolean isOnTop;
 
     public Sled(float angleSled,float speedSled, float xPosition, float yPosition, float widthSled, float heightSled) {
         this.xPosition = xPosition;
@@ -24,6 +25,7 @@ public class Sled {
         this.angleSled = angleSled;
         this.speedSled = speedSled;
 
+        this.isOnTop = true;
 
         this. rectangle = new Rectangle(this.xPosition, this.yPosition, 150, 50);
     }
@@ -42,14 +44,20 @@ public class Sled {
         this.angleSled = angle;
         this.speedSled = speedSled;
         if (isPushed){
-            if (xPosition<=1200-this.widthSled){
+            if (xPosition<=1200-this.widthSled && isOnTop == true){
                 this.xPosition += delta/this.speedSled;
-
+                System.out.println(xPosition);
+                if (xPosition>=1200){
+                    isOnTop = false;
+                }
             }
-            /*
-            if (xPosition>=1200-this.widthSled){
-                    this.xPosition -= delta/this.speedSled;
-            }*/
+            if (xPosition>=300-this.widthSled && isOnTop == false){
+                this.xPosition -= delta/this.speedSled;
+                if (xPosition<=300){
+                    isOnTop = true;
+
+                }
+            }
 
         }
     }

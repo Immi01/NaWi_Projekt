@@ -100,7 +100,6 @@ public class InclinedPlane extends BasicGameState {
 
         sled.render(gameContainer, graphics);
 
-
         graphics.setColor(Color.white);
 
         graphics.setLineWidth(5.0f);
@@ -130,7 +129,7 @@ public class InclinedPlane extends BasicGameState {
 
 
         this.calculateButtonPushed = calculateButton.isPushed();
-        System.out.println(calculateButtonPushed);
+        //System.out.println(calculateButtonPushed);
 
 
 

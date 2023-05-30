@@ -30,7 +30,8 @@ public class InclinedPlane extends BasicGameState {
     private SetAngle setAngle = new SetAngle();
 
     private Image backgroundImage;
-    private TrueTypeFont font;
+    private TrueTypeFont headlineFont;
+    private TrueTypeFont writing;
 
     private boolean calculateButtonPushed;
 
@@ -69,7 +70,7 @@ public class InclinedPlane extends BasicGameState {
 
 
 
-        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/backgoundimage.png");
+        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/background3.jpg");
 
         this.triangle = new Triangle();
 
@@ -79,8 +80,11 @@ public class InclinedPlane extends BasicGameState {
 
         this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30);
 
-        Font awtFont = new Font("Arial", Font.BOLD, 32);
-        font = new TrueTypeFont(awtFont, true);
+        Font headline = new Font("Arial", Font.BOLD, 32);
+        headlineFont = new TrueTypeFont(headline, true);
+
+        Font writing = new Font("Arial", Font.TRUETYPE_FONT, 18);
+        this.writing = new TrueTypeFont(writing, true);
 
         slider.addListener(setAngle);
     }
@@ -93,6 +97,7 @@ public class InclinedPlane extends BasicGameState {
             actors.render(graphics);
             graphics.setColor(Color.white);
         }
+        graphics.setFont(writing);
 
         sled.render(gameContainer, graphics);
 
@@ -109,8 +114,8 @@ public class InclinedPlane extends BasicGameState {
         calculateButton.render(gameContainer, graphics);
 
         graphics.setColor(Color.black);
-        graphics.setFont(font);
-        graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-font.getWidth("Schiefe Ebene")/2, 20);
+        graphics.setFont(headlineFont);
+        graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-headlineFont.getWidth("Schiefe Ebene")/2, 20);
     }
 
     @Override

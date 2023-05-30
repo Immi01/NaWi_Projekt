@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
@@ -115,7 +116,7 @@ public class SineFunctionSandBox extends BasicGameState {
 
         if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > gameContainer.getHeight() - (stateButton1.getY() + stateButton1.getHeight()) && posY < gameContainer.getHeight() - stateButton1.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                stateBasedGame.enterState(1);
+                stateBasedGame.enterState(Constants.TEAM6);
             }
         }
 

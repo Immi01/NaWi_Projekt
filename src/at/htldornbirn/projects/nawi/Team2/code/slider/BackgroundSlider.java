@@ -23,8 +23,8 @@ public class BackgroundSlider {
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.fillRect(this.x,this.y,this.width,this.value+this.width);
-        graphics.drawString("Winkel:", this.x+this.width+20,this.y+15);
-        graphics.drawString(String.valueOf(sliderValue),this.x+this.width+20,this.y+35);
+        graphics.drawString("Winkel:", this.x+this.width+20,this.y);
+        graphics.drawString(String.valueOf(sliderValue),this.x+this.width+20,this.y+20);
     }
 
     private double round(float value, int decimalPoints) {

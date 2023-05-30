@@ -27,7 +27,8 @@ public class Navigation extends BasicGameState implements SliderListener {
     float ObjX;
     float ObjY;
     Input input;
-    //private Image image;
+    private Image image;
+    private Image scaled;
     private Dictionary<Integer, Integer> map;
 
 
@@ -65,7 +66,8 @@ public class Navigation extends BasicGameState implements SliderListener {
         map.put(8, Constants.TEAM9);
 
 
-        //image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
+        image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
+        scaled = image.getScaledCopy(59,59);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.render(graphics);
         }
 
-        //image.draw(0,0);
+        scaled.draw(76,101);
 
     }
 

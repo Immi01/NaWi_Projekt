@@ -39,7 +39,7 @@ public class Team9Game extends BasicGameState {
         RectangleGround rightGround = new RectangleGround(850, 400, 750, 400);
 
         //Adding all actors necessary
-
+        this.actors.add(itemList);
     }
 
     @Override

@@ -39,6 +39,7 @@ public class GroundSkyNew implements Actor {
         minecraftgroundl.draw(0, 500);
         minecraftgroundr.draw(850,500);
 
+
     }
 
     @Override

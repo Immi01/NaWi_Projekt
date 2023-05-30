@@ -50,7 +50,6 @@ public class Team9Game extends BasicGameState {
         inputFieldRN.draw(graphics);
         horse.render(graphics);
 
-
     }
 
     @Override

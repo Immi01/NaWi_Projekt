@@ -17,7 +17,7 @@ public class ItemList implements Actor{
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.white); // setting color of list
+        graphics.setColor(Color.black); // setting color of list
         if (team9Game.getInputFieldRN().getText() == null || Objects.equals(team9Game.getInputFieldRN().getText() , "")) {
             graphics.drawString("Weight: " + "0" + " kg", InfoFieldX, InfoFieldY + 40);
         } else {

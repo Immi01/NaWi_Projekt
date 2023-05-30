@@ -30,12 +30,12 @@ public class Explanation extends BasicGameState {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        font.drawString((float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15, "The Rotation sex\n", Color.red);
+        font.drawString((float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15, "Die Gleichförmige Kreisbewegung\n", Color.yellow);
         graphics.setColor(Color.white);
         float fontFactor = 0.7f;
         graphics.scale(fontFactor, fontFactor);
         font.drawString(90 / fontFactor, 125 / fontFactor,
-                "Test ");
+                "");
     }
 
     @Override

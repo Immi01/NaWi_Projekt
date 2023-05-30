@@ -6,7 +6,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Team9Game extends BasicGameState {
 
@@ -32,24 +31,22 @@ public class Team9Game extends BasicGameState {
         backgroundColor = Color.white;
 
         //Ground
-        RectangleGround leftGround = new RectangleGround(0, 400, 750, 400);
-        RectangleGround rightGround = new RectangleGround(850, 400, 750, 400);
-        this.actors.add(leftGround);
-        this.actors.add(rightGround);
+        GroundSkyNew groundimagel = new GroundSkyNew();
+        actors.add(groundimagel);
         this.actors.add(calculations);
         this.actors.add(itemList);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        inputFieldRN.draw(graphics);
-
-
         // Draw a green rectangle
 
         for (Actor actor : this.actors) {
             actor.render(graphics);
+
         }
+        inputFieldRN.draw(graphics);
+
     }
 
     @Override

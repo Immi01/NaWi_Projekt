@@ -37,10 +37,10 @@ public class InputFieldRN {
             }
         } else {
             if (value.isEmpty()) {
-                graphics.setColor(Color.gray);
+                graphics.setColor(Color.white);
                 graphics.drawString(placeholder, x + 5, y + 5);
             } else {
-                graphics.setColor(Color.black);
+                graphics.setColor(Color.white);
                 graphics.drawString(value, x + 5, y + 5);
             }
         }

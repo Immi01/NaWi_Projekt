@@ -26,5 +26,6 @@ public class RectangleGround implements Actor {
     }
 
     public void update(int delta) {
+
     }
 }

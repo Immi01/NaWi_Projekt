@@ -9,15 +9,17 @@ public class Ball implements ProjectActor{
     private float Gforce;
     private float radius;
     private float speedX;
+    private float weight;
 
 
-    public Ball(float x, float y, float speedY, float gForce, float radius, float speedX) {
+    public Ball(float x, float y, float speedY, float gForce, float radius, float speedX, float weight) {
         this.x = x;
         this.y = y;
         this.speedY = speedY;
         this.Gforce = gForce;
         this.radius = radius;
         this.speedX = speedX;
+        this.weight = weight;
     }
 
 
@@ -31,8 +33,20 @@ public class Ball implements ProjectActor{
     public void update(GameContainer gc, int delta) {
         this.t += delta / 1000f;
         this.x += this.speedX * t;
-        //if (this.x >= 400){
+        if (this.x >= 400){
             this.y +=  (this.speedY) * this.t + (this.Gforce*((float)Math.pow(this.t,2)))/2;
-        //}
+        }
+    }
+
+    public float getGforce() {
+        return Gforce;
+    }
+
+    public float getRadius() {
+        return radius;
+    }
+
+    public float getWeight() {
+        return weight;
     }
 }

@@ -8,6 +8,7 @@ public class CalculateButton {
     private Calculations calculations;
     private float angle;
     private String weight, distance;
+    private boolean isPushed;
 
     private float positionX, positionY, width, height;
 
@@ -16,6 +17,7 @@ public class CalculateButton {
         this.angle = angle;
         this.weight = weightText;
         this.distance = distanceText;
+        this.isPushed = false;
 
         this.positionX = positionX;
         this.positionY = positionY;
@@ -31,6 +33,7 @@ public class CalculateButton {
         int mouseX = input.getMouseX();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             if (mouseY>this.positionY && mouseY<this.positionY+this.height && mouseX >this.positionX && mouseX < this.positionX+this.width){
+                this.isPushed = true;
                 calculations.update(gameContainer, angle, weight, distance);
             }
         }
@@ -42,5 +45,9 @@ public class CalculateButton {
         graphics.setColor(Color.white);
         graphics.drawString("Calcualate",(this.positionX+width)/2,this.positionY+height/5);
         calculations.render(gameContainer,graphics);
+    }
+
+    public boolean isPushed() {
+        return isPushed;
     }
 }

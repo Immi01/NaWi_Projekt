@@ -34,14 +34,14 @@ public class Slider {
     }
 
 
-    public void update(GameContainer gameContainer, float sliderValue) throws SlickException {
+    public void update(GameContainer gameContainer, float sliderValue, boolean calculateButtonPushed) throws SlickException {
         Input input = gameContainer.getInput();
         int mouseY = input.getMouseY();
         int mouseX = input.getMouseX();
         backgroundSlider.update(gameContainer, sliderValue);
 
 
-        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && calculateButtonPushed != true) {
             if (mouseY>=this.startPositionY && mouseY<=this.value+this.startPositionY && mouseX >=this.startPositionX && mouseX <= startPositionX+width){
                 this.actualPositionY = mouseY-width/2;
                 for (EventListener eventlistener: eventListeners) {

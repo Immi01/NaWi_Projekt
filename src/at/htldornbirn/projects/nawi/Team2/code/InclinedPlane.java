@@ -25,21 +25,19 @@ public class InclinedPlane extends BasicGameState {
     private InputField inputFieldWeight;
     private InputField inputFieldDistance;
     private CalculateButton calculateButton;
+    private Sled sled;
 
     private SetAngle setAngle = new SetAngle();
 
     private Image backgroundImage;
-
     private TrueTypeFont font;
+
+    private boolean calculateButtonPushed;
 
 
     private List<Actor> actors;
-    private Rectangle rectangle;
-    private float angle;
-    private float speed;
-    private float getX;
-    private float getY;
-    private boolean isMoving;
+    private float angleSled;
+    private float speedSled;
 
 
     @Override
@@ -49,17 +47,9 @@ public class InclinedPlane extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+
         this.actors = new ArrayList<>();
         Random random = new Random();
-
-        getX = 100;
-        getY = 700;
-        isMoving = true;
-
-        rectangle = new Rectangle(getX, getY, 150, 50);
-        angle = 135.0f;
-        speed = 5.0f;
-
 
         for (int i = 0; i <1; i++) {
             Sky sky = new Sky();
@@ -84,6 +74,11 @@ public class InclinedPlane extends BasicGameState {
         }
 
 
+        this.speedSled = 5.0f;
+        this.angleSled = setAngle.getSliderValue()*-1;
+        sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 50);
+
+
 
         backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/pictures/background.png");
 
@@ -106,15 +101,11 @@ public class InclinedPlane extends BasicGameState {
 
         for (Actor actors:this.actors){
             actors.render(graphics);
-
             graphics.setColor(Color.white);
-            graphics.pushTransform();
-            graphics.rotate(rectangle.getCenterX(), rectangle.getCenterY(), angle);
-            graphics.fillRect(getX, getY, 150, 50);
-            graphics.popTransform();
         }
 
-        //graphics.drawImage(backgroundImage, 0, 0);
+        sled.render(gameContainer, graphics);
+
 
         graphics.setColor(Color.white);
 
@@ -138,17 +129,20 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
 
+        this.angleSled = setAngle.getSliderValue()*-1;
+        sled.update(gameContainer, this.angleSled, delta, this.speedSled, calculateButton.isPushed());
+
         for (Actor actors : this.actors) {
             actors.update(delta);
         }
-        if (getY > 200){
-            getX -= (float)delta/this.speed;
-        }else{
-            this.speed = 0;
-        }
 
 
-        slider.update(gameContainer, setAngle.getSliderValue());
+        this.calculateButtonPushed = calculateButton.isPushed();
+        System.out.println(calculateButtonPushed);
+
+
+
+        slider.update(gameContainer, setAngle.getSliderValue(), calculateButtonPushed);
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
@@ -156,11 +150,11 @@ public class InclinedPlane extends BasicGameState {
     }
 
     public void keyPressed(int key, char c) {
-        if (key == Input.KEY_BACK){
+        if (key == Input.KEY_BACK && calculateButtonPushed != true){
                this.inputFieldWeight.back();
                this.inputFieldDistance.back();
         }else{
-            if (Character.isDigit(c)) {
+            if (Character.isDigit(c) && calculateButtonPushed != true) {
                 this.inputFieldWeight.append(Character.toString(c));
                 this.inputFieldDistance.append(Character.toString(c));
             }

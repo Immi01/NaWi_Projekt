@@ -3,26 +3,23 @@ package at.htldornbirn.projects.nawi.Team7;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-public class Rectangle implements ProjectActor{
-    private float x,y,z;
+public class DefinitionBoxes implements ProjectActor{
+    private float x,y,z, width;
 
-    public Rectangle(float x, float z) {
+    public DefinitionBoxes(float x, float z, float width) {
         this.z = z;
         this.x = x;
+        this.width = width;
     }
 
     @Override
     public void render(Graphics graphics) {
-        graphics.drawRect(this.x,this.y, this.z, this.z);
+        graphics.drawRect(this.x,this.y, this.width, this.z);
     }
 
     @Override
     public void update(GameContainer gc, int delta) {
 
-    }
-
-    public float getX() {
-        return x;
     }
 
     public void setX(float x) {
@@ -35,6 +32,10 @@ public class Rectangle implements ProjectActor{
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public float getX() {
+        return x;
     }
 
     public float getZ() {

@@ -26,6 +26,11 @@ public class Sandbox extends BasicGameState {
     private float BallGforce;
     private float BallRadius;
     private float BallWeight;
+    private DefinitionBoxes definitionBoxes;
+    private List<DefinitionBoxes> definitionBoxesList;
+    private BackgroundImage backgroundImage;
+    private List<BackgroundImage> backgroundImageList;
+    private List<ProjectActor> projectActors;
 
 
     @Override
@@ -37,10 +42,16 @@ public class Sandbox extends BasicGameState {
         this.rectangles = new ArrayList<>();
         this.customBalls = new ArrayList<>();
         this.locationButtons = new ArrayList<>();
+        this.definitionBoxesList = new ArrayList<>();
+        this.projectActors = new ArrayList<>();
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        /*for (int i = 0; i < 1; i++) {
+            BackgroundImage backgroundImage = new BackgroundImage();
+        }*/
+
         this.countOfBallSelection = 4;
         this.CountOfLocations = 8;
         this.bWidth = 200;
@@ -60,12 +71,18 @@ public class Sandbox extends BasicGameState {
         }
 
         for (int i = 0; i < this.countOfBallSelection; i++) {
-            rectangle = new Rectangle(this.distanceBetweenRechtangles);
+            rectangle = new Rectangle(this.distanceBetweenRechtangles, 100);
             this.rectangle.setY(150);
             rectangles.add(rectangle);
             this.distanceBetweenRechtangles += 250;
             customBall = new CustomBalls(rectangles.get(i).getX(), rectangles.get(i).getY(), rectangles.get(i).getZ(), rectangles.get(i).getZ(), WeightForBalls[i], RadiusForBalls[i]);
             customBalls.add(customBall);
+        }
+
+        for (int i = 0; i < this.countOfBallSelection; i++) {
+            definitionBoxes = new DefinitionBoxes(rectangles.get(i).getX(), 50, rectangles.get(i).getZ());
+            this.definitionBoxes.setY(300);
+            definitionBoxesList.add(definitionBoxes);
         }
 
         this.bY = this.rectangle.getY();
@@ -98,10 +115,21 @@ public class Sandbox extends BasicGameState {
             locationButton.render(graphics);
         }
 
+        for (int i = 0; i < definitionBoxesList.size(); i++) {
+            definitionBoxesList.get(i).render(graphics);
+            graphics.drawString("weight: " + customBalls.get(i).getWeight(), this.definitionBoxesList.get(i).getX(), this.definitionBoxesList.get(i).getY());
+            graphics.drawString("radius: " + customBalls.get(i).getRadius(), this.definitionBoxesList.get(i).getX(), this.definitionBoxesList.get(i).getY()+20);
+        }
+
         graphics.drawString("Menue", 720, 40);
 
         table.render(graphics);
         ball.render(graphics);
+
+        for (int i = 0; i < 1; i++) {
+            backgroundImage = new BackgroundImage();
+            this.projectActors.add(backgroundImage);
+        }
 
     }
 
@@ -128,7 +156,8 @@ public class Sandbox extends BasicGameState {
                     this.BallRadius = customBall.getRadius();
                     this.BallWeight = customBall.getWeight();
                     //System.out.println(this.BallRadius + ";" + this.BallWeight);
-                    System.out.println(this.ball.getRadius() + ";" + this.ball.getWeight());
+                    System.out.println(this.ball.getRadius() + ";" + this.ball.getWeight() + ";" + this.ball.getGforce());
+
                 }
             }
         }

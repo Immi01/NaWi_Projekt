@@ -14,12 +14,12 @@ public class SetupRotation extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-    this.addState(new Explanation());
+        this.addState(new Explanation());
     }
 
     public static void main(String[] args) throws SlickException {
         AppGameContainer container = new AppGameContainer(new SetupRotation("NaWi Portal"));
-        container.setDisplayMode(1280,960,false);
+        container.setDisplayMode(1280, 960, false);
         container.start();
     }
 }

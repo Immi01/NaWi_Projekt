@@ -9,14 +9,15 @@ public class Button implements Actor {
     private Color color;
     private AngelCodeFont font;
 
-    public Button(float x, float y, float width, float height, String text, Color color) {
+    public Button(float x, float y, float width, float height, String text, Color color) throws SlickException {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.text = text;
         this.color = color;
-        this.font = font;
+        this.font = new AngelCodeFont("C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
+
     }
 
     @Override

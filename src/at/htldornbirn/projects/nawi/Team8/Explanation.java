@@ -22,13 +22,13 @@ public class Explanation extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
+        font = new AngelCodeFont("C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
         this.actors = new ArrayList<>();
 
-        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 250, 100, "Go to sandbox", Color.yellow);
-        this.stateButton1.setX((float) gameContainer.getWidth() / 2 - this.stateButton1.getWidth() / 2);
-        this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
-        this.actors.add(this.stateButton1);
+        float buttonX = gameContainer.getWidth() / 2 - 125;
+        float buttonY = gameContainer.getHeight() * 0.9f - 50;
+        stateButton1 = new Button(buttonX, buttonY, 250, 100, "Go to sandbox", Color.yellow);
+        actors.add(stateButton1);
 
     }
 
@@ -36,9 +36,8 @@ public class Explanation extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         font.drawString((float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15, "Die Gleichförmige Kreisbewegung\n", Color.yellow);
         graphics.setColor(Color.white);
-        float fontFactor = 0.7f;
-        graphics.scale(fontFactor, fontFactor);
-        font.drawString(90 / fontFactor, 125 / fontFactor,
+        graphics.scale(0.7f, 0.7f);
+        font.drawString(90, 150,
                 "Test");
     }
 
@@ -48,11 +47,11 @@ public class Explanation extends BasicGameState {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 
-        if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > 50 && posY < 150)) {
+        if (posX > stateButton1.getX() && posX < stateButton1.getX() + stateButton1.getWidth() &&
+                posY > stateButton1.getY() && posY < stateButton1.getY() + stateButton1.getHeight()) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 stateBasedGame.enterState(2);
             }
         }
     }
-
 }

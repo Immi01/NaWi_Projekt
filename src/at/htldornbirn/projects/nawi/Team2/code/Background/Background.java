@@ -29,20 +29,19 @@ public class Background implements Actor {
 
     @Override
     public void render(Graphics graphics) {
-        /*backgroundColor = new Color(124,252,0);
+        backgroundColor = new Color(124,252,0);
         graphics.setColor(backgroundColor);
         graphics.drawRect(0,200,1500,600);
-        graphics.fillRect(0,200,1500,600);*/
+        graphics.fillRect(0,200,1500,600);
 
-        Image scaledImage = image.getScaledCopy(1f);
-        scaledImage.draw(x, y);
+
 
     }
 
     @Override
     public void update(int delta) {
-        /*backgroundColor = new Color(124, 252, 0);*/
-        image.draw(x,y);
+        backgroundColor = new Color(124, 252, 0);
+
 
     }
 }

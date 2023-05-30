@@ -124,7 +124,6 @@ public class InclinedPlane2 extends  BasicGameState{
 
         calculateButton.render(gameContainer, graphics);
 
-        graphics.setBackground(Color.blue);
 
         graphics.setColor(Color.black);
         graphics.setFont(font);

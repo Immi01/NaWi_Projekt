@@ -1,9 +1,6 @@
 package at.htldornbirn.projects.nawi.Team8;
 
-import org.newdawn.slick.AngelCodeFont;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.*;
 
 public class Button implements Actor {
 
@@ -36,5 +33,45 @@ public class Button implements Actor {
     @Override
     public void update(GameContainer gameContainer, int delta) {
 
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

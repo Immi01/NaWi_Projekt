@@ -8,7 +8,7 @@ import java.util.Objects;
 public class ItemList implements Actor{
     private Team9Game team9Game;
     private Calculations calculations;
-    private int InfoFieldX = 1400;
+    private int InfoFieldX = 1320;
     private int InfoFieldY = 0;
     public ItemList(Team9Game game) {
         this.team9Game = game;
@@ -17,11 +17,11 @@ public class ItemList implements Actor{
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.gray); // setting color of list
+        graphics.setColor(Color.white); // setting color of list
         if (team9Game.getInputFieldRN().getText() == null || Objects.equals(team9Game.getInputFieldRN().getText() , "")) {
             graphics.drawString("Weight: " + "0" + " kg", InfoFieldX, InfoFieldY + 40);
         } else {
-            graphics.drawString("Weight: " + team9Game.getInputFieldRN() + " kg", InfoFieldX, InfoFieldY + 40);
+            graphics.drawString("Weight: " + calculations.getInputValue() + " kg", InfoFieldX, InfoFieldY + 40);
         }
         graphics.drawString("Work: " + calculations.getWork() + " joules", InfoFieldX, InfoFieldY + 60);
         graphics.drawString("Height: " + calculations.getHeight() + " m", InfoFieldX, InfoFieldY + 80);

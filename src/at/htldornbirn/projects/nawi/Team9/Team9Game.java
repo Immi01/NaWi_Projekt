@@ -14,6 +14,7 @@ public class Team9Game extends BasicGameState {
     private Color backgroundColor;
     private Calculations calculations;
     private ItemList itemList;
+    private Horse horse;
 
 
     @Override
@@ -23,34 +24,32 @@ public class Team9Game extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        inputFieldRN = new InputFieldRN(100, 100, 100, 20, 10);
+        inputFieldRN = new InputFieldRN(100, 100, 40, 20, 3);
         calculations = new Calculations(this);
         itemList = new ItemList(this);
-
         actors = new ArrayList<Actor>();
-        backgroundColor = Color.white;
+        horse = new Horse(800, 450, 1, 1,100,50);
 
         //Ground
 
         GroundSkyNew groundimagel = new GroundSkyNew();
         actors.add(groundimagel);
 
-        RectangleGround leftGround = new RectangleGround(0, 400, 750, 400);
-        RectangleGround rightGround = new RectangleGround(850, 400, 750, 400);
 
         //Adding all actors necessary
         this.actors.add(itemList);
+        this.actors.add(horse);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         // Draw a green rectangle
-
         for (Actor actor : this.actors) {
             actor.render(graphics);
-
         }
         inputFieldRN.draw(graphics);
+        horse.render(graphics);
+
 
     }
 

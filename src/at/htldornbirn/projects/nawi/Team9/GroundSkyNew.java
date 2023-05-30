@@ -18,14 +18,13 @@ public class GroundSkyNew implements Actor {
 
 
     public GroundSkyNew() throws SlickException {
-        Image temp = new Image("src/at/htldornbirn/projects/nawi/Team9/images/pxfuel.jpg");
+        Image temp = new Image("src/at/htldornbirn/projects/nawi/Team9/images/groundl.jpg");
         this.minecraftgroundl = temp.getScaledCopy(600, 400);
-        Image temp2 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/pxfuel.jpg");
+        Image temp2 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/groundr.jpg");
         this.minecraftgroundr = temp2.getScaledCopy(750, 400);
-        Image temp4 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/ground.jpg");
-        this.minecraftgroundu = temp4.getScaledCopy(500,100);
-        Image temp3 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/ls.jpg");
+        Image temp3 = new Image("src/at/htldornbirn/projects/nawi/Team9/images/background.jpg");
         this.sky = temp3.getScaledCopy(1600, 800);
+
         //Gewicht
 
     }
@@ -35,10 +34,8 @@ public class GroundSkyNew implements Actor {
     @Override
     public void render(Graphics graphics) {
         sky.draw(0,0);
-        minecraftgroundu.draw(500,700);
         minecraftgroundl.draw(0, 500);
         minecraftgroundr.draw(850,500);
-
 
     }
 

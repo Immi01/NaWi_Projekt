@@ -6,7 +6,7 @@ import org.newdawn.slick.Input;
 
 public class InputFieldRN {
     private String value = "";
-    private String placeholder = "KG value";
+    private String placeholder = "KG";
     private int maxLength = 4;
     private int x;
     private int y;
@@ -26,18 +26,18 @@ public class InputFieldRN {
     }
 
     public void draw(Graphics graphics) {
-        graphics.setColor(Color.black);
+        graphics.setColor(Color.white);
         graphics.drawRect(x, y, width, height);
 
         if (selected) {
-            graphics.setColor(Color.black);
+            graphics.setColor(Color.white);
             graphics.drawString(value, x + 5, y + 5);
             if (cursorBlinkTimer < 250) {
                 graphics.drawLine(x + 5 + cursorPos * 10, y + 2, x + 5 + cursorPos * 10, y + height - 2);
             }
         } else {
             if (value.isEmpty()) {
-                graphics.setColor(Color.white);
+                graphics.setColor(Color.gray);
                 graphics.drawString(placeholder, x + 5, y + 5);
             } else {
                 graphics.setColor(Color.white);

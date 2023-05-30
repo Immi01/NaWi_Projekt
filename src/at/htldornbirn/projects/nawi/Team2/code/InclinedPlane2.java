@@ -144,7 +144,7 @@ public class InclinedPlane2 extends  BasicGameState{
         }
 
 
-        slider.update(gameContainer, setAngle.getSliderValue());
+        slider.update(gameContainer, setAngle.getSliderValue(), false);
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());

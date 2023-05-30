@@ -1,7 +1,5 @@
 package at.htldornbirn.projects.nawi;
-
 import at.htldornbirn.projects.nawi.navigation.Navigation;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -17,7 +15,6 @@ public class NaWiGame extends StateBasedGame {
         addState(new Navigation());
 
     }
-
     public static void main(String[] args) throws SlickException {
         AppGameContainer container = new AppGameContainer(new NaWiGame("NaWi Portal"));
         container.setDisplayMode(800,600,false);

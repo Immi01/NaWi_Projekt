@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Color;
 
 public class BackgroundSlider {
     private float x,y,width,value;
@@ -22,7 +23,9 @@ public class BackgroundSlider {
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        graphics.setColor(new Color(0,0,0,100));
         graphics.fillRect(this.x,this.y,this.width,this.value+this.width);
+        graphics.setColor(Color.black);
         graphics.drawString("Winkel:", this.x+this.width+20,this.y);
         graphics.drawString(String.valueOf(sliderValue),this.x+this.width+20,this.y+20);
     }

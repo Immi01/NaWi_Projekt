@@ -12,6 +12,7 @@ public class Calculations implements Actor {
     private double kg;
     private double work;
     private double time = 1.0;
+    private String inputValue;
     private Team9Game team9Game;
 
 
@@ -60,5 +61,10 @@ public class Calculations implements Actor {
 
     public double getHeight() {
         return height;
+    }
+
+    public String getInputValue() {
+        inputValue = team9Game.getInputFieldRN().getValue();
+        return inputValue;
     }
 }

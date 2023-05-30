@@ -23,7 +23,7 @@ public class Team9Game extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        inputFieldRN = new InputFieldRN(100, 100, 100, 20, 10);
+        inputFieldRN = new InputFieldRN(100, 100, 40, 20, 3);
         calculations = new Calculations(this);
         itemList = new ItemList(this);
 

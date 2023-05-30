@@ -51,18 +51,12 @@ public class InclinedPlane extends BasicGameState {
         this.actors = new ArrayList<>();
         Random random = new Random();
 
-        for (int i = 0; i <1; i++) {
-            Sky sky = new Sky();
-            this.actors.add(sky);
-        }
+
         for (int i = 0; i <1; i++) {
             Background background = new Background();
             this.actors.add(background);
         }
-        for (int i = 0; i <1; i++) {
-            Sun sun = new Sun();
-            this.actors.add(sun);
-        }
+
 
         for (int i = 0; i <1; i++) {
             Cloud cloud = new Cloud();

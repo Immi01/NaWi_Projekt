@@ -1,4 +1,4 @@
-package at.htldornbirn.projects.nawi.Team2.code.Background;
+/*package at.htldornbirn.projects.nawi.Team2.code.Background;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -37,3 +37,4 @@ public class Sun implements Actor {
         cirColor = new Color(255,255,0);
     }
 }
+*/

@@ -57,18 +57,12 @@ public class InclinedPlane2 extends  BasicGameState{
         speed = 5.0f;
 
 
-        for (int i = 0; i <1; i++) {
-            Sky sky = new Sky();
-            this.actors.add(sky);
-        }
+
         for (int i = 0; i <1; i++) {
             Background background = new Background();
             this.actors.add(background);
         }
-        for (int i = 0; i <1; i++) {
-            Sun sun = new Sun();
-            this.actors.add(sun);
-        }
+
 
         for (int i = 0; i <1; i++) {
             Cloud cloud = new Cloud();

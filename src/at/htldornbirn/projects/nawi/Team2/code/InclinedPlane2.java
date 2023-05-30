@@ -51,17 +51,9 @@ public class InclinedPlane2 extends  BasicGameState{
         getX = 100;
         getY = 700;
         isMoving = true;
-
         rectangle = new Rectangle(getX, getY, 150, 50);
         angle = 135.0f;
         speed = 5.0f;
-
-
-
-        for (int i = 0; i <1; i++) {
-            Background background = new Background();
-            this.actors.add(background);
-        }
 
 
         for (int i = 0; i <1; i++) {
@@ -75,7 +67,7 @@ public class InclinedPlane2 extends  BasicGameState{
 
 
 
-        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/pictures/background.png");
+        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/backgoundimage.png");
 
         this.triangle = new Triangle();
 
@@ -93,6 +85,7 @@ public class InclinedPlane2 extends  BasicGameState{
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        backgroundImage.draw(0, 0, gameContainer.getWidth(), gameContainer.getHeight());
 
         for (Actor actors:this.actors){
             actors.render(graphics);

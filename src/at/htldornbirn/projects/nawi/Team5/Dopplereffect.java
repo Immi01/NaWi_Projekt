@@ -116,4 +116,5 @@ public class Dopplereffect extends BasicGameState {
     public void setSpeed(int newSpeed) {
         this.speed = newSpeed;
     }
+
 }

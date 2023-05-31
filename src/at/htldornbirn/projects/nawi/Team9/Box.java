@@ -7,8 +7,9 @@ import org.newdawn.slick.SlickException;
 public class Box implements Actor{
 
     private Image box;
-    private float x;
-    private float y;
+    private float x = 700;
+    private float y = 700;
+    private float speed = 1;
     private float width;
     private float height;
 
@@ -25,10 +26,12 @@ public class Box implements Actor{
     }
     @Override
     public void render(Graphics graphics) throws SlickException {
-        box.draw(10,10);
+        box.draw(x,y);
     }
 
     @Override
     public void update(int delta) {
+        this.y -= (float) delta/this.speed;
+
     }
 }

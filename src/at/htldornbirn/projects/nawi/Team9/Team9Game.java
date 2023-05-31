@@ -61,6 +61,10 @@ public class Team9Game extends BasicGameState {
         itemList.update(delta);
         horse.update(delta);
         backgroundColor = Color.white;
+
+        for (Actor actor : this.actors) {
+            actor.update(delta);
+        }
     }
 
     @Override

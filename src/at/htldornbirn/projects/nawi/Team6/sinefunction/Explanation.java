@@ -12,6 +12,7 @@ import java.util.List;
 public class Explanation extends BasicGameState {
     private List<Actor> actors;
     private Button stateButton1;
+    private Button stateButton2;
     private SineFunction sineFunction1;
     private AngelCodeFont font;
 
@@ -27,7 +28,11 @@ public class Explanation extends BasicGameState {
         this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 250, 100, "Go to sandbox", Color.yellow);
         this.stateButton1.setX((float) gameContainer.getWidth() / 2 - this.stateButton1.getWidth() / 2);
         this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.stateButton2 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 300, 100, "Go to bouncing ball", Color.white);
+        this.stateButton2.setX((float) gameContainer.getWidth() * 8 / 10 - this.stateButton1.getWidth() / 2);
+        this.stateButton2.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(this.stateButton1);
+        this.actors.add(this.stateButton2);
 
         this.sineFunction1 = new SineFunction(2500, gameContainer.getWidth(), gameContainer.getHeight() - 150, Color.magenta);
         for (SineComponent sineComponent : sineFunction1.getSineComponents()) {
@@ -73,6 +78,12 @@ public class Explanation extends BasicGameState {
         if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > 50 && posY < 150)) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 stateBasedGame.enterState(2);
+            }
+        }
+
+        if ((posX > this.stateButton2.getX() && posX < this.stateButton2.getX() + this.stateButton2.getWidth()) && (posY > 50 && posY < 150)) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                stateBasedGame.enterState(4);
             }
         }
 

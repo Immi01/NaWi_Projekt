@@ -59,7 +59,7 @@ public class InclinedPlane extends BasicGameState {
         }
 
         for (int i = 0; i <100; i++) {
-            Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(50));
+            Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(30)+10);
             this.actors.add(snowflake);
         }
 
@@ -83,7 +83,7 @@ public class InclinedPlane extends BasicGameState {
         Font headline = new Font("Arial", Font.BOLD, 32);
         headlineFont = new TrueTypeFont(headline, true);
 
-        Font writing = new Font("Arial", Font.TRUETYPE_FONT, 18);
+        Font writing = new Font("Arial", Font.BOLD, 18);
         this.writing = new TrueTypeFont(writing, true);
 
         slider.addListener(setAngle);

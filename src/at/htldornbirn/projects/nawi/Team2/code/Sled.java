@@ -2,6 +2,7 @@ package at.htldornbirn.projects.nawi.Team2.code;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
@@ -14,8 +15,9 @@ public class Sled {
     private float speedSled;
     private float widthSled, heightSled;
     private boolean isOnTop, isAtBottom;
+    private Image scaledImage;
 
-    public Sled(float angleSled,float speedSled, float xPosition, float yPosition, float widthSled, float heightSled) {
+    public Sled(float angleSled,float speedSled, float xPosition, float yPosition, float widthSled, float heightSled) throws SlickException {
         this.xPosition = xPosition;
         this.yPosition = yPosition-heightSled;
 
@@ -28,16 +30,30 @@ public class Sled {
         this.isOnTop = true;
         this.isAtBottom = false;
 
+
+        Image originalImage = new Image("src/at/htldornbirn/projects/nawi/Team2/pictures/SledPicture2.png");
+        this.scaledImage = originalImage.getScaledCopy((int)widthSled, (int)heightSled);
+
+
         this. rectangle = new Rectangle(this.xPosition, this.yPosition, 150, 50);
     }
 
 
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        /*
         graphics.pushTransform();
         graphics.rotate(rectangle.getX(), rectangle.getY(), angleSled);
         graphics.fillRect(xPosition, yPosition-3, 150, 50);
         graphics.popTransform();
+        */
+
+
+        graphics.pushTransform();
+        graphics.rotate(scaledImage.getWidth(), rectangle.getHeight(), angleSled);
+        graphics.drawImage(scaledImage,xPosition, yPosition-3);
+        graphics.popTransform();
+
     }
 
 

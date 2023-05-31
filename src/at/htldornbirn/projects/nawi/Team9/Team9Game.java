@@ -15,6 +15,7 @@ public class Team9Game extends BasicGameState {
     private Calculations calculations;
     private ItemList itemList;
     private Horse horse;
+    private Box box;
 
 
     @Override
@@ -31,11 +32,12 @@ public class Team9Game extends BasicGameState {
         horse = new Horse(800, 450, 1, 1,100,50);
 
         //Ground
-
         GroundSkyNew groundimagel = new GroundSkyNew();
         actors.add(groundimagel);
 
-
+        //box
+        Box box1 = new Box();
+        this.actors.add(box1);
         //Adding all actors necessary
         this.actors.add(itemList);
         this.actors.add(horse);

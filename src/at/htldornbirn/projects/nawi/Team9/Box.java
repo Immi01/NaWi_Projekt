@@ -25,11 +25,10 @@ public class Box implements Actor{
     }
     @Override
     public void render(Graphics graphics) throws SlickException {
-        box.draw(0,0);
+        box.draw(10,10);
     }
 
     @Override
     public void update(int delta) {
-
     }
 }

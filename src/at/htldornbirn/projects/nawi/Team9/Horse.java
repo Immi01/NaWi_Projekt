@@ -32,15 +32,6 @@ public class Horse implements Actor {
         // Führe Aktualisierungslogik für das Pferd aus (z.B. Bewegung, Animation, etc.)
         if (direction == 1){
             this.x += (float)delta/this.speed;}
-        else {
-            this.x -= (float)delta/this.speed;
-        }
 
-        if (this.x>600){
-            this.x =2;
-        }
-        else if (this.x <0){
-            this.x = 600;
-        }
     }
 }

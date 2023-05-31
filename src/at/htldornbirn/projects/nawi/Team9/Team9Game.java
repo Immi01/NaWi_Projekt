@@ -57,6 +57,7 @@ public class Team9Game extends BasicGameState {
         inputFieldRN.update(delta);
         calculations.update(delta);
         itemList.update(delta);
+        horse.update(delta);
         backgroundColor = Color.white;
     }
 

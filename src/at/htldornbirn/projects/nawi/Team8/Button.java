@@ -75,4 +75,7 @@ public class Button implements Actor {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    public void setText(String start) {
+    }
 }

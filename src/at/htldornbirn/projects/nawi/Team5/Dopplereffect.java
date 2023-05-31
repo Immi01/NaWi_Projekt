@@ -33,9 +33,9 @@ public class Dopplereffect extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.x = -100;
+        this.x = -400;
         this.y = 550;
-        this.speed = 3; // 5 ist Maximum weil gleich schnell wie Schall Geschwindigkeit
+        this.speed = 0; // 5 ist Maximum weil gleich schnell wie Schall Geschwindigkeit
         this.savedSpeed = this.speed;
         this.waveSize = 0;
         this.lastWaveTime = 0;
@@ -84,7 +84,11 @@ public class Dopplereffect extends BasicGameState {
             Wave wave = waveIterator.next();
             wave.update();
             // despawn von wellen
-            if (wave.getX() > gameContainer.getWidth() + 100) {
+
+            if(this.x == -400)
+            {waveIterator.remove();}
+
+            else if (wave.getX() > gameContainer.getWidth() + 100) {
                 waveIterator.remove();
             }
         }

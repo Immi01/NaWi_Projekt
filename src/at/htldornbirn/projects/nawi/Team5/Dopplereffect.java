@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team5;
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -27,7 +28,7 @@ public class Dopplereffect extends BasicGameState {
 
     @Override
     public int getID() {
-        return 0;
+        return Constants.TEAM5;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class Dopplereffect extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
-        g.drawImage(person, 800,700);
+        g.drawImage(person, 800,550);
 
 
         for (Wave wave : waves) {
@@ -91,7 +92,7 @@ public class Dopplereffect extends BasicGameState {
 
 
     @Override
-    public void keyPressed(int key, char c) {   //pause mir Leertaste
+    public void keyPressed(int key, char c) {
         if (key == Input.KEY_SPACE) {
             if (this.speed == 0) {
                 this.speed = this.savedSpeed;
@@ -99,6 +100,20 @@ public class Dopplereffect extends BasicGameState {
                 this.savedSpeed = this.speed;
                 this.speed = 0;
             }
-        }
+        } else if (key == Input.KEY_1) {
+            setSpeed(1); // am Langsamsten
+        } else if (key == Input.KEY_2) {
+            setSpeed(2); // Langsamer
+        } else if (key == Input.KEY_3) {
+            setSpeed(3); // Normal
+        } else if (key == Input.KEY_4) {
+            setSpeed(4); // schnell
+        } else if (key == Input.KEY_5) {
+        setSpeed(5); // Schallgeschwindigkeit
+    }
+    }
+
+    public void setSpeed(int newSpeed) {
+        this.speed = newSpeed;
     }
 }

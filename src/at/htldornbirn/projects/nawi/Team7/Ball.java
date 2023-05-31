@@ -3,6 +3,9 @@ package at.htldornbirn.projects.nawi.Team7;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ball implements ProjectActor{
     private float t,y,x;
     private float speedY;
@@ -10,6 +13,8 @@ public class Ball implements ProjectActor{
     private float radius;
     private float speedX;
     private float weight;
+    private List<Float> positionsX;
+    private List<Float> positionsY;
 
 
     public Ball(float x, float y, float speedY, float gForce, float radius, float speedX, float weight) {
@@ -20,12 +25,23 @@ public class Ball implements ProjectActor{
         this.radius = radius;
         this.speedX = speedX;
         this.weight = weight;
+        this.positionsX = new ArrayList<>();
+        this.positionsY = new ArrayList<>();
     }
 
 
     @Override
     public void render(Graphics graphics) {
         graphics.drawOval(this.x, this.y, this.radius, this.radius);
+        if (this.positionsX.size() > 1) {
+            for (int i = 1; i < this.positionsX.size(); i++) {
+                float prevX = this.positionsX.get(i - 1);
+                float prevY = this.positionsY.get(i - 1);
+                float currX = this.positionsX.get(i);
+                float currY = this.positionsY.get(i);
+                graphics.drawLine(prevX, prevY, currX, currY);
+            }
+        }
     }
 
 
@@ -33,9 +49,12 @@ public class Ball implements ProjectActor{
     public void update(GameContainer gc, int delta) {
         this.t += delta / 1000f;
         this.x += this.speedX * t;
-        if (this.x >= 400){
-            this.y +=  (this.speedY) * this.t + (this.Gforce*((float)Math.pow(this.t,2)))/2;
+        if (this.x >= 300){
+            this.y +=  (this.speedX) * this.t + (this.Gforce*((float)Math.pow(this.t,2)))/2;
         }
+
+        this.positionsX.add(this.x);
+        this.positionsY.add(this.y);
     }
 
     public float getGforce() {
@@ -49,4 +68,6 @@ public class Ball implements ProjectActor{
     public float getWeight() {
         return weight;
     }
+
+
 }

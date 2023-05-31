@@ -28,9 +28,11 @@ public class Sandbox extends BasicGameState {
     private float BallWeight;
     private DefinitionBoxes definitionBoxes;
     private List<DefinitionBoxes> definitionBoxesList;
-    private BackgroundImage backgroundImage;
-    private List<BackgroundImage> backgroundImageList;
+    //private BackgroundImage backgroundImage;
+    //private List<BackgroundImage> backgroundImageList;
     private List<ProjectActor> projectActors;
+    private Image MercuryImage;
+
 
 
     @Override
@@ -51,7 +53,12 @@ public class Sandbox extends BasicGameState {
         /*for (int i = 0; i < 1; i++) {
             BackgroundImage backgroundImage = new BackgroundImage();
         }*/
-
+        /*try {
+            MercuryImage = new Image("");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }*/
+        //MercuryImage = new Image("C:\\HTL Dornbirn 2 - 5 Klasse\\SWP\\3 Klasse\\NaWi_Projekt\\images\\backgroundImage1.png");
         this.countOfBallSelection = 4;
         this.CountOfLocations = 8;
         this.bWidth = 200;
@@ -126,10 +133,12 @@ public class Sandbox extends BasicGameState {
         table.render(graphics);
         ball.render(graphics);
 
-        for (int i = 0; i < 1; i++) {
+        /*for (int i = 0; i < 1; i++) {
             backgroundImage = new BackgroundImage();
             this.projectActors.add(backgroundImage);
-        }
+        }*/
+
+        //MercuryImage.draw(0,0);
 
     }
 

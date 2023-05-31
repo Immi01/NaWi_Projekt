@@ -23,7 +23,7 @@ public class GravitySimulation extends BasicGameState {
     }
 
     public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
-        land = new Image("D:\\Schule 3bWI\\SWP(1)adfa\\Slick2DTemplate\\Images\\background.png");
+        land = new Image("D:\\Schule 3bWI\\SWP(1)adfa\\NaWi_Projekt\\src\\at\\htldornbirn\\projects\\nawi\\Team6\\sinefunction\\assets\\background.png");
         ball = new Circle(WIDTH / 2, HEIGHT / 2, BALL_RADIUS);
         velocity = new Vector2f(0, 0);
         jumping = false;

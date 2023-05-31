@@ -4,7 +4,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Box implements Actor{
+public class Box implements Actor {
 
     private Image box;
     private float x = 700;
@@ -12,6 +12,7 @@ public class Box implements Actor{
     private float speed = 1;
     private float width;
     private float height;
+    private boolean goingUp;
 
     public Box(float x, float y, float width, float height) {
         this.x = x;
@@ -20,18 +21,29 @@ public class Box implements Actor{
         this.height = height;
     }
 
-    public Box() throws SlickException{
+    public Box() throws SlickException {
         Image boxy = new Image("src/at/htldornbirn/projects/nawi/Team9/images/box.jpg");
-        this.box = boxy.getScaledCopy(100,100);
+        this.box = boxy.getScaledCopy(100, 100);
     }
+
     @Override
     public void render(Graphics graphics) throws SlickException {
-        box.draw(x,y);
+        box.draw(x, y);
     }
 
     @Override
     public void update(int delta) {
-        this.y -= (float) delta/this.speed;
 
+        if (goingUp && this.y > 500) {
+            this.y -= (float) delta / this.speed;
+        }
+        else if (goingUp){
+            goingUp = false;
+        }
+        else  if (!goingUp && this.y < 700)
+            this.y += (float) delta / this.speed;
+        else if(!goingUp){
+            goingUp = true;
+        }
     }
 }

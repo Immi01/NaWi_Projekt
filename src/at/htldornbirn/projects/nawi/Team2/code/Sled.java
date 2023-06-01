@@ -16,6 +16,8 @@ public class Sled {
     private float widthSled, heightSled;
     private boolean isOnTop, isAtBottom;
     private Image scaledImage;
+    private float xPictureStartPosition, yPictureStartPosition;
+    boolean mirroing;
 
     public Sled(float angleSled,float speedSled, float xPosition, float yPosition, float widthSled, float heightSled) throws SlickException {
         this.xPosition = xPosition;
@@ -29,29 +31,32 @@ public class Sled {
 
         this.isOnTop = true;
         this.isAtBottom = false;
+        this.mirroing = true;
+
+        this.xPictureStartPosition=this.xPosition;
+        this.yPictureStartPosition=this.yPosition;
 
 
-        Image originalImage = new Image("src/at/htldornbirn/projects/nawi/Team2/pictures/SledPicture2.png");
-        this.scaledImage = originalImage.getScaledCopy((int)widthSled, (int)heightSled);
-
-
-        this. rectangle = new Rectangle(this.xPosition, this.yPosition, 150, 50);
+        Image originalImage = new Image("src/at/htldornbirn/projects/nawi/Team2/pictures/SledPictureInclinedPlane.png");
+        this.scaledImage = originalImage.getScaledCopy((int)this.widthSled, (int)this.heightSled);
     }
 
 
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        /*
-        graphics.pushTransform();
-        graphics.rotate(rectangle.getX(), rectangle.getY(), angleSled);
-        graphics.fillRect(xPosition, yPosition-3, 150, 50);
-        graphics.popTransform();
-        */
+        System.out.println(mirroing);
+        if (this.xPosition>=1200-(this.widthSled+5) && mirroing){
+            this.mirroing = false;
+            this.scaledImage = scaledImage.getFlippedCopy(true, false);
+        }else if (xPosition <= 300-5){
+            this.scaledImage = scaledImage.getFlippedCopy(true, false);
+        }else{
+            this.mirroing = true;
+        }
 
-
         graphics.pushTransform();
-        graphics.rotate(scaledImage.getWidth(), rectangle.getHeight(), angleSled);
-        graphics.drawImage(scaledImage,xPosition, yPosition-3);
+        graphics.rotate(this.xPictureStartPosition, this.yPictureStartPosition, angleSled);
+        graphics.drawImage(scaledImage,xPosition, yPosition-5);
         graphics.popTransform();
 
     }

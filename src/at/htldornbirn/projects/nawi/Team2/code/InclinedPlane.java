@@ -66,7 +66,7 @@ public class InclinedPlane extends BasicGameState {
 
         this.speedSled = 5.0f;
         this.angleSled = setAngle.getSliderValue()*-1;
-        sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 50);
+        sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
 
 
 

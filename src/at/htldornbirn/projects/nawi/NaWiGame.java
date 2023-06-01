@@ -1,4 +1,10 @@
 package at.htldornbirn.projects.nawi;
+import at.htldornbirn.projects.nawi.Team2.code.InclinedPlane;
+import at.htldornbirn.projects.nawi.Team3.StopingDistance;
+import at.htldornbirn.projects.nawi.Team4.Substanzensimulator.Substanzensimulator;
+import at.htldornbirn.projects.nawi.Team5.Dopplereffect;
+import at.htldornbirn.projects.nawi.Team6.sinefunction.Explanation;
+import at.htldornbirn.projects.nawi.Team8.Sandbox;
 import at.htldornbirn.projects.nawi.navigation.Navigation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -13,6 +19,15 @@ public class NaWiGame extends StateBasedGame {
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         addState(new Navigation());
+        addState(new InclinedPlane());
+        addState(new StopingDistance());
+        addState(new StopingDistance());
+        addState(new Substanzensimulator("Substanzensimulator"));
+        addState(new Dopplereffect());
+        addState(new Explanation());
+        addState(new Sandbox());
+
+
 
     }
     public static void main(String[] args) throws SlickException {

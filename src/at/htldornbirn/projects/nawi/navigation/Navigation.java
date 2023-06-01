@@ -88,7 +88,7 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.update(delta);
         }
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            ChangeState();
+            ChangeState(stateBasedGame);
         }
 
 
@@ -99,14 +99,15 @@ public class Navigation extends BasicGameState implements SliderListener {
         System.out.println(mouseY);
     }
 
-    public void ChangeState() {
+    public void ChangeState(StateBasedGame stateBasedGame) {
         mouseX = Mouse.getX();
         mouseY = (Mouse.getY() - 600) * -1;
         for (int i = 0; i < actors.size(); i++) {
             ObjX = actors.get(i).getX();
             ObjY = actors.get(i).getY();
             if ((mouseX >= ObjX && mouseX < ObjX + 60) && (mouseY >= ObjY && mouseY < ObjY + 60)) {
-                System.out.println(map.get(i));
+                //System.out.println(map.get(i));
+                stateBasedGame.enterState(map.get(i));
                 return;
             }
         }

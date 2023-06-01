@@ -42,7 +42,6 @@ public class Calculations {
         graphics.setColor(Color.white);
     }
 
-
     public void calculate(){
 
         float inputWeight = 0;
@@ -59,7 +58,6 @@ public class Calculations {
         }else{
             inputDistance = Float.valueOf(this.distance);
         }
-
 
         this.fg = inputWeight * 10;
         System.out.println("FG: " + fg + "N");

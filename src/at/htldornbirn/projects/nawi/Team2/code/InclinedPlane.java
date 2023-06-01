@@ -48,6 +48,8 @@ public class InclinedPlane extends BasicGameState {
     private int pictureX;
     private int pictureY;
 
+    private String calculateButtonName;
+
 
     @Override
     public int getID() {
@@ -71,7 +73,7 @@ public class InclinedPlane extends BasicGameState {
             this.actors.add(snowflake);
         }
 
-
+        this.calculateButtonName = "Calculate";
         this.speedSled = 5.0f;
         this.angleSled = setAngle.getSliderValue()*-1;
         sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
@@ -86,13 +88,17 @@ public class InclinedPlane extends BasicGameState {
         this.inputFieldWeight = new InputField("", 100, 100,false, "Gewicht in kg: ");
         this.inputFieldDistance = new InputField("", 300, 100,false, "Strecke in m: ");
 
-        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30);
+        int buttonStringWidth = this.writing.getWidth(this.calculateButtonName);
+        int buttonStringHeight = this.writing.getHeight(this.calculateButtonName);
 
-        Font headline = new Font("Arial", Font.BOLD, 32);
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30, this.calculateButtonName, buttonStringWidth, buttonStringHeight);
+
+        Font headline = new Font("Arial", Font.BOLD, 42);
         headlineFont = new TrueTypeFont(headline, true);
 
         Font writing = new Font("Arial", Font.BOLD, 18);
         this.writing = new TrueTypeFont(writing, true);
+
 
         slider.addListener(setAngle);
 
@@ -154,7 +160,6 @@ public class InclinedPlane extends BasicGameState {
         for (Actor actors : this.actors) {
             actors.update(delta);
         }
-
 
         this.calculateButtonPushed = calculateButton.isPushed();
         //System.out.println(calculateButtonPushed);

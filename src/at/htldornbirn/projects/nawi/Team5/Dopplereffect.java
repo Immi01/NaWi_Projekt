@@ -4,6 +4,8 @@ import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.SlickException;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,6 +26,9 @@ public class Dopplereffect extends BasicGameState {
     private List<Wave> waves;
     private boolean paused;
     private float nextWaveDelay = 1; // Standardwert von 1 Sekunde, sonst Wellenabstand broken
+    private int xPerson;
+    private int yPerson;
+    private long enterZoneTime;
 
 
     @Override
@@ -41,6 +46,9 @@ public class Dopplereffect extends BasicGameState {
         this.lastWaveTime = 0;
         this.waves = new ArrayList<>();
         this.paused = false;
+        this.xPerson = 800;
+        this.yPerson = 550;
+
 
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
         this.background = new Image("at/htldornbirn/projects/nawi/Team5/res/City2.png");
@@ -51,8 +59,7 @@ public class Dopplereffect extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
-        g.drawImage(person, 800,550);
-
+        g.drawImage(person,xPerson ,yPerson);
 
         for (Wave wave : waves) {
             if (wave.getSize() > 0) {
@@ -69,6 +76,25 @@ public class Dopplereffect extends BasicGameState {
         if (this.x > 1500) {
             this.x = -400;
         }
+        if (this.x >= 700 && this.x <= 900) {
+            if (enterZoneTime == 0) {
+                enterZoneTime = System.currentTimeMillis(); // Setze den Zeitpunkt, wenn der Rettungswagen in den Bereich eintritt
+            }
+
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = currentTime - enterZoneTime;
+
+            if (elapsedTime >= 5000) {
+                this.xPerson = gameContainer.getWidth() + 300;
+            }
+        } else if (this.x == -400) {
+            this.xPerson = 800;
+            enterZoneTime = 0; // Zurücksetzen des Zeitpunkts, wenn der Rettungswagen den Bereich verlässt
+        }
+
+
+
+
 
         // Frequenz
         long currentTime = System.currentTimeMillis();
@@ -77,6 +103,8 @@ public class Dopplereffect extends BasicGameState {
             waves.add(wave);
             lastWaveTime = currentTime;
         }
+
+
 
         // welle bleibt auf krankenwagen
         Iterator<Wave> waveIterator = waves.iterator();
@@ -113,11 +141,11 @@ public class Dopplereffect extends BasicGameState {
         } else if (key == Input.KEY_4) {
             setSpeed(4); // schnell
         } else if (key == Input.KEY_5) {
-        setSpeed(5); // Schallgeschwindigkeit
+            setSpeed(5); // Schallgeschwindigkeit
+        }
     }
+        public void setSpeed ( int newSpeed){
+            this.speed = newSpeed;
+        }
     }
 
-    public void setSpeed(int newSpeed) {
-        this.speed = newSpeed;
-    }
-}

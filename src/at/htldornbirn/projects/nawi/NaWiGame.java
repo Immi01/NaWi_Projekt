@@ -4,10 +4,14 @@ import at.htldornbirn.projects.nawi.Team3.StopingDistance;
 import at.htldornbirn.projects.nawi.Team4.Substanzensimulator.Substanzensimulator;
 import at.htldornbirn.projects.nawi.Team5.Dopplereffect;
 import at.htldornbirn.projects.nawi.Team6.sinefunction.Explanation;
+import at.htldornbirn.projects.nawi.Team6.sinefunction.Interference;
+import at.htldornbirn.projects.nawi.Team6.sinefunction.SetupSineFunction;
+import at.htldornbirn.projects.nawi.Team6.sinefunction.SineFunctionSandBox;
 import at.htldornbirn.projects.nawi.Team8.Sandbox;
 import at.htldornbirn.projects.nawi.navigation.Navigation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.ScalableGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -24,6 +28,8 @@ public class NaWiGame extends StateBasedGame {
         addState(new StopingDistance());
         addState(new Substanzensimulator("Substanzensimulator"));
         addState(new Explanation());
+        addState(new SineFunctionSandBox());
+        addState(new Interference());
         addState(new Sandbox());
 
 

@@ -63,7 +63,7 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.update(delta);
         }
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            ChangeState(stateBasedGame);
+            ChangeState(stateBasedGame,gameContainer);
         }
 
 
@@ -74,7 +74,8 @@ public class Navigation extends BasicGameState implements SliderListener {
         System.out.println(mouseY);
     }
 
-    public void ChangeState(StateBasedGame stateBasedGame) {
+    public void ChangeState(StateBasedGame stateBasedGame,GameContainer gameContainer) throws SlickException {
+        AppGameContainer gc = (AppGameContainer) gameContainer;
         mouseX = Mouse.getX();
         mouseY = (Mouse.getY() - 600) * -1;
         for (int i = 0; i < actors.size(); i++) {
@@ -82,7 +83,17 @@ public class Navigation extends BasicGameState implements SliderListener {
             ObjY = actors.get(i).getY();
             if ((mouseX >= ObjX && mouseX < ObjX + 60) && (mouseY >= ObjY && mouseY < ObjY + 60)) {
                 //System.out.println(map.get(i));
+
+
+                switch (i+1){
+                    case 2:
+                        gc.setDisplayMode(1500,800, false);
+                    case 6:
+                        gc.setDisplayMode(1280, 960, false);
+                }
                 stateBasedGame.enterState(map.get(i));
+
+
                 return;
             }
         }

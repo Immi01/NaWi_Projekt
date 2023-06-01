@@ -3,6 +3,7 @@ package at.htldornbirn.projects.nawi.Team8;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+
 public class ValueButton implements Actor{
     private float speedButtonX;
     private float speedButtonY;
@@ -26,6 +27,7 @@ public class ValueButton implements Actor{
     public void update(GameContainer gameContainer, int delta) {
 
     }
+
 
     public String getValue() {
         return value;

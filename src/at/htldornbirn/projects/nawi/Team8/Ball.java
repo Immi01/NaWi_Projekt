@@ -11,13 +11,15 @@ public class Ball implements Actor{
     private float centerY;
     private float radius;
     private float angle;
-    private float speedButton;
+    private Button speedButton;
 
     public Ball(float centerX, float centerY, float radius) {
         this.centerX = centerX;
         this.centerY = centerY;
         this.radius = radius;
         this.angle = 0;
+        float speedButtonY = 0;
+        float speedButtonX = 0;
     }
 
     @Override
@@ -29,8 +31,5 @@ public class Ball implements Actor{
     @Override
     public void update(GameContainer gameContainer, int delta) {
 
-        angle += (delta / 1000.0f) * speedButton.getValue();
-        float x = centerX + (float) Math.cos(angle) * radius;
-        float y = centerY + (float) Math.sin(angle) * radius;
     }
 }

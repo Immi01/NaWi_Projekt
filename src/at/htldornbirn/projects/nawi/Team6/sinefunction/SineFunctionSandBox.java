@@ -75,7 +75,7 @@ public class SineFunctionSandBox extends BasicGameState {
         double currentDisplacementX = this.sineFunction1.getSineComponents().get(0).getDisplacementX() / Math.PI;
         String currentDisplacementXFormatted = decimalFormat.format(currentDisplacementX);
 
-        String stringDisplacementX = "Displacement x Axes: ";
+        String stringDisplacementX = "Phase difference: ";
         float widthXLabel = graphics.getFont().getWidth(stringDisplacementX);
         String stringDisplacementY = "Displacement y Axes: ";
         float widthYLabel = graphics.getFont().getWidth(stringDisplacementX);

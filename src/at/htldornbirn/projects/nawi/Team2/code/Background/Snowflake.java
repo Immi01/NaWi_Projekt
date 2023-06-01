@@ -18,7 +18,7 @@ public class Snowflake implements Actor{
         this.x = x;
         this.y = y;
         this.speed = speed;
-        image = new Image("C:\\Users\\Luca\\Documents\\3. Klasse\\SWP\\NaWi_Projekt\\src\\at\\htldornbirn\\projects\\nawi\\Team2\\code\\Background\\snowflake.png");
+        image = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/snowflake.png");
 
     }
 

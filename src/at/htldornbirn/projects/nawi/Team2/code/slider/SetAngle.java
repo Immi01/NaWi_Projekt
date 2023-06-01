@@ -6,11 +6,17 @@ public class SetAngle implements EventListener {
 
     private float sliderValue;
 
+    public SetAngle() {
+        this.sliderValue = 10;
+    }
+
     @Override
-    public void onChange(float mouseY) {
+    public void onChange(float mouseY, float startPositionY) {
         //Berechnet Winkel für die Schiefe Ebene
         //Hier kann individueller Code geschrieben werden der beim bewegen des Sliders ausgeführt wird
-        sliderValue = ((mouseY-200)/20)+10;
+        //(mouseY-startPositionY) mit diesem Ausdruck wird nur der Wert des Sliders ausgegeben
+        //.../20)+10 hiermit wird ein Winkel zwischen 10 und 25 berechnet
+        sliderValue = ((mouseY-startPositionY)/20)+10;
         System.out.println(sliderValue);
     }
 

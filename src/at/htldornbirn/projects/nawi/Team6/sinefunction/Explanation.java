@@ -34,10 +34,10 @@ public class Explanation extends BasicGameState {
         this.actors.add(this.stateButton1);
         this.actors.add(this.stateButton2);
 
-        this.sineFunction1 = new SineFunction(2500, gameContainer.getWidth(), gameContainer.getHeight() - 150, Color.magenta);
+        this.sineFunction1 = new SineFunction(1500, gameContainer.getWidth(), gameContainer.getHeight() - 150, Color.magenta);
         for (SineComponent sineComponent : sineFunction1.getSineComponents()) {
             sineComponent.setAmplitude(50);
-            sineComponent.setAmountOfDurations(20);
+            sineComponent.setAmountOfDurations(10);
         }
     }
 
@@ -75,13 +75,13 @@ public class Explanation extends BasicGameState {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 
-        if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > 50 && posY < 150)) {
+        if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > gameContainer.getHeight() - (stateButton1.getY() + stateButton1.getHeight()) && posY < gameContainer.getHeight() - stateButton1.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 stateBasedGame.enterState(2);
             }
         }
 
-        if ((posX > this.stateButton2.getX() && posX < this.stateButton2.getX() + this.stateButton2.getWidth()) && (posY > 50 && posY < 150)) {
+        if ((posX > this.stateButton2.getX() && posX < this.stateButton2.getX() + this.stateButton2.getWidth()) && (posY > gameContainer.getHeight() - (stateButton2.getY() + stateButton2.getHeight()) && posY < gameContainer.getHeight() - stateButton2.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 stateBasedGame.enterState(4);
             }

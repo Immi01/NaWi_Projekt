@@ -1,4 +1,4 @@
-package at.htldornbirn.projects.nawi.Team6;
+package at.htldornbirn.projects.nawi.Team8;
 
 import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.GameContainer;
@@ -7,10 +7,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class SinusFunction extends BasicGameState {
+public class Sandbox extends BasicGameState {
     @Override
     public int getID() {
-        return Constants.SINUS_FUNKTION_GAME;
+        return Constants.TEAM8;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class SinusFunction extends BasicGameState {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.drawRect(50,50,50,50);
+
     }
 
     @Override

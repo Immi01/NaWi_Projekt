@@ -23,7 +23,6 @@ public class NaWiGame extends StateBasedGame {
         addState(new StopingDistance());
         addState(new StopingDistance());
         addState(new Substanzensimulator("Substanzensimulator"));
-        addState(new Dopplereffect());
         addState(new Explanation());
         addState(new Sandbox());
 

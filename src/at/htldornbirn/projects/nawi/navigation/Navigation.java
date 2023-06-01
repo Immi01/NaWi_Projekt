@@ -14,6 +14,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.*;
 
+import static at.htldornbirn.projects.nawi.Constants.TEAMS;
+
 public class Navigation extends BasicGameState implements SliderListener {
     @Override
     public int getID() {
@@ -37,34 +39,7 @@ public class Navigation extends BasicGameState implements SliderListener {
         input = gameContainer.getInput();
         this.actors = new ArrayList<>();
         map = new Hashtable<Integer, Integer>();
-        Team team1 = new Team(75, 100, 60);
-        Team team2 = new Team(225, 100, 60);
-        Team team3 = new Team(375, 100, 60);
-        Team team4 = new Team(525, 100, 60);
-        Team team5 = new Team(675, 100, 60);
-        Team team6 = new Team(150, 300, 60);
-        Team team7 = new Team(300, 300, 60);
-        Team team8 = new Team(450, 300, 60);
-        Team team9 = new Team(600, 300, 60);
-        actors.add(team1);
-        actors.add(team2);
-        actors.add(team3);
-        actors.add(team4);
-        actors.add(team5);
-        actors.add(team6);
-        actors.add(team7);
-        actors.add(team8);
-        actors.add(team9);
-        map.put(0, Constants.TEAM1);
-        map.put(1, Constants.TEAM2);
-        map.put(2, Constants.TEAM3);
-        map.put(3, Constants.TEAM4);
-        map.put(4, Constants.TEAM5);
-        map.put(5, Constants.TEAM6);
-        map.put(6, Constants.TEAM7);
-        map.put(7, Constants.TEAM8);
-        map.put(8, Constants.TEAM9);
-
+        createTeams();
 
         image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
         scaled = image.getScaledCopy(59,59);
@@ -124,6 +99,23 @@ public class Navigation extends BasicGameState implements SliderListener {
         }
         System.out.println("no OBJ clicked");
     }
+
+    public void createTeams() {
+        int y = 100;
+        int x = 75;
+        for (int i = 0; i < 9; i++) {
+            Team team = new Team(x, y, 60);
+            actors.add(team);
+            map.put(i,TEAMS[i]);
+
+            if (x == 675) {
+                x = 0;
+                y = 300;
+            }
+            x += 150;
+        }
+    }
+
 }
 
 

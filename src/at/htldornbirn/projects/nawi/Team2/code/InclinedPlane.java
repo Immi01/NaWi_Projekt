@@ -40,6 +40,14 @@ public class InclinedPlane extends BasicGameState {
     private float angleSled;
     private float speedSled;
 
+    private Image buttonImage;
+    private Image pictureImage;
+    private boolean showPicture;
+    private int buttonX;
+    private int buttonY;
+    private int pictureX;
+    private int pictureY;
+
 
     @Override
     public int getID() {
@@ -87,6 +95,15 @@ public class InclinedPlane extends BasicGameState {
         this.writing = new TrueTypeFont(writing, true);
 
         slider.addListener(setAngle);
+
+        buttonImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/infoImage.png");
+        pictureImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/animationImage.png");
+        showPicture = false;
+
+        buttonX = 1430;
+        buttonY = 20;
+        pictureX = 1230;
+        pictureY = 100;
     }
 
     @Override
@@ -116,6 +133,13 @@ public class InclinedPlane extends BasicGameState {
         graphics.setColor(Color.black);
         graphics.setFont(headlineFont);
         graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-headlineFont.getWidth("Schiefe Ebene")/2, 20);
+
+        Image scaledButton = buttonImage.getScaledCopy(0.1f);
+        scaledButton.draw(buttonX, buttonY);
+        if (showPicture) {
+            Image scaledExplination = pictureImage.getScaledCopy(0.35f);
+            scaledExplination.draw(pictureX, pictureY);
+        }
     }
 
     @Override
@@ -141,6 +165,18 @@ public class InclinedPlane extends BasicGameState {
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
+
+        buttonImage.draw(buttonX, buttonY);
+        pictureImage.draw(buttonX, buttonY);
+        Input input = gameContainer.getInput();
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            int mouseX = input.getMouseX();
+            int mouseY = input.getMouseY();
+            if (mouseX >= buttonX && mouseX <= buttonX + buttonImage.getWidth()
+                    && mouseY >= buttonY && mouseY <= buttonY + buttonImage.getHeight()) {
+                showPicture = !showPicture;
+            }
+        }
 
     }
 

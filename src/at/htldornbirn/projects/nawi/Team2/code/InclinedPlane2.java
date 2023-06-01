@@ -9,8 +9,7 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import java.util.Random;
-
-
+import org.newdawn.slick.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,14 @@ public class InclinedPlane2 extends  BasicGameState{
     private Image backgroundImage;
 
     private TrueTypeFont font;
+
+    private Image buttonImage;
+    private Image pictureImage;
+    private boolean showPicture;
+    private int buttonX;
+    private int buttonY;
+    private int pictureX;
+    private int pictureY;
 
 
     private List<Actor> actors;
@@ -73,10 +80,21 @@ public class InclinedPlane2 extends  BasicGameState{
 
         this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30);
 
+
         java.awt.Font awtFont = new java.awt.Font("Arial", java.awt.Font.BOLD, 32);
         font = new TrueTypeFont(awtFont, true);
 
         slider.addListener(setAngle);
+
+        buttonImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/infoImage.png");
+        pictureImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/animationImage.png");
+        showPicture = false;
+
+        buttonX = 1400;
+        buttonY = 20;
+        pictureX = 1230;
+        pictureY = 100;
+
     }
 
     @Override
@@ -95,6 +113,7 @@ public class InclinedPlane2 extends  BasicGameState{
 
 
 
+
         graphics.setColor(Color.white);
 
         graphics.setLineWidth(5.0f);
@@ -108,9 +127,20 @@ public class InclinedPlane2 extends  BasicGameState{
         calculateButton.render(gameContainer, graphics);
 
 
+
+
         graphics.setColor(Color.black);
         graphics.setFont(font);
         graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-font.getWidth("Schiefe Ebene")/2, 20);
+
+        Image scaledButton = buttonImage.getScaledCopy(0.1f);
+        scaledButton.draw(buttonX, buttonY);
+        if (showPicture) {
+            Image scaledExplination = pictureImage.getScaledCopy(0.35f);
+            scaledExplination.draw(pictureX, pictureY);
+        }
+
+
     }
 
     @Override
@@ -130,6 +160,18 @@ public class InclinedPlane2 extends  BasicGameState{
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
+
+        buttonImage.draw(buttonX, buttonY);
+        pictureImage.draw(buttonX, buttonY);
+        Input input = gameContainer.getInput();
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            int mouseX = input.getMouseX();
+            int mouseY = input.getMouseY();
+            if (mouseX >= buttonX && mouseX <= buttonX + buttonImage.getWidth()
+                    && mouseY >= buttonY && mouseY <= buttonY + buttonImage.getHeight()) {
+                showPicture = !showPicture;
+            }
+        }
 
     }
 

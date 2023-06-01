@@ -15,6 +15,8 @@ public class Explanation extends BasicGameState {
     private Button stateButton2;
     private SineFunction sineFunction1;
     private AngelCodeFont font;
+    private static final int WIDTH = 1280;
+    private static final int HEIGHT = 960;
 
     public int getID() {
         return Constants.TEAM6;
@@ -25,16 +27,16 @@ public class Explanation extends BasicGameState {
         font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
         this.actors = new ArrayList<>();
 
-        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 250, 100, "Go to sandbox", Color.yellow);
-        this.stateButton1.setX((float) gameContainer.getWidth() / 2 - this.stateButton1.getWidth() / 2);
-        this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
-        this.stateButton2 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 300, 100, "Go to bouncing ball", Color.white);
-        this.stateButton2.setX((float) gameContainer.getWidth() * 8 / 10 - this.stateButton1.getWidth() / 2);
-        this.stateButton2.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.stateButton1 = new Button((float) WIDTH / 2, HEIGHT, 250, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1.setX((float) WIDTH / 2 - this.stateButton1.getWidth() / 2);
+        this.stateButton1.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.stateButton2 = new Button((float) WIDTH / 2, HEIGHT, 300, 100, "Go to bouncing ball", Color.white);
+        this.stateButton2.setX((float) WIDTH * 8 / 10 - this.stateButton1.getWidth() / 2);
+        this.stateButton2.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(this.stateButton1);
         this.actors.add(this.stateButton2);
 
-        this.sineFunction1 = new SineFunction(1500, gameContainer.getWidth(), gameContainer.getHeight() - 150, Color.magenta);
+        this.sineFunction1 = new SineFunction(1500, WIDTH, HEIGHT * 9 / 10, Color.magenta);
         for (SineComponent sineComponent : sineFunction1.getSineComponents()) {
             sineComponent.setAmplitude(50);
             sineComponent.setAmountOfDurations(10);
@@ -77,13 +79,13 @@ public class Explanation extends BasicGameState {
 
         if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > gameContainer.getHeight() - (stateButton1.getY() + stateButton1.getHeight()) && posY < gameContainer.getHeight() - stateButton1.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                stateBasedGame.enterState(2);
+                stateBasedGame.enterState(62);
             }
         }
 
         if ((posX > this.stateButton2.getX() && posX < this.stateButton2.getX() + this.stateButton2.getWidth()) && (posY > gameContainer.getHeight() - (stateButton2.getY() + stateButton2.getHeight()) && posY < gameContainer.getHeight() - stateButton2.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                stateBasedGame.enterState(4);
+                stateBasedGame.enterState(64);
             }
         }
 

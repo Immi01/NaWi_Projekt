@@ -36,7 +36,7 @@ public class NaWiGame extends StateBasedGame {
 
     }
     public static void main(String[] args) throws SlickException {
-        AppGameContainer container = new AppGameContainer(new ScalableGame(new NaWiGame("NaWi Portal"),800,600));
+        AppGameContainer container = new AppGameContainer(new NaWiGame("NaWi Portal"));
         container.setDisplayMode(800,600,false);
         container.start();
     }

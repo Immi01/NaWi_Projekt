@@ -27,7 +27,7 @@ public class GravitySimulation extends BasicGameState {
 
     @Override
     public int getID() {
-        return 4;
+        return 64;
     }
 
     public void init(GameContainer gc, StateBasedGame sb) throws SlickException {

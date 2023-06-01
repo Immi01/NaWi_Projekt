@@ -88,6 +88,8 @@ public class InclinedPlane extends BasicGameState {
         this.inputFieldWeight = new InputField("", 100, 100,false, "Gewicht in kg: ");
         this.inputFieldDistance = new InputField("", 300, 100,false, "Strecke in m: ");
 
+        Font writing = new Font("Arial", Font.BOLD, 18);
+        this.writing = new TrueTypeFont(writing, true);
         int buttonStringWidth = this.writing.getWidth(this.calculateButtonName);
         int buttonStringHeight = this.writing.getHeight(this.calculateButtonName);
 
@@ -95,10 +97,6 @@ public class InclinedPlane extends BasicGameState {
 
         Font headline = new Font("Arial", Font.BOLD, 42);
         headlineFont = new TrueTypeFont(headline, true);
-
-        Font writing = new Font("Arial", Font.BOLD, 18);
-        this.writing = new TrueTypeFont(writing, true);
-
 
         slider.addListener(setAngle);
 

@@ -20,12 +20,20 @@ public class InclinedPlane2 extends  BasicGameState{
     private InputField inputFieldWeight;
     private InputField inputFieldDistance;
     private CalculateButton calculateButton;
+    private Sled sled;
 
     private SetAngle setAngle = new SetAngle();
 
     private Image backgroundImage;
+    private TrueTypeFont headlineFont;
+    private TrueTypeFont writing;
 
-    private TrueTypeFont font;
+    private boolean calculateButtonPushed;
+
+
+    private List<Actor> actors;
+    private float angleSled;
+    private float speedSled;
 
     private Image buttonImage;
     private Image pictureImage;
@@ -35,14 +43,7 @@ public class InclinedPlane2 extends  BasicGameState{
     private int pictureX;
     private int pictureY;
 
-
-    private List<Actor> actors;
-    private Rectangle rectangle;
-    private float angle;
-    private float speed;
-    private float getX;
-    private float getY;
-    private boolean isMoving;
+    private String calculateButtonName;
 
 
     @Override
@@ -52,25 +53,29 @@ public class InclinedPlane2 extends  BasicGameState{
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+
         this.actors = new ArrayList<>();
         Random random = new Random();
 
-        getX = 100;
-        getY = 700;
-        isMoving = true;
-        rectangle = new Rectangle(getX, getY, 150, 50);
-        angle = 135.0f;
-        speed = 5.0f;
 
+        for (int i = 0; i <1; i++) {
+            Background background = new Background();
+            this.actors.add(background);
+        }
 
         for (int i = 0; i <100; i++) {
-            Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(50));
+            Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(30)+10);
             this.actors.add(snowflake);
         }
 
+        this.calculateButtonName = "Calculate";
+        this.speedSled = 5.0f;
+        this.angleSled = setAngle.getSliderValue()*-1;
+        sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
 
 
-        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/backgoundimage.png");
+
+        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/background3.jpg");
 
         this.triangle = new Triangle();
 
@@ -78,11 +83,15 @@ public class InclinedPlane2 extends  BasicGameState{
         this.inputFieldWeight = new InputField("", 100, 100,false, "Gewicht in kg: ");
         this.inputFieldDistance = new InputField("", 300, 100,false, "Strecke in m: ");
 
-        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30);
+        java.awt.Font writing = new java.awt.Font("Arial", java.awt.Font.BOLD, 18);
+        this.writing = new TrueTypeFont(writing, true);
+        int buttonStringWidth = this.writing.getWidth(this.calculateButtonName);
+        int buttonStringHeight = this.writing.getHeight(this.calculateButtonName);
 
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30, this.calculateButtonName, buttonStringWidth, buttonStringHeight);
 
-        java.awt.Font awtFont = new java.awt.Font("Arial", java.awt.Font.BOLD, 32);
-        font = new TrueTypeFont(awtFont, true);
+        java.awt.Font headline = new java.awt.Font("Arial", java.awt.Font.BOLD, 42);
+        headlineFont = new TrueTypeFont(headline, true);
 
         slider.addListener(setAngle);
 
@@ -90,11 +99,10 @@ public class InclinedPlane2 extends  BasicGameState{
         pictureImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/animationImage.png");
         showPicture = false;
 
-        buttonX = 1400;
+        buttonX = 1430;
         buttonY = 20;
         pictureX = 1230;
         pictureY = 100;
-
     }
 
     @Override
@@ -103,16 +111,11 @@ public class InclinedPlane2 extends  BasicGameState{
 
         for (Actor actors:this.actors){
             actors.render(graphics);
-
             graphics.setColor(Color.white);
-            graphics.pushTransform();
-            graphics.rotate(rectangle.getCenterX(), rectangle.getCenterY(), angle);
-            graphics.fillRect(getX, getY, 150, 50);
-            graphics.popTransform();
         }
+        graphics.setFont(writing);
 
-
-
+        sled.render(gameContainer, graphics);
 
         graphics.setColor(Color.white);
 
@@ -126,12 +129,9 @@ public class InclinedPlane2 extends  BasicGameState{
 
         calculateButton.render(gameContainer, graphics);
 
-
-
-
         graphics.setColor(Color.black);
-        graphics.setFont(font);
-        graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-font.getWidth("Schiefe Ebene")/2, 20);
+        graphics.setFont(headlineFont);
+        graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-headlineFont.getWidth("Schiefe Ebene")/2, 20);
 
         Image scaledButton = buttonImage.getScaledCopy(0.1f);
         scaledButton.draw(buttonX, buttonY);
@@ -139,24 +139,27 @@ public class InclinedPlane2 extends  BasicGameState{
             Image scaledExplination = pictureImage.getScaledCopy(0.35f);
             scaledExplination.draw(pictureX, pictureY);
         }
-
-
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        if (sled.isAtBottom()){
+            calculateButton.setPushed(false);
+            sled.setAtBottom(false);
+        }
+        this.angleSled = setAngle.getSliderValue()*-1;
+        sled.update(gameContainer, this.angleSled, delta, this.speedSled, calculateButton.isPushed(),calculateButton.getCalculations().getA());
 
         for (Actor actors : this.actors) {
             actors.update(delta);
         }
-        if (getY > 200){
-            getX -= (float)delta/this.speed;
-        }else{
-            this.speed = 0;
-        }
+
+        this.calculateButtonPushed = calculateButton.isPushed();
+        //System.out.println(calculateButtonPushed);
 
 
-        slider.update(gameContainer, setAngle.getSliderValue(), false);
+
+        slider.update(gameContainer, setAngle.getSliderValue(), calculateButtonPushed);
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
@@ -176,11 +179,11 @@ public class InclinedPlane2 extends  BasicGameState{
     }
 
     public void keyPressed(int key, char c) {
-        if (key == Input.KEY_BACK){
+        if (key == Input.KEY_BACK && calculateButtonPushed != true){
             this.inputFieldWeight.back();
             this.inputFieldDistance.back();
         }else{
-            if (Character.isDigit(c)) {
+            if (Character.isDigit(c) && calculateButtonPushed != true) {
                 this.inputFieldWeight.append(Character.toString(c));
                 this.inputFieldDistance.append(Character.toString(c));
             }
@@ -190,7 +193,7 @@ public class InclinedPlane2 extends  BasicGameState{
     public void mousePressed(int button, int x, int y) {
 
         if (x >= this.inputFieldWeight.getX() && x <= this.inputFieldWeight.getX() + this.inputFieldWeight.getRectWidth()
-                && y >= this.inputFieldWeight.getY() && y <= this.inputFieldWeight.getY() + this.inputFieldWeight.getRectHeight()) {
+                && y >= this.inputFieldWeight.getY() && y <= this.inputFieldWeight.getY() + this.inputFieldWeight.getRectHeight()&& calculateButtonPushed != true) {
             this.inputFieldWeight.setHasFocus(true);
         } else {
             this.inputFieldWeight.setHasFocus(false);
@@ -198,7 +201,7 @@ public class InclinedPlane2 extends  BasicGameState{
 
 
         if (x >= this.inputFieldDistance.getX() && x <= this.inputFieldDistance.getX() + this.inputFieldDistance.getRectWidth()
-                && y >= this.inputFieldDistance.getY() && y <= this.inputFieldDistance.getY() + this.inputFieldDistance.getRectHeight()) {
+                && y >= this.inputFieldDistance.getY() && y <= this.inputFieldDistance.getY() + this.inputFieldDistance.getRectHeight() && calculateButtonPushed != true) {
             this.inputFieldDistance.setHasFocus(true);
         } else {
             this.inputFieldDistance.setHasFocus(false);

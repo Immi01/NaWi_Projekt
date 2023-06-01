@@ -24,6 +24,8 @@ public class Dopplereffect extends BasicGameState {
     private List<Wave> waves;
     private boolean paused;
     private float nextWaveDelay = 1; // Standardwert von 1 Sekunde, sonst Wellenabstand broken
+    private float xMenu;
+    private float yMenu;
 
 
     @Override
@@ -41,6 +43,8 @@ public class Dopplereffect extends BasicGameState {
         this.lastWaveTime = 0;
         this.waves = new ArrayList<>();
         this.paused = false;
+        this.xMenu = 0;
+        this.yMenu = 0;
 
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
         this.background = new Image("at/htldornbirn/projects/nawi/Team5/res/City2.png");
@@ -113,12 +117,12 @@ public class Dopplereffect extends BasicGameState {
         } else if (key == Input.KEY_4) {
             setSpeed(4); // schnell
         } else if (key == Input.KEY_5) {
-        setSpeed(5); // Schallgeschwindigkeit
-    }
+            setSpeed(5); // Schallgeschwindigkeit
+        }
     }
 
     public void setSpeed(int newSpeed) {
-        this.speed = newSpeed;
+        this.speed += this.speed;
     }
 
 }

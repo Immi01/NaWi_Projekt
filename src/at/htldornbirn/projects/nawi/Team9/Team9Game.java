@@ -15,7 +15,8 @@ public class Team9Game extends BasicGameState {
     private Calculations calculations;
     private ItemList itemList;
     private Horse horse;
-    private Box box;
+    private Rope ropeUp;
+    private Button startButton;
 
 
     @Override
@@ -30,6 +31,8 @@ public class Team9Game extends BasicGameState {
         itemList = new ItemList(this);
         actors = new ArrayList<Actor>();
         horse = new Horse(800, 450, 1, 1,100,50);
+        ropeUp = new Rope();
+        startButton = new Button(1300, 400, 200, 50, "Start");
 
         //Ground
         GroundSkyNew groundimagel = new GroundSkyNew();
@@ -41,6 +44,7 @@ public class Team9Game extends BasicGameState {
         //Adding all actors necessary
         this.actors.add(itemList);
         this.actors.add(horse);
+        this.actors.add(ropeUp);
     }
 
     @Override
@@ -51,6 +55,7 @@ public class Team9Game extends BasicGameState {
         }
         inputFieldRN.draw(graphics);
         horse.render(graphics);
+        startButton.render(graphics);
 
     }
 
@@ -65,6 +70,7 @@ public class Team9Game extends BasicGameState {
         for (Actor actor : this.actors) {
             actor.update(delta);
         }
+        startButton.update(gameContainer.getInput(), stateBasedGame, delta);
     }
 
     @Override

@@ -58,7 +58,6 @@ public class Button {
                 isPressed = true;
             } else {
                 if (isPressed) {
-                    // Button is clicked, perform actions here
                     System.out.println("Button clicked!");
                 }
                 isPressed = false;
@@ -72,5 +71,9 @@ public class Button {
         // You can modify this method to change the default font of the button
         // Example:
         return new TrueTypeFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 16), true);
+    }
+
+    public boolean isPressed() {
+        return isPressed;
     }
 }

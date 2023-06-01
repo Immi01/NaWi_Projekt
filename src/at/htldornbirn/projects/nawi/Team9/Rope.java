@@ -6,15 +6,15 @@ import org.newdawn.slick.SlickException;
 
 public class Rope implements Actor{
     private float x1;
-    private float y1;
+    private float y1 = 700;
     private float x2;
     private float y2;
+    private float speed = 10;
+    private Team9Game team9Game;
+    private boolean moving;
 
-    public Rope() {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
+    public Rope(Team9Game game) {
+        this.team9Game = game;
     }
 
     @Override
@@ -26,8 +26,16 @@ public class Rope implements Actor{
     @Override
     public void update(int delta) {
         x1 = 750;
-        y1 = 300;
         x2 = 750;
-        y2 = 700;
+        y2 = 300;
+        if (team9Game.getStartButton().isPressed()){
+            this.moving = true;
+        }
+            else if (moving &&y1 >= 400){
+            y1 -= (float)delta/speed;
+        }
+            else if (moving){
+                moving = false;
+        }
     }
 }

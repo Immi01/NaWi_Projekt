@@ -8,22 +8,19 @@ public class Box implements Actor {
 
     private Image box;
     private float x = 700;
-    private float y = 700;
-    private float speed = 1;
+    private float y = 695;
+    private float speed = 10;
     private float width;
     private float height;
-    private boolean goingUp;
+    private boolean moving;
+    private Team9Game team9Game;
 
-    public Box(float x, float y, float width, float height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
 
-    public Box() throws SlickException {
+
+    public Box(Team9Game game) throws SlickException {
         Image boxy = new Image("src/at/htldornbirn/projects/nawi/Team9/images/box.jpg");
         this.box = boxy.getScaledCopy(100, 100);
+        this.team9Game = game;
     }
 
     @Override
@@ -33,17 +30,14 @@ public class Box implements Actor {
 
     @Override
     public void update(int delta) {
-
-        if (goingUp && this.y > 500) {
-            this.y -= (float) delta / this.speed;
+        if (team9Game.getStartButton().isPressed()){
+            this.moving = true;
         }
-        else if (goingUp){
-            goingUp = false;
+        else if (moving &&y >= 395){
+            y -= (float)delta/speed;
         }
-        else  if (!goingUp && this.y < 700)
-            this.y += (float) delta / this.speed;
-        else if(!goingUp){
-            goingUp = true;
+        else if (moving){
+            moving = false;
         }
     }
 }

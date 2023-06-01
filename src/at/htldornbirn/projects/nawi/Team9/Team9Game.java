@@ -31,7 +31,9 @@ public class Team9Game extends BasicGameState {
         itemList = new ItemList(this);
         actors = new ArrayList<Actor>();
         horse = new Horse(800, 450, 1, 1,100,50);
-        ropeUp = new Rope();
+        // Rope
+        ropeUp = new Rope(this);
+        //Button
         startButton = new Button(1300, 400, 200, 50, "Start");
 
         //Ground
@@ -39,7 +41,7 @@ public class Team9Game extends BasicGameState {
         actors.add(groundimagel);
 
         //box
-        Box box1 = new Box();
+        Box box1 = new Box(this);
         this.actors.add(box1);
         //Adding all actors necessary
         this.actors.add(itemList);
@@ -96,6 +98,10 @@ public class Team9Game extends BasicGameState {
         } else {
             inputFieldRN.setSelected(false);
         }
+    }
+
+    public Button getStartButton() {
+        return startButton;
     }
 
     public InputFieldRN getInputFieldRN() {

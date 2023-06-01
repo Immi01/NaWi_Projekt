@@ -31,8 +31,9 @@ public class Sandbox extends BasicGameState {
     //private BackgroundImage backgroundImage;
     //private List<BackgroundImage> backgroundImageList;
     private List<ProjectActor> projectActors;
-    private Image MercuryImage;
-
+    //private Image MercuryImage;
+    private PlayButton playButton;
+    private List<PlayButton> playButtons;
 
 
     @Override
@@ -46,6 +47,7 @@ public class Sandbox extends BasicGameState {
         this.locationButtons = new ArrayList<>();
         this.definitionBoxesList = new ArrayList<>();
         this.projectActors = new ArrayList<>();
+        this.playButtons = new ArrayList<>();
     }
 
     @Override
@@ -103,6 +105,9 @@ public class Sandbox extends BasicGameState {
             this.bY += 100;
         }
 
+        playButton = new PlayButton(this.customBall.getX(), this.locationButton.getY(), 40, 100, Color.blue, "Game start");
+        this.playButtons.add(playButton);
+
         table = new Table(200, 200, 150, 30);
         ball = new Ball(0, 0, 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
 
@@ -132,11 +137,7 @@ public class Sandbox extends BasicGameState {
 
         table.render(graphics);
         ball.render(graphics);
-
-        /*for (int i = 0; i < 1; i++) {
-            backgroundImage = new BackgroundImage();
-            this.projectActors.add(backgroundImage);
-        }*/
+        playButton.render(graphics);
 
         //MercuryImage.draw(0,0);
 
@@ -166,12 +167,23 @@ public class Sandbox extends BasicGameState {
                     this.BallWeight = customBall.getWeight();
                     //System.out.println(this.BallRadius + ";" + this.BallWeight);
                     System.out.println(this.ball.getRadius() + ";" + this.ball.getWeight() + ";" + this.ball.getGforce());
-
                 }
             }
         }
-        ball = new Ball(0, 899-this.table.getHigh()-this.table.getWidth()-this.ball.getRadius(), 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
+
+        for (PlayButton playButton: this.playButtons) {
+            Input input = gameContainer.getInput();
+            int mouseY = input.getMouseY();
+            int mouseX = input.getMouseX();
+            if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                if (mouseY > playButton.getY() && mouseY < playButton.getY() + playButton.getHeight() && mouseX > playButton.getX() && mouseX < playButton.getX() + playButton.getWidth()) {
+                    System.out.println("hello");
+                    stateBasedGame.enterState(6);
+                }
+            }
         }
+        ball = new Ball(0, 899 - this.table.getHigh() - this.table.getWidth() - this.ball.getRadius(), 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
     }
+}
 
 

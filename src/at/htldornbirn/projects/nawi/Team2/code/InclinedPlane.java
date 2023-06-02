@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class InclinedPlane extends BasicGameState {
 
@@ -33,6 +34,7 @@ public class InclinedPlane extends BasicGameState {
     private Image backgroundImage;
     private TrueTypeFont headlineFont;
     private TrueTypeFont writing;
+    private TrueTypeFont errorMessage;
 
     private boolean calculateButtonPushed;
 
@@ -99,6 +101,9 @@ public class InclinedPlane extends BasicGameState {
         Font headline = new Font("Arial", Font.BOLD, 42);
         headlineFont = new TrueTypeFont(headline, true);
 
+        Font errorMessageFont = new Font("Arial", Font.BOLD, 30);
+        this.errorMessage = new TrueTypeFont(errorMessageFont, true);
+
         slider.addListener(setAngle);
 
         buttonImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/infoImage.png");
@@ -133,7 +138,7 @@ public class InclinedPlane extends BasicGameState {
         inputFieldWeight.render(graphics);
         inputFieldDistance.render(graphics);
 
-        calculateButton.render(gameContainer, graphics);
+        calculateButton.render(gameContainer, graphics, this.errorMessage, this.writing);
 
         graphics.setColor(Color.black);
         graphics.setFont(headlineFont);

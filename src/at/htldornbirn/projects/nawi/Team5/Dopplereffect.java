@@ -35,6 +35,8 @@ public class Dopplereffect extends BasicGameState {
     private long enterZoneTime;
     Music music;
     private float pitch = 1;
+    private float xMenu;
+    private float xString;
 
 
     @Override
@@ -54,6 +56,8 @@ public class Dopplereffect extends BasicGameState {
         this.paused = false;
         this.xPerson = 800;
         this.yPerson = 550;
+        this.xMenu = 0;
+        this.xString = 50;
 
         music = new Music("/src/at/htldornbirn/projects/nawi/Team5/res/alarm.ogg");
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
@@ -78,6 +82,15 @@ public class Dopplereffect extends BasicGameState {
         g.drawImage(person, xPerson, yPerson);
         g.drawImage(menu, 0, 0);
 
+        g.drawImage(menu, xMenu, 0);
+        g.drawString("Press enter to start game",xString,100);
+        g.drawString("Press 1 to set speed to very slow", xString, 150);
+        g.drawString("Press 2 to set speed to slow", xString, 200);
+        g.drawString("Press 3 to set speed to normal", xString, 250);
+        g.drawString("Press 4 to set speed to fast", xString, 300);
+        g.drawString("Press 5 to set speed to very fast", xString, 350);
+        g.drawString("Press SPACE to STOPP / START the car", xString, 400);
+
 
 
         for (Wave wave : waves) {
@@ -98,7 +111,7 @@ public class Dopplereffect extends BasicGameState {
             this.timerToZero=1000;
         }
 
-            this.x += this.speed;
+        this.x += this.speed;
         //respawner vom Auto
         if (this.x > 1500) {
             this.x = -400;
@@ -164,6 +177,12 @@ public class Dopplereffect extends BasicGameState {
             setSpeed(4); // schnell
         } else if (key == Input.KEY_5) {
             setSpeed(5); // Schallgeschwindigkeit
+        } else if (key == Input.KEY_ENTER) {
+            this.xMenu = 3000;
+            this.xString = 3000;
+            if (this.x == -400) {
+                setSpeed(2);
+            }
         }
     }
 
@@ -171,4 +190,3 @@ public class Dopplereffect extends BasicGameState {
         this.speed = newSpeed;
     }
 }
-

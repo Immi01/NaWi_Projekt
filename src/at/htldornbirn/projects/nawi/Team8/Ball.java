@@ -1,7 +1,5 @@
 package at.htldornbirn.projects.nawi.Team8;
 
-import jdk.internal.icu.util.CodePointMap;
-import jdk.internal.org.objectweb.asm.TypeReference;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

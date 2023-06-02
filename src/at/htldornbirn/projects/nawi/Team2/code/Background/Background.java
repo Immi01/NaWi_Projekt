@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team2.code.Background;
 
+import at.htldornbirn.projects.nawi.navigation.Actor;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -21,11 +22,6 @@ public class Background implements Actor {
     }
 
 
-    @Override
-    public void init(GameContainer gameContainer) throws SlickException {
-
-
-    }
 
     @Override
     public void render(Graphics graphics) {
@@ -38,5 +34,15 @@ public class Background implements Actor {
 
 
 
+    }
+
+    @Override
+    public float getY() {
+        return y;
+    }
+
+    @Override
+    public float getX() {
+        return x;
     }
 }

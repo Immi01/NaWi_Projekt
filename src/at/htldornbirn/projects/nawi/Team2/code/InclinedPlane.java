@@ -4,6 +4,7 @@ import at.htldornbirn.projects.nawi.Team2.code.Background.*;
 import at.htldornbirn.projects.nawi.Team2.code.inputField.InputField;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
+import at.htldornbirn.projects.nawi.navigation.Actor;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -36,7 +37,7 @@ public class InclinedPlane extends BasicGameState {
     private boolean calculateButtonPushed;
 
 
-    private List<Actor> actors;
+    private List<at.htldornbirn.projects.nawi.navigation.Actor> actors;
     private float angleSled;
     private float speedSled;
 
@@ -114,7 +115,7 @@ public class InclinedPlane extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         backgroundImage.draw(0, 0, gameContainer.getWidth(), gameContainer.getHeight());
 
-        for (Actor actors:this.actors){
+        for (at.htldornbirn.projects.nawi.navigation.Actor actors:this.actors){
             actors.render(graphics);
             graphics.setColor(Color.white);
         }

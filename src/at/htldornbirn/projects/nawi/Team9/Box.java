@@ -33,7 +33,7 @@ public class Box implements Actor {
         if (team9Game.getStartButton().isPressed()){
             this.moving = true;
         }
-        else if (moving &&y >= 395){
+        else if (moving &&y >= 545){
             y -= (float)delta/speed;
         }
         else if (moving){

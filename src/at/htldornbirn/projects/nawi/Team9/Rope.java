@@ -27,11 +27,11 @@ public class Rope implements Actor{
     public void update(int delta) {
         x1 = 750;
         x2 = 750;
-        y2 = 300;
+        y2 = 400;
         if (team9Game.getStartButton().isPressed()){
             this.moving = true;
         }
-            else if (moving &&y1 >= 400){
+            else if (moving &&y1 >= 550){
             y1 -= (float)delta/speed;
         }
             else if (moving){

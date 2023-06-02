@@ -9,12 +9,12 @@ public class BackgroundImage implements ProjectActor {
     private Image MercuryImage;
 
     public BackgroundImage() throws SlickException {
-        this.MercuryImage = new Image("backgroundImages/");
+        MercuryImage = new Image("images/backgroundImage1.png");
     }
 
     @Override
     public void render(Graphics graphics) {
-
+        MercuryImage.draw(100,100);
     }
 
     @Override

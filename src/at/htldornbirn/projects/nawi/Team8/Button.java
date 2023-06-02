@@ -17,7 +17,7 @@ public class Button implements Actor {
         this.height = height;
         this.text = text;
         this.color = color;
-        this.font = new AngelCodeFont("C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
+        this.font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
 
     }
 

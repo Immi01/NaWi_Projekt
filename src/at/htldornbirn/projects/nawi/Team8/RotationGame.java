@@ -14,6 +14,7 @@ import java.util.List;
 public class RotationGame extends BasicGameState {
     private List<Actor> actors;
     private Button stateButton1;
+
     /*private ValueButton valueButton1;
     private Ball ball;
     private Button startStopButton;
@@ -22,12 +23,12 @@ public class RotationGame extends BasicGameState {
      */
     private AngelCodeFont font;
 
-    private boolean isRunning;
+    //private boolean isRunning;
 
 
     @Override
     public int getID() {
-        return Constants.TEAM8;
+        return 82;
     }
 
     @Override
@@ -37,10 +38,12 @@ public class RotationGame extends BasicGameState {
         //button für die seiten zu springen
 
 
-        float buttonX = gameContainer.getWidth() / 1.7f - 125;
-        float buttonY = gameContainer.getHeight() * 0.9f - 50;
-        stateButton1 = new Button(buttonX, buttonY, 500, 400, "Go to explanation", Color.green);
+        float buttonX = gameContainer.getWidth() / 3f;
+        float buttonY = gameContainer.getHeight() * 0.6f;
+        this.stateButton1 = new Button(buttonX, buttonY, 400, 300, "Go to explanation", Color.green);
+
         actors.add(stateButton1);
+
 
         //buttons für das einstellen
         /*
@@ -62,14 +65,17 @@ public class RotationGame extends BasicGameState {
         radiusButton = new ValueButton(radiusButtonX, radiusButtonY,"Radius");
 
          */
-        font = new AngelCodeFont("C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "C:/Users/lenov/OneDrive/Dokumente/SWP/Projects/NaWi_Projekt/src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
+        this.font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
 
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+
         font.drawString((float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15, "Sandbox", Color.yellow);
         graphics.setColor(Color.white);
+
+
 
         /*
         ball.render(graphics);
@@ -90,11 +96,15 @@ public class RotationGame extends BasicGameState {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 
-        if (posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth() && (posY > gameContainer.getHeight() - (stateButton1.getY() + stateButton1.getHeight()) && posY < gameContainer.getHeight() - stateButton1.getY())) {
+
+
+        if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > gameContainer.getHeight() - (stateButton1.getY() + stateButton1.getHeight()) && posY < gameContainer.getHeight() - stateButton1.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                stateBasedGame.enterState(3);
+                System.out.println("aaaa");
+                stateBasedGame.enterState(Constants.TEAM8);
             }
         }
+
         /*
         if (isRunning) {
             float speed = Float.parseFloat(speedButton.getValue());

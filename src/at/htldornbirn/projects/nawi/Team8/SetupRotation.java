@@ -18,7 +18,7 @@ public class SetupRotation extends StateBasedGame {
     }
 
     public static void main(String[] args) throws SlickException {
-        AppGameContainer container = new AppGameContainer(new SetupRotation("Rotationk"));
+        AppGameContainer container = new AppGameContainer(new SetupRotation("Rotation+"));
         container.setDisplayMode(1280, 960, false);
         container.start();
     }

@@ -4,6 +4,9 @@ import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Music;
 
 
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ public class Dopplereffect extends BasicGameState {
     private int y;
     private int speed;
     private int savedSpeed;
+    private int timerToZero = 1000;
     private Image ambulance;
     private Image person;
     private Image background;
@@ -28,17 +32,14 @@ public class Dopplereffect extends BasicGameState {
     private int xPerson;
     private int yPerson;
     private long enterZoneTime;
-
-    private int xMenu;
-    private int yMenu;
+    Music music;
+    private float pitch = 1;
 
 
     @Override
     public int getID() {
         return Constants.TEAM5;
     }
-
-
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
@@ -52,22 +53,26 @@ public class Dopplereffect extends BasicGameState {
         this.paused = false;
         this.xPerson = 800;
         this.yPerson = 550;
-        this.xMenu = 0;
-        this.yMenu = 0;
 
-
+        music = new Music("/src/at/htldornbirn/projects/nawi/Team5/res/alarm.ogg");
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
         this.background = new Image("at/htldornbirn/projects/nawi/Team5/res/City2.png");
         this.person = new Image("/src/at/htldornbirn/projects/nawi/Team5/res/Person.png");
+
+    }
+
+    private void playSirene() {
+        pitch += 0;
+
+        music.play(pitch, 1);
+
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
-        g.drawImage(person,xPerson ,yPerson);
-        g.fillRect(this.xMenu, this.yMenu, gameContainer.getWidth(), gameContainer.getHeight());
-        g.drawString("Press ENTER to start",50, 50);
+        g.drawImage(person, xPerson, yPerson);
 
 
         for (Wave wave : waves) {
@@ -76,11 +81,19 @@ public class Dopplereffect extends BasicGameState {
                 g.drawOval(wave.getX() - wave.getSize() / 2, wave.getY() - wave.getSize() / 2, wave.getSize(), wave.getSize());
             }
         }
+
+
     }
 
     @Override
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-        this.x += this.speed;
+    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        this.timerToZero -= delta;
+        if (this.timerToZero <0){
+            playSirene();
+            this.timerToZero=1000;
+        }
+
+            this.x += this.speed;
         //respawner vom Auto
         if (this.x > 1500) {
             this.x = -400;
@@ -93,16 +106,13 @@ public class Dopplereffect extends BasicGameState {
             long currentTime = System.currentTimeMillis();
             long elapsedTime = currentTime - enterZoneTime;
 
-            if (elapsedTime >= 5000) {
+            if (elapsedTime >= 4000) {
                 this.xPerson = gameContainer.getWidth() + 300;
             }
         } else if (this.x == -400) {
             this.xPerson = 800;
             enterZoneTime = 0; // Zurücksetzen des Zeitpunkts, wenn der Rettungswagen den Bereich verlässt
         }
-
-
-
 
 
         // Frequenz
@@ -114,7 +124,6 @@ public class Dopplereffect extends BasicGameState {
         }
 
 
-
         // welle bleibt auf krankenwagen
         Iterator<Wave> waveIterator = waves.iterator();
         while (waveIterator.hasNext()) {
@@ -122,10 +131,9 @@ public class Dopplereffect extends BasicGameState {
             wave.update();
             // despawn von wellen
 
-            if(this.x == -400)
-            {waveIterator.remove();}
-
-            else if (wave.getX() > gameContainer.getWidth() + 100) {
+            if (this.x == -400) {
+                waveIterator.remove();
+            } else if (wave.getX() > gameContainer.getWidth() + 100) {
                 waveIterator.remove();
             }
         }
@@ -151,11 +159,11 @@ public class Dopplereffect extends BasicGameState {
             setSpeed(4); // schnell
         } else if (key == Input.KEY_5) {
             setSpeed(5); // Schallgeschwindigkeit
-        } else if (key == Input.KEY_ENTER) {
-            this.xMenu = 1000;
         }
     }
-        public void setSpeed ( int newSpeed){
-            this.speed = newSpeed;
-        }
+
+    public void setSpeed(int newSpeed) {
+        this.speed = newSpeed;
     }
+}
+

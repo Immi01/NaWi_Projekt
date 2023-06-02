@@ -12,7 +12,7 @@ public class Calculations implements Actor {
     private double height = 1.0;
     private double kg;
     private double work;
-    private double time = 3.0;
+    private double time = 1.72;
     private double secondsPassed = 0.0;
     private String inputValue;
     private Team9Game team9Game;

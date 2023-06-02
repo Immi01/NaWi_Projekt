@@ -6,8 +6,8 @@ import org.newdawn.slick.Graphics;
 public class Rectangle implements ProjectActor{
     private float x,y,z;
 
-    public Rectangle(float x) {
-        this.z = 100;
+    public Rectangle(float x, float z) {
+        this.z = z;
         this.x = x;
     }
 

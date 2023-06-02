@@ -30,7 +30,8 @@ public class InclinedPlane extends BasicGameState {
     private SetAngle setAngle = new SetAngle();
 
     private Image backgroundImage;
-    private TrueTypeFont font;
+    private TrueTypeFont headlineFont;
+    private TrueTypeFont writing;
 
     private boolean calculateButtonPushed;
 
@@ -38,6 +39,16 @@ public class InclinedPlane extends BasicGameState {
     private List<Actor> actors;
     private float angleSled;
     private float speedSled;
+
+    private Image buttonImage;
+    private Image pictureImage;
+    private boolean showPicture;
+    private int buttonX;
+    private int buttonY;
+    private int pictureX;
+    private int pictureY;
+
+    private String calculateButtonName;
 
 
     @Override
@@ -58,18 +69,18 @@ public class InclinedPlane extends BasicGameState {
         }
 
         for (int i = 0; i <100; i++) {
-            Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(50));
+            Snowflake snowflake = new Snowflake(random.nextInt(1500), random.nextInt(100), random.nextInt(30)+10);
             this.actors.add(snowflake);
         }
 
-
+        this.calculateButtonName = "Calculate";
         this.speedSled = 5.0f;
         this.angleSled = setAngle.getSliderValue()*-1;
-        sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 50);
+        sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
 
 
 
-        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/backgoundimage.png");
+        backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/background3.jpg");
 
         this.triangle = new Triangle();
 
@@ -77,12 +88,26 @@ public class InclinedPlane extends BasicGameState {
         this.inputFieldWeight = new InputField("", 100, 100,false, "Gewicht in kg: ");
         this.inputFieldDistance = new InputField("", 300, 100,false, "Strecke in m: ");
 
-        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30);
+        Font writing = new Font("Arial", Font.BOLD, 18);
+        this.writing = new TrueTypeFont(writing, true);
+        int buttonStringWidth = this.writing.getWidth(this.calculateButtonName);
+        int buttonStringHeight = this.writing.getHeight(this.calculateButtonName);
 
-        Font awtFont = new Font("Arial", Font.BOLD, 32);
-        font = new TrueTypeFont(awtFont, true);
+        this.calculateButton = new CalculateButton(setAngle.getSliderValue(), inputFieldWeight.getText(), inputFieldDistance.getText(), 100, 710, 150, 30, this.calculateButtonName, buttonStringWidth, buttonStringHeight);
+
+        Font headline = new Font("Arial", Font.BOLD, 42);
+        headlineFont = new TrueTypeFont(headline, true);
 
         slider.addListener(setAngle);
+
+        buttonImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/infoImage.png");
+        pictureImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/animationImage.png");
+        showPicture = false;
+
+        buttonX = 1430;
+        buttonY = 20;
+        pictureX = 1230;
+        pictureY = 100;
     }
 
     @Override
@@ -93,6 +118,7 @@ public class InclinedPlane extends BasicGameState {
             actors.render(graphics);
             graphics.setColor(Color.white);
         }
+        graphics.setFont(writing);
 
         sled.render(gameContainer, graphics);
 
@@ -109,8 +135,15 @@ public class InclinedPlane extends BasicGameState {
         calculateButton.render(gameContainer, graphics);
 
         graphics.setColor(Color.black);
-        graphics.setFont(font);
-        graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-font.getWidth("Schiefe Ebene")/2, 20);
+        graphics.setFont(headlineFont);
+        graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-headlineFont.getWidth("Schiefe Ebene")/2, 20);
+
+        Image scaledButton = buttonImage.getScaledCopy(0.1f);
+        scaledButton.draw(buttonX, buttonY);
+        if (showPicture) {
+            Image scaledExplination = pictureImage.getScaledCopy(0.35f);
+            scaledExplination.draw(pictureX, pictureY);
+        }
     }
 
     @Override
@@ -126,7 +159,6 @@ public class InclinedPlane extends BasicGameState {
             actors.update(delta);
         }
 
-
         this.calculateButtonPushed = calculateButton.isPushed();
         //System.out.println(calculateButtonPushed);
 
@@ -136,6 +168,18 @@ public class InclinedPlane extends BasicGameState {
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
+
+        buttonImage.draw(buttonX, buttonY);
+        pictureImage.draw(buttonX, buttonY);
+        Input input = gameContainer.getInput();
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            int mouseX = input.getMouseX();
+            int mouseY = input.getMouseY();
+            if (mouseX >= buttonX && mouseX <= buttonX + buttonImage.getWidth()
+                    && mouseY >= buttonY && mouseY <= buttonY + buttonImage.getHeight()) {
+                showPicture = !showPicture;
+            }
+        }
 
     }
 

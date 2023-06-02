@@ -1,6 +1,8 @@
 package at.htldornbirn.projects.nawi.Team4.Substanzensimulator;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Substanzen implements Actors{
 
@@ -8,13 +10,30 @@ public class Substanzen implements Actors{
     private int width, height;
     private boolean dragging;
     private String id;
+    private Image squareImage1;
+    private Image squareImage2;
+    private Image squareImage3;
+    private Image squareImage4;
+    private Image squareImage5;
 
-    public Substanzen(float x, float y, int width, int height, boolean dragging, String id) {
+
+
+    public Substanzen(float x, float y, int width, int height, boolean dragging, String id) throws SlickException {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.id = id;
+        Image temp1 = new Image("src/at/htldornbirn/projects/nawi/Team4/Substanzensimulator/images/Flamme.png");
+        this.squareImage1 = temp1.getScaledCopy(70,70);
+        Image temp2 = new Image("src/at/htldornbirn/projects/nawi/Team4/Substanzensimulator/images/Rufezeichen.jpg");
+        this.squareImage2 = temp2.getScaledCopy(70,70);
+        Image temp3 = new Image("src/at/htldornbirn/projects/nawi/Team4/Substanzensimulator/images/Flamme.png");
+        this.squareImage3 = temp3.getScaledCopy(70,70);
+        Image temp4 = new Image("src/at/htldornbirn/projects/nawi/Team4/Substanzensimulator/images/Flamme.png");
+        this.squareImage4 = temp4.getScaledCopy(70,70);
+        Image temp5 = new Image("src/at/htldornbirn/projects/nawi/Team4/Substanzensimulator/images/Flamme.png");
+        this.squareImage5 = temp5.getScaledCopy(70,70);
 
 
     }
@@ -74,6 +93,25 @@ public class Substanzen implements Actors{
 
     @Override
     public void render(Graphics graphics) {
-        graphics.drawRect(x, y, width, height);
+        switch (id){
+            case "0":
+                squareImage1.draw(x,y);
+                break;
+            case "1":
+                squareImage2.draw(x,y);
+                break;
+            case "2":
+                squareImage3.draw(x,y);
+                break;
+            case "3":
+                squareImage4.draw(x,y);
+                break;
+            case "4":
+                squareImage5.draw(x,y);
+                break;
+
+        }
+
     }
+
 }

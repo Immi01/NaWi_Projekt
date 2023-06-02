@@ -1,8 +1,11 @@
 package at.htldornbirn.projects.nawi.Team5;
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.SlickException;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,23 +26,29 @@ public class Dopplereffect extends BasicGameState {
     private List<Wave> waves;
     private boolean paused;
     private float nextWaveDelay = 1; // Standardwert von 1 Sekunde, sonst Wellenabstand broken
+    private int xPerson;
+    private int yPerson;
+    private long enterZoneTime;
 
 
     @Override
     public int getID() {
-        return 0;
+        return Constants.TEAM5;
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.x = -100;
+        this.x = -400;
         this.y = 550;
-        this.speed = 3; // 5 ist Maximum weil gleich schnell wie Schall Geschwindigkeit
+        this.speed = 0; // 5 ist Maximum weil gleich schnell wie Schall Geschwindigkeit
         this.savedSpeed = this.speed;
         this.waveSize = 0;
         this.lastWaveTime = 0;
         this.waves = new ArrayList<>();
         this.paused = false;
+        this.xPerson = 800;
+        this.yPerson = 550;
+
 
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
         this.background = new Image("at/htldornbirn/projects/nawi/Team5/res/City2.png");
@@ -50,8 +59,7 @@ public class Dopplereffect extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
-        g.drawImage(person, 800,700);
-
+        g.drawImage(person,xPerson ,yPerson);
 
         for (Wave wave : waves) {
             if (wave.getSize() > 0) {
@@ -68,6 +76,25 @@ public class Dopplereffect extends BasicGameState {
         if (this.x > 1500) {
             this.x = -400;
         }
+        if (this.x >= 700 && this.x <= 900) {
+            if (enterZoneTime == 0) {
+                enterZoneTime = System.currentTimeMillis(); // Setze den Zeitpunkt, wenn der Rettungswagen in den Bereich eintritt
+            }
+
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = currentTime - enterZoneTime;
+
+            if (elapsedTime >= 5000) {
+                this.xPerson = gameContainer.getWidth() + 300;
+            }
+        } else if (this.x == -400) {
+            this.xPerson = 800;
+            enterZoneTime = 0; // Zurücksetzen des Zeitpunkts, wenn der Rettungswagen den Bereich verlässt
+        }
+
+
+
+
 
         // Frequenz
         long currentTime = System.currentTimeMillis();
@@ -77,13 +104,19 @@ public class Dopplereffect extends BasicGameState {
             lastWaveTime = currentTime;
         }
 
+
+
         // welle bleibt auf krankenwagen
         Iterator<Wave> waveIterator = waves.iterator();
         while (waveIterator.hasNext()) {
             Wave wave = waveIterator.next();
             wave.update();
             // despawn von wellen
-            if (wave.getX() > gameContainer.getWidth() + 100) {
+
+            if(this.x == -400)
+            {waveIterator.remove();}
+
+            else if (wave.getX() > gameContainer.getWidth() + 100) {
                 waveIterator.remove();
             }
         }
@@ -91,7 +124,7 @@ public class Dopplereffect extends BasicGameState {
 
 
     @Override
-    public void keyPressed(int key, char c) {   //pause mir Leertaste
+    public void keyPressed(int key, char c) {
         if (key == Input.KEY_SPACE) {
             if (this.speed == 0) {
                 this.speed = this.savedSpeed;
@@ -99,6 +132,20 @@ public class Dopplereffect extends BasicGameState {
                 this.savedSpeed = this.speed;
                 this.speed = 0;
             }
+        } else if (key == Input.KEY_1) {
+            setSpeed(1); // am Langsamsten
+        } else if (key == Input.KEY_2) {
+            setSpeed(2); // Langsamer
+        } else if (key == Input.KEY_3) {
+            setSpeed(3); // Normal
+        } else if (key == Input.KEY_4) {
+            setSpeed(4); // schnell
+        } else if (key == Input.KEY_5) {
+            setSpeed(5); // Schallgeschwindigkeit
         }
     }
-}
+        public void setSpeed ( int newSpeed){
+            this.speed = newSpeed;
+        }
+    }
+

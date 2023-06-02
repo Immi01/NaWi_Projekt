@@ -3,10 +3,7 @@ import at.htldornbirn.projects.nawi.Team2.code.InclinedPlane;
 import at.htldornbirn.projects.nawi.Team3.StopingDistance;
 import at.htldornbirn.projects.nawi.Team4.Substanzensimulator.Substanzensimulator;
 import at.htldornbirn.projects.nawi.Team5.Dopplereffect;
-import at.htldornbirn.projects.nawi.Team6.sinefunction.Explanation;
-import at.htldornbirn.projects.nawi.Team6.sinefunction.Interference;
-import at.htldornbirn.projects.nawi.Team6.sinefunction.SetupSineFunction;
-import at.htldornbirn.projects.nawi.Team6.sinefunction.SineFunctionSandBox;
+import at.htldornbirn.projects.nawi.Team6.sinefunction.*;
 import at.htldornbirn.projects.nawi.Team8.Sandbox;
 import at.htldornbirn.projects.nawi.navigation.Navigation;
 import org.newdawn.slick.AppGameContainer;
@@ -30,13 +27,14 @@ public class NaWiGame extends StateBasedGame {
         addState(new Explanation());
         addState(new SineFunctionSandBox());
         addState(new Interference());
+        addState(new GravitySimulation());
         addState(new Sandbox());
 
 
 
     }
     public static void main(String[] args) throws SlickException {
-        AppGameContainer container = new AppGameContainer(new ScalableGame(new NaWiGame("NaWi Portal"),800,600));
+        AppGameContainer container = new AppGameContainer(new NaWiGame("NaWi Portal"));
         container.setDisplayMode(800,600,false);
         container.start();
     }

@@ -16,6 +16,7 @@ public class SetupSineFunction extends StateBasedGame {
         this.addState(new Explanation());
         this.addState(new SineFunctionSandBox());
         this.addState(new Interference());
+        this.addState(new GravitySimulation());
     }
 
     public static void main(String[] args) throws SlickException {

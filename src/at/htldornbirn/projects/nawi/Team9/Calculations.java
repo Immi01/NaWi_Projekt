@@ -1,7 +1,8 @@
 package at.htldornbirn.projects.nawi.Team9;
 
 import org.newdawn.slick.Graphics;
-
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Objects;
 
 public class Calculations implements Actor {
@@ -11,7 +12,8 @@ public class Calculations implements Actor {
     private double height = 1.0;
     private double kg;
     private double work;
-    private double time = 1.0;
+    private double time = 3.0;
+    private double secondsPassed = 0.0;
     private String inputValue;
     private Team9Game team9Game;
 
@@ -38,6 +40,7 @@ public class Calculations implements Actor {
             ps = Math.round((watt/735.5)*100.0)/100.0;
         }
     }
+
 
     public double getWatt() {
         return watt;
@@ -67,4 +70,5 @@ public class Calculations implements Actor {
         inputValue = team9Game.getInputFieldRN().getValue();
         return inputValue;
     }
-}
+
+};

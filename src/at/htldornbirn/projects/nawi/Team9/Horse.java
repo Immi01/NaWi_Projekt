@@ -10,14 +10,19 @@ public class Horse implements Actor {
     private int direction;
     private float width;
     private float height;
+    private boolean moving;
+    private Team9Game team9Game;
+    private float mspeed = 10;
 
-    public Horse(float x, float y, int direction, float speed, float width, float height) {
+    public Horse(float x, float y, int direction, float speed, float width, float height, Team9Game team9Game) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.direction=direction;
         this.height = height;
         this.width = width;
+        this.moving = false;
+        this.team9Game = team9Game;
     }
 
     @Override
@@ -30,17 +35,15 @@ public class Horse implements Actor {
     @Override
     public void update(int delta) {
         // Führe Aktualisierungslogik für das Pferd aus (z.B. Bewegung, Animation, etc.)
-        if (direction == 1){
-            this.x += (float)delta/this.speed;}
-        else {
-            this.x -= (float)delta/this.speed;
+        if (team9Game.getStartButton().isPressed()){
+            this.moving = true;
+        }
+        else if (moving &&x <= 1195){
+            x += (float)delta/mspeed;
+        }
+        else if (moving){
+            moving = false;
         }
 
-        if (this.x>600){
-            this.x =2;
-        }
-        else if (this.x <0){
-            this.x = 600;
-        }
     }
 }

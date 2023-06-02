@@ -2,12 +2,14 @@ package at.htldornbirn.projects.nawi.navigation;
 
 import at.htldornbirn.projects.nawi.Constants;
 
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.lwjgl.input.Mouse;
 
 import at.htldornbirn.projects.nawi.tools.slider.Slider;
 import at.htldornbirn.projects.nawi.tools.slider.SliderListener;
 
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -33,6 +35,7 @@ public class Navigation extends BasicGameState implements SliderListener {
     private Image scaled;
     private Dictionary<Integer, Integer> map;
     private Animation anim;
+    private BackButton back;
 
 
     @Override
@@ -41,9 +44,10 @@ public class Navigation extends BasicGameState implements SliderListener {
         this.actors = new ArrayList<>();
         map = new Hashtable<Integer, Integer>();
         createTeams();
-
         image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
         scaled = image.getScaledCopy(59,59);
+        back = new BackButton(100,100,stateBasedGame);
+        actors.add(back);
     }
 
     @Override
@@ -60,13 +64,13 @@ public class Navigation extends BasicGameState implements SliderListener {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
 
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            ChangeState(stateBasedGame,gameContainer);
+            //back.changeState();
+        }
         for (Actor actor : actors) {
             actor.update(delta);
         }
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            ChangeState(stateBasedGame,gameContainer);
-        }
-
 
     }
 
@@ -87,15 +91,19 @@ public class Navigation extends BasicGameState implements SliderListener {
             ObjY = actors.get(i).getY();
             if ((mouseX >= ObjX && mouseX < ObjX + 60) && (mouseY >= ObjY && mouseY < ObjY + 60)) {
                 //System.out.println(map.get(i));
-
-
                 switch (i+1){
                     case 2:
-                        gc.setDisplayMode(1500,800, false);
+                        gc.setDisplayMode(1500, 800, false);
+                        stateBasedGame.enterState(map.get(i));
+                    break;
                     case 6:
                         gc.setDisplayMode(1280, 960, false);
+                        stateBasedGame.enterState(map.get(i));
+                        System.out.println(i+1);
+                        break;
                 }
-                stateBasedGame.enterState(map.get(i));
+
+
 
 
                 return;

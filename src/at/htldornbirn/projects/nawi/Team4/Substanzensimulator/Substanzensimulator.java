@@ -20,6 +20,7 @@ public class Substanzensimulator extends BasicGameState {
     private List<Substanzen> substanzen;
     private Subject subject;
 
+
     public Substanzensimulator(String  name) {
     }
 
@@ -37,6 +38,7 @@ public class Substanzensimulator extends BasicGameState {
         }
         subject = new Subject(400, 300, radius);
 
+
     }
 
 
@@ -44,8 +46,8 @@ public class Substanzensimulator extends BasicGameState {
         Input input = container.getInput();
         for (Substanzen substanzen : substanzen) {
             if (substanzen.isDragging()) {
-                substanzen.setX(input.getMouseX());
-                substanzen.setY(input.getMouseY());
+                substanzen.setX(input.getMouseX()-30);
+                substanzen.setY(input.getMouseY()-30);
             }
             if (subject.intersects(substanzen)) {
                 // Aktion bei Kollision
@@ -58,10 +60,13 @@ public class Substanzensimulator extends BasicGameState {
 
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
+        subject.render(graphics);
+
         for (Substanzen substanzen : substanzen) {
             substanzen.render(graphics);
         }
-        subject.render(graphics);
+
+
 
     }
 

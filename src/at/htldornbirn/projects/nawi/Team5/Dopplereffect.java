@@ -24,6 +24,7 @@ public class Dopplereffect extends BasicGameState {
     private Image ambulance;
     private Image person;
     private Image background;
+    private Image menu;
     private float waveSize;
     private long lastWaveTime;
     private List<Wave> waves;
@@ -58,6 +59,8 @@ public class Dopplereffect extends BasicGameState {
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
         this.background = new Image("at/htldornbirn/projects/nawi/Team5/res/City2.png");
         this.person = new Image("/src/at/htldornbirn/projects/nawi/Team5/res/Person.png");
+        this.menu = new Image("/src/at/htldornbirn/projects/nawi/Team5/res/Menu.png");
+
 
     }
 
@@ -73,6 +76,8 @@ public class Dopplereffect extends BasicGameState {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
         g.drawImage(person, xPerson, yPerson);
+        g.drawImage(menu, 0, 0);
+
 
 
         for (Wave wave : waves) {

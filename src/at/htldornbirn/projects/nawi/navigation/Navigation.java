@@ -32,6 +32,7 @@ public class Navigation extends BasicGameState implements SliderListener {
     private Image image;
     private Image scaled;
     private Dictionary<Integer, Integer> map;
+    private Animation anim;
 
 
     @Override
@@ -78,6 +79,9 @@ public class Navigation extends BasicGameState implements SliderListener {
         AppGameContainer gc = (AppGameContainer) gameContainer;
         mouseX = Mouse.getX();
         mouseY = (Mouse.getY() - 600) * -1;
+        anim = new Animation(100,75,50);
+        actors.add(anim);
+
         for (int i = 0; i < actors.size(); i++) {
             ObjX = actors.get(i).getX();
             ObjY = actors.get(i).getY();

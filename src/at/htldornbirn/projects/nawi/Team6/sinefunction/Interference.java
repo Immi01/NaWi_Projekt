@@ -16,35 +16,35 @@ public class Interference extends BasicGameState {
     private SineFunction sineFunction2;
     private SineFunction sineFunction3;
     private AngelCodeFont font;
+    private static final int WIDTH = 1280;
+    private static final int HEIGHT = 960;
 
     @Override
     public int getID() {
-        return 3;
+        return 63;
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        double containerHeight = gameContainer.getHeight();
-        double containerWidth = gameContainer.getWidth();
         font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
 
         this.actors = new ArrayList<>();
         this.sineFunctions = new ArrayList<>();
-        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight() - 150, 250, 100, "Go to sandbox", Color.yellow);
-        this.stateButton1.setX((float) gameContainer.getWidth() / 2 - this.stateButton1.getWidth() / 2);
-        this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.stateButton1 = new Button((float) WIDTH / 2, HEIGHT - 150, 250, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1.setX((float) WIDTH / 2 - this.stateButton1.getWidth() / 2);
+        this.stateButton1.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(stateButton1);
 
         int amountOfComponents = 2000;
-        this.sineFunction1 = new SineFunction(amountOfComponents, containerWidth, containerHeight / 2, Color.blue);
-        this.sineFunction2 = new SineFunction(amountOfComponents, containerWidth, containerHeight / 2, Color.green);
-        this.sineFunction3 = new SineFunction(amountOfComponents, containerWidth, containerHeight / 2, Color.red);
+        this.sineFunction1 = new SineFunction(amountOfComponents, WIDTH, HEIGHT / 2, Color.blue);
+        this.sineFunction2 = new SineFunction(amountOfComponents, WIDTH, HEIGHT / 2, Color.green);
+        this.sineFunction3 = new SineFunction(amountOfComponents, WIDTH, HEIGHT / 2, Color.red);
         this.sineFunctions.add(sineFunction1);
         this.sineFunctions.add(sineFunction2);
         this.sineFunctions.add(sineFunction3);
 
-        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1, "x", (float) containerWidth * 0.97f, (float) containerHeight / 2 + 5);
-        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight * 0.97f, "sin(x)", 5, 30);
+        Axes xAxes = new Axes(0, (float) HEIGHT / 2, (float) WIDTH, 1, "x", (float) WIDTH * 0.97f, (float) HEIGHT / 2 + 5);
+        Axes yAxes = new Axes((float) 0, 0, 1, (float) HEIGHT * 0.97f, "sin(x,t)", 5, 30);
         this.actors.add(xAxes);
         this.actors.add(yAxes);
     }
@@ -96,7 +96,7 @@ public class Interference extends BasicGameState {
         int posY = Mouse.getY();
         if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > gameContainer.getHeight() - (stateButton1.getY() + stateButton1.getHeight()) && posY < gameContainer.getHeight() - stateButton1.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                stateBasedGame.enterState(2);
+                stateBasedGame.enterState(62);
             }
         }
     }

@@ -24,38 +24,37 @@ public class SineFunctionSandBox extends BasicGameState {
     private SineFunction sineFunction1;
     private SineFunction sineFunction2;
     private AngelCodeFont font;
+    private static final int WIDTH = 1280;
+    private static final int HEIGHT = 960;
 
     public int getID() {
-        return 2;
+        return 62;
     }
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.stateButton1 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 250, 100, "Go to explanation", Color.red);
-        this.stateButton1.setX((float) gameContainer.getWidth() * 0.33f - this.stateButton1.getWidth() / 2);
-        this.stateButton1.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton1.getHeight() / 2);
-        this.stateButton2 = new Button((float) gameContainer.getWidth() / 2, gameContainer.getHeight(), 250, 100, "Interference", Color.cyan);
-        this.stateButton2.setX((float) gameContainer.getWidth() * 2 / 3 - this.stateButton2.getWidth() / 2);
-        this.stateButton2.setY((float) gameContainer.getHeight() * 9 / 10 - this.stateButton2.getHeight() / 2);
+        this.stateButton1 = new Button((float) WIDTH / 2, HEIGHT, 250, 100, "Go to explanation", Color.red);
+        this.stateButton1.setX((float) WIDTH * 0.33f - this.stateButton1.getWidth() / 2);
+        this.stateButton1.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
+        this.stateButton2 = new Button((float) WIDTH / 2, HEIGHT, 250, 100, "Interference", Color.cyan);
+        this.stateButton2.setX((float) WIDTH * 2 / 3 - this.stateButton2.getWidth() / 2);
+        this.stateButton2.setY((float) HEIGHT * 9 / 10 - this.stateButton2.getHeight() / 2);
         this.actors.add(this.stateButton1);
         this.actors.add(this.stateButton2);
 
-        float heightValueButtons = (float) (gameContainer.getHeight() / 7);
-        this.valueButton1 = new ValueButton((float) (gameContainer.getWidth() / 3), heightValueButtons, 75);
-        this.valueButton2 = new ValueButton((float) (gameContainer.getWidth() * 6 / 10), heightValueButtons, 75);
-        this.valueButton3 = new ValueButton((float) (gameContainer.getWidth() * 8 / 10), heightValueButtons, 75);
+        float heightValueButtons = (float) (HEIGHT / 7);
+        this.valueButton1 = new ValueButton((float) (WIDTH / 3), heightValueButtons, 75);
+        this.valueButton2 = new ValueButton((float) (WIDTH * 6 / 10), heightValueButtons, 75);
+        this.valueButton3 = new ValueButton((float) (WIDTH * 8 / 10), heightValueButtons, 75);
         this.actors.add(this.valueButton1);
         this.actors.add(this.valueButton2);
         this.actors.add(this.valueButton3);
 
-        double containerHeight = gameContainer.getHeight();
-        double containerWidth = gameContainer.getWidth();
+        this.sineFunction1 = new SineFunction(3000, WIDTH, HEIGHT / 2, Color.orange);
+        this.sineFunction2 = new SineFunction(3000, WIDTH, HEIGHT / 2, Color.green);
 
-        this.sineFunction1 = new SineFunction(5000, containerWidth, containerHeight / 2, Color.orange);
-        this.sineFunction2 = new SineFunction(5000, containerWidth, containerHeight / 2, Color.green);
-
-        Axes xAxes = new Axes(0, (float) containerHeight / 2, (float) containerWidth, 1, "x", (float) containerWidth * 0.97f, (float) containerHeight / 2 + 5);
-        Axes yAxes = new Axes((float) 0, 0, 1, (float) containerHeight * 0.97f, "sin(x)", 5, 30);
+        Axes xAxes = new Axes(0, (float) HEIGHT / 2, (float) WIDTH, 1, "x", (float) WIDTH * 0.97f, (float) HEIGHT / 2 + 5);
+        Axes yAxes = new Axes((float) 0, 0, 1, (float) HEIGHT * 0.97f, "sin(x,t)", 5, 30);
         this.actors.add(xAxes);
         this.actors.add(yAxes);
 
@@ -75,7 +74,7 @@ public class SineFunctionSandBox extends BasicGameState {
         double currentDisplacementX = this.sineFunction1.getSineComponents().get(0).getDisplacementX() / Math.PI;
         String currentDisplacementXFormatted = decimalFormat.format(currentDisplacementX);
 
-        String stringDisplacementX = "Displacement x Axes: ";
+        String stringDisplacementX = "Phase difference: ";
         float widthXLabel = graphics.getFont().getWidth(stringDisplacementX);
         String stringDisplacementY = "Displacement y Axes: ";
         float widthYLabel = graphics.getFont().getWidth(stringDisplacementX);
@@ -122,7 +121,7 @@ public class SineFunctionSandBox extends BasicGameState {
 
         if ((posX > this.stateButton2.getX() && posX < this.stateButton2.getX() + this.stateButton2.getWidth()) && (posY > gameContainer.getHeight() - (stateButton2.getY() + stateButton2.getHeight()) && posY < gameContainer.getHeight() - stateButton2.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                stateBasedGame.enterState(3);
+                stateBasedGame.enterState(63);
             }
         }
 

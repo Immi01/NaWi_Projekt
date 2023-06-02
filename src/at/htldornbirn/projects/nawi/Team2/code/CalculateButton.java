@@ -13,6 +13,7 @@ public class CalculateButton {
     private float positionX, positionY, width, height;
 
     private String buttonName;
+    private String errorMassage;
 
     private int buttonStringWidth,buttonStringHeight;
 
@@ -22,6 +23,7 @@ public class CalculateButton {
         this.weight = weightText;
         this.distance = distanceText;
         this.isPushed = false;
+        this.errorMassage = "";
 
         this.buttonName = buttonName;
 
@@ -41,9 +43,12 @@ public class CalculateButton {
         int mouseY = input.getMouseY();
         int mouseX = input.getMouseX();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            if (mouseY>this.positionY && mouseY<this.positionY+this.height && mouseX >this.positionX && mouseX < this.positionX+this.width){
+            if (mouseY>this.positionY && mouseY<this.positionY+this.height && mouseX >this.positionX && mouseX < this.positionX+this.width && weight.length()>0){
                 this.isPushed = true;
+                this.errorMassage = "";
                 calculations.update(gameContainer, angle, weight, distance);
+            } else if(mouseY>this.positionY && mouseY<this.positionY+this.height && mouseX >this.positionX && mouseX < this.positionX+this.width && weight.length()<=0){
+                this.errorMassage = "Kein Gewicht im Eingabefeld angegeben!";
             }
         }
     }
@@ -53,6 +58,11 @@ public class CalculateButton {
         graphics.fillRect(this.positionX,this.positionY,this.width,this.height);
         graphics.setColor(Color.white);
         graphics.drawString(this.buttonName,this.positionX + (this.width-this.buttonStringWidth)/2,this.positionY+(this.height-this.buttonStringHeight)/2);
+        graphics.setColor(Color.red);
+        //int errorMassageWidth = this.writing.getWidth(this.errorMassage);
+        //int errorMassageHeight = this.writing.getHeight(this.errorMassage);
+        graphics.drawString(this.errorMassage,200,200);
+        graphics.setColor(Color.white);
         calculations.render(gameContainer,graphics);
     }
 

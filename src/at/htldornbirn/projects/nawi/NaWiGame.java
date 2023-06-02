@@ -28,15 +28,14 @@ public class NaWiGame extends StateBasedGame {
         addState(new StopingDistance());
         addState(new Substanzensimulator("Substanzensimulator"));
         addState(new Explanation());
-        addState(new SineFunctionSandBox());
-        addState(new Interference());
+
         addState(new Sandbox());
 
 
 
     }
     public static void main(String[] args) throws SlickException {
-        AppGameContainer container = new AppGameContainer(new ScalableGame(new NaWiGame("NaWi Portal"),800,600));
+        AppGameContainer container = new AppGameContainer(new NaWiGame("NaWi Portal"));
         container.setDisplayMode(800,600,false);
         container.start();
     }

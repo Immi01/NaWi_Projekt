@@ -11,11 +11,10 @@ public class Rope implements Actor {
     private float y2;
     private float x3;
     private float y3 = 700;
-    private float x4 = 900;
+    private float x4 = 925;
     private float y4;
 
     private float speed = 10;
-    private float speedD = 4;
     private Team9Game team9Game;
     private boolean moving;
     private boolean isMoving;
@@ -52,7 +51,7 @@ public class Rope implements Actor {
         if (team9Game.getStartButton().isPressed()) {
             this.isMoving = true;
         } else if (isMoving && x4 <= 1195) {
-            x4 += (float) delta / speedD;
+            x4 += (float) delta / speed;
         } else if (isMoving) {
             isMoving = false;
         }

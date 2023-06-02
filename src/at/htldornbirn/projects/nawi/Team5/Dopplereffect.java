@@ -83,13 +83,14 @@ public class Dopplereffect extends BasicGameState {
         g.drawImage(menu, 0, 0);
 
         g.drawImage(menu, xMenu, 0);
-        g.drawString("Press enter to start game",xString,100);
+        g.drawString("Press SPACE to STOPP / START the car", xString, 70);
         g.drawString("Press 1 to set speed to very slow", xString, 150);
-        g.drawString("Press 2 to set speed to slow", xString, 200);
-        g.drawString("Press 3 to set speed to normal", xString, 250);
-        g.drawString("Press 4 to set speed to fast", xString, 300);
-        g.drawString("Press 5 to set speed to very fast", xString, 350);
-        g.drawString("Press SPACE to STOPP / START the car", xString, 400);
+        g.drawString("Press 2 to set speed to slow", xString, 180);
+        g.drawString("Press 3 to set speed to normal", xString, 210);
+        g.drawString("Press 4 to set speed to fast", xString, 240);
+        g.drawString("Press 5 to set speed to very fast", xString, 270);
+        g.drawString("Press enter to start game",xString,350);
+
 
 
 
@@ -167,15 +168,15 @@ public class Dopplereffect extends BasicGameState {
                 this.savedSpeed = this.speed;
                 this.speed = 0;
             }
-        } else if (key == Input.KEY_1) {
+        } else if (key == Input.KEY_1 && this.xMenu != 0) {
             setSpeed(1); // am Langsamsten
-        } else if (key == Input.KEY_2) {
+        } else if (key == Input.KEY_2 && this.xMenu != 0) {
             setSpeed(2); // Langsamer
-        } else if (key == Input.KEY_3) {
+        } else if (key == Input.KEY_3 && this.xMenu != 0) {
             setSpeed(3); // Normal
-        } else if (key == Input.KEY_4) {
+        } else if (key == Input.KEY_4 && this.xMenu != 0) {
             setSpeed(4); // schnell
-        } else if (key == Input.KEY_5) {
+        } else if (key == Input.KEY_5 && this.xMenu != 0) {
             setSpeed(5); // Schallgeschwindigkeit
         } else if (key == Input.KEY_ENTER) {
             this.xMenu = 3000;

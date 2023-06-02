@@ -30,7 +30,7 @@ public class Team9Game extends BasicGameState {
         calculations = new Calculations(this);
         itemList = new ItemList(this);
         actors = new ArrayList<Actor>();
-        horse = new Horse(800, 450, 1, 1,100,50);
+        horse = new Horse(900, 450-100, 1, 1,100,188,this);
         // Rope
         ropeUp = new Rope(this);
         //Button
@@ -103,6 +103,7 @@ public class Team9Game extends BasicGameState {
     public Button getStartButton() {
         return startButton;
     }
+
 
     public InputFieldRN getInputFieldRN() {
         return inputFieldRN;

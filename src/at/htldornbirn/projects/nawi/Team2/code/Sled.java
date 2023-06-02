@@ -2,6 +2,7 @@ package at.htldornbirn.projects.nawi.Team2.code;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
@@ -10,12 +11,14 @@ public class Sled {
 
     private float xPosition, yPosition;
     private float angleSled;
-    private Rectangle rectangle;
     private float speedSled;
     private float widthSled, heightSled;
     private boolean isOnTop, isAtBottom;
+    private Image scaledImage;
+    private float xPictureStartPosition, yPictureStartPosition;
+    boolean mirroing;
 
-    public Sled(float angleSled,float speedSled, float xPosition, float yPosition, float widthSled, float heightSled) {
+    public Sled(float angleSled,float speedSled, float xPosition, float yPosition, float widthSled, float heightSled) throws SlickException {
         this.xPosition = xPosition;
         this.yPosition = yPosition-heightSled;
 
@@ -27,19 +30,33 @@ public class Sled {
 
         this.isOnTop = true;
         this.isAtBottom = false;
+        this.mirroing = true;
 
-        this. rectangle = new Rectangle(this.xPosition, this.yPosition, 150, 50);
+        this.xPictureStartPosition=this.xPosition;
+        this.yPictureStartPosition=this.yPosition;
+
+        Image originalImage = new Image("src/at/htldornbirn/projects/nawi/Team2/pictures/SledPictureInclinedPlane.png");
+        this.scaledImage = originalImage.getScaledCopy((int)this.widthSled, (int)this.heightSled);
     }
-
-
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        graphics.pushTransform();
-        graphics.rotate(rectangle.getX(), rectangle.getY(), angleSled);
-        graphics.fillRect(xPosition, yPosition-3, 150, 50);
-        graphics.popTransform();
-    }
+        if (this.xPosition>=1200-this.widthSled-2 && mirroing == true){
+            this.mirroing = false;
+            this.scaledImage = scaledImage.getFlippedCopy(true, false);
+        }
 
+        if (this.xPosition<=300 && mirroing == false){
+            System.out.println(this.xPosition);
+            this.mirroing = true;
+            this.scaledImage = scaledImage.getFlippedCopy(true,false);
+        }
+
+        graphics.pushTransform();
+        graphics.rotate(this.xPictureStartPosition, this.yPictureStartPosition, angleSled);
+        graphics.drawImage(scaledImage,xPosition, yPosition-5);
+        graphics.popTransform();
+
+    }
 
     public void update(GameContainer gameContainer, float angle, float delta, float speedSled, boolean isPushed,float a) throws SlickException {
         this.angleSled = angle;

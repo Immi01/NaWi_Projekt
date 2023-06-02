@@ -23,6 +23,7 @@ public class BackgroundInputField {
         if (hasFocus){
             graphics.setColor(Color.black);
         }
+
         graphics.drawRect(x,y,width,height);
         graphics.setColor(Color.white);
         graphics.drawString(function,x,y-20);

@@ -12,12 +12,21 @@ public class CalculateButton {
 
     private float positionX, positionY, width, height;
 
+    private String buttonName;
 
-    public CalculateButton(float angle, String weightText, String distanceText, float positionX, float positionY, float width, float height) {
+    private int buttonStringWidth,buttonStringHeight;
+
+
+    public CalculateButton(float angle, String weightText, String distanceText, float positionX, float positionY, float width, float height, String buttonName, int buttonStringWidth, int buttonStringHeight) {
         this.angle = angle;
         this.weight = weightText;
         this.distance = distanceText;
         this.isPushed = false;
+
+        this.buttonName = buttonName;
+
+        this.buttonStringHeight = buttonStringHeight;
+        this.buttonStringWidth = buttonStringWidth;
 
         this.positionX = positionX;
         this.positionY = positionY;
@@ -43,7 +52,7 @@ public class CalculateButton {
         graphics.setColor(Color.black);
         graphics.fillRect(this.positionX,this.positionY,this.width,this.height);
         graphics.setColor(Color.white);
-        graphics.drawString("Calcualate",(this.positionX+width)/2,this.positionY+height/5);
+        graphics.drawString(this.buttonName,this.positionX + (this.width-this.buttonStringWidth)/2,this.positionY+(this.height-this.buttonStringHeight)/2);
         calculations.render(gameContainer,graphics);
     }
 

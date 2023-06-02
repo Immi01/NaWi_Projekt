@@ -100,11 +100,11 @@ public class Navigation extends BasicGameState implements SliderListener {
         System.out.println("no OBJ clicked");
     }
 
-    public void createTeams() {
+    public void createTeams() throws SlickException {
         int y = 100;
         int x = 75;
         for (int i = 0; i < 9; i++) {
-            Team team = new Team(x, y, 60);
+            Team team = new Team(x, y, 60,i);
             actors.add(team);
             map.put(i,TEAMS[i]);
 

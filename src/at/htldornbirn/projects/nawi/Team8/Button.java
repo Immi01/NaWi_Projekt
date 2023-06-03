@@ -21,7 +21,6 @@ public class Button implements Actor {
 
     }
 
-    @Override
     public void render(Graphics graphics) {
         graphics.setColor(this.color);
         int cornerRadius = (int) this.width / 10;

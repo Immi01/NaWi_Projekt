@@ -7,6 +7,8 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.GameContainer;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +16,13 @@ import java.util.List;
 public class RotationGame extends BasicGameState {
     private List<Actor> actors;
     private Button stateButton1;
-
-    /*private ValueButton valueButton1;
     private Ball ball;
     private Button startStopButton;
     private ValueButton speedButton;
     private ValueButton radiusButton;
-     */
+    private boolean isRunning;
+
     private AngelCodeFont font;
-
-    //private boolean isRunning;
-
 
     @Override
     public int getID() {
@@ -35,36 +33,43 @@ public class RotationGame extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
 
-        //button für die seiten zu springen
-
-
-        float buttonX = gameContainer.getWidth() / 3f;
-        float buttonY = gameContainer.getHeight() * 0.6f;
-        this.stateButton1 = new Button(buttonX, buttonY, 400, 300, "Go to explanation", Color.green);
-
+        // Button für den Seitenwechsel
+        float buttonX = gameContainer.getWidth() / 2.5f;
+        float buttonY = gameContainer.getHeight() * 0.8f;
+        this.stateButton1 = new Button(buttonX, buttonY, 400, 100, "Go to explanation", Color.green);
         actors.add(stateButton1);
 
 
-        //buttons für das einstellen
-        /*
+        //buttons für das einstellen der Kreisbewegung
+
+        // Button für Start/Stop
+        float startStopButtonX = gameContainer.getWidth() / 40f;
+        float startStopButtonY = gameContainer.getHeight() * 0.5f;
+        startStopButton = new Button(startStopButtonX, startStopButtonY, 200, 100, "Start/Stopp", Color.orange);
+        actors.add(startStopButton);
+
+        // Button für Geschwindigkeit
+        float speedButtonX = gameContainer.getWidth() / 4f;
+        float speedButtonY = gameContainer.getHeight() * 1f;
+        speedButton = new ValueButton(speedButtonX, speedButtonY, "Speed");
+        actors.add(speedButton);
+
+        // Button für Radius
+        float radiusButtonX = 80;
+        float radiusButtonY = gameContainer.getHeight() / 8f;
+        radiusButton = new ValueButton(radiusButtonX, radiusButtonY, "Radius");
+        actors.add(radiusButton);
+
+
+        // Ball initialisieren
+
         float centerX = gameContainer.getWidth() / 2;
+
         float centerY = gameContainer.getHeight() / 2;
         float radius = 100;
         ball = new Ball(centerX, centerY, radius);
 
-        float buttonX = gameContainer.getWidth() / 2 - 125;
-        float buttonY = gameContainer.getHeight() * 0.9f - 50;
-        startStopButton = new Button(buttonX, buttonY, 250, 100, "Start", Color.green);
 
-        float speedButtonX = gameContainer.getWidth() - 200;
-        float speedButtonY = gameContainer.getHeight() - 60;
-        speedButton = new ValueButton(speedButtonX, speedButtonY, "Speed");
-
-        float radiusButtonX = 80;
-        float radiusButtonY = gameContainer.getHeight() - 60;
-        radiusButton = new ValueButton(radiusButtonX, radiusButtonY,"Radius");
-
-         */
         this.font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
 
     }
@@ -72,20 +77,17 @@ public class RotationGame extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
-        font.drawString((float) gameContainer.getWidth() / 15, (float) gameContainer.getHeight() / 15, "Sandbox", Color.yellow);
-        graphics.setColor(Color.white);
+        font.drawString((float) gameContainer.getWidth() / 20, (float) gameContainer.getHeight() / 20, "Sandbox", Color.yellow);
+
+        for (Actor actor : actors) {
+            actor.render(graphics);
+        }
+
+        // Geschwindigkeit und Radius anzeigen
+        font.drawString(10, 100, "Geschwindigkeit: " + speedButton.getValue());
+        font.drawString(10, 140, "Radius: " + radiusButton.getValue());
 
 
-
-        /*
-        ball.render(graphics);
-        startStopButton.render(graphics);
-        speedButton.render(graphics);
-        radiusButton.render(graphics);
-
-        font.drawString(10, 10, "Geschwindigkeit: " + speedButton.getValue());
-        font.drawString(10, 40, "Radius: " + radiusButton.getValue());
-        */
         stateButton1.render(graphics);
 
     }
@@ -97,21 +99,33 @@ public class RotationGame extends BasicGameState {
         int posY = Mouse.getY();
 
 
-
         if ((posX > this.stateButton1.getX() && posX < this.stateButton1.getX() + this.stateButton1.getWidth()) && (posY > gameContainer.getHeight() - (stateButton1.getY() + stateButton1.getHeight()) && posY < gameContainer.getHeight() - stateButton1.getY())) {
             if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                System.out.println("aaaa");
                 stateBasedGame.enterState(Constants.TEAM8);
             }
         }
 
-        /*
+        // Start/Stop-Button prüfen
+        if ((posX > this.startStopButton.getX() && posX < this.startStopButton.getX() + this.startStopButton.getWidth()) &&
+                (posY > gameContainer.getHeight() - (startStopButton.getY() + startStopButton.getHeight()) && posY < gameContainer.getHeight() - startStopButton.getY())) {
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                if (isRunning) {
+                    isRunning = false;
+                    startStopButton.setText("Start");
+                } else {
+                    isRunning = true;
+                    startStopButton.setText("Stop");
+                }
+            }
+        }
+/*
+        // Ball aktualisieren, wenn es läuft
         if (isRunning) {
             float speed = Float.parseFloat(speedButton.getValue());
             float radius = Float.parseFloat(radiusButton.getValue());
+            this.ball.update(delta, speed, radius, gameContainer.getWidth() / 2, gameContainer.getHeight() / 2);
         }
 
-         */
-
+ */
     }
 }

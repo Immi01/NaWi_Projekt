@@ -10,6 +10,7 @@ public class Substanzen implements Actors{
     private int width, height;
     private boolean dragging;
     private int id;
+    private boolean active;
     private Image squareImage1;
     private Image squareImage2;
     private Image squareImage3;
@@ -120,4 +121,11 @@ public class Substanzen implements Actors{
 
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

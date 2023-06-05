@@ -5,6 +5,7 @@ package at.htldornbirn.projects.nawi.Team4.Substanzensimulator;
 import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.gui.MouseOverArea;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -19,6 +20,8 @@ public class Substanzensimulator extends BasicGameState {
     private List<Actors> actors;
     private List<Substanzen> substanzen;
     private Subject subject;
+    private MouseOverArea resetButton;
+    private Image buttonImg;
 
 
     public Substanzensimulator(String  name) {
@@ -34,9 +37,12 @@ public class Substanzensimulator extends BasicGameState {
         substanzen = new ArrayList<>();
         for (int i = 0; i < 5;i++){
             String s = String.valueOf(i);
-            substanzen.add(new Substanzen(70+(150*i), 500, 50, 50, false,s));
+            substanzen.add(new Substanzen(70+(150*i), 450, 90, 90, false,i));
         }
-        subject = new Subject(400, 300, radius);
+        subject = new Subject(400, 250, radius);
+        Image buttonImage = new Image("src/at/htldornbirn/projects/nawi/Team4/Substanzensimulator/images/button.png");
+        this.buttonImg = buttonImage.getScaledCopy(100,60);
+        resetButton = new MouseOverArea(gameContainer, buttonImg, 50, 50, buttonImg.getWidth(), buttonImg.getHeight());
 
 
     }
@@ -46,12 +52,16 @@ public class Substanzensimulator extends BasicGameState {
         Input input = container.getInput();
         for (Substanzen substanzen : substanzen) {
             if (substanzen.isDragging()) {
-                substanzen.setX(input.getMouseX()-30);
-                substanzen.setY(input.getMouseY()-30);
+                substanzen.setX(input.getMouseX()-50);
+                substanzen.setY(input.getMouseY()-50);
             }
             if (subject.intersects(substanzen)) {
                 // Aktion bei Kollision
-                System.out.println("Quadrat "+substanzen.getId()+" und Kreis überlappen!" );
+             //  System.out.println("Quadrat "+substanzen.getId()+" und Kreis überlappen!" );
+            }
+
+            if(subject.intersects(substanzen) ){
+
             }
         }
 
@@ -66,7 +76,7 @@ public class Substanzensimulator extends BasicGameState {
             substanzen.render(graphics);
         }
 
-
+        resetButton.render(gameContainer, graphics);
 
     }
 
@@ -87,10 +97,25 @@ public class Substanzensimulator extends BasicGameState {
 
     @Override
     public void mouseReleased(int button, int x, int y) {
+
         for (Substanzen substanzen : substanzen) {
+
             substanzen.setDragging(false);
+            if (!dragging && subject.intersects(substanzen)) {
+                substanzen.setX(600);
+                substanzen.setY(800);
+            }
+
+            if (button == Input.MOUSE_LEFT_BUTTON && resetButton.isMouseOver()) {
+                // Setzen Sie alle Quadrate zurück auf ihre Ursprungspositionen
+
+                    substanzen.setPos(70+(150*substanzen.getId()), 450);
+                    dragging = false;
+
+
+
         }
     }
 
 
-}
+}}

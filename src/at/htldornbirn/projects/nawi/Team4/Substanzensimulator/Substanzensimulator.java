@@ -36,7 +36,6 @@ public class Substanzensimulator extends BasicGameState {
         circle = new Circle(x, y, radius);
         substanzen = new ArrayList<>();
         for (int i = 0; i < 5;i++){
-            String s = String.valueOf(i);
             substanzen.add(new Substanzen(70+(150*i), 450, 90, 90, false,i));
         }
         subject = new Subject(400, 250, radius);
@@ -55,14 +54,7 @@ public class Substanzensimulator extends BasicGameState {
                 substanzen.setX(input.getMouseX()-50);
                 substanzen.setY(input.getMouseY()-50);
             }
-            if (subject.intersects(substanzen)) {
-                // Aktion bei Kollision
-             //  System.out.println("Quadrat "+substanzen.getId()+" und Kreis überlappen!" );
-            }
 
-            if(subject.intersects(substanzen) ){
-
-            }
         }
 
 
@@ -74,9 +66,13 @@ public class Substanzensimulator extends BasicGameState {
 
         for (Substanzen substanzen : substanzen) {
             substanzen.render(graphics);
+            if (subject.intersects(substanzen)){
+                subject.consume(substanzen.getId());
+            }
         }
 
         resetButton.render(gameContainer, graphics);
+
 
     }
 
@@ -104,6 +100,7 @@ public class Substanzensimulator extends BasicGameState {
             if (!dragging && subject.intersects(substanzen)) {
                 substanzen.setX(600);
                 substanzen.setY(800);
+                subject.consume(substanzen.getId());
             }
 
             if (button == Input.MOUSE_LEFT_BUTTON && resetButton.isMouseOver()) {

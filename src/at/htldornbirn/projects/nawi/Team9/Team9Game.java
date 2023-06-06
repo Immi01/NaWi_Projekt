@@ -17,6 +17,7 @@ public class Team9Game extends BasicGameState {
     private Rope ropeUp;
     private Button startButton;
     private Button resetButton;
+    private HoverInfo hoverInfo;
 
 
     @Override
@@ -35,6 +36,8 @@ public class Team9Game extends BasicGameState {
         //Button
         startButton = new Button(100, 400, 200, 50, "Start");
         resetButton = new Button(1300, 400, 200, 50, "Reset");
+        hoverInfo = new HoverInfo(10, 30, "Santiago Scheffknecht", "Noel Riedmann");
+
 
 
         //Ground
@@ -60,6 +63,7 @@ public class Team9Game extends BasicGameState {
         inputFieldRN.draw(graphics);
         startButton.render(graphics);
         resetButton.render(graphics);
+        hoverInfo.render(graphics);
 
     }
 
@@ -75,6 +79,8 @@ public class Team9Game extends BasicGameState {
         }
         startButton.update(gameContainer.getInput(), stateBasedGame, delta);
         resetButton.update(gameContainer.getInput(), stateBasedGame, delta);
+        Input input = gameContainer.getInput();
+        hoverInfo.update(input);
     }
 
     @Override

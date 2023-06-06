@@ -170,7 +170,6 @@ public class InclinedPlane extends BasicGameState {
 
         AppGameContainer gc = (AppGameContainer) gameContainer;
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            gc.setDisplayMode(800, 600, false);
             back.changeState();
 
         }

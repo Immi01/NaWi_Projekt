@@ -36,7 +36,7 @@ public class Team9Game extends BasicGameState {
         //Button
         startButton = new Button(100, 400, 200, 50, "Start");
         resetButton = new Button(1300, 400, 200, 50, "Reset");
-        hoverInfo = new HoverInfo(10, 30, "Santiago Scheffknecht", "Noel Riedmann");
+        hoverInfo = new HoverInfo(10, 30, "Scheffknecht Santiago", "Riedmann Noel");
 
 
 

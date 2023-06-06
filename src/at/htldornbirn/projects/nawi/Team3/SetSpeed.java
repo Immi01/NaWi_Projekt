@@ -1,15 +1,18 @@
-package at.htldornbirn.projects.nawi.tools.slider;
+package at.htldornbirn.projects.nawi.Team3;
 
-public class SetAngle implements SliderListener {
+import at.htldornbirn.projects.nawi.tools.slider.SliderListener;
+
+public class SetSpeed implements SliderListener {
 
     private float sliderValue;
 
     @Override
-    public void onChange(float mouseY) {
+    public void onChange(float mouseX) {
         //Berechnet Winkel für die Schiefe Ebene
         //Hier kann individueller Code geschrieben werden der beim bewegen des Sliders ausgeführt wird
-        sliderValue = ((mouseY-200)/20)+10;
+        sliderValue = mouseX;
         System.out.println(sliderValue);
+
     }
 
     //Gibt den Wert des sliders zurück

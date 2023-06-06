@@ -1,5 +1,5 @@
-package at.htldornbirn.projects.nawi.tools.slider;
+package at.htldornbirn.projects.nawi.Team3;
 
 public interface SliderListener {
-    public void onChange(float mouseY);
+    public void onChange(float mouseX);
 }

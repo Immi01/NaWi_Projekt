@@ -2,7 +2,7 @@ package at.htldornbirn.projects.nawi.Team3;
 
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.Graphics;
+
 import org.newdawn.slick.state.StateBasedGame;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ public class Test extends StateBasedGame {
     }
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        addState(new StopingDistance2());
+        addState(new StopingDistance());
 
     }
 

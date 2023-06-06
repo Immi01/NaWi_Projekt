@@ -35,7 +35,7 @@ public class Slider {
         int mouseX = input.getMouseX();
 
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            if (mouseY>this.y && mouseY<this.y+300 && mouseX >this.x && mouseX < this.x+40){
+            if (mouseY>this.y && mouseY<this.y+100 && mouseX >this.x && mouseX < this.x+40){
                 if(this.y >= this.minValue && this.y <= this.maxValue) {
                     this.y = mouseY - 20;
                     for (SliderListener eventlistener : eventListeners) {

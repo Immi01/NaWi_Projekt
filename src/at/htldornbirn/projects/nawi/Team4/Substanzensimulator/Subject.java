@@ -57,7 +57,7 @@ public class Subject implements Actors {
 
     @Override
     public void update(int delta) {
-        // Hier können weitere Logik-Updates für den Kreis durchgeführt werden
+
     }
 
     @Override

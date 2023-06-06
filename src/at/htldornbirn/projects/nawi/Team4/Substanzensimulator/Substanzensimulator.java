@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Substanzensimulator extends BasicGameState {
-    private int x, y; // Position des Quadrats
-    private int radius = 100; // Radius des Kreises
-    private boolean dragging; // Zustand des Quadrats
-    private Circle circle; // Kreisobjekt
+    private int x, y;
+    private int radius = 100;
+    private boolean dragging;
+
     private List<Actors> actors;
     private List<Substanzen> substanzen;
     private Subject subject;
@@ -34,7 +34,7 @@ public class Substanzensimulator extends BasicGameState {
         x = 100;
         y = 100;
         dragging = false;
-        circle = new Circle(x, y, radius);
+
         substanzen = new ArrayList<>();
         for (int i = 0; i < 5;i++){
             substanzen.add(new Substanzen(70+(150*i), 450, 90, 90, false,i));
@@ -119,7 +119,7 @@ public class Substanzensimulator extends BasicGameState {
             }
 
             if (button == Input.MOUSE_LEFT_BUTTON && resetButton.isMouseOver()) {
-                // Setzen Sie alle Quadrate zurück auf ihre Ursprungspositionen
+
 
                     substanzen.setPos(70+(150*substanzen.getId()), 450);
                     dragging = false;

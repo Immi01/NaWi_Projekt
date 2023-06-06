@@ -20,7 +20,6 @@ public class StopingDistance extends BasicGameState {
     private Font headerfont;
 
 
-
     public StopingDistance() throws SlickException {
 
     }
@@ -35,7 +34,6 @@ public class StopingDistance extends BasicGameState {
         this.streetImage = new Image("assets/Street.png");
         this.xCarImage = -100;
         this.headerfont = new TrueTypeFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20), true);
-
 
     }
 
@@ -95,7 +93,9 @@ public class StopingDistance extends BasicGameState {
             }
         }
 
-        this.xCarImage += this.speed / 100 / (float) delta;
+
+        this.xCarImage += this.speed  * (float) delta /100;
+
         if (this.xCarImage > 800) {
             this.xCarImage = -400;
         }

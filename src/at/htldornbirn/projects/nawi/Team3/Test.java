@@ -11,7 +11,6 @@ import java.awt.*;
 public class Test extends StateBasedGame {
 
 
-
     public Test(String name) {
         super(name);
     }

@@ -12,13 +12,12 @@ public class StopingDistance extends BasicGameState {
 
     private Input input;
     private float speed;
-
     private float brakingDistance;
     private Font font;
     private Image carImage;
     private Image streetImage;
     private float xCarImage;
-    private float CarSpeed;
+    private Font headerfont;
 
 
 
@@ -35,8 +34,7 @@ public class StopingDistance extends BasicGameState {
         this.carImage = new Image("assets/Car.png");
         this.streetImage = new Image("assets/Street.png");
         this.xCarImage = -100;
-        this.CarSpeed = this.speed;
-
+        this.headerfont = new TrueTypeFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 20), true);
 
 
     }
@@ -58,7 +56,14 @@ public class StopingDistance extends BasicGameState {
         streetImage.draw(0, 0);
         carImage.draw(this.xCarImage, 320);
 
-        g.drawString("Anhalteweg", 300, 50);
+// Beschreibung
+        g.drawString("Der Anhalteweg ist der Weg, den ein Fahrzeug benötigt, um vollständig zum Stillstand zu kommen,", 50, 120);
+        g.drawString("nachdem der Fahrer eine Bremsung eingeleitet hat.", 50, 135);
+
+// Titel
+        g.setFont(headerfont);
+        g.drawString("Anhalteweg", 300, 30);
+
 
     }
 
@@ -96,7 +101,6 @@ public class StopingDistance extends BasicGameState {
         }
 
 
-
 //Benutzereingabe überprüfen
         if (this.speed < 0) {
             this.speed = 0;
@@ -108,6 +112,7 @@ public class StopingDistance extends BasicGameState {
 // Berechnung des Anhaltewegs
 
         this.brakingDistance = (this.speed / 10) * (this.speed / 10);
+
 
 
     }

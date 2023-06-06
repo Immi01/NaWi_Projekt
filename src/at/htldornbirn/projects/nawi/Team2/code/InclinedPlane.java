@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class InclinedPlane extends BasicGameState {
 
@@ -31,8 +32,11 @@ public class InclinedPlane extends BasicGameState {
     private SetAngle setAngle = new SetAngle();
 
     private Image backgroundImage;
+
     private TrueTypeFont headlineFont;
     private TrueTypeFont writing;
+    private TrueTypeFont errorMessage;
+    private TrueTypeFont copyright;
 
     private boolean calculateButtonPushed;
 
@@ -99,6 +103,12 @@ public class InclinedPlane extends BasicGameState {
         Font headline = new Font("Arial", Font.BOLD, 42);
         headlineFont = new TrueTypeFont(headline, true);
 
+        Font copyrightFont = new Font("Arial", Font.BOLD, 12);
+        this.copyright = new TrueTypeFont(copyrightFont, true);
+
+        Font errorMessageFont = new Font("Arial", Font.BOLD, 30);
+        this.errorMessage = new TrueTypeFont(errorMessageFont, true);
+
         slider.addListener(setAngle);
 
         buttonImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/infoImage.png");
@@ -133,7 +143,7 @@ public class InclinedPlane extends BasicGameState {
         inputFieldWeight.render(graphics);
         inputFieldDistance.render(graphics);
 
-        calculateButton.render(gameContainer, graphics);
+        calculateButton.render(gameContainer, graphics, this.errorMessage, this.writing);
 
         graphics.setColor(Color.black);
         graphics.setFont(headlineFont);
@@ -145,6 +155,9 @@ public class InclinedPlane extends BasicGameState {
             Image scaledExplination = pictureImage.getScaledCopy(0.35f);
             scaledExplination.draw(pictureX, pictureY);
         }
+
+        graphics.setFont(copyright);
+        graphics.drawString("© Jonas Nigg, Luca Grabherr", gameContainer.getWidth()-copyright.getWidth("© Jonas Nigg, Luca Grabherr")-20,gameContainer.getHeight()-copyright.getHeight("© Jonas Nigg, Luca Grabherr")-5);
     }
 
     @Override

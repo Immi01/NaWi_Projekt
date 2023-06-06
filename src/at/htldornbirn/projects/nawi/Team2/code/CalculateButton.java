@@ -53,15 +53,16 @@ public class CalculateButton {
         }
     }
 
-    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+    public void render(GameContainer gameContainer, Graphics graphics, TrueTypeFont errorMessageFont, TrueTypeFont writing) throws SlickException {
         graphics.setColor(Color.black);
-        graphics.fillRect(this.positionX,this.positionY,this.width,this.height);
+        graphics.fillRoundRect(this.positionX,this.positionY,this.width,this.height,4);
         graphics.setColor(Color.white);
         graphics.drawString(this.buttonName,this.positionX + (this.width-this.buttonStringWidth)/2,this.positionY+(this.height-this.buttonStringHeight)/2);
         graphics.setColor(Color.red);
-        //int errorMassageWidth = this.writing.getWidth(this.errorMassage);
-        //int errorMassageHeight = this.writing.getHeight(this.errorMassage);
-        graphics.drawString(this.errorMassage,200,200);
+        graphics.setFont(errorMessageFont);
+        int errorMassageWidth = errorMessageFont.getWidth(this.errorMassage);
+        graphics.drawString(this.errorMassage,(gameContainer.getWidth()-errorMassageWidth)/2,300);
+        graphics.setFont(writing);
         graphics.setColor(Color.white);
         calculations.render(gameContainer,graphics);
     }

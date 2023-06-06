@@ -21,8 +21,8 @@ public class HoverInfo {
     public HoverInfo(float x, float y, String creator1, String creator2) {
         this.x = x;
         this.y = y;
-        this.width = 300; // Adjust width as needed
-        this.height = 20; // Adjust height as needed
+        this.width = 300;
+        this.height = 20;
         this.font = defaultFont();
         this.creatorInfo = "Creators:\n" + creator1 + ", \n" + creator2;
         this.isHovered = false;
@@ -30,9 +30,9 @@ public class HoverInfo {
 
     public void render(Graphics graphics) {
         graphics.setColor(Color.cyan);
-        graphics.fillRect(10,30,37,20);
+        graphics.fillRect(10, 30, 37, 20);
         graphics.setColor(Color.black);
-        graphics.drawString(" info",10,30);
+        graphics.drawString(" info", 10, 30);
         if (isHovered) {
             graphics.setColor(Color.cyan);
             graphics.fillRect(x, y, width, height);

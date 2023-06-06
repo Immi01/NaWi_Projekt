@@ -134,6 +134,7 @@ public class InclinedPlane2 extends  BasicGameState{
 
         calculateButton.render(gameContainer, graphics, this.writing,this.writing);
 
+
         graphics.setColor(Color.black);
         graphics.setFont(headlineFont);
         graphics.drawString("Schiefe Ebene", stateBasedGame.getContainer().getWidth()/2-headlineFont.getWidth("Schiefe Ebene")/2, 20);

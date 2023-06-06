@@ -27,7 +27,7 @@ public class Explanation extends BasicGameState {
 
         float buttonX = gameContainer.getWidth() / 2.5f;
         float buttonY = gameContainer.getHeight() * 0.8f;
-        stateButton1 = new Button(buttonX, buttonY, 400, 100, "Go to sandbox", Color.green);
+        stateButton1 = new Button(buttonX, buttonY, 400, 100, "Go to Rotation-Game", Color.green);
 
         actors.add(stateButton1);
 

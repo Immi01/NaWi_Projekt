@@ -10,17 +10,18 @@ import java.util.List;
 
 public class Slider {
     private float x, y;
-    private float minValue, maxValue;
+    private float minValue, maxValue, width;
     private List<SliderListener> eventListeners;
 
 
 
-    public Slider(float x, float y, int minValue, int maxValue) {
+    public Slider(float x, float y, int minValue, int maxValue, float width) {
         this.x = x;
         this.y = y;
         this.minValue =minValue+y;
         this.maxValue =maxValue+y;
         this.eventListeners = new ArrayList<>();
+        this.width = width;
     }
 
 
@@ -56,6 +57,22 @@ public class Slider {
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        graphics.fillOval(this.x, this.y, 40, 40);
+        graphics.fillOval(this.x, this.y, width, width);
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getMaxValue() {
+        return maxValue;
+    }
+
+    public float getWidth() {
+        return width;
     }
 }

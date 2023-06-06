@@ -7,6 +7,8 @@ import at.htldornbirn.projects.nawi.Team6.sinefunction.Explanation;
 import at.htldornbirn.projects.nawi.Team6.sinefunction.Interference;
 import at.htldornbirn.projects.nawi.Team6.sinefunction.SetupSineFunction;
 import at.htldornbirn.projects.nawi.Team6.sinefunction.SineFunctionSandBox;
+import at.htldornbirn.projects.nawi.Team7.Team7;
+import at.htldornbirn.projects.nawi.Team7.Team7Game;
 import at.htldornbirn.projects.nawi.Team8.Sandbox;
 import at.htldornbirn.projects.nawi.navigation.Navigation;
 import org.newdawn.slick.AppGameContainer;
@@ -31,6 +33,7 @@ public class NaWiGame extends StateBasedGame {
         addState(new SineFunctionSandBox());
         addState(new Interference());
         addState(new Sandbox());
+        addState(new Team7());
 
 
 

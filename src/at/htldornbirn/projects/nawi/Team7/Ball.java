@@ -27,8 +27,25 @@ public class Ball implements ProjectActor{
         this.weight = weight;
         this.positionsX = new ArrayList<>();
         this.positionsY = new ArrayList<>();
+        //System.out.println(this.toString());
+        System.out.println(this.toString());
     }
 
+    @Override
+    public String toString() {
+        return "Ball{" +
+                "t=" + t +
+                ", y=" + y +
+                ", x=" + x +
+                ", speedY=" + speedY +
+                ", Gforce=" + Gforce +
+                ", radius=" + radius +
+                ", speedX=" + speedX +
+                ", weight=" + weight +
+                ", positionsX=" + positionsX +
+                ", positionsY=" + positionsY +
+                '}';
+    }
 
     @Override
     public void render(Graphics graphics) {
@@ -69,5 +86,7 @@ public class Ball implements ProjectActor{
         return weight;
     }
 
-
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
 }

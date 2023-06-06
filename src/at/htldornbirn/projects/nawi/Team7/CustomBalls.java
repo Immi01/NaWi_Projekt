@@ -8,8 +8,9 @@ public class CustomBalls implements ProjectActor{
     private float distanceBetweenBallAndRectangle;
     private float weight;
     private float radius;
+    private float id;
 
-    public CustomBalls(float x, float y, float height, float width, float weight, float radius) {
+    public CustomBalls(float x, float y, float height, float width, float weight, float radius, float id) {
         this.x = x;
         this.y = y;
         this.height = height;
@@ -17,6 +18,7 @@ public class CustomBalls implements ProjectActor{
         this.distanceBetweenBallAndRectangle = 20;
         this.weight = weight;
         this.radius = radius;
+        this.id = id;
     }
 
     @Override
@@ -67,5 +69,21 @@ public class CustomBalls implements ProjectActor{
 
     public float getRadius() {
         return radius;
+    }
+
+    public float getId() {
+        return id;
+    }
+
+    public void setId(float id) {
+        this.id = id;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public void setRadius(float radius) {
+        this.radius = radius;
     }
 }

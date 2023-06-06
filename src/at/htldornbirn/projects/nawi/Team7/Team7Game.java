@@ -15,8 +15,9 @@ public class Team7Game extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        //addState(new Team7());
         this.addState(new Sandbox());
+        this.addState(new Team7());
+
     }
 
     public static void main(String[] args) throws SlickException {

@@ -1,5 +1,4 @@
 package at.htldornbirn.projects.nawi.Team8;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

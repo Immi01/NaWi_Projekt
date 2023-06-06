@@ -3,6 +3,7 @@ package at.htldornbirn.projects.nawi.tools.button;
 import at.htldornbirn.projects.nawi.Constants;
 import at.htldornbirn.projects.nawi.navigation.Actor;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -28,7 +29,7 @@ public class BackButton implements Actor {
     @Override
     public void update(int delta) {
         mouseX = Mouse.getX();
-        mouseY = (Mouse.getY() - 600) * -1;
+        mouseY = (Mouse.getY() - Display.getHeight()) * -1;
     }
 
 

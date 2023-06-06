@@ -148,8 +148,11 @@ public class InclinedPlane2 extends  BasicGameState{
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        AppGameContainer gc = (AppGameContainer) gameContainer;
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            gc.setDisplayMode(800, 600, false);
             back.changeState();
+
         }
 
         if (sled.isAtBottom()){

@@ -65,7 +65,7 @@ public class Navigation extends BasicGameState implements SliderListener {
 
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             ChangeState(stateBasedGame,gameContainer);
-            back.changeState();
+            //back.changeState();
         }
         for (Actor actor : actors) {
             actor.update(delta);
@@ -89,11 +89,14 @@ public class Navigation extends BasicGameState implements SliderListener {
                 //System.out.println(map.get(i));
                 switch (i+1){
                     case 2:
-                        gc.setDisplayMode(1500,800, false);
-
+                        gc.setDisplayMode(1500, 800, false);
+                        stateBasedGame.enterState(map.get(i));
+                    break;
                     case 6:
                         gc.setDisplayMode(1280, 960, false);
                         stateBasedGame.enterState(map.get(i));
+                        System.out.println(i+1);
+                        break;
                 }
 
 

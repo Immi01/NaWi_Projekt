@@ -87,7 +87,7 @@ public class StopingDistance extends BasicGameState {
         }
         if (input.isKeyDown(Input.KEY_SPACE)) {
             this.xCarImage += this.speed / 90 / (float) delta;
-            this.speed -= 1;
+            this.speed -= 2;
             if (this.speed < 0) {
                 this.speed = 0;
             }

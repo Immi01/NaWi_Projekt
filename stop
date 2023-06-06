@@ -1,0 +1,264 @@
+[33mcommit 17416825cc2e109700e0f5da89b12faacad4f313[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/Team9[m[33m, [m[1;31morigin/feature/Team9[m[33m)[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Fri Jun 2 14:22:06 2023 +0200
+
+    - rope now has a realistic flow
+
+[33mcommit 1398425acb5f2f12bfc95fd3de4b0d52a8801e37[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Fri Jun 2 13:44:11 2023 +0200
+
+    Pferd isch stuck in boden brucht stephorse
+
+[33mcommit c70d6e071afe0cdb76b8ddf7e9bab4cfc28cd4df[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Fri Jun 2 13:39:09 2023 +0200
+
+    - rope length changed
+
+[33mcommit 3ee34440e362360c1d2f4700295cfdc45b32d612[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Thu Jun 1 09:49:16 2023 +0200
+
+    - box is now moving syncronised to the rope
+
+[33mcommit 0d365da6bc43dcff0bacf45afed59b678de3c712[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Thu Jun 1 08:45:10 2023 +0200
+
+    - added start button including (radius, color, onclick color and check wheter it's pressed or not)
+
+[33mcommit 625a53d4f781bd644464377a724c7b2a6d50c996[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Wed May 31 10:38:46 2023 +0200
+
+    - added box movement ability 2.0
+
+[33mcommit 7b9b03aa39119b5159b66198ad361ad971ed6433[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Wed May 31 10:33:33 2023 +0200
+
+    - added box movement ability
+
+[33mcommit a065a07ead8b78f97cff5bf8eed0ba02b5d604f9[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Wed May 31 10:21:39 2023 +0200
+
+    - added box
+
+[33mcommit 982dd4646328d4e3f9621c9557b60056959dbde1[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Wed May 31 10:09:52 2023 +0200
+
+    min pferd rennt jetzt aba bliebt ne stau:(
+
+[33mcommit fd51017224dc425a8d6f20eadfc89d88dab43f6f[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Tue May 30 11:29:30 2023 +0200
+
+    - box is npt appearing
+
+[33mcommit 08b3fa54dc6c6844bdd2ac1d45e51df996c5de89[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 11:17:17 2023 +0200
+
+    horse eingefügt
+
+[33mcommit 8e15364ba76b61278543d386015747aca86d8cd6[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 10:43:31 2023 +0200
+
+    pictures changed
+
+[33mcommit 744527f1b7d6b4365836d353e5db5a79dfd3cdde[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 10:40:26 2023 +0200
+
+    itemlist exceled
+
+[33mcommit 9e08d220eb26ee696a2edc853dde811b6e5e2434[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Tue May 30 10:36:38 2023 +0200
+
+    - fixed item list
+
+[33mcommit 6a507895220eaf91736b54d8a26024cc7c286074[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 10:11:54 2023 +0200
+
+    itemlist exceled
+
+[33mcommit 29bfa9b7076d0f6d0d8e6fe0965f650a7c27288f[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 10:06:08 2023 +0200
+
+    images added and reworked
+
+[33mcommit 4a544691c53a8605f82fcaf764f095932fa00b88[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 09:48:08 2023 +0200
+
+    Angefangen mit neuem Groundsend nudes
+
+[33mcommit c3686bfe9eed1813ab82b1051f93bc6311310735[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 09:46:55 2023 +0200
+
+    Bilder eingefügt
+
+[33mcommit e60dac5e1b760545511f6f0b0a9d6866eb560e55[m
+Merge: f2e437c 3805de3
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 09:38:11 2023 +0200
+
+    design überarbeitung
+
+[33mcommit f2e437c765f826113f0803a2d1d6251e23475302[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 30 09:35:13 2023 +0200
+
+    design überarbeitung
+
+[33mcommit 3aa59136fa12cc093e2cc7334942b863a839f5dc[m
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 9 11:35:18 2023 +0200
+
+    Angefangen mit neuem Groundsend nudes
+
+[33mcommit 3805de3eb5de5fb32148102a32e5c8df641eb197[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Tue May 9 11:35:08 2023 +0200
+
+    - Small Hotfix (small Bug with height still there)
+
+[33mcommit 7f46ddeeda7685109f4bad369ff174eb97dc1529[m
+Merge: abf4159 7b355fb
+Author: santiago <santiago.scheffknecht@student.htldornbirn.at>
+Date:   Tue May 9 11:24:10 2023 +0200
+
+    Merge branch 'feature/Team2' of https://github.com/Immi01/NaWi_Projekt into feature/Team9
+
+[33mcommit abf4159702283f035032ad41e93a78912fcf4f15[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Tue May 9 11:18:52 2023 +0200
+
+    -- Für Santi
+
+[33mcommit 7b355fb71ad0e693a84605b706b20d10e95f7864[m
+Author: Mihai <mihai.muscalu@student.htldornbirn.at>
+Date:   Tue May 9 10:41:27 2023 +0200
+
+    after merge 1
+
+[33mcommit 17f44f1d7accea698c703db41809ab5ea74df7d9[m
+Merge: e227688 24a6a42
+Author: Mihai <mihai.muscalu@student.htldornbirn.at>
+Date:   Tue May 9 10:26:51 2023 +0200
+
+    JDK
+
+[33mcommit 24a6a4255b1ca600994f0ba396f4ad37975b1a85[m
+Author: Mihai <mihai.muscalu@student.htldornbirn.at>
+Date:   Tue May 9 10:21:35 2023 +0200
+
+    idea ignore
+
+[33mcommit 445219b8a39bbe544d4e030c54e60b79761fa3b5[m
+Author: Luca <luca.grabherr@student.htldornbirn.at>
+Date:   Tue May 9 10:18:22 2023 +0200
+
+    Snowflake-animation
+
+[33mcommit 88c2523a13d3e86d2f3d8437ce29f790647f0890[m
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Tue May 9 10:17:51 2023 +0200
+
+    InputField erweitert
+
+[33mcommit 5926a222960c5edf2c548c342f20100e17e0f622[m
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Tue May 9 10:03:49 2023 +0200
+
+    Bugfixes
+
+[33mcommit 43c34158132cece75419acea0888d7540f6103bd[m
+Author: Noel Riedmann <noel.riedmann@student.htldornbirn.at>
+Date:   Fri May 5 14:47:30 2023 +0200
+
+    - PS calculation still not working for some reason :C
+
+[33mcommit 18917fec38fcd4ef3584e696d0609771b7af6410[m
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Fri May 5 14:41:30 2023 +0200
+
+    InputField started
+
+[33mcommit 513a3529f4a57e56f11a6006ea341f02d86f6b65[m
+Author: Luca <luca.grabherr@student.htldornbirn.at>
+Date:   Fri May 5 13:20:55 2023 +0200
+
+    Testii
+
+[33mcommit 3e580fabc77cbb19554bbf43e3d717470b90cd2a[m
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Fri May 5 13:20:11 2023 +0200
+
+    Balance
+
+[33mcommit 31fafd9538a600abcd1124591ff5cb4f94bc97fa[m
+Author: Luca <luca.grabherr@student.htldornbirn.at>
+Date:   Tue May 2 10:51:23 2023 +0200
+
+    Testy
+
+[33mcommit 259ef5b775f3745b4af904d08b30de72923b43e0[m
+Author: Luca <luca.grabherr@student.htldornbirn.at>
+Date:   Tue May 2 10:32:35 2023 +0200
+
+    Testi
+
+[33mcommit b2bb2145bf8d7316ff4a1ef892388c1e2f5b3a31[m
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Tue May 2 10:31:39 2023 +0200
+
+    Change
+
+[33mcommit a9ae9b58e4162a773535594393c4cdb295779341[m
+Author: Luca <luca.grabherr@student.htldornbirn.at>
+Date:   Tue May 2 10:25:56 2023 +0200
+
+    Luca-Merge
+
+[33mcommit c78a101a84b2e13af2cffd60003bfec2f8003cc7[m
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Tue May 2 10:19:06 2023 +0200
+
+    Merge complete
+
+[33mcommit 3917248ded8bb50f2605d87ef2b18e1212bfa290[m
+Merge: eb42442 6d6bc39
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Tue May 2 10:16:37 2023 +0200
+
+    Merge branch 'feature/Team2' of https://github.com/Immi01/NaWi_Projekt into feature/Team2
+
+[33mcommit eb424429e1cbb5f9683694665b948911a0e39f60[m
+Author: JonasN05 <jonas.nigg@student.htldornbirn.at>
+Date:   Tue May 2 10:15:45 2023 +0200
+
+    IP1 Merge
+
+[33mcommit 6d6bc395fea4432247833fda90aa5953a72970f9[m
+Merge: 4a2691b ac1da72
+Author: Luca <luca.grabherr@student.htldornbirn.at>
+Date:   Tue May 2 10:05:27 2023 +0200
+
+    BasicState
+
+[33mcommit 4a2691b6f6935752c6d22adb770346bc02cf4e74[m
+Author: Luca <luca.grabherr@student.htldornbirn.at>
+Date:   Tue May 2 10:04:48 2023 +0200
+
+    BasicState
+
+[33mcommit 7ab99f0ee18cf162deb

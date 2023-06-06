@@ -5,11 +5,12 @@ import org.newdawn.slick.Graphics;
 
 import java.util.Objects;
 
-public class ItemList implements Actor{
+public class ItemList implements Actor {
     private Team9Game team9Game;
     private Calculations calculations;
     private int InfoFieldX = 1320;
     private int InfoFieldY = 0;
+
     public ItemList(Team9Game game) {
         this.team9Game = game;
         this.calculations = new Calculations(team9Game);
@@ -18,7 +19,7 @@ public class ItemList implements Actor{
     @Override
     public void render(Graphics graphics) {
         graphics.setColor(Color.black); // setting color of list
-        if (team9Game.getInputFieldRN().getText() == null || Objects.equals(team9Game.getInputFieldRN().getText() , "")) {
+        if (team9Game.getInputFieldRN().getText() == null || Objects.equals(team9Game.getInputFieldRN().getText(), "")) {
             graphics.drawString("Weight: " + "0" + " kg", InfoFieldX, InfoFieldY + 40);
         } else {
             graphics.drawString("Weight: " + calculations.getInputValue() + " kg", InfoFieldX, InfoFieldY + 40);

@@ -16,6 +16,7 @@ public class Team9Game extends BasicGameState {
     private ItemList itemList;
     private Rope ropeUp;
     private Button startButton;
+    private Button resetButton;
 
 
     @Override
@@ -32,7 +33,9 @@ public class Team9Game extends BasicGameState {
         // Rope
         ropeUp = new Rope(this);
         //Button
-        startButton = new Button(1300, 400, 200, 50, "Start");
+        startButton = new Button(100, 400, 200, 50, "Start");
+        resetButton = new Button(1300, 400, 200, 50, "Reset");
+
 
         //Ground
         GroundSkyNew groundimagel = new GroundSkyNew();
@@ -56,6 +59,7 @@ public class Team9Game extends BasicGameState {
         }
         inputFieldRN.draw(graphics);
         startButton.render(graphics);
+        resetButton.render(graphics);
 
     }
 
@@ -70,6 +74,7 @@ public class Team9Game extends BasicGameState {
             actor.update(delta);
         }
         startButton.update(gameContainer.getInput(), stateBasedGame, delta);
+        resetButton.update(gameContainer.getInput(), stateBasedGame, delta);
     }
 
     @Override
@@ -104,5 +109,9 @@ public class Team9Game extends BasicGameState {
 
     public InputFieldRN getInputFieldRN() {
         return inputFieldRN;
+    }
+
+    public Button getResetButton() {
+        return resetButton;
     }
 }

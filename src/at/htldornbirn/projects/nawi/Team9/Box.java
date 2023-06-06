@@ -16,7 +16,6 @@ public class Box implements Actor {
     private Team9Game team9Game;
 
 
-
     public Box(Team9Game game) throws SlickException {
         Image boxy = new Image("src/at/htldornbirn/projects/nawi/Team9/images/box.jpg");
         this.box = boxy.getScaledCopy(100, 100);
@@ -30,14 +29,15 @@ public class Box implements Actor {
 
     @Override
     public void update(int delta) {
-        if (team9Game.getStartButton().isPressed()){
+        if (team9Game.getStartButton().isPressed()) {
             this.moving = true;
-        }
-        else if (moving &&y >= 545){
-            y -= (float)delta/speed;
-        }
-        else if (moving){
+        } else if (moving && y >= 545) {
+            y -= (float) delta / speed;
+        } else if (moving) {
             moving = false;
+        }
+        if (team9Game.getResetButton().isPressed()) {
+            y = 695;
         }
     }
 }

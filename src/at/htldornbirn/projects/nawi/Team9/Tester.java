@@ -17,7 +17,7 @@ public class Tester extends StateBasedGame {
 
     public static void main(String[] args) throws SlickException {
         AppGameContainer container = new AppGameContainer(new Tester("NaWi Portal"));
-        container.setDisplayMode(1600,800,false);
+        container.setDisplayMode(1600, 800, false);
         container.start();
     }
 }

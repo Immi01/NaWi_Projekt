@@ -28,8 +28,8 @@ public class Rope implements Actor {
         graphics.setColor(Color.black);
         graphics.drawLine(x1, y1, x2, y2);
         graphics.drawLine(x3, y3, x4, y4);
-        graphics.drawOval(750,400,50,50);
-        graphics.drawLine(795,440,850,500);
+        graphics.drawOval(750, 400, 50, 50);
+        graphics.drawLine(795, 440, 850, 500);
     }
 
     @Override
@@ -54,6 +54,12 @@ public class Rope implements Actor {
             x4 += (float) delta / speed;
         } else if (isMoving) {
             isMoving = false;
+        }
+
+        if (team9Game.getResetButton().isPressed()) {
+            y1 = 700;
+            y3 = 700;
+            x4 = 925;
         }
     }
 }

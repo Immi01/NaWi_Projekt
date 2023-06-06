@@ -18,7 +18,7 @@ public class Horse implements Actor {
     private Image realhorse;
 
 
-    public Horse (Team9Game team9Game) throws SlickException {
+    public Horse(Team9Game team9Game) throws SlickException {
         Image temp = new Image("src/at/htldornbirn/projects/nawi/Team9/images/copyrightisgay.png");
         this.realhorse = temp.getScaledCopy(200, 183);
         this.team9Game = team9Game;
@@ -26,21 +26,23 @@ public class Horse implements Actor {
 
     @Override
     public void render(Graphics graphics) {
-        realhorse.draw(x,500-183);
+        realhorse.draw(x, 500 - 183);
     }
 
     @Override
     public void update(int delta) {
         // Führe Aktualisierungslogik für das Pferd aus (z.B. Bewegung, Animation, etc.)
-        if (team9Game.getStartButton().isPressed()){
+        if (team9Game.getStartButton().isPressed()) {
             this.moving = true;
 
-        }
-        else if (moving &&x <= 1050){
-            x += (float)delta/mspeed;
-        }
-        else if (moving){
+        } else if (moving && x <= 1050) {
+            x += (float) delta / mspeed;
+        } else if (moving) {
             moving = false;
+        }
+
+        if (team9Game.getResetButton().isPressed()) {
+            x = 900;
         }
 
     }

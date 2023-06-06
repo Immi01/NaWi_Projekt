@@ -44,7 +44,7 @@ public class Calculations implements Actor {
 
 
     public double getWatt() {
-        return watt;
+        return Math.round((watt) * 100.0) / 100.0;
     }
 
     public double getPs() {

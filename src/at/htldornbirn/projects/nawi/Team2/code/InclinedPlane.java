@@ -168,10 +168,8 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
 
-        AppGameContainer gc = (AppGameContainer) gameContainer;
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             back.changeState();
-
         }
         if (sled.isAtBottom()){
             calculateButton.setPushed(false);
@@ -184,28 +182,15 @@ public class InclinedPlane extends BasicGameState {
             actors.update(delta);
         }
 
+        buttonImage.draw(buttonX, buttonY);
+        pictureImage.draw(buttonX, buttonY);
+
         this.calculateButtonPushed = calculateButton.isPushed();
-        //System.out.println(calculateButtonPushed);
-
-
 
         slider.update(gameContainer, setAngle.getSliderValue(), calculateButtonPushed);
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
-
-        buttonImage.draw(buttonX, buttonY);
-        pictureImage.draw(buttonX, buttonY);
-        Input input = gameContainer.getInput();
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            int mouseX = input.getMouseX();
-            int mouseY = input.getMouseY();
-            if (mouseX >= buttonX && mouseX <= buttonX + buttonImage.getWidth()
-                    && mouseY >= buttonY && mouseY <= buttonY + buttonImage.getHeight()) {
-                showPicture = !showPicture;
-            }
-        }
-
     }
 
     public void keyPressed(int key, char c) {
@@ -229,12 +214,17 @@ public class InclinedPlane extends BasicGameState {
             this.inputFieldWeight.setHasFocus(false);
         }
 
-
         if (x >= this.inputFieldDistance.getX() && x <= this.inputFieldDistance.getX() + this.inputFieldDistance.getRectWidth()
                 && y >= this.inputFieldDistance.getY() && y <= this.inputFieldDistance.getY() + this.inputFieldDistance.getRectHeight() && calculateButtonPushed != true) {
             this.inputFieldDistance.setHasFocus(true);
         } else {
             this.inputFieldDistance.setHasFocus(false);
+        }
+
+        int mouseX = input.getMouseX();
+        int mouseY = input.getMouseY();
+        if (mouseX >= buttonX && mouseX <= buttonX + buttonImage.getWidth() && mouseY >= buttonY && mouseY <= buttonY + buttonImage.getHeight()) {
+            showPicture = !showPicture;
         }
     }
 }

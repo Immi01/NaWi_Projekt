@@ -57,6 +57,7 @@ public class Rope implements Actor {
         }
 
         if (team9Game.getResetButton().isPressed()) {
+            this.isMoving = false;
             y1 = 700;
             y3 = 700;
             x4 = 925;

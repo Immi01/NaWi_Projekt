@@ -42,6 +42,7 @@ public class Horse implements Actor {
         }
 
         if (team9Game.getResetButton().isPressed()) {
+            this.moving = false;
             x = 900;
         }
 

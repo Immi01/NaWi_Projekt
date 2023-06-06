@@ -37,6 +37,7 @@ public class Box implements Actor {
             moving = false;
         }
         if (team9Game.getResetButton().isPressed()) {
+            this.moving = false;
             y = 695;
         }
     }

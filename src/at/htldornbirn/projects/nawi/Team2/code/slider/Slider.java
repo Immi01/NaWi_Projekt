@@ -42,4 +42,6 @@ public class Slider {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.fillOval(this.x, this.y, 40, 40);
     }
+
+
 }

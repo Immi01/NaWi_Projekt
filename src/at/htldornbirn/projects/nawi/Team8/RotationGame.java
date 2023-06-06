@@ -2,6 +2,8 @@ package at.htldornbirn.projects.nawi.Team8;
 
 import at.htldornbirn.projects.nawi.Constants;
 
+import at.htldornbirn.projects.nawi.Team8.slider.SetAngle;
+import at.htldornbirn.projects.nawi.Team8.slider.Slider;
 import at.htldornbirn.projects.nawi.Team8.Actor;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
@@ -21,6 +23,9 @@ public class RotationGame extends BasicGameState {
     private ValueButton speedButton;
     private ValueButton radiusButton;
     private boolean isRunning;
+    private Slider slider;
+    private SetAngle setAngle = new SetAngle();
+
 
     private AngelCodeFont font;
 
@@ -32,6 +37,7 @@ public class RotationGame extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
+
 
         // Button für den Seitenwechsel
         float buttonX = gameContainer.getWidth() / 2.5f;
@@ -48,23 +54,32 @@ public class RotationGame extends BasicGameState {
         startStopButton = new Button(startStopButtonX, startStopButtonY, 200, 100, "Start/Stopp", Color.orange);
         actors.add(startStopButton);
 
-        // Button für Geschwindigkeit
+        // Slider für Geschwindigkeit
         float speedButtonX = gameContainer.getWidth() / 4f;
-        float speedButtonY = gameContainer.getHeight() * 1f;
+        float speedButtonY = gameContainer.getHeight() * 4f;
         speedButton = new ValueButton(speedButtonX, speedButtonY, "Speed");
         actors.add(speedButton);
 
-        // Button für Radius
+        // Slider für die Geschwindigkeit
+
+        this.slider = new Slider(10, 260, 0, 300);
+        slider.addListener(setAngle);
+        slider.setColor(Color.orange);
+
+
+        // Slider für Radius
         float radiusButtonX = 80;
-        float radiusButtonY = gameContainer.getHeight() / 8f;
+        float radiusButtonY = gameContainer.getHeight() / 10f;
         radiusButton = new ValueButton(radiusButtonX, radiusButtonY, "Radius");
         actors.add(radiusButton);
+
+        // Slider für den Radius
+
 
 
         // Ball initialisieren
 
         float centerX = gameContainer.getWidth() / 2;
-
         float centerY = gameContainer.getHeight() / 2;
         float radius = 100;
         ball = new Ball(centerX, centerY, radius);
@@ -83,9 +98,12 @@ public class RotationGame extends BasicGameState {
             actor.render(graphics);
         }
 
+        slider.render(gameContainer, graphics);
+
+
         // Geschwindigkeit und Radius anzeigen
-        font.drawString(10, 100, "Geschwindigkeit: " + speedButton.getValue());
-        font.drawString(10, 140, "Radius: " + radiusButton.getValue());
+        font.drawString(10, 200, "Geschwindigkeit: " + speedButton.getValue());
+        font.drawString(10, 350, "Radius: " + radiusButton.getValue());
 
 
         stateButton1.render(graphics);
@@ -94,6 +112,9 @@ public class RotationGame extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+
+        slider.update(gameContainer);
+
         Input input = gameContainer.getInput();
         int posX = Mouse.getX();
         int posY = Mouse.getY();

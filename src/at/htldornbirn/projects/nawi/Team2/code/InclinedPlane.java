@@ -5,6 +5,7 @@ import at.htldornbirn.projects.nawi.Team2.code.inputField.InputField;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
 import at.htldornbirn.projects.nawi.navigation.Actor;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -28,6 +29,8 @@ public class InclinedPlane extends BasicGameState {
     private InputField inputFieldDistance;
     private CalculateButton calculateButton;
     private Sled sled;
+    private Input input;
+    private BackButton back;
 
     private SetAngle setAngle = new SetAngle();
 
@@ -64,6 +67,7 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
 
+        input = gameContainer.getInput();
         this.actors = new ArrayList<>();
         Random random = new Random();
 
@@ -82,7 +86,8 @@ public class InclinedPlane extends BasicGameState {
         this.speedSled = 5.0f;
         this.angleSled = setAngle.getSliderValue()*-1;
         sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
-
+        back = new BackButton(50,1100,stateBasedGame);
+        this.actors.add(back);
 
 
         backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/background3.jpg");
@@ -162,6 +167,13 @@ public class InclinedPlane extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+
+        AppGameContainer gc = (AppGameContainer) gameContainer;
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            gc.setDisplayMode(800, 600, false);
+            back.changeState();
+
+        }
         if (sled.isAtBottom()){
             calculateButton.setPushed(false);
             sled.setAtBottom(false);

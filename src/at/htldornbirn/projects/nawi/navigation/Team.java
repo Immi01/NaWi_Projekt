@@ -8,16 +8,18 @@ public class Team implements Actor{
 
     private float x;
     private float y;
-    private int a;
+    private int height;
+    private int width;
     private int teamNr;
     private Image image;
 
-    public Team(float x, float y, int a, int teamNr) throws SlickException {
+    public Team(float x, float y, int width, int height, int teamNr) throws SlickException {
         this.x = x;
         this.y = y;
-        this.a = a;
+        this.width = width;
+        this.height = height;
         this.teamNr = teamNr;
-        image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg").getScaledCopy(a-1,a-1);
+        image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg").getScaledCopy(width-1,height-1);
     }
 
     public float getX() {
@@ -31,7 +33,7 @@ public class Team implements Actor{
 
     @Override
     public void render(Graphics graphics) {
-        graphics.drawRect(this.x,this.y,this.a,this.a);
+        graphics.drawRect(this.x,this.y,this.width,this.height);
         image.draw(x+1,y+1);
     }
 

@@ -43,11 +43,11 @@ public class Navigation extends BasicGameState implements SliderListener {
         input = gameContainer.getInput();
         this.actors = new ArrayList<>();
         map = new Hashtable<Integer, Integer>();
-        createTeams();
+        createTeams(gameContainer);
         image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg");
         scaled = image.getScaledCopy(59,59);
-        back = new BackButton(100,100,stateBasedGame);
-        actors.add(back);
+        //back = new BackButton(100,100,stateBasedGame);
+        //actors.add(back);
     }
 
     @Override
@@ -57,7 +57,6 @@ public class Navigation extends BasicGameState implements SliderListener {
             actor.render(graphics);
         }
 
-        scaled.draw(76,101);
 
     }
 
@@ -83,15 +82,15 @@ public class Navigation extends BasicGameState implements SliderListener {
         AppGameContainer gc = (AppGameContainer) gameContainer;
         mouseX = Mouse.getX();
         mouseY = (Mouse.getY() - 600) * -1;
-        anim = new Animation(100,75,50);
-        actors.add(anim);
+
 
         for (int i = 0; i < actors.size(); i++) {
             ObjX = actors.get(i).getX();
             ObjY = actors.get(i).getY();
-            if ((mouseX >= ObjX && mouseX < ObjX + 60) && (mouseY >= ObjY && mouseY < ObjY + 60)) {
+
+            if ((mouseX >= ObjX && mouseX < ObjX + 160) && (mouseY >= ObjY && mouseY < ObjY + 120)) {
                 //System.out.println(map.get(i));
-                switch (i+1){
+                /*switch (i+1){
                     case 2:
                         gc.setDisplayMode(1500, 800, false);
                         stateBasedGame.enterState(map.get(i));
@@ -101,9 +100,9 @@ public class Navigation extends BasicGameState implements SliderListener {
                         stateBasedGame.enterState(map.get(i));
                         System.out.println(i+1);
                         break;
-                }
-
-
+                }*/
+                anim = new Animation((int)actors.get(i).getY(),(int)actors.get(i).getX(),160,120, gameContainer);
+                actors.add(anim);
 
 
                 return;
@@ -112,20 +111,34 @@ public class Navigation extends BasicGameState implements SliderListener {
         System.out.println("no OBJ clicked");
     }
 
-    public void createTeams() throws SlickException {
-        int y = 100;
-        int x = 75;
+    public void createTeams(GameContainer gc) throws SlickException {
+        int columns = 3;
+        int column = 1;
+
+        int width = 160;
+        int height = 120;
+        int x = gc.getWidth()/(columns+1) - width/2;
+        //int x = (gc.getWidth()*100/90) / columns - width;
+        System.out.println(gc.getWidth());
+        int y = gc.getHeight()/(columns+1) - height/2;
+
+        int xGrowth = gc.getWidth() / (columns+1);
+        int yGrowth = gc.getHeight() / (columns+1);
+
         for (int i = 0; i < 9; i++) {
-            Team team = new Team(x, y, 60,i);
+            Team team = new Team(x, y, width,height,i);
             actors.add(team);
             map.put(i,TEAMS[i]);
 
-            if (x == 675) {
-                x = 0;
-                y = 300;
+            if (column == 3) {
+                x = -width/2;
+                y += yGrowth;
+                column = 0;
             }
-            x += 150;
+            column++;
+            x += xGrowth;
         }
+
     }
 
 }

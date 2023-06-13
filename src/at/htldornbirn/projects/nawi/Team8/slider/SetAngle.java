@@ -7,7 +7,7 @@ public class SetAngle implements SliderListener {
     @Override
     public void onChange(float mouseY) {
         //Hier kann individueller Code geschrieben werden der beim bewegen des Sliders ausgeführt wird
-        sliderValue = ((mouseY-200)/20)+10;
+        sliderValue = ((mouseY-200)/40)+10;
         System.out.println(sliderValue);
     }
 

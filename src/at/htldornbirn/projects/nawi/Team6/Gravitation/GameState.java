@@ -27,7 +27,7 @@ public class GameState extends BasicGameState {
 
 
     public int getID() {
-        return 2; // ID des Spielzustands
+        return 65; // ID des Spielzustands
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -107,7 +107,7 @@ public class GameState extends BasicGameState {
             }
 
             if(plusButtonLossConstant.isClicked(mouseX, mouseY) && !plusButtonClicked){
-                sbg.enterState(1);
+                sbg.enterState(64);
             }
         } else {
             plusButtonClicked = false;

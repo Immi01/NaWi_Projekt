@@ -13,7 +13,7 @@ public class GravityExplanation extends BasicGameState{
     private RoundedRectExample earthButton;
 
     public int getID() {
-        return 1;
+        return 64;
     }
 
     public void init (GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -34,15 +34,15 @@ public class GravityExplanation extends BasicGameState{
             int mouseY = input.getMouseY();
 
             if (marsButton.isClicked(mouseX, mouseY)) {
-                sbg.enterState(2);
+                sbg.enterState(65);
             }
 
             if (jupiterButton.isClicked(mouseX, mouseY)) {
-                sbg.enterState(2);
+                sbg.enterState(65);
             }
 
             if (earthButton.isClicked(mouseX, mouseY)) {
-                sbg.enterState(2);
+                sbg.enterState(65);
             }
         }
     }

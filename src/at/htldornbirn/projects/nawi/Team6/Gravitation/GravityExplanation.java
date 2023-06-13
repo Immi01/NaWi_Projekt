@@ -17,9 +17,9 @@ public class GravityExplanation extends BasicGameState{
     }
 
     public void init (GameContainer gc, StateBasedGame sbg) throws SlickException {
-        marsImage = new Image("D:\\Schule 3bWI\\SWP(1)adfa\\Slick2DTemplate\\Images\\mars.png");
-        jupiterImage = new Image("D:\\Schule 3bWI\\SWP(1)adfa\\Slick2DTemplate\\Images\\jupiter1.png");
-        earthImage = new Image("D:\\Schule 3bWI\\SWP(1)adfa\\Slick2DTemplate\\Images\\earth.png");
+        marsImage = new Image("at/htldornbirn/projects/nawi/Team6/Gravitation/Assets/mars.png");
+        jupiterImage = new Image("at/htldornbirn/projects/nawi/Team6/Gravitation/Assets/jupiter1.png");
+        earthImage = new Image("at/htldornbirn/projects/nawi/Team6/Gravitation/Assets/earth.png");
 
         marsButton = new RoundedRectExample(250 - 45,330, 90, 30, 10, "mars");
         jupiterButton = new RoundedRectExample(595, 330, 90, 30, 10, "jupiter");

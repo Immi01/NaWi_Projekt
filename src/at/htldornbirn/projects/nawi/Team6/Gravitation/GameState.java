@@ -27,11 +27,11 @@ public class GameState extends BasicGameState {
 
 
     public int getID() {
-        return 65; // ID des Spielzustands
+        return 65;
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        ballImage = new Image("D:\\Schule 3bWI\\SWP(1)adfa\\Slick2DTemplate\\Images\\basketballPicture.png");
+        ballImage = new Image("at/htldornbirn/projects/nawi/Team6/Gravitation/Assets/basketballPicture.png");
 
         gravity = 0.5;
         lossConstant = 0.2;

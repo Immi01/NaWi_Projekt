@@ -30,7 +30,7 @@ public class Ball implements Actor {
     }
 
     public void update(int delta, float speed, float radius) {
-        // gleichförmige Kreisbewegung wird hier berechnet.
+        // Gleichförmige Kreisbewegung wird hier berechnet.
         angle += speed * delta / radius;
         centerX = (float) (radius * Math.cos(Math.toRadians(angle))) + centerX;
         centerY = (float) (radius * Math.sin(Math.toRadians(angle))) + centerY;

@@ -50,7 +50,7 @@ public class RotationGame extends BasicGameState {
 
         // Button für Start/Stop
         float startStopButtonX = gameContainer.getWidth() / 40f;
-        float startStopButtonY = gameContainer.getHeight() * 0.5f;
+        float startStopButtonY = gameContainer.getHeight() * 0.6f;
         startStopButton = new Button(startStopButtonX, startStopButtonY, 200, 100, "Start/Stopp", Color.orange);
         actors.add(startStopButton);
 
@@ -62,7 +62,7 @@ public class RotationGame extends BasicGameState {
 
         // Slider für die Geschwindigkeit
 
-        this.slider = new Slider(10, 260, 0, 300);
+        this.slider = new Slider(20, 260, 0, 300);
         slider.addListener(setAngle);
         slider.setColor(Color.orange);
 

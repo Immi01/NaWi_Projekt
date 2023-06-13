@@ -15,8 +15,8 @@ public class Slider {
     public Slider(float x, float y, int minValue, int maxValue) {
         this.x = x;
         this.y = y;
-        this.minValue = minValue + y;
-        this.maxValue = maxValue + y;
+        this.minValue = minValue + x;
+        this.maxValue = maxValue + x;
         this.eventListeners = new ArrayList<>();
         this.color = Color.orange;
 
@@ -36,7 +36,7 @@ public class Slider {
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             if (mouseX > this.x && mouseX < this.x + 300 && mouseY > this.y && mouseY < this.y + 40) {
                 if (this.x >= this.minValue && this.x <= this.maxValue) {
-                    this.x = mouseX - 10;
+                    this.x = mouseX-10;
                     for (SliderListener eventListener : eventListeners) {
                         eventListener.onChange(mouseX);
                     }

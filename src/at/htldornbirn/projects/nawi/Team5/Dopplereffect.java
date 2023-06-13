@@ -6,7 +6,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Music;
+import org.newdawn.slick.Sound;
 
 
 import java.util.ArrayList;
@@ -34,15 +34,19 @@ public class Dopplereffect extends BasicGameState {
     private int yPerson;
     private long enterZoneTime;
     Music music;
-    private float pitch = 1;
     private float xMenu;
     private float xString;
+    private int showspeed;
+    private float elapsedTime = 0;
+    private float pitch;
+
 
 
     @Override
     public int getID() {
         return Constants.TEAM5;
     }
+
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
@@ -58,6 +62,9 @@ public class Dopplereffect extends BasicGameState {
         this.yPerson = 550;
         this.xMenu = 0;
         this.xString = 50;
+        this.pitch = 1;
+
+
 
         music = new Music("/src/at/htldornbirn/projects/nawi/Team5/res/alarm.ogg");
         this.ambulance = new Image("at/htldornbirn/projects/nawi/Team5/res/Rettung.png");
@@ -69,10 +76,8 @@ public class Dopplereffect extends BasicGameState {
     }
 
     private void playSirene() {
-        pitch += 0;
 
-        music.play(pitch, 1);
-
+        music.play(this.pitch, 100f);
     }
 
     @Override
@@ -80,8 +85,6 @@ public class Dopplereffect extends BasicGameState {
         g.drawImage(background, 0, 0, gameContainer.getWidth(), gameContainer.getHeight(), 0, 0, background.getWidth(), background.getHeight());
         g.drawImage(ambulance, this.x, this.y);
         g.drawImage(person, xPerson, yPerson);
-        g.drawImage(menu, 0, 0);
-
         g.drawImage(menu, xMenu, 0);
         g.drawString("Press SPACE to STOPP / START the car", xString, 70);
         g.drawString("Press 1 to set speed to very slow", xString, 150);
@@ -90,6 +93,9 @@ public class Dopplereffect extends BasicGameState {
         g.drawString("Press 4 to set speed to fast", xString, 240);
         g.drawString("Press 5 to set speed to very fast", xString, 270);
         g.drawString("Press enter to start game",xString,350);
+        g.drawString(speed + " Gang",900, 40);
+        g.drawString(showspeed + " km/h",900, 60);
+        g.drawString(  elapsedTime/1000  + " Timer",900, 80);
 
 
 
@@ -106,11 +112,26 @@ public class Dopplereffect extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+
         this.timerToZero -= delta;
-        if (this.timerToZero <0){
+        if (this.timerToZero <0 && this.xMenu != 0) {
             playSirene();
-            this.timerToZero=1000;
+            this.timerToZero = 1000;
         }
+        if(this.x == 100){
+            this.pitch =1.2f;
+        }if(this.x == 300){
+            this.pitch =1.4f;
+        }if(this.x == 500){
+            this.pitch =1.6f;
+        }if(this.x == 700){
+            this.pitch =1.8f;
+        }if(this.x == 750){
+            this.pitch =1.6f;
+        }if(this.x == 800){
+            this.pitch =1.4f;
+        }
+
 
         this.x += this.speed;
         //respawner vom Auto
@@ -123,7 +144,7 @@ public class Dopplereffect extends BasicGameState {
             }
 
             long currentTime = System.currentTimeMillis();
-            long elapsedTime = currentTime - enterZoneTime;
+            elapsedTime = currentTime - enterZoneTime;
 
             if (elapsedTime >= 4000) {
                 this.xPerson = gameContainer.getWidth() + 300;
@@ -140,6 +161,7 @@ public class Dopplereffect extends BasicGameState {
             Wave wave = new Wave(this.x + 180, this.y);
             waves.add(wave);
             lastWaveTime = currentTime;
+
         }
 
 
@@ -169,20 +191,26 @@ public class Dopplereffect extends BasicGameState {
                 this.speed = 0;
             }
         } else if (key == Input.KEY_1 && this.xMenu != 0) {
-            setSpeed(1); // am Langsamsten
+            setSpeed(1);
+            showspeed = 50;// am Langsamsten
         } else if (key == Input.KEY_2 && this.xMenu != 0) {
-            setSpeed(2); // Langsamer
+            setSpeed(2);
+            showspeed = 100; // Langsamer
         } else if (key == Input.KEY_3 && this.xMenu != 0) {
             setSpeed(3); // Normal
+            showspeed = 200;
         } else if (key == Input.KEY_4 && this.xMenu != 0) {
             setSpeed(4); // schnell
+            showspeed = 300;
         } else if (key == Input.KEY_5 && this.xMenu != 0) {
             setSpeed(5); // Schallgeschwindigkeit
+            showspeed = 1234;
+
         } else if (key == Input.KEY_ENTER) {
             this.xMenu = 3000;
             this.xString = 3000;
             if (this.x == -400) {
-                setSpeed(2);
+                setSpeed(2); // Beim Fahren nach dem Enter speed
             }
         }
     }

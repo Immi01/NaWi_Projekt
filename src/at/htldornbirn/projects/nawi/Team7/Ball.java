@@ -89,4 +89,12 @@ public class Ball implements ProjectActor{
     public void setRadius(float radius) {
         this.radius = radius;
     }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
 }

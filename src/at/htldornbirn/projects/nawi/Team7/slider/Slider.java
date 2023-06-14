@@ -1,9 +1,6 @@
 package at.htldornbirn.projects.nawi.Team7.slider;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +54,9 @@ public class Slider {
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        graphics.setColor(Color.blue);
         graphics.fillOval(this.x, this.y, width, width);
+        graphics.setColor(Color.white);
     }
 
     public float getX() {

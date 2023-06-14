@@ -32,10 +32,7 @@ public class Sandbox extends BasicGameState implements SliderListener {
     private float BallWeight;
     private DefinitionBoxes definitionBoxes;
     private List<DefinitionBoxes> definitionBoxesList;
-    //private BackgroundImage backgroundImage;
-    //private List<BackgroundImage> backgroundImageList;
     private List<ProjectActor> projectActors;
-    //private Image MercuryImage;
     private PlayButton playButton;
     private List<PlayButton> playButtons;
     private Slider slider;
@@ -43,6 +40,8 @@ public class Sandbox extends BasicGameState implements SliderListener {
     private float sliderValue;
     private boolean isBall4Clicked = false;
     private boolean isMouseDown = false;
+
+    private Image bgImage;
 
     @Override
     public int getID() {
@@ -60,16 +59,7 @@ public class Sandbox extends BasicGameState implements SliderListener {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
-        /*for (int i = 0; i < 1; i++) {
-            BackgroundImage backgroundImage = new BackgroundImage();
-        }*/
-        /*try {
-            MercuryImage = new Image("");
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }*/
-        //MercuryImage = new Image("C:\\HTL Dornbirn 2 - 5 Klasse\\SWP\\3 Klasse\\NaWi_Projekt\\images\\backgroundImage1.png");
+        this.bgImage = new Image("images/hiero.png");
         this.countOfBallSelection = 4;
         this.CountOfLocations = 8;
         this.bWidth = 200;
@@ -78,9 +68,11 @@ public class Sandbox extends BasicGameState implements SliderListener {
         this.distanceBetweenRandAndButton = 1440 - this.bWidth - this.distanceBetweenRechtangles;
 
 
+
+
         float[] GforcesForBallsOnLocatiosn = {3.7f, 8.87f, 9.81f, 3.71f, 24.79f, 10.44f, 8.87f, 11.15f};
-        float[] RadiusForBalls = {20f, 30f, 40f, 30f};
-        float[] WeightForBalls = {0.4f, 0.3f, 0.5f,0.3f};
+        float[] RadiusForBalls = {20f, 30f, 40f, this.RadiusForCustomBall};
+        float[] WeightForBalls = {0.4f, 0.3f, 0.5f, this.WeightForCustomBall};
         int[] LocationID = new int[8];
 
 
@@ -114,13 +106,13 @@ public class Sandbox extends BasicGameState implements SliderListener {
             this.bY += 100;
         }
 
-        playButton = new PlayButton(this.customBall.getX(), this.locationButton.getY(), 40, 100, Color.blue, "Game start");
+        playButton = new PlayButton(this.customBalls.get(2).getX(), this.locationButton.getY(), 40, 100, Color.blue, "Game start");
         this.playButtons.add(playButton);
 
         table = new Table(200, 200, 150, 30);
         ball = new Ball(0, 0, 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
 
-        slider = new Slider(this.customBall.getX() + 20, 400, 0, 200, 40);
+        slider = new Slider(this.customBall.getX() + 20, 400, 0, 400, 40);
         setAngle = new SetAngle();
         slider.addListener(setAngle);
         slider.addListener(this);
@@ -173,41 +165,28 @@ public class Sandbox extends BasicGameState implements SliderListener {
         Input input = gameContainer.getInput();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && !isMouseDown) {
             this.isMouseDown = true;
-            System.out.println("-------Start mouse down-------");
+
             for (CustomBalls customBall : this.customBalls) {
 
                 int mouseY = input.getMouseY();
                 int mouseX = input.getMouseX();
-                System.out.println("------------------- Ball --------------");
-                System.out.println("click inside mousey:" + mouseY + " mousex:" + mouseX);
-                System.out.println("Customx:" + customBall.getX() + " customy:" + customBall.getY());
                 if (mouseY > customBall.getY() && mouseY < customBall.getY() + customBall.getHeight() && mouseX > customBall.getX() && mouseX < customBall.getX() + customBall.getWidth()) {
-                    System.out.println("Ball hit");
+
                     if (customBall.getId() == 3) {
                         this.isBall4Clicked = true;
-                        /*while ((mouseX > this.slider.getX()) && (mouseX < this.slider.getX() + this.slider.getWidth())) {
-                            System.out.println(customBall.getX());
-                            //while (mouseY > )
-                            customBall.setRadius(setAngle.getSliderValue());
-                            System.out.println(setAngle.getSliderValue() + " Test");
-                        }*/
-
                     }
                     this.BallRadius = customBall.getRadius();
                     this.BallWeight = customBall.getWeight();
-                    // System.out.println(customBall.getId());
-                    //System.out.println(this.BallRadius + ";" + this.BallWeight);
-                    System.out.println(this.ball.getRadius() + ";" + this.ball.getWeight() + ";" + this.ball.getGforce());
-                    ball = new Ball(0, 899 - this.table.getHigh() - this.table.getWidth() - this.ball.getRadius(), 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
+                    this.bgImage.draw(0,0);
+                    System.out.println(this.ball.getY());
+                    ball = new Ball(0, 899 - this.table.getHigh() - this.table.getWidth() - this.BallRadius, 0.0f, this.BallGforce, this.BallRadius, 0.2f, this.BallWeight);
                 }
             }
         } else if (!input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             this.isMouseDown = false;
         }
 
-
         slider.update(gameContainer);
-
         for (PlayButton playButton : this.playButtons) {
 
             int mouseY = input.getMouseY();
@@ -219,10 +198,8 @@ public class Sandbox extends BasicGameState implements SliderListener {
                 }
             }
         }
-        // System.out.println();
 
     }
-
 
 
     @Override
@@ -230,7 +207,9 @@ public class Sandbox extends BasicGameState implements SliderListener {
         if (isBall4Clicked) {
             System.out.println("Slider:" + mouseY);
             this.sliderValue = mouseY;
-            this.ball.setRadius(mouseY/20f);
+            //this.RadiusForCustomBall = mouseY/20f;
+            this.ball.setRadius(mouseY / 20f);
+            this.ball.setY(899 - this.table.getHigh() - this.table.getWidth() - this.ball.getRadius());
             System.out.println("radius:" + this.ball.getRadius());
         }
 

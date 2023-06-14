@@ -1,40 +1,62 @@
 package at.htldornbirn.projects.nawi.Team3;
 
-import org.newdawn.slick.state.GameState;
+import at.htldornbirn.projects.nawi.tools.slider.SliderListener;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 
-import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Slider {
+    private float x, y;
+    private float minValue, maxValue;
+    private List<SliderListener> eventListeners;
 
-    private JSlider slider;
-    private float value;
 
-    public Slider(float min, float max) {
-        slider = new JSlider(JSlider.HORIZONTAL, (int)min, (int)max, (int)min);
-        slider.addChangeListener(new SliderChangeListener());
-        value = min;
+
+    public Slider(float x, float y, int minValue, int maxValue) {
+        this.x = x;
+        this.y = y;
+        this.minValue = minValue;
+        this.maxValue =maxValue;
+        this.eventListeners = new ArrayList<>();
     }
 
 
-    public JSlider getSlider() {
-        return slider;
+    public void addListener(SliderListener eventListener){
+        this.eventListeners.add(eventListener);
     }
 
-    public float getValue() {
-        return value;
-    }
 
-    private class SliderChangeListener implements ChangeListener {
+    public void update(GameContainer gameContainer) throws SlickException {
+        Input input = gameContainer.getInput();
+        int mouseY = input.getMouseY();
+        int mouseX = input.getMouseX();
 
-        @Override
-        public void stateChanged(ChangeEvent e) {
-            JSlider source = (JSlider)e.getSource();
-            if (!source.getValueIsAdjusting()) {
-                value = source.getValue();
+        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            if (mouseX>this.x && mouseX<this.x+300 && mouseX >this.x && mouseX < this.x+40){
+                if(this.x >= this.minValue && this.x <= this.maxValue) {
+                    this.x = mouseX-20;
+                    for (SliderListener eventlistener : eventListeners) {
+                        eventlistener.onChange(mouseY);
+                    }
+                }
+                if(this.x > this.maxValue)
+                {
+                    this.x = this.maxValue;
+                }
+                if(this.x < this.minValue)
+                {
+                    this.x = this.minValue;
+                }
+
             }
         }
+    }
 
+    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        graphics.fillOval(this.x, this.y, 40, 40);
     }
 }

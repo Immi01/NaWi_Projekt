@@ -2,7 +2,7 @@ package at.htldornbirn.projects.nawi.Team3;
 
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.Graphics;
+
 import org.newdawn.slick.state.StateBasedGame;
 
 import javax.swing.*;
@@ -10,17 +10,20 @@ import java.awt.*;
 
 public class Test extends StateBasedGame {
 
+<<<<<<< HEAD
 
     private StopingDistance game;
 
 
+=======
+>>>>>>> origin/feature/Team3
 
     public Test(String name) {
         super(name);
     }
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        addState(new StopingDistance2());
+        addState(new StopingDistance());
 
     }
 

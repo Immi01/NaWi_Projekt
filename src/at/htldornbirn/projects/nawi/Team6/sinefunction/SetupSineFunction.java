@@ -2,7 +2,6 @@ package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
 import at.htldornbirn.projects.nawi.Team6.Gravitation.GameState;
 import at.htldornbirn.projects.nawi.Team6.Gravitation.GravityExplanation;
-import at.htldornbirn.projects.nawi.Team6.Gravitation.GravitySimulation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;

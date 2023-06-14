@@ -22,7 +22,7 @@ public class RectangleGround implements Actor {
     public void render(Graphics graphics) {
         graphics.setColor(Color.green);
         graphics.drawRect(this.x, this.y, width, height);
-        graphics.fillRect(this.x, this.y,this.width,this.height);
+        graphics.fillRect(this.x, this.y, this.width, this.height);
     }
 
     public void update(int delta) {

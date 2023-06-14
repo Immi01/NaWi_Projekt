@@ -14,9 +14,10 @@ public class Team9Game extends BasicGameState {
     private Color backgroundColor;
     private Calculations calculations;
     private ItemList itemList;
-    private Horse horse;
     private Rope ropeUp;
     private Button startButton;
+    private Button resetButton;
+    private HoverInfo hoverInfo;
 
 
     @Override
@@ -30,23 +31,27 @@ public class Team9Game extends BasicGameState {
         calculations = new Calculations(this);
         itemList = new ItemList(this);
         actors = new ArrayList<Actor>();
-        horse = new Horse(900, 450-100, 1, 1,100,188,this);
         // Rope
         ropeUp = new Rope(this);
         //Button
-        startButton = new Button(1300, 400, 200, 50, "Start");
+        startButton = new Button(100, 400, 200, 50, "Start");
+        resetButton = new Button(1300, 400, 200, 50, "Reset");
+        hoverInfo = new HoverInfo(10, 30, "Scheffknecht Santiago", "Riedmann Noel");
+
+
 
         //Ground
         GroundSkyNew groundimagel = new GroundSkyNew();
         actors.add(groundimagel);
-
         //box
         Box box1 = new Box(this);
         this.actors.add(box1);
         //Adding all actors necessary
         this.actors.add(itemList);
-        this.actors.add(horse);
         this.actors.add(ropeUp);
+        //Horse
+        Horse horse = new Horse(this);
+        actors.add(horse);
     }
 
     @Override
@@ -56,8 +61,9 @@ public class Team9Game extends BasicGameState {
             actor.render(graphics);
         }
         inputFieldRN.draw(graphics);
-        horse.render(graphics);
         startButton.render(graphics);
+        resetButton.render(graphics);
+        hoverInfo.render(graphics);
 
     }
 
@@ -66,13 +72,15 @@ public class Team9Game extends BasicGameState {
         inputFieldRN.update(delta);
         calculations.update(delta);
         itemList.update(delta);
-        horse.update(delta);
         backgroundColor = Color.white;
 
         for (Actor actor : this.actors) {
             actor.update(delta);
         }
         startButton.update(gameContainer.getInput(), stateBasedGame, delta);
+        resetButton.update(gameContainer.getInput(), stateBasedGame, delta);
+        Input input = gameContainer.getInput();
+        hoverInfo.update(input);
     }
 
     @Override
@@ -107,5 +115,9 @@ public class Team9Game extends BasicGameState {
 
     public InputFieldRN getInputFieldRN() {
         return inputFieldRN;
+    }
+
+    public Button getResetButton() {
+        return resetButton;
     }
 }

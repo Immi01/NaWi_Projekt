@@ -1,6 +1,6 @@
 package at.htldornbirn.projects.nawi.Team7;
 
-import org.newdawn.slick.AppGameContainer;
+import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -17,7 +17,7 @@ public class Team7 extends BasicGameState {
 
     @Override
     public int getID() {
-        return 6;
+        return Constants.TEAM7;
     }
 
     @Override

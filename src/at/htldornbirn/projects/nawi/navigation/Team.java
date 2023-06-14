@@ -19,7 +19,7 @@ public class Team implements Actor{
         this.width = width;
         this.height = height;
         this.teamNr = teamNr;
-        image = new Image("/src/at/htldornbirn/projects/nawi/images/Unbenannt.jpg").getScaledCopy(width-1,height-1);
+        image = new Image("/src/at/htldornbirn/projects/nawi/images/TEAM9.png").getScaledCopy(width-1,height-1);
     }
 
     public float getX() {
@@ -40,5 +40,9 @@ public class Team implements Actor{
     @Override
     public void update(int delta) {
 
+    }
+
+    public void setImage(Image image) {
+        this.image = image.getScaledCopy(width-1,height-1);
     }
 }

@@ -1,7 +1,7 @@
 package at.htldornbirn.projects.nawi.navigation;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.*;
 
 public class Animation implements Actor{
 
@@ -18,8 +18,14 @@ public class Animation implements Actor{
     private final float ySpeed;
     private final float aSpeedX;
     private final float aSpeedY;
+    private boolean finished;
+    Image image;
+    private AngelCodeFont font;
+    private String title;
+    private String description;
 
-    public Animation(int y, int x, int sizeX, int sizeY, GameContainer gameContainer) {
+
+    public Animation(int y, int x, int sizeX, int sizeY, GameContainer gameContainer,Image image,AngelCodeFont font) {
         this.y = y;
         this.x = x;
         this.sizeX = sizeX;
@@ -33,6 +39,10 @@ public class Animation implements Actor{
         ySpeed = (y - yGoal) * speed;
         aSpeedX = (aGoalX - sizeX) * speed;
         aSpeedY = (aGoalY - sizeY) * speed;
+        this.image = image;
+        this.font = font;
+        this.title = "";
+        this.description = "";
     }
 
 
@@ -56,22 +66,47 @@ public class Animation implements Actor{
 
         if (sizeY < aGoalY)
             sizeY += time * aSpeedY;
-        else
+        else {
             sizeY = aGoalY;
-    }
-
-    @Override
-    public void render(Graphics graphics) {
-        graphics.drawRect(x,y,sizeX,sizeY);
+            finished = true;
+        }
     }
 
     @Override
     public float getY() {
-        return 0;
+        return y;
     }
 
     @Override
     public float getX() {
-        return 0;
+        return x;
+    }
+
+    @Override
+    public void render(Graphics graphics) {
+        graphics.drawImage(image.getScaledCopy((int)sizeX,(int)sizeY),x,y);
+        graphics.drawRect(x,y,sizeX,sizeY);
+        font.drawString(Display.getWidth()/2-font.getWidth(title)/2, 100, title, Color.gray);
+        font.drawString(100, 200, description, Color.gray);
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

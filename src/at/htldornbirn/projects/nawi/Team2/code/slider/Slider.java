@@ -61,4 +61,6 @@ public class Slider {
     public BackgroundSlider getBackgroundSlider() {
         return backgroundSlider;
     }
+
+
 }

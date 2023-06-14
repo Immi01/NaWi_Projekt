@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Explanation extends BasicGameState {
     private List<Actor> actors;
-    private Button stateButton1;
-    private Button stateButton2;
+    private StateButton stateButton1;
+    private StateButton stateButton2;
     private SineFunction sineFunction1;
     private AngelCodeFont font;
     private static final int WIDTH = 1280;
@@ -27,10 +27,10 @@ public class Explanation extends BasicGameState {
         font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
         this.actors = new ArrayList<>();
 
-        this.stateButton1 = new Button((float) WIDTH / 2, HEIGHT, 250, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1 = new StateButton((float) WIDTH / 2, HEIGHT, 250, 100, "Go to sandbox", Color.yellow);
         this.stateButton1.setX((float) WIDTH / 2 - this.stateButton1.getWidth() / 2);
         this.stateButton1.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
-        this.stateButton2 = new Button((float) WIDTH / 2, HEIGHT, 300, 100, "Go to bouncing ball", Color.white);
+        this.stateButton2 = new StateButton((float) WIDTH / 2, HEIGHT, 300, 100, "Go to bouncing ball", Color.white);
         this.stateButton2.setX((float) WIDTH * 8 / 10 - this.stateButton1.getWidth() / 2);
         this.stateButton2.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(this.stateButton1);

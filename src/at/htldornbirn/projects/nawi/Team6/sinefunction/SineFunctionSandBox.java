@@ -16,8 +16,8 @@ import java.util.Locale;
 
 public class SineFunctionSandBox extends BasicGameState {
     private List<Actor> actors;
-    private Button stateButton1;
-    private Button stateButton2;
+    private StateButton stateButton1;
+    private StateButton stateButton2;
     private ValueButton valueButton1;
     private ValueButton valueButton2;
     private ValueButton valueButton3;
@@ -33,10 +33,10 @@ public class SineFunctionSandBox extends BasicGameState {
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.actors = new ArrayList<>();
-        this.stateButton1 = new Button((float) WIDTH / 2, HEIGHT, 250, 100, "Go to explanation", Color.red);
+        this.stateButton1 = new StateButton((float) WIDTH / 2, HEIGHT, 250, 100, "Go to explanation", Color.red);
         this.stateButton1.setX((float) WIDTH * 0.33f - this.stateButton1.getWidth() / 2);
         this.stateButton1.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
-        this.stateButton2 = new Button((float) WIDTH / 2, HEIGHT, 250, 100, "Interference", Color.cyan);
+        this.stateButton2 = new StateButton((float) WIDTH / 2, HEIGHT, 250, 100, "Interference", Color.cyan);
         this.stateButton2.setX((float) WIDTH * 2 / 3 - this.stateButton2.getWidth() / 2);
         this.stateButton2.setY((float) HEIGHT * 9 / 10 - this.stateButton2.getHeight() / 2);
         this.actors.add(this.stateButton1);

@@ -11,7 +11,7 @@ import java.util.List;
 public class Interference extends BasicGameState {
     private List<Actor> actors;
     private List<SineFunction> sineFunctions;
-    private Button stateButton1;
+    private StateButton stateButton1;
     private SineFunction sineFunction1;
     private SineFunction sineFunction2;
     private SineFunction sineFunction3;
@@ -30,7 +30,7 @@ public class Interference extends BasicGameState {
 
         this.actors = new ArrayList<>();
         this.sineFunctions = new ArrayList<>();
-        this.stateButton1 = new Button((float) WIDTH / 2, HEIGHT - 150, 250, 100, "Go to sandbox", Color.yellow);
+        this.stateButton1 = new StateButton((float) WIDTH / 2, HEIGHT - 150, 250, 100, "Go to sandbox", Color.yellow);
         this.stateButton1.setX((float) WIDTH / 2 - this.stateButton1.getWidth() / 2);
         this.stateButton1.setY((float) HEIGHT * 9 / 10 - this.stateButton1.getHeight() / 2);
         this.actors.add(stateButton1);

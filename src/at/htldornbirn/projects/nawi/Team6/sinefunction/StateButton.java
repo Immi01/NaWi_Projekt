@@ -2,14 +2,14 @@ package at.htldornbirn.projects.nawi.Team6.sinefunction;
 
 import org.newdawn.slick.*;
 
-public class Button implements Actor {
+public class StateButton implements Actor {
 
     private float x, y, width, height;
     private String text;
     private Color color;
     private AngelCodeFont font;
 
-    public Button(float x, float y, float width, float height, String text, Color color) throws SlickException {
+    public StateButton(float x, float y, float width, float height, String text, Color color) throws SlickException {
         this.x = x;
         this.y = y;
         this.width = width;

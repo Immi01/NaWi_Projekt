@@ -25,33 +25,40 @@ public class GravityExplanation extends BasicGameState{
         jupiterImage = new Image("at/htldornbirn/projects/nawi/Team6/Gravitation/Assets/jupiter1.png");
         earthImage = new Image("at/htldornbirn/projects/nawi/Team6/Gravitation/Assets/earth.png");
 
-        marsButton = new RoundedRectExample(250 - 45,330, 90, 30, 10, "mars");
-        jupiterButton = new RoundedRectExample(595, 330, 90, 30, 10, "jupiter");
-        earthButton = new RoundedRectExample(985, 330, 90, 30, 10, "earth");
-
-        backButton = new RoundedRectExample(1280- 180, 960-100, 150, 30, 10, "back to sinus");
+        marsButton = new RoundedRectExample(250 - 45,330, 90, 30, 10, "mars", "white");
+        jupiterButton = new RoundedRectExample(595, 330, 90, 30, 10, "jupiter", "white");
+        earthButton = new RoundedRectExample(985, 330, 90, 30, 10, "earth", "white");
+        backButton = new RoundedRectExample(1280- 180, 960-100, 150, 30, 10, "back to sinus", "white");
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
         Input input = gc.getInput();
 
-        if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+        if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             int mouseX = input.getMouseX();
             int mouseY = input.getMouseY();
 
+            GameState gameState = (GameState) sbg.getState(65);
+
             if (marsButton.isClicked(mouseX, mouseY)) {
+                gameState.setPlanet("mars");
                 sbg.enterState(65);
             }
 
             if (jupiterButton.isClicked(mouseX, mouseY)) {
-
+                gameState.setPlanet("jupiter");
                 sbg.enterState(65);
             }
 
             if (earthButton.isClicked(mouseX, mouseY)) {
-
+                gameState.setPlanet("earth");
                 sbg.enterState(65);
             }
+
+            if(backButton.isClicked(mouseX, mouseY)){
+                sbg.enterState(Constants.TEAM6);
+            }
+
         }
     }
 
@@ -87,18 +94,6 @@ public class GravityExplanation extends BasicGameState{
 
                         "Diese Formel, bekannt als das Newtonsche Gravitationsgesetz, beschreibt die Anziehungskraft zwischen zwei\n" +
                         "Körpern aufgrund ihrer Massen und ist eine wichtige Grundlage für das Verständnis der Gravitation.");
-
-
-        Input input = gc.getInput();
-
-        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            int mouseX = input.getMouseX();
-            int mouseY = input.getMouseY();
-
-            if(backButton.isClicked(mouseX, mouseY)){
-                sbg.enterState(Constants.TEAM6);
-            }
-        }
     }
 
 

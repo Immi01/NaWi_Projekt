@@ -14,17 +14,19 @@ public class RoundedRectExample {
     private String text;
     private float textWidth;
     private float textHeight;
+    private String color;
 
     private RoundedRectangle roundedRect;
     private TrueTypeFont font;
 
-    public RoundedRectExample(float x, float y, float width, float height, float cornerRadius, String text) {
+    public RoundedRectExample(float x, float y, float width, float height, float cornerRadius, String text, String color) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.cornerRadius = cornerRadius;
         this.text = text;
+        this.color = color;
 
         font = new TrueTypeFont(new Font("Arial", Font.PLAIN, 16), true);
         roundedRect = new RoundedRectangle(x, y, width, height, cornerRadius);
@@ -35,8 +37,16 @@ public class RoundedRectExample {
     public void render (Graphics g){
         g.setColor(Color.white);
         g.setFont(font);
-        g.draw(roundedRect);
-        g.drawString(text, roundedRect.getX() + (width / 2 - textWidth / 2), roundedRect.getY() + (height / 2 - textHeight / 2));
+
+        if(this.color == "white"){
+            g.setColor(Color.white);
+            g.draw(roundedRect);
+            g.drawString(text, roundedRect.getX() + (width / 2 - textWidth / 2), roundedRect.getY() + (height / 2 - textHeight / 2));
+        } else if(this.color == "black"){
+            g.setColor(Color.black);
+            g.draw(roundedRect);
+            g.drawString(text, roundedRect.getX() + (width / 2 - textWidth / 2), roundedRect.getY() + (height / 2 - textHeight / 2));
+        }
     }
 
     public boolean isClicked(float mouseX, float mouseY) {

@@ -11,12 +11,13 @@ public class GameState extends BasicGameState {
     private static final float floorHeight = 70;
     private static final float floorPositionY =  containerHeight - floorHeight;
 
-    private double lossConstant, gravity, velocity;
+    private double lossConstant, velocity;
+    private double gravity;
+    private double gravityScale;
     private int lossConstantInProcent;
     private float ballX, ballY;
 
     private Image ballImage;
-    private AngelCodeFont font;
 
     private Button plusButtonGravity;
     private Button minusButtonGravity;
@@ -29,6 +30,8 @@ public class GameState extends BasicGameState {
     private boolean plusButtonClicked;
     private boolean minusButtonClicked;
 
+    private String planet;
+
 
 
     public int getID() {
@@ -38,7 +41,8 @@ public class GameState extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         ballImage = new Image("at/htldornbirn/projects/nawi/Team6/Gravitation/Assets/basketballPicture.png");
 
-        gravity = 0.5;
+        gravity = 9.81;
+        gravityScale = calcGraviyScale(gravity);
         lossConstant = 0.2;
         lossConstantInProcent = (int) (lossConstant * 100);
         velocity = 0;
@@ -46,13 +50,13 @@ public class GameState extends BasicGameState {
         ballX = gc.getWidth() / 2;
         ballY = 0;
 
-        backButton = new RoundedRectExample(1280 - 210, 960-55, 150, 40, 10, "back to explanation");
+        backButton = new RoundedRectExample(1280 - 210, floorPositionY - 60, 150, 40, 10, "back to explanation", "black");
 
-        plusButtonGravity = new Button(230, 70 + 7.5f, 15, Color.green, "+", "circle");
-        minusButtonGravity = new Button(270, 70 + 7.5f, 15, Color.red, "-", "circle");
+        plusButtonGravity = new Button(270, 70 + 7.5f, 15, Color.green, "+", "circle");
+        minusButtonGravity = new Button(310, 70 + 7.5f, 15, Color.red, "-", "circle");
 
-        plusButtonLossConstant = new Button(250,110 + 7.5f, 15, Color.green, "+", "circle");
-        minusButtonLossConstant = new Button(290,110 + 7.5f, 15, Color.red, "-", "circle");
+        plusButtonLossConstant = new Button(270,110 + 7.5f, 15, Color.green, "+", "circle");
+        minusButtonLossConstant = new Button(310,110 + 7.5f, 15, Color.red, "-", "circle");
         plusButtonClicked = false;
         minusButtonClicked = false;
     }
@@ -69,7 +73,7 @@ public class GameState extends BasicGameState {
         g.drawString("Anziehungskraft: " + (float) gravity, 10, 70);
         g.drawString("verlust konstante: " + lossConstantInProcent + " %" , 10, 110);
 
-        ballImage.draw(ballX - 35, ballY - 35, 70,70);
+        ballImage.draw(ballX - 35f, ballY- 35f , 70,70);
 
         plusButtonGravity.render(g);
         minusButtonGravity.render(g);
@@ -82,10 +86,24 @@ public class GameState extends BasicGameState {
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+
+        if (planet == "earth"){
+            gravity = 9.81;
+            gravityScale = calcGraviyScale(gravity);
+        } else if (planet == "mars"){
+            gravity = 3.71;
+            lossConstant = 0.4;
+            gravityScale = calcGraviyScale(gravity);
+        } else if (planet =="jupiter"){
+            gravity = 24.79;
+            gravityScale = calcGraviyScale(gravity);
+            lossConstant = 0.5;
+        }
+
         Input input = gc.getInput();
         double remaining = 1 - this.lossConstant;
 
-        velocity += gravity;
+        velocity += gravityScale;
         ballY += velocity;
 
         if(ballY >= floorPositionY){
@@ -98,20 +116,26 @@ public class GameState extends BasicGameState {
             ballY = 0;
         }
 
-        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             int mouseX = input.getMouseX();
             int mouseY = input.getMouseY();
 
             // hier wird es überpfrüft, ob der Plus-Button geklickt wurde
             if (plusButtonGravity.isClicked(mouseX, mouseY) && !plusButtonClicked) {
-                gravity += 0.05;
+                gravityScale += 0.05;
+                gravity = calcGravity(gravityScale);
                 plusButtonClicked = true;
             }
 
             // hier wird es überpfrüft, ob der Minus-Button geklickt wurde
             if (minusButtonGravity.isClicked(mouseX, mouseY) && !minusButtonClicked) {
-                gravity -= 0.05;
-                minusButtonClicked = true;
+                    if(gravity > 0){
+                        gravityScale -= 0.05;
+                        gravity = calcGravity(gravityScale);
+                        minusButtonClicked = true;
+                    } else{
+                        gravity = 0;
+                    }
             }
 
             if (plusButtonLossConstant.isClicked(mouseX, mouseY) && !plusButtonClicked) {
@@ -122,9 +146,13 @@ public class GameState extends BasicGameState {
 
             // hier wird es überpfrüft, ob der Minus-Button geklickt wurde
             if (minusButtonLossConstant.isClicked(mouseX, mouseY) && !minusButtonClicked) {
-                lossConstant -= 0.05;
-                lossConstantInProcent -= 5;
-                minusButtonClicked = true;
+                if(lossConstant > 0){
+                    lossConstant -= 0.05;
+                    lossConstantInProcent -= 5;
+                    minusButtonClicked = true;
+                } else {
+                    lossConstant = 0;
+                }
             }
 
             if(backButton.isClicked(mouseX, mouseY)){
@@ -146,5 +174,20 @@ public class GameState extends BasicGameState {
             return ballY *= -1;
         }
     }
+
+    public static double calcGraviyScale(double gravity){
+        return gravity * 5.0969 / 100;
+    }
+
+    public static double calcGravity(double gravityScale){
+        gravityScale = gravityScale * 100 / 5.0968;
+        double roundedNumber = Math.floor(gravityScale * 100.0) / 100.0;
+        return roundedNumber;
+    }
+
+    public void setPlanet(String str){
+        this.planet = str;
+    }
+
 }
 

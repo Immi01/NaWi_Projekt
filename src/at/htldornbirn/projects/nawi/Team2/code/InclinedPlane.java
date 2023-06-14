@@ -4,6 +4,8 @@ import at.htldornbirn.projects.nawi.Team2.code.Background.*;
 import at.htldornbirn.projects.nawi.Team2.code.inputField.InputField;
 import at.htldornbirn.projects.nawi.Team2.code.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team2.code.slider.Slider;
+import at.htldornbirn.projects.nawi.navigation.Actor;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -17,6 +19,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeMap;
 
 public class InclinedPlane extends BasicGameState {
 
@@ -26,17 +29,22 @@ public class InclinedPlane extends BasicGameState {
     private InputField inputFieldDistance;
     private CalculateButton calculateButton;
     private Sled sled;
+    private Input input;
+    private BackButton back;
 
     private SetAngle setAngle = new SetAngle();
 
     private Image backgroundImage;
+
     private TrueTypeFont headlineFont;
     private TrueTypeFont writing;
+    private TrueTypeFont errorMessage;
+    private TrueTypeFont copyright;
 
     private boolean calculateButtonPushed;
 
 
-    private List<Actor> actors;
+    private List<at.htldornbirn.projects.nawi.navigation.Actor> actors;
     private float angleSled;
     private float speedSled;
 
@@ -59,6 +67,7 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
 
+        input = gameContainer.getInput();
         this.actors = new ArrayList<>();
         Random random = new Random();
 
@@ -77,7 +86,8 @@ public class InclinedPlane extends BasicGameState {
         this.speedSled = 5.0f;
         this.angleSled = setAngle.getSliderValue()*-1;
         sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
-
+        back = new BackButton(50,1100,stateBasedGame);
+        this.actors.add(back);
 
 
         backgroundImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/background3.jpg");
@@ -98,6 +108,12 @@ public class InclinedPlane extends BasicGameState {
         Font headline = new Font("Arial", Font.BOLD, 42);
         headlineFont = new TrueTypeFont(headline, true);
 
+        Font copyrightFont = new Font("Arial", Font.BOLD, 12);
+        this.copyright = new TrueTypeFont(copyrightFont, true);
+
+        Font errorMessageFont = new Font("Arial", Font.BOLD, 30);
+        this.errorMessage = new TrueTypeFont(errorMessageFont, true);
+
         slider.addListener(setAngle);
 
         buttonImage = new Image("src/at/htldornbirn/projects/nawi/Team2/code/Background/infoImage.png");
@@ -114,7 +130,7 @@ public class InclinedPlane extends BasicGameState {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         backgroundImage.draw(0, 0, gameContainer.getWidth(), gameContainer.getHeight());
 
-        for (Actor actors:this.actors){
+        for (at.htldornbirn.projects.nawi.navigation.Actor actors:this.actors){
             actors.render(graphics);
             graphics.setColor(Color.white);
         }
@@ -132,7 +148,7 @@ public class InclinedPlane extends BasicGameState {
         inputFieldWeight.render(graphics);
         inputFieldDistance.render(graphics);
 
-        calculateButton.render(gameContainer, graphics);
+        calculateButton.render(gameContainer, graphics, this.errorMessage, this.writing);
 
         graphics.setColor(Color.black);
         graphics.setFont(headlineFont);
@@ -144,10 +160,17 @@ public class InclinedPlane extends BasicGameState {
             Image scaledExplination = pictureImage.getScaledCopy(0.35f);
             scaledExplination.draw(pictureX, pictureY);
         }
+
+        graphics.setFont(copyright);
+        graphics.drawString("© Jonas Nigg, Luca Grabherr", gameContainer.getWidth()-copyright.getWidth("© Jonas Nigg, Luca Grabherr")-20,gameContainer.getHeight()-copyright.getHeight("© Jonas Nigg, Luca Grabherr")-5);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            back.changeState();
+        }
         if (sled.isAtBottom()){
             calculateButton.setPushed(false);
             sled.setAtBottom(false);
@@ -159,28 +182,15 @@ public class InclinedPlane extends BasicGameState {
             actors.update(delta);
         }
 
+        buttonImage.draw(buttonX, buttonY);
+        pictureImage.draw(buttonX, buttonY);
+
         this.calculateButtonPushed = calculateButton.isPushed();
-        //System.out.println(calculateButtonPushed);
-
-
 
         slider.update(gameContainer, setAngle.getSliderValue(), calculateButtonPushed);
         calculateButton.update(gameContainer,this.setAngle.getSliderValue(),this.inputFieldWeight.getText(), this.inputFieldDistance.getText());
 
         triangle.setAngle(setAngle.getSliderValue());
-
-        buttonImage.draw(buttonX, buttonY);
-        pictureImage.draw(buttonX, buttonY);
-        Input input = gameContainer.getInput();
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            int mouseX = input.getMouseX();
-            int mouseY = input.getMouseY();
-            if (mouseX >= buttonX && mouseX <= buttonX + buttonImage.getWidth()
-                    && mouseY >= buttonY && mouseY <= buttonY + buttonImage.getHeight()) {
-                showPicture = !showPicture;
-            }
-        }
-
     }
 
     public void keyPressed(int key, char c) {
@@ -204,12 +214,17 @@ public class InclinedPlane extends BasicGameState {
             this.inputFieldWeight.setHasFocus(false);
         }
 
-
         if (x >= this.inputFieldDistance.getX() && x <= this.inputFieldDistance.getX() + this.inputFieldDistance.getRectWidth()
                 && y >= this.inputFieldDistance.getY() && y <= this.inputFieldDistance.getY() + this.inputFieldDistance.getRectHeight() && calculateButtonPushed != true) {
             this.inputFieldDistance.setHasFocus(true);
         } else {
             this.inputFieldDistance.setHasFocus(false);
+        }
+
+        int mouseX = input.getMouseX();
+        int mouseY = input.getMouseY();
+        if (mouseX >= buttonX && mouseX <= buttonX + buttonImage.getWidth() && mouseY >= buttonY && mouseY <= buttonY + buttonImage.getHeight()) {
+            showPicture = !showPicture;
         }
     }
 }

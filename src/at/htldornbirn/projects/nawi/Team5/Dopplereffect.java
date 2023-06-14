@@ -96,13 +96,13 @@ public class Dopplereffect extends BasicGameState {
         g.drawString(speed + " Gang",900, 40);
         g.drawString(showspeed + " km/h",900, 60);
         g.drawString(  elapsedTime/1000  + " Timer",900, 80);
-
-
-
+        g.drawString("Erklärung: Mit diesem Spiel wird der Dopplereffekt Simuliert. Sie werden einen Krankenwagen sehen der ",xString,530);
+        g.drawString("von rechts nach Links fährt, der gleichzeitig Schallwellen ausstrahlt.",xString,550);
+        g.drawString("C Sender ist jene Geschwindigkeit mit dem sich die Schallwelle in Bezug auf den Sender entfernt.",xString,580);
 
         for (Wave wave : waves) {
             if (wave.getSize() > 0) {
-                g.setColor(new Color(0, 255, 255, 255));
+                g.setColor(new Color(0, 255, 255, 200));
                 g.drawOval(wave.getX() - wave.getSize() / 2, wave.getY() - wave.getSize() / 2, wave.getSize(), wave.getSize());
             }
         }
@@ -151,7 +151,7 @@ public class Dopplereffect extends BasicGameState {
             }
         } else if (this.x == -400) {
             this.xPerson = 800;
-            enterZoneTime = 0; // Zurücksetzen des Zeitpunkts, wenn der Rettungswagen den Bereich verlässt
+            enterZoneTime = 0; // Zurücksetzen von zeit beim neubetreten
         }
 
 

@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team6.Gravitation;
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -15,6 +16,7 @@ public class GameState extends BasicGameState {
     private float ballX, ballY;
 
     private Image ballImage;
+    private AngelCodeFont font;
 
     private Button plusButtonGravity;
     private Button minusButtonGravity;
@@ -22,8 +24,11 @@ public class GameState extends BasicGameState {
     private Button plusButtonLossConstant;
     private Button minusButtonLossConstant;
 
+    private RoundedRectExample backButton;
+
     private boolean plusButtonClicked;
     private boolean minusButtonClicked;
+
 
 
     public int getID() {
@@ -41,11 +46,13 @@ public class GameState extends BasicGameState {
         ballX = gc.getWidth() / 2;
         ballY = 0;
 
-        plusButtonGravity = new Button(230, 70 + 7.5f, 15, Color.green, "+");
-        minusButtonGravity = new Button(270, 70 + 7.5f, 15, Color.red, "-");
+        backButton = new RoundedRectExample(1280 - 210, 960-55, 150, 40, 10, "back to explanation");
 
-        plusButtonLossConstant = new Button(250,110 + 7.5f, 15, Color.green, "+");
-        minusButtonLossConstant = new Button(290,110 + 7.5f, 15, Color.red, "-");
+        plusButtonGravity = new Button(230, 70 + 7.5f, 15, Color.green, "+", "circle");
+        minusButtonGravity = new Button(270, 70 + 7.5f, 15, Color.red, "-", "circle");
+
+        plusButtonLossConstant = new Button(250,110 + 7.5f, 15, Color.green, "+", "circle");
+        minusButtonLossConstant = new Button(290,110 + 7.5f, 15, Color.red, "-", "circle");
         plusButtonClicked = false;
         minusButtonClicked = false;
     }
@@ -69,6 +76,9 @@ public class GameState extends BasicGameState {
 
         plusButtonLossConstant.render(g);
         minusButtonLossConstant.render(g);
+
+        g.setColor(Color.black);
+        backButton.render(g);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -94,21 +104,33 @@ public class GameState extends BasicGameState {
 
             // hier wird es überpfrüft, ob der Plus-Button geklickt wurde
             if (plusButtonGravity.isClicked(mouseX, mouseY) && !plusButtonClicked) {
+                gravity += 0.05;
+                plusButtonClicked = true;
+            }
+
+            // hier wird es überpfrüft, ob der Minus-Button geklickt wurde
+            if (minusButtonGravity.isClicked(mouseX, mouseY) && !minusButtonClicked) {
+                gravity -= 0.05;
+                minusButtonClicked = true;
+            }
+
+            if (plusButtonLossConstant.isClicked(mouseX, mouseY) && !plusButtonClicked) {
                 lossConstant += 0.05;
                 lossConstantInProcent += 5;
                 plusButtonClicked = true;
             }
 
             // hier wird es überpfrüft, ob der Minus-Button geklickt wurde
-            if (minusButtonGravity.isClicked(mouseX, mouseY) && !minusButtonClicked) {
+            if (minusButtonLossConstant.isClicked(mouseX, mouseY) && !minusButtonClicked) {
                 lossConstant -= 0.05;
                 lossConstantInProcent -= 5;
                 minusButtonClicked = true;
             }
 
-            if(plusButtonLossConstant.isClicked(mouseX, mouseY) && !plusButtonClicked){
+            if(backButton.isClicked(mouseX, mouseY)){
                 sbg.enterState(64);
             }
+
         } else {
             plusButtonClicked = false;
             minusButtonClicked = false;

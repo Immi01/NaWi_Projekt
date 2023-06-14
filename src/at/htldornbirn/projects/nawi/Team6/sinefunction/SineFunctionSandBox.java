@@ -53,10 +53,10 @@ public class SineFunctionSandBox extends BasicGameState {
         this.sineFunction1 = new SineFunction(3000, WIDTH, HEIGHT / 2, Color.orange);
         this.sineFunction2 = new SineFunction(3000, WIDTH, HEIGHT / 2, Color.green);
 
-        Axes xAxes = new Axes(0, (float) HEIGHT / 2, (float) WIDTH, 1, "x", (float) WIDTH * 0.97f, (float) HEIGHT / 2 + 5);
-        Axes yAxes = new Axes((float) 0, 0, 1, (float) HEIGHT * 0.97f, "sin(x,t)", 5, 30);
-        this.actors.add(xAxes);
-        this.actors.add(yAxes);
+        Axis xAxis = new Axis(0, (float) HEIGHT / 2, (float) WIDTH, 1, "x", (float) WIDTH * 0.97f, (float) HEIGHT / 2 + 5);
+        Axis yAxis = new Axis((float) 0, 0, 1, (float) HEIGHT * 0.97f, "sin(x,t)", 5, 30);
+        this.actors.add(xAxis);
+        this.actors.add(yAxis);
 
         font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team6/sinefunction/assets/demo2_00.tga");
     }

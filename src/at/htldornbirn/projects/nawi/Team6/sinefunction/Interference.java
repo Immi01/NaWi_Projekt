@@ -43,10 +43,10 @@ public class Interference extends BasicGameState {
         this.sineFunctions.add(sineFunction2);
         this.sineFunctions.add(sineFunction3);
 
-        Axes xAxes = new Axes(0, (float) HEIGHT / 2, (float) WIDTH, 1, "x", (float) WIDTH * 0.97f, (float) HEIGHT / 2 + 5);
-        Axes yAxes = new Axes((float) 0, 0, 1, (float) HEIGHT * 0.97f, "sin(x,t)", 5, 30);
-        this.actors.add(xAxes);
-        this.actors.add(yAxes);
+        Axis xAxis = new Axis(0, (float) HEIGHT / 2, (float) WIDTH, 1, "x", (float) WIDTH * 0.97f, (float) HEIGHT / 2 + 5);
+        Axis yAxis = new Axis((float) 0, 0, 1, (float) HEIGHT * 0.97f, "sin(x,t)", 5, 30);
+        this.actors.add(xAxis);
+        this.actors.add(yAxis);
     }
 
     @Override

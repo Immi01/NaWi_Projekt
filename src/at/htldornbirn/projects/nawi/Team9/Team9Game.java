@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.Team9;
 
+import at.htldornbirn.projects.nawi.Constants;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -22,7 +23,7 @@ public class Team9Game extends BasicGameState {
 
     @Override
     public int getID() {
-        return 9;
+        return Constants.TEAM9;
     }
 
     @Override

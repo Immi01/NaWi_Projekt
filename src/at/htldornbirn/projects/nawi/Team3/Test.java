@@ -10,13 +10,6 @@ import java.awt.*;
 
 public class Test extends StateBasedGame {
 
-<<<<<<< HEAD
-
-    private StopingDistance game;
-
-
-=======
->>>>>>> origin/feature/Team3
 
     public Test(String name) {
         super(name);

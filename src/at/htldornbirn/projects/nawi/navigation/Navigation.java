@@ -33,9 +33,7 @@ public class Navigation extends BasicGameState implements SliderListener {
     float ObjX;
     float ObjY;
     Input input;
-    private Image image;
     private Image background;
-    private Image scaled;
     private Dictionary<Integer, Integer> map;
     Animation anim;
     private int cteam;
@@ -45,6 +43,9 @@ public class Navigation extends BasicGameState implements SliderListener {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        anim = null;
+        playButton = null;
+        returnButton = null;
         cteam = -1;
         buttonimg = new Image("/src/at/htldornbirn/projects/nawi/images/Button.png");
         menu = false;
@@ -52,11 +53,7 @@ public class Navigation extends BasicGameState implements SliderListener {
         this.actors = new ArrayList<>();
         map = new Hashtable<Integer, Integer>();
         createTeams(gameContainer);
-        image = new Image("/src/at/htldornbirn/projects/nawi/images/TEAM9.png");
         background = new Image("/src/at/htldornbirn/projects/nawi/images/Background.jpg");
-        scaled = image.getScaledCopy(59, 59);
-        //back = new BackButton(100,100,stateBasedGame);
-        //actors.add(back);
     }
 
     @Override
@@ -156,16 +153,26 @@ public class Navigation extends BasicGameState implements SliderListener {
                 switch (cteam + 1) {
                     case 2 -> {
                         gc.setDisplayMode(1500, 800, false);
+                        actors.remove(11);
+                        actors.remove(10);
+                        actors.remove(9);
+                        menu = false;
                         stateBasedGame.enterState(map.get(cteam));
+                        anim = null;
+                        playButton = null;
+                        returnButton = null;
                     }
                     case 6 -> {
                         gc.setDisplayMode(1280, 960, false);
                         stateBasedGame.enterState(map.get(cteam));
                         System.out.println(cteam + 1);
                     }
+                    default -> {
+                        stateBasedGame.enterState(map.get(cteam));
+                    }
                 }
             }
-            if (mouseX >= returnButton.getX() && mouseX < returnButton.getX() + returnButton.getWidth() && mouseY >= returnButton.getY() && mouseY < returnButton.getY() + returnButton.getHeight()) {
+            if (returnButton != null && mouseX >= returnButton.getX() && mouseX < returnButton.getX() + returnButton.getWidth() && mouseY >= returnButton.getY() && mouseY < returnButton.getY() + returnButton.getHeight()) {
                 actors.remove(11);
                 actors.remove(10);
                 actors.remove(9);

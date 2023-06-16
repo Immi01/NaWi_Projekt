@@ -1,12 +1,7 @@
 package at.htldornbirn.projects.nawi.Team8;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/feature/Team8
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.GameContainer;
 
 
 public class Ball implements Actor {

@@ -3,36 +3,70 @@ package at.htldornbirn.projects.nawi.Team8;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.GameContainer;
 
 
 public class Ball implements Actor {
-    private float centerX;
-    private float centerY;
+    private float x;
+    private float y;
     private float radius;
     private float angle;
+    private double angleVelocity;
 
-    public Ball(float centerX, float centerY, float radius) {
-        this.centerX = centerX;
-        this.centerY = centerY;
+    public Ball(float x, float y, float radius) {
+        this.x = x;
+        this.y = y;
         this.radius = radius;
         this.angle = 0;
     }
 
+    public double getAngleVelocity() {
+        return angleVelocity;
+    }
+
+    public void setAngleVelocity(double angleVelocity) {
+        this.angleVelocity = angleVelocity;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public float getRadius() {
+        return radius;
+    }
+
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+
+    public float getAngle() {
+        return angle;
+    }
+
+    public void setAngle(float angle) {
+        this.angle = angle;
+    }
+
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.blue);
-        graphics.fillOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
+        graphics.setColor(Color.orange);
+        graphics.fillOval(this.x, this.y, radius * 2, radius * 2);
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
-    }
 
-    public void update(int delta, float speed, float radius) {
-        // Gleichförmige Kreisbewegung wird hier berechnet.
-        angle += speed * delta / radius;
-        centerX = (float) (radius * Math.cos(Math.toRadians(angle))) + centerX;
-        centerY = (float) (radius * Math.sin(Math.toRadians(angle))) + centerY;
     }
 }

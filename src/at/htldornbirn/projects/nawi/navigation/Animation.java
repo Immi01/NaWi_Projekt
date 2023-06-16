@@ -85,8 +85,8 @@ public class Animation implements Actor{
     @Override
     public void render(Graphics graphics) {
         graphics.drawImage(image.getScaledCopy((int)sizeX,(int)sizeY),x,y);
-        graphics.drawRect(x,y,sizeX,sizeY);
-        font.drawString(Display.getWidth()/2-font.getWidth(title)/2, 100, title, Color.gray);
+        graphics.drawRoundRect(x,y,sizeX,sizeY,10);
+        font.drawString(Display.getWidth()/2f-font.getWidth(title)/2f, 100, title, Color.gray);
         font.drawString(100, 200, description, Color.gray);
     }
 

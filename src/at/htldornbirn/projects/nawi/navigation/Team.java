@@ -1,5 +1,6 @@
 package at.htldornbirn.projects.nawi.navigation;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -33,8 +34,12 @@ public class Team implements Actor{
 
     @Override
     public void render(Graphics graphics) {
-        graphics.drawRect(this.x,this.y,this.width,this.height);
         image.draw(x+1,y+1);
+        graphics.drawRoundRect(this.x,this.y,this.width,this.height,20);
+        graphics.setColor(Color.black);
+        for (int i = 0; i < 12; i++) {
+            graphics.drawRoundRect(this.x-i/2f,this.y-i/2f,this.width+i,this.height+i,20);
+        }
     }
 
     @Override

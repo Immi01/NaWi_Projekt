@@ -36,7 +36,7 @@ public class Slider {
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             if (mouseX > this.x && mouseX < this.x + 300 && mouseY > this.y && mouseY < this.y + 40) {
                 if (this.x >= this.minValue && this.x <= this.maxValue) {
-                    this.x = mouseX-10;
+                    this.x = mouseX - 10;
                     for (SliderListener eventListener : eventListeners) {
                         eventListener.onChange(mouseX);
                     }
@@ -63,5 +63,9 @@ public class Slider {
 
     public Color getColor() {
         return color;
+    }
+
+    public double getValue() {
+        return 0;
     }
 }

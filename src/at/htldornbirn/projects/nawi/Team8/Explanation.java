@@ -38,15 +38,15 @@ public class Explanation extends BasicGameState {
         font.drawString((float) gameContainer.getWidth() / 25, (float) gameContainer.getHeight() / 25, "Die Gleichförmige Kreisbewegung\n", Color.yellow);
         graphics.setColor(Color.white);
         graphics.scale(1f, 1f);
-        font.drawString(70, 105, "Überblick");
+        font.drawString(70, 110, "Überblick");
 
         graphics.scale(0.8f, 0.8f);
-        font.drawString(90, 150,
+        font.drawString(90, 200,
                 "\n" + "Eine Kreisbewegung ist eine Bewegung, bei der ein Objekt entlang eines geschlossenen Pfades verläuft,\n" +
-                        "der den Umriss eines Kreises beschreibt. \n" + "In einer Kreisbewegung bleibt die Entfernung des Objekts von einem festen Punkt konstant,\n" +
+                        "der den Umriss eines Kreises beschreibt. \n" +"\n" +"\n" + "In einer Kreisbewegung bleibt die Entfernung des Objekts von einem festen Punkt konstant,\n" +
                         "während sich das Objekt kontinuierlich um diesen Punkt herum bewegt. Die Geschwindigkeit des Objekts variiert während der Bewegung,\n" +
-                        "wobei die Richtung immer tangential zur Kreisbahn gerichtet ist.\n" +
-                        "Die Kreisbewegung kann sowohl im Uhrzeigersinn als auch gegen den Uhrzeigersinn stattfinden \n" +
+                        "wobei die Richtung immer tangential zur Kreisbahn gerichtet ist.\n" +"\n" +"\n" +
+                        "Die Kreisbewegung kann sowohl im Uhrzeigersinn als auch gegen den Uhrzeigersinn stattfinden \n"+
                         "und wird oft durch Begriffe wie Winkelgeschwindigkeit, Zentripetalbeschleunigung und Periode charakterisiert.");
         graphics.scale(1/0.8f, 1/0.8f);
 

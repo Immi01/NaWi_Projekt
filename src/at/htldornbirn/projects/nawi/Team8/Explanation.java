@@ -1,6 +1,7 @@
 package at.htldornbirn.projects.nawi.Team8;
 
 import at.htldornbirn.projects.nawi.Constants;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
@@ -14,6 +15,7 @@ public class Explanation extends BasicGameState {
     private Button stateButton1;
     private AngelCodeFont font;
     private List<Actor> actors;
+    private BackButton back;
 
     @Override
     public int getID() {
@@ -22,6 +24,7 @@ public class Explanation extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        back = new BackButton(stateBasedGame);
         font = new AngelCodeFont("src/at/htldornbirn/projects/nawi/Team8/assets/demo2.fnt", "src/at/htldornbirn/projects/nawi/Team8/assets/demo2_00.tga");
         this.actors = new ArrayList<>();
 
@@ -56,6 +59,9 @@ public class Explanation extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         Input input = gameContainer.getInput();
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            back.changeState(gameContainer);
+        }
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 

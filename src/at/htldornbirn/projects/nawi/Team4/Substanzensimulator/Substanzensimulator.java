@@ -3,6 +3,7 @@ package at.htldornbirn.projects.nawi.Team4.Substanzensimulator;
 
 
 import at.htldornbirn.projects.nawi.Constants;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.gui.MouseOverArea;
@@ -24,12 +25,15 @@ public class Substanzensimulator extends BasicGameState {
     private Image buttonImg;
     private Image subjectImg;
     private Image backgr;
+    private BackButton back;
+
 
     public Substanzensimulator(String  name) {
     }
 
 
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        back = new BackButton(stateBasedGame);
         this.actors = new ArrayList<>();
         x = 100;
         y = 100;
@@ -54,6 +58,9 @@ public class Substanzensimulator extends BasicGameState {
 
     public void update(GameContainer container, StateBasedGame stateBasedGame, int delta) throws SlickException {
         Input input = container.getInput();
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            back.changeState(container);
+        }
         for (Substanzen substanzen : substanzen) {
             if (substanzen.isDragging()) {
                 substanzen.setX(input.getMouseX()-50);

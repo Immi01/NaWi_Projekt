@@ -76,7 +76,7 @@ public class InclinedPlane2 extends  BasicGameState{
         this.speedSled = 5.0f;
         this.angleSled = setAngle.getSliderValue()*-1;
         sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
-        back = new BackButton(100,1200,stateBasedGame);
+        back = new BackButton(stateBasedGame);
         this.actors.add(back);
 
 
@@ -152,7 +152,7 @@ public class InclinedPlane2 extends  BasicGameState{
         AppGameContainer gc = (AppGameContainer) gameContainer;
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             gc.setDisplayMode(800, 600, false);
-            back.changeState();
+            back.changeState(gameContainer);
 
         }
 

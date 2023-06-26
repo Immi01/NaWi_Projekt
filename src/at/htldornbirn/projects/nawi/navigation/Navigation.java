@@ -164,11 +164,24 @@ public class Navigation extends BasicGameState implements SliderListener {
                     }
                     case 6 -> {
                         gc.setDisplayMode(1280, 960, false);
+                        actors.remove(11);
+                        actors.remove(10);
+                        actors.remove(9);
+                        menu = false;
                         stateBasedGame.enterState(map.get(cteam));
-                        System.out.println(cteam + 1);
+                        anim = null;
+                        playButton = null;
+                        returnButton = null;
                     }
                     default -> {
+                        actors.remove(11);
+                        actors.remove(10);
+                        actors.remove(9);
+                        menu = false;
                         stateBasedGame.enterState(map.get(cteam));
+                        anim = null;
+                        playButton = null;
+                        returnButton = null;
                     }
                 }
             }

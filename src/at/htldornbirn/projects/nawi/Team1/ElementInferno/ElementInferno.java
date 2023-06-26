@@ -1,6 +1,7 @@
 package at.htldornbirn.projects.nawi.Team1.ElementInferno;
 
 import at.htldornbirn.projects.nawi.Constants;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -23,12 +24,14 @@ public class ElementInferno extends BasicGameState {
     private Vector2f[] initialPositions;
     private boolean[] isRectangleInCircle;
     private boolean standardFlame = true;
+    private BackButton back;
 
     public ElementInferno() {
     }
 
     @Override
     public void init(GameContainer container, StateBasedGame stateBasedGame) throws SlickException {
+        back = new BackButton(stateBasedGame);
         rectangles = new Rectangle[5];
         elementImages = new Image[5];
         flameImages = new Image[5];
@@ -80,9 +83,13 @@ public class ElementInferno extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame stateBasedGame, int delta) throws SlickException {
         Input input = container.getInput();
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            back.changeState(container);
+        }
         int mouseX = input.getMouseX();
         int mouseY = input.getMouseY();
         standardFlame = true;
+
 
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             if (selectedRectangle == null) {

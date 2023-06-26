@@ -1,6 +1,7 @@
 package at.htldornbirn.projects.nawi.Team9;
 
 import at.htldornbirn.projects.nawi.Constants;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -19,6 +20,7 @@ public class Team9Game extends BasicGameState {
     private Button startButton;
     private Button resetButton;
     private HoverInfo hoverInfo;
+    private BackButton back;
 
 
     @Override
@@ -28,6 +30,7 @@ public class Team9Game extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        back = new BackButton(stateBasedGame);
         inputFieldRN = new InputFieldRN(100, 100, 40, 20, 3);
         calculations = new Calculations(this);
         itemList = new ItemList(this);
@@ -70,6 +73,10 @@ public class Team9Game extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        Input input = gameContainer.getInput();
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            back.changeState(gameContainer);
+        }
         inputFieldRN.update(delta);
         calculations.update(delta);
         itemList.update(delta);
@@ -80,7 +87,6 @@ public class Team9Game extends BasicGameState {
         }
         startButton.update(gameContainer.getInput(), stateBasedGame, delta);
         resetButton.update(gameContainer.getInput(), stateBasedGame, delta);
-        Input input = gameContainer.getInput();
         hoverInfo.update(input);
     }
 

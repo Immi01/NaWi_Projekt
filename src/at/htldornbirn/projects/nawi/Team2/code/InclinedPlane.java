@@ -86,7 +86,7 @@ public class InclinedPlane extends BasicGameState {
         this.speedSled = 5.0f;
         this.angleSled = setAngle.getSliderValue()*-1;
         sled = new Sled(this.angleSled,this.speedSled,300,600, 150, 40);
-        back = new BackButton(50,1100,stateBasedGame);
+        back = new BackButton(stateBasedGame);
         this.actors.add(back);
 
 
@@ -168,10 +168,8 @@ public class InclinedPlane extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
 
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            AppGameContainer gc = (AppGameContainer) gameContainer;
-            gc.setDisplayMode(800, 600, false);
-            back.changeState();
+        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+            back.changeState(gameContainer);
         }
         if (sled.isAtBottom()){
             calculateButton.setPushed(false);

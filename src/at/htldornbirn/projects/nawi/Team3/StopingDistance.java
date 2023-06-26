@@ -1,6 +1,7 @@
 package at.htldornbirn.projects.nawi.Team3;
 
 import at.htldornbirn.projects.nawi.Constants;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
@@ -18,6 +19,7 @@ public class StopingDistance extends BasicGameState {
     private Image streetImage;
     private float xCarImage;
     private Font headerfont;
+    private BackButton back;
 
 
     public StopingDistance() throws SlickException {
@@ -26,7 +28,7 @@ public class StopingDistance extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
+        back = new BackButton(stateBasedGame);
         this.input = gameContainer.getInput();
         this.speed = 0;
         this.font = new TrueTypeFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 11), true);
@@ -68,6 +70,9 @@ public class StopingDistance extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
 
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            back.changeState(gameContainer);
+        }
 // Benutzereingabe abfragen
         if (input.isKeyDown(Input.KEY_UP)) {
             this.speed += 5 * delta / 1000.0f;

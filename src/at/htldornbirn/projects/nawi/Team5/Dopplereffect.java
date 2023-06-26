@@ -1,6 +1,7 @@
 package at.htldornbirn.projects.nawi.Team5;
 
 import at.htldornbirn.projects.nawi.Constants;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -39,6 +40,7 @@ public class Dopplereffect extends BasicGameState {
     private int showspeed;
     private float elapsedTime = 0;
     private float pitch;
+    private BackButton back;
 
 
 
@@ -50,6 +52,7 @@ public class Dopplereffect extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        back = new BackButton(stateBasedGame);
         this.x = -400;
         this.y = 550;
         this.speed = 0; // 5 ist Maximum weil gleich schnell wie Schall Geschwindigkeit
@@ -112,6 +115,10 @@ public class Dopplereffect extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        Input input = gameContainer.getInput();
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            back.changeState(gameContainer);
+        }
 
         this.timerToZero -= delta;
         if (this.timerToZero <0 && this.xMenu != 0) {

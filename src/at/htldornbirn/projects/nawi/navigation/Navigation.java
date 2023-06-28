@@ -59,6 +59,7 @@ public class Navigation extends BasicGameState implements SliderListener {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
+        graphics.setBackground(Color.black);
         for (Actor actor : actors) {
             actor.render(graphics);
         }
@@ -162,8 +163,52 @@ public class Navigation extends BasicGameState implements SliderListener {
                         playButton = null;
                         returnButton = null;
                     }
+                    case 5 -> {
+                        gc.setDisplayMode(1000, 750, false);
+                        actors.remove(11);
+                        actors.remove(10);
+                        actors.remove(9);
+                        menu = false;
+                        stateBasedGame.enterState(map.get(cteam));
+                        anim = null;
+                        playButton = null;
+                        returnButton = null;
+                    }
                     case 6 -> {
                         gc.setDisplayMode(1280, 960, false);
+                        actors.remove(11);
+                        actors.remove(10);
+                        actors.remove(9);
+                        menu = false;
+                        stateBasedGame.enterState(map.get(cteam));
+                        anim = null;
+                        playButton = null;
+                        returnButton = null;
+                    }
+                    case 7 -> {
+                        gc.setDisplayMode(1440,1080,false);
+                        actors.remove(11);
+                        actors.remove(10);
+                        actors.remove(9);
+                        menu = false;
+                        stateBasedGame.enterState(map.get(cteam));
+                        anim = null;
+                        playButton = null;
+                        returnButton = null;
+                    }
+                    case 8 -> {
+                        gc.setDisplayMode(1600, 960, false);
+                        actors.remove(11);
+                        actors.remove(10);
+                        actors.remove(9);
+                        menu = false;
+                        stateBasedGame.enterState(map.get(cteam));
+                        anim = null;
+                        playButton = null;
+                        returnButton = null;
+                    }
+                    case 9 -> {
+                        gc.setDisplayMode(1600, 800, false);
                         actors.remove(11);
                         actors.remove(10);
                         actors.remove(9);

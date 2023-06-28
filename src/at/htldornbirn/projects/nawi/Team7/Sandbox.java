@@ -45,7 +45,7 @@ public class Sandbox extends BasicGameState implements SliderListener {
 
     @Override
     public int getID() {
-        return 1;
+        return Constants.TEAM7;
     }
 
     public Sandbox() {
@@ -59,7 +59,7 @@ public class Sandbox extends BasicGameState implements SliderListener {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.bgImage = new Image("images/hiero.png");
+        this.bgImage = new Image("src/at/htldornbirn/projects/nawi/images/hiero.png");
         this.countOfBallSelection = 4;
         this.CountOfLocations = 8;
         this.bWidth = 200;
@@ -194,7 +194,7 @@ public class Sandbox extends BasicGameState implements SliderListener {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 if (mouseY > playButton.getY() && mouseY < playButton.getY() + playButton.getHeight() && mouseX > playButton.getX() && mouseX < playButton.getX() + playButton.getWidth()) {
                     System.out.println("hello");
-                    stateBasedGame.enterState(Constants.TEAM7);
+                    stateBasedGame.enterState(71);
                 }
             }
         }

@@ -20,7 +20,7 @@ public class Team7 extends BasicGameState {
 
     @Override
     public int getID() {
-        return Constants.TEAM7;
+        return 71;
     }
 
     @Override

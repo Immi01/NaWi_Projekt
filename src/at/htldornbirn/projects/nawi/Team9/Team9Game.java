@@ -21,6 +21,7 @@ public class Team9Game extends BasicGameState {
     private Button resetButton;
     private HoverInfo hoverInfo;
     private BackButton back;
+    private GroundSkyNew groundimagel;
 
 
     @Override
@@ -45,7 +46,7 @@ public class Team9Game extends BasicGameState {
 
 
         //Ground
-        GroundSkyNew groundimagel = new GroundSkyNew();
+        groundimagel = new GroundSkyNew();
         actors.add(groundimagel);
         //box
         Box box1 = new Box(this);

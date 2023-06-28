@@ -4,6 +4,7 @@ import at.htldornbirn.projects.nawi.Constants;
 import at.htldornbirn.projects.nawi.Team7.slider.SetAngle;
 import at.htldornbirn.projects.nawi.Team7.slider.Slider;
 import at.htldornbirn.projects.nawi.Team7.slider.SliderListener;
+import at.htldornbirn.projects.nawi.tools.button.BackButton;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -40,6 +41,7 @@ public class Sandbox extends BasicGameState implements SliderListener {
     private float sliderValue;
     private boolean isBall4Clicked = false;
     private boolean isMouseDown = false;
+    private BackButton back;
 
     private Image bgImage;
 
@@ -59,6 +61,7 @@ public class Sandbox extends BasicGameState implements SliderListener {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        back = new BackButton(stateBasedGame);
         this.bgImage = new Image("src/at/htldornbirn/projects/nawi/images/hiero.png");
         this.countOfBallSelection = 4;
         this.CountOfLocations = 8;
@@ -150,8 +153,11 @@ public class Sandbox extends BasicGameState implements SliderListener {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+        Input input = gameContainer.getInput();
+        if(input.isKeyPressed(Input.KEY_ESCAPE)){
+            back.changeState(gameContainer);
+        }
         for (LocationButton locationButton : this.locationButtons) {
-            Input input = gameContainer.getInput();
             int mouseY = input.getMouseY();
             int mouseX = input.getMouseX();
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
@@ -162,7 +168,6 @@ public class Sandbox extends BasicGameState implements SliderListener {
             }
         }
 
-        Input input = gameContainer.getInput();
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && !isMouseDown) {
             this.isMouseDown = true;
 
